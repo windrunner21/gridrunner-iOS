@@ -9,7 +9,20 @@ import UIKit
 
 class MainViewController: UIViewController, UITextFieldDelegate {
 
+    // Override device orienation settings.
+    override var shouldAutorotate: Bool {
+        return false
+    }
     
+    override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
+        return .portrait
+    }
+    
+    override var preferredInterfaceOrientationForPresentation: UIInterfaceOrientation {
+        return .portrait
+    }
+    
+    // Storyboard properties.
     @IBOutlet weak var codeRoomTextField: UITextField!
     
     override func viewDidLoad() {

@@ -35,20 +35,20 @@
                                 <buttonConfiguration key="configuration" style="plain" title="Login"/>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tij-KS-abi">
-                                <rect key="frame" x="30" y="497.5" width="260" height="40.5"/>
+                                <rect key="frame" x="30" y="503.5" width="260" height="34.5"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="filled" title="Play with Randoms">
-                                    <directionalEdgeInsets key="contentInsets" top="10" leading="0.0" bottom="10" trailing="0.0"/>
+                                    <fontDescription key="titleFontDescription" type="system" weight="semibold" pointSize="17"/>
                                 </buttonConfiguration>
                                 <connections>
                                     <action selector="onPlayWithRandoms:" destination="BYZ-38-t0r" eventType="touchUpInside" id="lSm-OI-GOu"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Rzr-xJ-feX">
-                                <rect key="frame" x="30" y="331" width="260" height="40.5"/>
+                                <rect key="frame" x="30" y="331" width="260" height="34.5"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="filled" title="Play with a Friend">
-                                    <directionalEdgeInsets key="contentInsets" top="10" leading="0.0" bottom="10" trailing="0.0"/>
+                                    <fontDescription key="titleFontDescription" type="system" weight="semibold" pointSize="17"/>
                                 </buttonConfiguration>
                                 <connections>
                                     <action selector="onPlayWithFriend:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Fws-2y-YAY"/>
@@ -78,7 +78,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" alignment="center" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="GiA-zD-X5v">
-                                <rect key="frame" x="30" y="447" width="260" height="20.5"/>
+                                <rect key="frame" x="30" y="453" width="260" height="20.5"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="DtT-JY-QRP" userLabel="Divider 1">
                                         <rect key="frame" x="0.0" y="10" width="80" height="1"/>
