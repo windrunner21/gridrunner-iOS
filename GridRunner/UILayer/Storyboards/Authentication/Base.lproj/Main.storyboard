@@ -9,10 +9,10 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--View Controller-->
+        <!--Main View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="GridRunner" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="BYZ-38-t0r" customClass="MainViewController" customModule="GridRunner" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -35,14 +35,24 @@
                                 <buttonConfiguration key="configuration" style="plain" title="Login"/>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tij-KS-abi">
-                                <rect key="frame" x="30" y="503.5" width="260" height="34.5"/>
+                                <rect key="frame" x="30" y="497.5" width="260" height="40.5"/>
                                 <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="filled" title="Play with Randoms"/>
+                                <buttonConfiguration key="configuration" style="filled" title="Play with Randoms">
+                                    <directionalEdgeInsets key="contentInsets" top="10" leading="0.0" bottom="10" trailing="0.0"/>
+                                </buttonConfiguration>
+                                <connections>
+                                    <action selector="onPlayWithRandoms:" destination="BYZ-38-t0r" eventType="touchUpInside" id="lSm-OI-GOu"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Rzr-xJ-feX">
-                                <rect key="frame" x="30" y="331" width="260" height="34.5"/>
+                                <rect key="frame" x="30" y="331" width="260" height="40.5"/>
                                 <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="filled" title="Play with a Friend"/>
+                                <buttonConfiguration key="configuration" style="filled" title="Play with a Friend">
+                                    <directionalEdgeInsets key="contentInsets" top="10" leading="0.0" bottom="10" trailing="0.0"/>
+                                </buttonConfiguration>
+                                <connections>
+                                    <action selector="onPlayWithFriend:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Fws-2y-YAY"/>
+                                </connections>
                             </button>
                             <stackView opaque="NO" contentMode="scaleToFill" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="dZy-6x-0Fh">
                                 <rect key="frame" x="30" y="267" width="260" height="34"/>
@@ -50,11 +60,14 @@
                                     <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="E6b-gE-zaR">
                                         <rect key="frame" x="0.0" y="0.0" width="199" height="34"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <textInputTraits key="textInputTraits"/>
+                                        <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardType="numberPad" returnKeyType="done" smartInsertDeleteType="no" smartQuotesType="no"/>
                                     </textField>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Wtt-5X-YXe">
                                         <rect key="frame" x="209" y="0.0" width="51" height="34"/>
                                         <buttonConfiguration key="configuration" style="tinted" image="doc.on.clipboard.fill" catalog="system"/>
+                                        <connections>
+                                            <action selector="onCopyRoomCode:" destination="BYZ-38-t0r" eventType="touchUpInside" id="jXH-w8-ZqZ"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                             </stackView>
@@ -65,7 +78,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" alignment="center" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="GiA-zD-X5v">
-                                <rect key="frame" x="30" y="453" width="260" height="20.5"/>
+                                <rect key="frame" x="30" y="447" width="260" height="20.5"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="DtT-JY-QRP" userLabel="Divider 1">
                                         <rect key="frame" x="0.0" y="10" width="80" height="1"/>
@@ -118,6 +131,9 @@
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="dZy-6x-0Fh" secondAttribute="trailing" constant="30" id="zuY-gY-0oA"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="codeRoomTextField" destination="E6b-gE-zaR" id="vBS-6x-lxB"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>

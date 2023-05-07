@@ -1,19 +1,18 @@
 //
-//  ViewController.swift
+//  GameViewController.swift
 //  GridRunner
 //
-//  Created by Imran Hajiyev on 03.05.23.
+//  Created by Imran Hajiyev on 07.05.23.
 //
 
 import UIKit
 
-class ViewController: UIViewController {
+class GameViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+
         // Do any additional setup after loading the view.
     }
 
-
 }
-
