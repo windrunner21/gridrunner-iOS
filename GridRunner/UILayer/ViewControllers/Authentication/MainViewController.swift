@@ -37,7 +37,19 @@ class MainViewController: UIViewController, UITextFieldDelegate {
         
         return true
     }
-
+    
+    
+    @IBAction func onLogin(_ sender: Any) {
+        let registerStoryboard: UIStoryboard = UIStoryboard(name: "Register", bundle: .main)
+        let registerViewController = registerStoryboard.instantiateViewController(withIdentifier: "RegisterScreen")
+        
+        if let registerPresentationController = registerViewController.presentationController as? UISheetPresentationController {
+            registerPresentationController.detents = [.medium(), .large()]
+        }
+        
+        self.present(registerViewController, animated: true)
+    }
+    
     @IBAction func onCopyRoomCode(_ sender: Any) {
         let pasteboard = UIPasteboard.general
         pasteboard.string = codeRoomTextField.text
