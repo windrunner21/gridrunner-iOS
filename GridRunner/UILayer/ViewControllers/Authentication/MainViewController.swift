@@ -8,7 +8,17 @@
 import UIKit
 
 class MainViewController: UIViewController, UITextFieldDelegate {
-
+    
+    // Storyboard properties.
+    @IBOutlet weak var codeRoomTextField: UITextField!
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        // Manage delegate to override UITextField methods.
+        codeRoomTextField.delegate = self
+    }
+    
     // Override device orienation settings.
     override var shouldAutorotate: Bool {
         return false
@@ -20,16 +30,6 @@ class MainViewController: UIViewController, UITextFieldDelegate {
     
     override var preferredInterfaceOrientationForPresentation: UIInterfaceOrientation {
         return .portrait
-    }
-    
-    // Storyboard properties.
-    @IBOutlet weak var codeRoomTextField: UITextField!
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
-        // Manage delegate to override UITextField methods.
-        codeRoomTextField.delegate = self
     }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
