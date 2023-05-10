@@ -14,10 +14,14 @@ class GameViewController: UIViewController {
     @IBOutlet weak var movesLabel: UILabel!
     @IBOutlet weak var gameView: UIView!
     
+    @IBOutlet weak var optionsButton: UIButton!
+    
     // Controller related temporary properties.
     //TODO: remove into business logic
-    let numberOfRows: Int = 15
-    let numberOfColumns: Int = 15
+    let numberOfRows: Int = Int.random(in: 9...15)
+    var numberOfColumns: Int {
+        numberOfRows
+    }
     var playerType: PlayerType = .runner
     var moves: Int = 0
     
@@ -27,6 +31,9 @@ class GameViewController: UIViewController {
         // Update moves label when loading the view.
         moves = playerType == .runner ? 2 : 1
         movesLabel.text = "\(moves) moves left"
+        
+        // Set up game options.
+        setUpOptionsButton()
         
         // Prepare game grid.
         createGameGridWithDimensions(numberOfRows, by: numberOfColumns, inside: gameView)
@@ -53,6 +60,20 @@ class GameViewController: UIViewController {
         }
     }
     
+    private func setUpOptionsButton() {
+        let optionClosure = {(action: UIAction) in
+            print(action.state)
+        }
+        
+        optionsButton.menu = UIMenu(children: [
+            UIAction(title: "Restart", state: .off, handler: optionClosure),
+            UIAction(title: "Give up", state: .off, handler: optionClosure),
+            UIAction(title: "Main Menu", state: .off, handler: optionClosure)
+        ])
+        
+        optionsButton.showsMenuAsPrimaryAction = true
+    }
+    
     private func createGameGridWithDimensions(_ rows: Int, by columns: Int, inside rootView: UIView, spacing: CGFloat = 5) {
         
         let verticalStackView = UIStackView()
@@ -70,9 +91,8 @@ class GameViewController: UIViewController {
             
             for column in 0..<columns {
                 let button = UIButton()
-                initializeExits(row: row, column: column, button)
+                initializeMap(for: button, row, column)
                 button.layer.cornerRadius = 6
-//                button.setTitle("X", for: .normal)
                 button.addTarget(self, action: #selector(gridButtonClicked), for: .touchUpInside)
                 horizontalStackView.addArrangedSubview(button)
             }
@@ -88,8 +108,9 @@ class GameViewController: UIViewController {
         verticalStackView.leftAnchor.constraint(equalTo: rootView.leftAnchor, constant: 0).isActive = true
     }
     
-    private func initializeExits(row: Int, column: Int, _ button: UIButton) {
+    private func initializeMap(for button: UIButton, _ row: Int, _ column: Int) {
         //let numberOfExits = Int.random(in: 1...4)
+        
         if row == 0 && column == 0 {
             button.backgroundColor = .systemMint
         } else if row == numberOfRows / 2 && column == numberOfColumns / 2 {
@@ -101,7 +122,8 @@ class GameViewController: UIViewController {
         }
     }
     
-    @objc func gridButtonClicked() {
+    @objc func gridButtonClicked(_ button: UIButton) {
+        button.backgroundColor = .systemRed
         print("i'm clicked")
     }
 }
