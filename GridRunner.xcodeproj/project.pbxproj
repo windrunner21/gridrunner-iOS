@@ -14,6 +14,7 @@
 		CA4E3F602A0891F300D36266 /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA4E3F5F2A0891F300D36266 /* RegisterViewController.swift */; };
 		CA4E3F642A08DCB400D36266 /* ViewControllerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA4E3F632A08DCB400D36266 /* ViewControllerExtension.swift */; };
 		CA4E3F662A0BCD3300D36266 /* MapExits.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA4E3F652A0BCD3300D36266 /* MapExits.swift */; };
+		CA4E3F692A0CE31200D36266 /* TransitionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA4E3F682A0CE31200D36266 /* TransitionViewController.swift */; };
 		CAFED48D2A02496E00FB4B9B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAFED48C2A02496E00FB4B9B /* AppDelegate.swift */; };
 		CAFED48F2A02496E00FB4B9B /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAFED48E2A02496E00FB4B9B /* SceneDelegate.swift */; };
 		CAFED4912A02496E00FB4B9B /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAFED4902A02496E00FB4B9B /* MainViewController.swift */; };
@@ -50,6 +51,7 @@
 		CA4E3F5F2A0891F300D36266 /* RegisterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewController.swift; sourceTree = "<group>"; };
 		CA4E3F632A08DCB400D36266 /* ViewControllerExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewControllerExtension.swift; sourceTree = "<group>"; };
 		CA4E3F652A0BCD3300D36266 /* MapExits.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapExits.swift; sourceTree = "<group>"; };
+		CA4E3F682A0CE31200D36266 /* TransitionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransitionViewController.swift; sourceTree = "<group>"; };
 		CAFED4892A02496E00FB4B9B /* GridRunner.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GridRunner.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CAFED48C2A02496E00FB4B9B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		CAFED48E2A02496E00FB4B9B /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -144,6 +146,7 @@
 		CA4E3F612A08DCA100D36266 /* Utils */ = {
 			isa = PBXGroup;
 			children = (
+				CA4E3F672A0CE30100D36266 /* CustomClasses */,
 				CA4E3F622A08DCA600D36266 /* Extensions */,
 			);
 			path = Utils;
@@ -155,6 +158,14 @@
 				CA4E3F632A08DCB400D36266 /* ViewControllerExtension.swift */,
 			);
 			path = Extensions;
+			sourceTree = "<group>";
+		};
+		CA4E3F672A0CE30100D36266 /* CustomClasses */ = {
+			isa = PBXGroup;
+			children = (
+				CA4E3F682A0CE31200D36266 /* TransitionViewController.swift */,
+			);
+			path = CustomClasses;
 			sourceTree = "<group>";
 		};
 		CAFED4802A02496E00FB4B9B = {
@@ -393,6 +404,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CA4E3F692A0CE31200D36266 /* TransitionViewController.swift in Sources */,
 				CA4E3F5C2A07BBF100D36266 /* PlayerType.swift in Sources */,
 				CA4E3F582A07A85900D36266 /* GameViewController.swift in Sources */,
 				CA4E3F642A08DCB400D36266 /* ViewControllerExtension.swift in Sources */,

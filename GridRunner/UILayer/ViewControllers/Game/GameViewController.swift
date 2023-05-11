@@ -16,8 +16,7 @@ class GameViewController: UIViewController {
     
     @IBOutlet weak var optionsButton: UIButton!
     
-    // Controller related temporary properties.
-    //TODO: remove into business logic
+    // Controller related temporary properties. TODO: remove into business logic
     let numberOfRows: Int = Int.random(in: 9...15)
     var numberOfColumns: Int {
         numberOfRows
@@ -61,14 +60,20 @@ class GameViewController: UIViewController {
     }
     
     private func setUpOptionsButton() {
-        let optionClosure = {(action: UIAction) in
-            print(action.state)
+        
+        let mainMenuClosure = {(action: UIAction) in
+            let mainStoryboard: UIStoryboard = UIStoryboard(name: "Main", bundle: .main)
+            let mainViewController: UIViewController = mainStoryboard.instantiateViewController(identifier: "MainScreen") as MainViewController
+            
+            guard let window = self.view.window else { return }
+            
+            UIView.transition(with: window, duration: 0.5, options: [.transitionCurlDown], animations: {
+                window.rootViewController = mainViewController
+            })
         }
         
         optionsButton.menu = UIMenu(children: [
-            UIAction(title: "Restart", state: .off, handler: optionClosure),
-            UIAction(title: "Give up", state: .off, handler: optionClosure),
-            UIAction(title: "Main Menu", state: .off, handler: optionClosure)
+            UIAction(title: "Main Menu", state: .off, handler: mainMenuClosure)
         ])
         
         optionsButton.showsMenuAsPrimaryAction = true

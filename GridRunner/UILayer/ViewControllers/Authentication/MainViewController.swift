@@ -58,8 +58,12 @@ class MainViewController: UIViewController, UITextFieldDelegate {
     @IBAction func onPlayWithFriend(_ sender: Any) {
         let gameStoryboard: UIStoryboard = UIStoryboard(name: "Game", bundle: .main)
         let gameViewController: UIViewController = gameStoryboard.instantiateViewController(identifier: "GameScreen") as GameViewController
-        
-        self.view.window?.rootViewController = gameViewController
+
+        guard let window = self.view.window else { return }
+
+        UIView.transition(with: window, duration: 0.5, options: [.transitionCurlUp], animations: {
+            window.rootViewController = gameViewController
+        })
     }
     
     
@@ -67,7 +71,11 @@ class MainViewController: UIViewController, UITextFieldDelegate {
         let gameStoryboard: UIStoryboard = UIStoryboard(name: "Game", bundle: .main)
         let gameViewController: UIViewController = gameStoryboard.instantiateViewController(identifier: "GameScreen") as GameViewController
         
-        self.view.window?.rootViewController = gameViewController
+        guard let window = self.view.window else { return }
+        
+        UIView.transition(with: window, duration: 0.5, options: [.transitionCurlUp], animations: {
+            window.rootViewController = gameViewController
+        })
     }
 }
 
