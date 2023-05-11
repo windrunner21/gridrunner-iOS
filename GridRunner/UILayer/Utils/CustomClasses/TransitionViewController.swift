@@ -12,6 +12,10 @@ class TransitionViewController: UIViewController {
     
     private var currentViewController: UIViewController?
     
+    override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
+        return .landscapeRight
+    }
+    
     func transition(to viewController: UIViewController, with options: UIView.AnimationOptions) {
         guard viewController.parent == nil else {
             print("Error: The view controller is already a child view controller.")
@@ -28,19 +32,16 @@ class TransitionViewController: UIViewController {
         newView.frame = self.view.bounds
         
         if let currentViewController = self.currentViewController, let oldView = currentViewController.view {
-            print("Mark: Current view controller exists.")
-            UIView.transition(with: self.view, duration: 0.3, options: options, animations: {
+            UIView.transition(with: self.view, duration: 0.5, options: options, animations: {
                 oldView.removeFromSuperview()
-            }, completion: { _ in
                 self.view.addSubview(newView)
                 viewController.didMove(toParent: self)
+                self.currentViewController = viewController
             })
         } else {
-            print("Mark: Current view controller did not exist.")
             view.addSubview(newView)
             viewController.didMove(toParent: self)
+            self.currentViewController = viewController
         }
-        
-        currentViewController = viewController
     }
 }

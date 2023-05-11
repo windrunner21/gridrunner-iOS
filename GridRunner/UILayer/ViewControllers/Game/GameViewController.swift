@@ -38,19 +38,6 @@ class GameViewController: UIViewController {
         createGameGridWithDimensions(numberOfRows, by: numberOfColumns, inside: gameView)
     }
     
-    // Override device orienation settings.
-    override var shouldAutorotate: Bool {
-        return false
-    }
-    
-    override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
-        return .landscapeRight
-    }
-    
-    override var preferredInterfaceOrientationForPresentation: UIInterfaceOrientation {
-        return .landscapeRight
-    }
-    
     @IBAction func onFinish(_ sender: Any) {
         if moves > 0 {
             moves -= 1
@@ -65,11 +52,8 @@ class GameViewController: UIViewController {
             let mainStoryboard: UIStoryboard = UIStoryboard(name: "Main", bundle: .main)
             let mainViewController: UIViewController = mainStoryboard.instantiateViewController(identifier: "MainScreen") as MainViewController
             
-            guard let window = self.view.window else { return }
-            
-            UIView.transition(with: window, duration: 0.5, options: [.transitionCurlDown], animations: {
-                window.rootViewController = mainViewController
-            })
+            let sceneDelegate = UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate
+            sceneDelegate?.transitionViewController.transition(to: mainViewController, with: [.transitionCurlDown])
         }
         
         optionsButton.menu = UIMenu(children: [

@@ -19,25 +19,11 @@ class MainViewController: UIViewController, UITextFieldDelegate {
         codeRoomTextField.delegate = self
     }
     
-    // Override device orienation settings.
-    override var shouldAutorotate: Bool {
-        return false
-    }
-    
-    override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
-        return .portrait
-    }
-    
-    override var preferredInterfaceOrientationForPresentation: UIInterfaceOrientation {
-        return .portrait
-    }
-    
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder()
         
         return true
     }
-    
     
     @IBAction func onLogin(_ sender: Any) {
         let registerStoryboard: UIStoryboard = UIStoryboard(name: "Register", bundle: .main)
@@ -59,22 +45,16 @@ class MainViewController: UIViewController, UITextFieldDelegate {
         let gameStoryboard: UIStoryboard = UIStoryboard(name: "Game", bundle: .main)
         let gameViewController: UIViewController = gameStoryboard.instantiateViewController(identifier: "GameScreen") as GameViewController
 
-        guard let window = self.view.window else { return }
-
-        UIView.transition(with: window, duration: 0.5, options: [.transitionCurlUp], animations: {
-            window.rootViewController = gameViewController
-        })
+        let sceneDelegate = UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate
+        sceneDelegate?.transitionViewController.transition(to: gameViewController, with: [.transitionCurlUp])
     }
     
     @IBAction func onPlayWithRandoms(_ sender: Any) {
         let gameStoryboard: UIStoryboard = UIStoryboard(name: "Game", bundle: .main)
         let gameViewController: UIViewController = gameStoryboard.instantiateViewController(identifier: "GameScreen") as GameViewController
         
-        guard let window = self.view.window else { return }
-        
-        UIView.transition(with: window, duration: 0.5, options: [.transitionCurlUp], animations: {
-            window.rootViewController = gameViewController
-        })
+        let sceneDelegate = UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate
+        sceneDelegate?.transitionViewController.transition(to: gameViewController, with: [.transitionCurlUp])
     }
 }
 
