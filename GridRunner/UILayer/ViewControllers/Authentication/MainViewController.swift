@@ -66,7 +66,6 @@ class MainViewController: UIViewController, UITextFieldDelegate {
         })
     }
     
-    
     @IBAction func onPlayWithRandoms(_ sender: Any) {
         let gameStoryboard: UIStoryboard = UIStoryboard(name: "Game", bundle: .main)
         let gameViewController: UIViewController = gameStoryboard.instantiateViewController(identifier: "GameScreen") as GameViewController
