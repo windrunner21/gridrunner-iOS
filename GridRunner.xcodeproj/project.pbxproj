@@ -16,6 +16,7 @@
 		CA0AAC342A0E6395008367FB /* Map.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA0AAC332A0E6395008367FB /* Map.swift */; };
 		CA0AAC362A0E6428008367FB /* MapDimensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA0AAC352A0E6428008367FB /* MapDimensions.swift */; };
 		CA0AAC392A0E722C008367FB /* TileType.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA0AAC382A0E722C008367FB /* TileType.swift */; };
+		CA0AAC3B2A0E7528008367FB /* PowerUp.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA0AAC3A2A0E7528008367FB /* PowerUp.swift */; };
 		CA4E3F542A07A80E00D36266 /* Game.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CA4E3F532A07A80E00D36266 /* Game.storyboard */; };
 		CA4E3F582A07A85900D36266 /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA4E3F572A07A85900D36266 /* GameViewController.swift */; };
 		CA4E3F5C2A07BBF100D36266 /* PlayerType.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA4E3F5B2A07BBF100D36266 /* PlayerType.swift */; };
@@ -62,6 +63,7 @@
 		CA0AAC332A0E6395008367FB /* Map.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Map.swift; sourceTree = "<group>"; };
 		CA0AAC352A0E6428008367FB /* MapDimensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapDimensions.swift; sourceTree = "<group>"; };
 		CA0AAC382A0E722C008367FB /* TileType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TileType.swift; sourceTree = "<group>"; };
+		CA0AAC3A2A0E7528008367FB /* PowerUp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PowerUp.swift; sourceTree = "<group>"; };
 		CA4E3F532A07A80E00D36266 /* Game.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Game.storyboard; sourceTree = "<group>"; };
 		CA4E3F572A07A85900D36266 /* GameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameViewController.swift; sourceTree = "<group>"; };
 		CA4E3F5B2A07BBF100D36266 /* PlayerType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerType.swift; sourceTree = "<group>"; };
@@ -125,6 +127,7 @@
 			isa = PBXGroup;
 			children = (
 				CA0AAC2A2A0E2C17008367FB /* Player.swift */,
+				CA0AAC3A2A0E7528008367FB /* PowerUp.swift */,
 			);
 			path = Protocols;
 			sourceTree = "<group>";
@@ -466,6 +469,7 @@
 				CA0AAC2E2A0E2F0F008367FB /* Tile.swift in Sources */,
 				CAFED4912A02496E00FB4B9B /* MainViewController.swift in Sources */,
 				CA4E3F662A0BCD3300D36266 /* MapExits.swift in Sources */,
+				CA0AAC3B2A0E7528008367FB /* PowerUp.swift in Sources */,
 				CA0AAC392A0E722C008367FB /* TileType.swift in Sources */,
 				CA4E3F602A0891F300D36266 /* RegisterViewController.swift in Sources */,
 				CA0AAC302A0E484F008367FB /* Coordinate.swift in Sources */,
