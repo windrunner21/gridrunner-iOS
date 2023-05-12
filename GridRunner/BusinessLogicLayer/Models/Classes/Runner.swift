@@ -13,7 +13,10 @@ class Runner: Player {
     var didWin: Bool = false
     
     func move(to coordinate: Coordinate) {
-        print("Seeker is moving to x: \(coordinate.x) and y: \(coordinate.y)")
+        if numberOfMoves > 0 {
+            numberOfMoves -= 1
+            print("Runner is moving to x: \(coordinate.x) and y: \(coordinate.y)")
+        }
     }
     
     func win() {

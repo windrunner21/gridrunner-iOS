@@ -23,21 +23,24 @@ class GameViewController: UIViewController {
         super.viewDidLoad()
         
         // Prepare game class.
-        game.createSession(
+        self.game.createSession(
             with: Map(with: MapDimensions(13, by: 13)),
             for: Runner()
         )
         
+        // If player could not have been instatiated return.
+        // TODO: replace with error screen later
+        guard let player = game.getPlayer() else { return }
+        
         // Prepare game grid.
-        createGameGrid(
+        self.createGameGrid(
             rows: game.getMap().getDimensions().getNumberOfRows(),
             columns: game.getMap().getDimensions().getNumberOfColumns(),
             inside: gameView
         )
         
-        movesLabel.text = "\(game.getPlayer()?.numberOfMoves ?? -1) moves left"
-        
-        setUpOptionsButton()
+        self.setUpOptionsButton()
+        self.updateMovesLabel(with: player.numberOfMoves)
     }
     
     @IBAction func onUndo(_ sender: Any) {
@@ -56,11 +59,11 @@ class GameViewController: UIViewController {
             sceneDelegate?.transitionViewController.transition(to: mainViewController, with: [.transitionCurlDown])
         }
         
-        optionsButton.menu = UIMenu(children: [
+        self.optionsButton.menu = UIMenu(children: [
             UIAction(title: "Main Menu", state: .off, handler: mainMenuClosure)
         ])
         
-        optionsButton.showsMenuAsPrimaryAction = true
+        self.optionsButton.showsMenuAsPrimaryAction = true
     }
     
     private func createGameGrid(rows: Int, columns: Int, inside rootView: UIView, spacing: CGFloat = 5) {
@@ -117,11 +120,21 @@ class GameViewController: UIViewController {
     }
     
     @objc func gridButtonClicked(_ tile: Tile) {
-        print("oldValue for tile with id \(tile.getIdentifier()) is \(tile.isOpen())")
-        if tile.type == .basic {
-            tile.backgroundColor = .systemIndigo.withAlphaComponent(0.5)
-            tile.open()
+        guard let player = game.getPlayer() else { return }
+        
+        if player.numberOfMoves > 0 {
+            print("oldValue for tile with id \(tile.getIdentifier()) is \(tile.isOpen())")
+            if tile.type == .basic {
+                tile.backgroundColor = .systemIndigo.withAlphaComponent(0.5)
+                tile.open()
+                self.game.getPlayer()?.move(to: Coordinate(x: 1, y: 2))
+                self.updateMovesLabel(with: player.numberOfMoves)
+            }
+            print("new for tile with id \(tile.getIdentifier()) is \(tile.isOpen())")
         }
-        print("new for tile with id \(tile.getIdentifier()) is \(tile.isOpen())")
+    }
+    
+    private func updateMovesLabel(with value: Int) {
+        self.movesLabel.text = "\(value) moves left"
     }
 }
