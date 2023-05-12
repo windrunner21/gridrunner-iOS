@@ -12,6 +12,10 @@
 		CA0AAC2B2A0E2C17008367FB /* Player.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA0AAC2A2A0E2C17008367FB /* Player.swift */; };
 		CA0AAC2E2A0E2F0F008367FB /* Tile.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA0AAC2D2A0E2F0F008367FB /* Tile.swift */; };
 		CA0AAC302A0E484F008367FB /* Coordinate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA0AAC2F2A0E484F008367FB /* Coordinate.swift */; };
+		CA0AAC322A0E637E008367FB /* Game.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA0AAC312A0E637E008367FB /* Game.swift */; };
+		CA0AAC342A0E6395008367FB /* Map.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA0AAC332A0E6395008367FB /* Map.swift */; };
+		CA0AAC362A0E6428008367FB /* MapDimensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA0AAC352A0E6428008367FB /* MapDimensions.swift */; };
+		CA0AAC392A0E722C008367FB /* TileType.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA0AAC382A0E722C008367FB /* TileType.swift */; };
 		CA4E3F542A07A80E00D36266 /* Game.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CA4E3F532A07A80E00D36266 /* Game.storyboard */; };
 		CA4E3F582A07A85900D36266 /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA4E3F572A07A85900D36266 /* GameViewController.swift */; };
 		CA4E3F5C2A07BBF100D36266 /* PlayerType.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA4E3F5B2A07BBF100D36266 /* PlayerType.swift */; };
@@ -54,6 +58,10 @@
 		CA0AAC2A2A0E2C17008367FB /* Player.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Player.swift; sourceTree = "<group>"; };
 		CA0AAC2D2A0E2F0F008367FB /* Tile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tile.swift; sourceTree = "<group>"; };
 		CA0AAC2F2A0E484F008367FB /* Coordinate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinate.swift; sourceTree = "<group>"; };
+		CA0AAC312A0E637E008367FB /* Game.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Game.swift; sourceTree = "<group>"; };
+		CA0AAC332A0E6395008367FB /* Map.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Map.swift; sourceTree = "<group>"; };
+		CA0AAC352A0E6428008367FB /* MapDimensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapDimensions.swift; sourceTree = "<group>"; };
+		CA0AAC382A0E722C008367FB /* TileType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TileType.swift; sourceTree = "<group>"; };
 		CA4E3F532A07A80E00D36266 /* Game.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Game.storyboard; sourceTree = "<group>"; };
 		CA4E3F572A07A85900D36266 /* GameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameViewController.swift; sourceTree = "<group>"; };
 		CA4E3F5B2A07BBF100D36266 /* PlayerType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerType.swift; sourceTree = "<group>"; };
@@ -107,7 +115,8 @@
 			children = (
 				CA0AAC252A0E2BE6008367FB /* Seeker.swift */,
 				CA0AAC272A0E2BF1008367FB /* Runner.swift */,
-				CA0AAC2F2A0E484F008367FB /* Coordinate.swift */,
+				CA0AAC312A0E637E008367FB /* Game.swift */,
+				CA0AAC332A0E6395008367FB /* Map.swift */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -118,6 +127,15 @@
 				CA0AAC2A2A0E2C17008367FB /* Player.swift */,
 			);
 			path = Protocols;
+			sourceTree = "<group>";
+		};
+		CA0AAC372A0E643A008367FB /* Structs */ = {
+			isa = PBXGroup;
+			children = (
+				CA0AAC352A0E6428008367FB /* MapDimensions.swift */,
+				CA0AAC2F2A0E484F008367FB /* Coordinate.swift */,
+			);
+			path = Structs;
 			sourceTree = "<group>";
 		};
 		CA4E3F502A07A75800D36266 /* Authentication */ = {
@@ -157,6 +175,7 @@
 		CA4E3F592A07BBE100D36266 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				CA0AAC372A0E643A008367FB /* Structs */,
 				CA0AAC292A0E2C09008367FB /* Protocols */,
 				CA0AAC242A0E2BDD008367FB /* Classes */,
 				CA4E3F5A2A07BBE400D36266 /* Enums */,
@@ -167,6 +186,7 @@
 		CA4E3F5A2A07BBE400D36266 /* Enums */ = {
 			isa = PBXGroup;
 			children = (
+				CA0AAC382A0E722C008367FB /* TileType.swift */,
 				CA4E3F5B2A07BBF100D36266 /* PlayerType.swift */,
 				CA4E3F652A0BCD3300D36266 /* MapExits.swift */,
 			);
@@ -436,13 +456,17 @@
 			buildActionMask = 2147483647;
 			files = (
 				CA4E3F692A0CE31200D36266 /* TransitionViewController.swift in Sources */,
+				CA0AAC322A0E637E008367FB /* Game.swift in Sources */,
+				CA0AAC342A0E6395008367FB /* Map.swift in Sources */,
 				CA4E3F5C2A07BBF100D36266 /* PlayerType.swift in Sources */,
 				CA4E3F582A07A85900D36266 /* GameViewController.swift in Sources */,
 				CA4E3F642A08DCB400D36266 /* ViewControllerExtension.swift in Sources */,
 				CA0AAC2B2A0E2C17008367FB /* Player.swift in Sources */,
+				CA0AAC362A0E6428008367FB /* MapDimensions.swift in Sources */,
 				CA0AAC2E2A0E2F0F008367FB /* Tile.swift in Sources */,
 				CAFED4912A02496E00FB4B9B /* MainViewController.swift in Sources */,
 				CA4E3F662A0BCD3300D36266 /* MapExits.swift in Sources */,
+				CA0AAC392A0E722C008367FB /* TileType.swift in Sources */,
 				CA4E3F602A0891F300D36266 /* RegisterViewController.swift in Sources */,
 				CA0AAC302A0E484F008367FB /* Coordinate.swift in Sources */,
 				CAFED48D2A02496E00FB4B9B /* AppDelegate.swift in Sources */,

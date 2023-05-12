@@ -10,6 +10,7 @@ import UIKit
 class Tile: UIButton {
     
     private var identifier: String = String()
+    var type: TileType = .unknown
     private var hasBeenOpened: Bool = false
     
     convenience init() {
@@ -24,19 +25,19 @@ class Tile: UIButton {
         super.init(coder: coder)
     }
     
-    func open() {
-        hasBeenOpened = true
+    func getIdentifier() -> String {
+        self.identifier
     }
     
     func isOpen() -> Bool {
-        hasBeenOpened
+        self.hasBeenOpened
     }
-    
+
     func setIdentifier(_ id: String) {
-        identifier = id
+        self.identifier = id
     }
     
-    func getIdentifier() -> String {
-        identifier
+    func open() {
+        self.hasBeenOpened = true
     }
 }

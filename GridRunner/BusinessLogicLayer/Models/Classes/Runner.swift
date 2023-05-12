@@ -5,9 +5,9 @@
 //  Created by Imran Hajiyev on 12.05.23.
 //
 
-import Foundation
 
 class Runner: Player {
+    var type: PlayerType = .runner
     var numberOfMoves: Int = 2
     var movesHistory: [String] = []
     var didWin: Bool = false
@@ -19,9 +19,4 @@ class Runner: Player {
     func win() {
         didWin = true
     }
-    
-    func didPlayerWin() -> Bool {
-        didWin
-    }
-    
 }

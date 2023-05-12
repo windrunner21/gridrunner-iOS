@@ -16,38 +16,34 @@ class GameViewController: UIViewController {
     
     @IBOutlet weak var optionsButton: UIButton!
     
-    // Controller related temporary properties. TODO: remove into business logic
-    let numberOfRows: Int = Int.random(in: 9...15)
-    var numberOfColumns: Int {
-        numberOfRows
-    }
-    var playerType: PlayerType = .runner
-    var moves: Int = 0
+    // Controller properties.
+    var game = Game()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Update moves label when loading the view.
-        moves = playerType == .runner ? 2 : 1
-        movesLabel.text = "\(moves) moves left"
         
-        // Set up game options.
-        setUpOptionsButton()
+        // Prepare game class.
+        game.createSession(
+            with: Map(with: MapDimensions(13, by: 13)),
+            for: Runner()
+        )
         
         // Prepare game grid.
-        createGameGridWithDimensions(numberOfRows, by: numberOfColumns, inside: gameView)
+        createGameGrid(
+            rows: game.getMap().getDimensions().getNumberOfRows(),
+            columns: game.getMap().getDimensions().getNumberOfColumns(),
+            inside: gameView
+        )
+        
+        movesLabel.text = "\(game.getPlayer()?.numberOfMoves ?? -1) moves left"
+        
+        setUpOptionsButton()
     }
     
     @IBAction func onUndo(_ sender: Any) {
-        
     }
     
     @IBAction func onFinish(_ sender: Any) {
-        if moves > 0 {
-            moves -= 1
-            
-            movesLabel.text = "\(moves) moves left"
-        }
     }
     
     private func setUpOptionsButton() {
@@ -67,7 +63,7 @@ class GameViewController: UIViewController {
         optionsButton.showsMenuAsPrimaryAction = true
     }
     
-    private func createGameGridWithDimensions(_ rows: Int, by columns: Int, inside rootView: UIView, spacing: CGFloat = 5) {
+    private func createGameGrid(rows: Int, columns: Int, inside rootView: UIView, spacing: CGFloat = 5) {
         
         let verticalStackView = UIStackView()
         verticalStackView.axis = .vertical
@@ -85,7 +81,7 @@ class GameViewController: UIViewController {
             for column in 0..<columns {
                 let tile = Tile()
                 tile.setIdentifier("\(row)\(column)")
-                initializeMap(for: tile, row, column)
+                decorateTile(tile, at: row, and: column)
                 tile.layer.cornerRadius = 6
                 tile.addTarget(self, action: #selector(gridButtonClicked), for: .touchUpInside)
                 horizontalStackView.addArrangedSubview(tile)
@@ -102,24 +98,30 @@ class GameViewController: UIViewController {
         verticalStackView.leftAnchor.constraint(equalTo: rootView.leftAnchor, constant: 0).isActive = true
     }
     
-    private func initializeMap(for tile: Tile, _ row: Int, _ column: Int) {
-        //let numberOfExits = Int.random(in: 1...4)
-        
+    private func decorateTile(_ tile: Tile, at row: Int, and column: Int) {
         if row == 0 && column == 0 {
+            tile.type = .exit
             tile.backgroundColor = .systemMint
-        } else if row == numberOfRows / 2 && column == numberOfColumns / 2 {
+        } else if row == game.getMap().getDimensions().getNumberOfRows() / 2 &&
+                  column == game.getMap().getDimensions().getNumberOfColumns() / 2 {
+            tile.type = .start
             tile.backgroundColor = .systemIndigo
-        } else if row == numberOfRows - 1 && column == numberOfColumns - 1 {
+        } else if row == game.getMap().getDimensions().getNumberOfRows() - 1 &&
+                  column == game.getMap().getDimensions().getNumberOfColumns() - 1 {
+            tile.type = .exit
             tile.backgroundColor = .systemMint
         } else {
+            tile.type = .basic
             tile.backgroundColor = .systemGray3
         }
     }
     
     @objc func gridButtonClicked(_ tile: Tile) {
         print("oldValue for tile with id \(tile.getIdentifier()) is \(tile.isOpen())")
-        tile.backgroundColor = .systemIndigo.withAlphaComponent(0.5)
-        tile.open()
+        if tile.type == .basic {
+            tile.backgroundColor = .systemIndigo.withAlphaComponent(0.5)
+            tile.open()
+        }
         print("new for tile with id \(tile.getIdentifier()) is \(tile.isOpen())")
     }
 }
