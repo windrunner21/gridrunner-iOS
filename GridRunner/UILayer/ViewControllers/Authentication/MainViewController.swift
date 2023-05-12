@@ -17,6 +17,15 @@ class MainViewController: UIViewController, UITextFieldDelegate {
         
         // Manage delegate to override UITextField methods.
         codeRoomTextField.delegate = self
+        
+        // Close any open editing on any outside click.
+        let closeEditingTap = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
+        
+        self.view.addGestureRecognizer(closeEditingTap)
+    }
+    
+    @objc func dismissKeyboard() {
+        self.view.endEditing(true)
     }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
