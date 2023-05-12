@@ -51,8 +51,18 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ykD-wi-ZWY">
                                 <rect key="frame" x="79" y="20" width="550.66666666666663" height="332"/>
                             </view>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xwH-Zm-e8h">
+                                <rect key="frame" x="706" y="262.66666666666669" width="67" height="35"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="filled" title="Undo">
+                                    <fontDescription key="titleFontDescription" type="system" weight="semibold" pointSize="17"/>
+                                </buttonConfiguration>
+                                <connections>
+                                    <action selector="onUndo:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="KNn-oq-4pr"/>
+                                </connections>
+                            </button>
                             <button opaque="NO" contentMode="scaleToFill" showsMenuAsPrimaryAction="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qHe-QY-Ur5">
-                                <rect key="frame" x="747.33333333333337" y="272" width="25.666666666666629" height="25.666666666666686"/>
+                                <rect key="frame" x="747.33333333333337" y="217" width="25.666666666666629" height="25.666666666666657"/>
                                 <menu key="menu" id="dnI-GB-Why">
                                     <children>
                                         <command title="Item 1" id="yv7-2q-e8P"/>
@@ -70,7 +80,6 @@
                             <constraint firstItem="0bE-6i-jdG" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" id="1ig-z0-rOh"/>
                             <constraint firstItem="ykD-wi-ZWY" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="20" id="6WX-pw-iQD"/>
                             <constraint firstItem="JQs-fq-qxl" firstAttribute="top" secondItem="sEa-W9-TVt" secondAttribute="bottom" constant="10" id="BSj-tR-i5P"/>
-                            <constraint firstItem="Vop-64-fjf" firstAttribute="top" secondItem="qHe-QY-Ur5" secondAttribute="bottom" constant="20" id="D82-E9-jeJ"/>
                             <constraint firstAttribute="bottom" secondItem="0bE-6i-jdG" secondAttribute="bottom" id="Do3-VX-Ir7"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="Vop-64-fjf" secondAttribute="trailing" constant="20" id="LrF-G2-rCt"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="sEa-W9-TVt" secondAttribute="trailing" constant="20" id="P9G-zq-rcR"/>
@@ -78,9 +87,12 @@
                             <constraint firstItem="sEa-W9-TVt" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" constant="20" id="U4f-ez-usz"/>
                             <constraint firstItem="0bE-6i-jdG" firstAttribute="leading" secondItem="ykD-wi-ZWY" secondAttribute="trailing" constant="20" id="YNt-xE-d3y"/>
                             <constraint firstItem="ykD-wi-ZWY" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" constant="20" id="Ydf-ij-B1t"/>
+                            <constraint firstItem="Vop-64-fjf" firstAttribute="top" secondItem="xwH-Zm-e8h" secondAttribute="bottom" constant="20" id="dwO-dK-99E"/>
                             <constraint firstItem="sEa-W9-TVt" firstAttribute="leading" secondItem="0bE-6i-jdG" secondAttribute="trailing" constant="20" id="iNQ-hM-jgP"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="bottom" secondItem="ykD-wi-ZWY" secondAttribute="bottom" constant="20" id="kOe-M4-Uzq"/>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="xwH-Zm-e8h" secondAttribute="trailing" constant="20" id="lse-J2-33T"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="bottom" secondItem="Vop-64-fjf" secondAttribute="bottom" constant="20" id="mfS-FR-WUt"/>
+                            <constraint firstItem="xwH-Zm-e8h" firstAttribute="top" secondItem="qHe-QY-Ur5" secondAttribute="bottom" constant="20" id="qOQ-C9-yGa"/>
                             <constraint firstItem="JQs-fq-qxl" firstAttribute="leading" secondItem="0bE-6i-jdG" secondAttribute="trailing" constant="20" id="qce-Ic-1w3"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="JQs-fq-qxl" secondAttribute="trailing" constant="20" id="rVB-Wj-i6M"/>
                         </constraints>

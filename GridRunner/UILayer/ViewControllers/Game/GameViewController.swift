@@ -38,6 +38,10 @@ class GameViewController: UIViewController {
         createGameGridWithDimensions(numberOfRows, by: numberOfColumns, inside: gameView)
     }
     
+    @IBAction func onUndo(_ sender: Any) {
+        
+    }
+    
     @IBAction func onFinish(_ sender: Any) {
         if moves > 0 {
             moves -= 1
@@ -79,11 +83,12 @@ class GameViewController: UIViewController {
             horizontalStackView.spacing = spacing
             
             for column in 0..<columns {
-                let button = UIButton()
-                initializeMap(for: button, row, column)
-                button.layer.cornerRadius = 6
-                button.addTarget(self, action: #selector(gridButtonClicked), for: .touchUpInside)
-                horizontalStackView.addArrangedSubview(button)
+                let tile = Tile()
+                tile.setIdentifier("\(row)\(column)")
+                initializeMap(for: tile, row, column)
+                tile.layer.cornerRadius = 6
+                tile.addTarget(self, action: #selector(gridButtonClicked), for: .touchUpInside)
+                horizontalStackView.addArrangedSubview(tile)
             }
             verticalStackView.addArrangedSubview(horizontalStackView)
         }
@@ -97,22 +102,24 @@ class GameViewController: UIViewController {
         verticalStackView.leftAnchor.constraint(equalTo: rootView.leftAnchor, constant: 0).isActive = true
     }
     
-    private func initializeMap(for button: UIButton, _ row: Int, _ column: Int) {
+    private func initializeMap(for tile: Tile, _ row: Int, _ column: Int) {
         //let numberOfExits = Int.random(in: 1...4)
         
         if row == 0 && column == 0 {
-            button.backgroundColor = .systemMint
+            tile.backgroundColor = .systemMint
         } else if row == numberOfRows / 2 && column == numberOfColumns / 2 {
-            button.backgroundColor = .systemIndigo
+            tile.backgroundColor = .systemIndigo
         } else if row == numberOfRows - 1 && column == numberOfColumns - 1 {
-            button.backgroundColor = .systemMint
+            tile.backgroundColor = .systemMint
         } else {
-            button.backgroundColor = .systemGray3
+            tile.backgroundColor = .systemGray3
         }
     }
     
-    @objc func gridButtonClicked(_ button: UIButton) {
-        button.backgroundColor = .systemRed
-        print("i'm clicked")
+    @objc func gridButtonClicked(_ tile: Tile) {
+        print("oldValue for tile with id \(tile.getIdentifier()) is \(tile.isOpen())")
+        tile.backgroundColor = .systemIndigo.withAlphaComponent(0.5)
+        tile.open()
+        print("new for tile with id \(tile.getIdentifier()) is \(tile.isOpen())")
     }
 }
