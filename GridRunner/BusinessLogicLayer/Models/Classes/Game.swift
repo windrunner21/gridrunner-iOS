@@ -9,6 +9,9 @@ class Game {
     private var map: Map
     private var player: Player?
     
+    typealias History = [Coordinate]
+    private var history: History = []
+    
     convenience init() {
         self.init(map: Map())
     }
@@ -16,6 +19,10 @@ class Game {
     init(map: Map, player: Player? = nil) {
         self.map = map
         self.player = player
+    }
+    
+    func getHistory() -> History {
+        self.history
     }
     
     func getMap() -> Map {

@@ -8,7 +8,7 @@
 class Seeker: Player {
     var type: PlayerType = .seeker
     var numberOfMoves: Int = 1
-    var movesHistory: [Coordinate] = []
+    var movesHistory: History = []
     var didWin: Bool = false
     
     func move(to coordinate: Coordinate) {

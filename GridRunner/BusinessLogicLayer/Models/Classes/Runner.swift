@@ -11,7 +11,7 @@ class Runner: Player {
     var didWin: Bool = false
     
     var numberOfMoves: Int = 2
-    var movesHistory: [Coordinate] = []
+    var movesHistory: History = []
     
     var position: Coordinate
     
