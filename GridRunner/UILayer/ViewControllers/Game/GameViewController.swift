@@ -156,6 +156,7 @@ class GameViewController: UIViewController {
             
             if allowedMove && direction != .unknown {
                 player.move(to: tile.position)
+                game.updateGameHistory(with: player.movesHistory)
                 tile.setDirectionImage(to: direction)
                 tile.open()
             } else {

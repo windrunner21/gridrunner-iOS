@@ -37,4 +37,8 @@ class Game {
         self.map = map
         self.player = player
     }
+    
+    func updateGameHistory(with history: History) {
+        self.history += history
+    }
 }
