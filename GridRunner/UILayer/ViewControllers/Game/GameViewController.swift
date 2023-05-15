@@ -148,16 +148,15 @@ class GameViewController: UIViewController {
     }
     
     private func basicTileTapped(_ tile: Tile, by player: Player) {
-        print("Basic tile with id: \(tile.getIdentifier()) tapped. (Tile open: \(tile.isOpen()).")
+        print("Basic tile with id: \(tile.getIdentifier()) tapped. (Tile open: \(tile.isOpen()).)")
         
         if let player = player as? Runner {
-            let allowedMove = game.canRunnerMoveBeAllowed(from: player.position, to: tile.position)
-            let direction: MoveDirection = game.identifyRunnerMovingDirection(from: player.position, to: tile.position)
+            let allowedMove = player.canMoveBeAllowed(from: player.position, to: tile.position)
+            let direction: MoveDirection = player.identifyMovingDirection(from: player.position, to: tile.position)
             
             if allowedMove && direction != .unknown {
                 player.move(to: tile.position)
                 tile.setDirectionImage(to: direction)
-                tile.backgroundColor = .systemIndigo.withAlphaComponent(0.5)
                 tile.open()
             } else {
                 print("Forbidden move.")
@@ -165,6 +164,7 @@ class GameViewController: UIViewController {
         }
         
         self.updateMovesLabel(with: player.numberOfMoves)
+        print(player.movesHistory)
     }
     
     private func updateMovesLabel(with value: Int) {

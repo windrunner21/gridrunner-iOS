@@ -8,7 +8,7 @@
 protocol Player {
     var type: PlayerType { get }
     var numberOfMoves: Int { get set }
-    var movesHistory: [String] { get set }
+    var movesHistory: [Coordinate] { get set }
     var didWin: Bool { get set }
     
     func move(to coordinate: Coordinate)

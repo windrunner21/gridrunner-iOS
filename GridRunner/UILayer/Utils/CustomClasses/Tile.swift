@@ -44,6 +44,7 @@ class Tile: UIButton {
     
     func open() {
         self.hasBeenOpened = true
+        self.backgroundColor = .systemIndigo.withAlphaComponent(0.5)
     }
     
     func setDirectionImage(to direction: MoveDirection) {

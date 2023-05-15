@@ -8,13 +8,13 @@
 class Seeker: Player {
     var type: PlayerType = .seeker
     var numberOfMoves: Int = 1
-    var movesHistory: [String] = []
+    var movesHistory: [Coordinate] = []
     var didWin: Bool = false
     
     func move(to coordinate: Coordinate) {
         if numberOfMoves > 0 {
             numberOfMoves -= 1
-            print("Seeker is moving to x: \(coordinate.x) and y: \(coordinate.y)")
+            print("Seeker is opening tile at x: \(coordinate.x) and y: \(coordinate.y)")
         }
     }
     
