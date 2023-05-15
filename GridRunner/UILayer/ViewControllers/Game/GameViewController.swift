@@ -140,26 +140,27 @@ class GameViewController: UIViewController {
     }
     
     private func startTileTapped(_ tile: Tile) {
-        print("start tile with id: \(tile.getIdentifier()) tapped.")
+        print("Start tile with id: \(tile.getIdentifier()) tapped.")
     }
     
     private func exitTileTapped(_ tile: Tile) {
-        print("exit tile with id: \(tile.getIdentifier()) tapped.")
+        print("Exit tile with id: \(tile.getIdentifier()) tapped.")
     }
     
     private func basicTileTapped(_ tile: Tile, by player: Player) {
-        print("basic tile with id: \(tile.getIdentifier()) tapped.")
-        print("was tile opened before? \(tile.isOpen())")
+        print("Basic tile with id: \(tile.getIdentifier()) tapped. (Tile open: \(tile.isOpen()).")
         
         if let player = player as? Runner {
+            let allowedMove = game.canRunnerMoveBeAllowed(from: player.position, to: tile.position)
             let direction: MoveDirection = game.identifyRunnerMovingDirection(from: player.position, to: tile.position)
-            if direction != .unknown {
+            
+            if allowedMove && direction != .unknown {
                 player.move(to: tile.position)
                 tile.setDirectionImage(to: direction)
                 tile.backgroundColor = .systemIndigo.withAlphaComponent(0.5)
                 tile.open()
             } else {
-                print("forbidden move")
+                print("Forbidden move.")
             }
         }
         

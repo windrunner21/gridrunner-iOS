@@ -23,6 +23,7 @@ class Runner: Player {
         if numberOfMoves > 0 {
             numberOfMoves -= 1
             print("Runner is moving to x: \(coordinate.x) and y: \(coordinate.y)")
+            self.position = coordinate
         }
     }
     
