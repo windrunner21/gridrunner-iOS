@@ -30,4 +30,28 @@ class Game {
         self.map = map
         self.player = player
     }
+    
+    func identifyRunnerMovingDirection(from oldPosition: Coordinate, to newPosition: Coordinate) -> MoveDirection {
+        // horizontal movement
+        // left
+        if oldPosition.x == newPosition.x && oldPosition.y > newPosition.y {
+            return .left
+        }
+        // right
+        if oldPosition.x == newPosition.x && oldPosition.y < newPosition.y {
+            return .right
+        }
+        
+        // vertical movement
+        // up
+        if oldPosition.x > newPosition.x && oldPosition.y == newPosition.y {
+            return .up
+        }
+        // down
+        if oldPosition.x < newPosition.x && oldPosition.y == newPosition.y {
+            return .down
+        }
+        
+        return .unknown
+    }
 }

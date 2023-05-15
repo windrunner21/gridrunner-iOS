@@ -23,9 +23,10 @@ class GameViewController: UIViewController {
         super.viewDidLoad()
         
         // Prepare game class.
+        let map = Map(with: MapDimensions(13, by: 13))
         self.game.createSession(
-            with: Map(with: MapDimensions(13, by: 13)),
-            for: Runner()
+            with: map,
+            for: Runner(at: map.getCenterCoordinates())
         )
         
         // If player could not have been instatiated return.
@@ -44,6 +45,7 @@ class GameViewController: UIViewController {
     }
     
     @IBAction func onUndo(_ sender: Any) {
+        
     }
     
     @IBAction func onFinish(_ sender: Any) {
@@ -83,12 +85,17 @@ class GameViewController: UIViewController {
             
             for column in 0..<columns {
                 let tile = Tile()
+                
+                tile.position = Coordinate(x: row, y: column)
                 tile.setIdentifier("\(row)\(column)")
+                
                 decorateTile(tile, at: row, and: column)
                 tile.layer.cornerRadius = 6
                 tile.addTarget(self, action: #selector(gridButtonClicked), for: .touchUpInside)
+                
                 horizontalStackView.addArrangedSubview(tile)
             }
+            
             verticalStackView.addArrangedSubview(horizontalStackView)
         }
         
@@ -122,16 +129,41 @@ class GameViewController: UIViewController {
     @objc func gridButtonClicked(_ tile: Tile) {
         guard let player = game.getPlayer() else { return }
         
-        if player.numberOfMoves > 0 {
-            print("oldValue for tile with id \(tile.getIdentifier()) is \(tile.isOpen())")
-            if tile.type == .basic {
+        switch tile.type {
+        case .start:
+            self.startTileTapped(tile)
+        case .exit:
+            self.exitTileTapped(tile)
+        default:
+            if player.numberOfMoves > 0 { basicTileTapped(tile, by: player) }
+        }
+    }
+    
+    private func startTileTapped(_ tile: Tile) {
+        print("start tile with id: \(tile.getIdentifier()) tapped.")
+    }
+    
+    private func exitTileTapped(_ tile: Tile) {
+        print("exit tile with id: \(tile.getIdentifier()) tapped.")
+    }
+    
+    private func basicTileTapped(_ tile: Tile, by player: Player) {
+        print("basic tile with id: \(tile.getIdentifier()) tapped.")
+        print("was tile opened before? \(tile.isOpen())")
+        
+        if let player = player as? Runner {
+            let direction: MoveDirection = game.identifyRunnerMovingDirection(from: player.position, to: tile.position)
+            if direction != .unknown {
+                player.move(to: tile.position)
+                tile.setDirectionImage(to: direction)
                 tile.backgroundColor = .systemIndigo.withAlphaComponent(0.5)
                 tile.open()
-                self.game.getPlayer()?.move(to: Coordinate(x: 1, y: 2))
-                self.updateMovesLabel(with: player.numberOfMoves)
+            } else {
+                print("forbidden move")
             }
-            print("new for tile with id \(tile.getIdentifier()) is \(tile.isOpen())")
         }
+        
+        self.updateMovesLabel(with: player.numberOfMoves)
     }
     
     private func updateMovesLabel(with value: Int) {

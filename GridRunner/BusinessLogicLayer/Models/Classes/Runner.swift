@@ -8,9 +8,16 @@
 
 class Runner: Player {
     var type: PlayerType = .runner
+    var didWin: Bool = false
+    
     var numberOfMoves: Int = 2
     var movesHistory: [String] = []
-    var didWin: Bool = false
+    
+    var position: Coordinate
+    
+    init(at position: Coordinate) {
+        self.position = position
+    }
     
     func move(to coordinate: Coordinate) {
         if numberOfMoves > 0 {

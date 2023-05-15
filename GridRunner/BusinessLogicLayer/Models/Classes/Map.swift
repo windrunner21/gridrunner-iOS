@@ -8,6 +8,9 @@
 class Map {
     private var dimensions: MapDimensions
     private var numberOfExits: Int
+    private var centerCoordinates: Coordinate {
+        Coordinate(x: dimensions.getNumberOfRows() / 2, y: dimensions.getNumberOfColumns() / 2)
+    }
     
     convenience init() {
         self.init(with: MapDimensions())
@@ -20,5 +23,9 @@ class Map {
     
     func getDimensions() -> MapDimensions {
         dimensions
+    }
+    
+    func getCenterCoordinates() -> Coordinate {
+        self.centerCoordinates
     }
 }
