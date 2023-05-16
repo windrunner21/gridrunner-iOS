@@ -15,6 +15,8 @@ class Runner: Player {
     
     var position: Coordinate
     
+    private var movesHistoryWithDirection: HistoryWithDirection = [:]
+    
     init(at position: Coordinate) {
         self.position = position
     }
@@ -26,6 +28,14 @@ class Runner: Player {
             self.position = coordinate
             self.movesHistory.append(coordinate)
         }
+    }
+    
+    func updateHistoryWithDirections(at position: Coordinate, moving direction: MoveDirection) {
+        self.movesHistoryWithDirection[position] = direction
+    }
+    
+    func getHistoryWithDirections() -> HistoryWithDirection {
+        self.movesHistoryWithDirection
     }
     
     func win() {

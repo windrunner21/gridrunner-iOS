@@ -15,6 +15,8 @@ class GameViewController: UIViewController {
     @IBOutlet weak var gameView: UIView!
     
     @IBOutlet weak var optionsButton: UIButton!
+    @IBOutlet weak var undoButton: UIButton!
+    @IBOutlet weak var finishButton: UIButton!
     
     // Controller properties.
     var game = Game()
@@ -45,10 +47,12 @@ class GameViewController: UIViewController {
     }
     
     @IBAction func onUndo(_ sender: Any) {
-        
+        print("undo clicked")
     }
     
     @IBAction func onFinish(_ sender: Any) {
+        print("finish clicked")
+        self.finishButton.isEnabled = false
     }
     
     private func setUpOptionsButton() {
@@ -137,6 +141,10 @@ class GameViewController: UIViewController {
         default:
             if player.numberOfMoves > 0 { basicTileTapped(tile, by: player) }
         }
+        
+        if player.numberOfMoves == 0 {
+            self.enableFinishButton()
+        }
     }
     
     private func startTileTapped(_ tile: Tile) {
@@ -154,11 +162,21 @@ class GameViewController: UIViewController {
             let allowedMove = player.canMoveBeAllowed(from: player.position, to: tile.position)
             let direction: MoveDirection = player.identifyMovingDirection(from: player.position, to: tile.position)
             
+            // Manage previous tile arrow direction if previous tile exists.
+            var previousDirection: MoveDirection? = nil
+            let previousTile = self.accessTile(with: player.position, in: gameView)
+            if let previousTile = previousTile {
+                previousDirection = player.getHistoryWithDirections()[previousTile.position]
+            }
+            
             if allowedMove && direction != .unknown {
                 player.move(to: tile.position)
-                game.updateGameHistory(with: player.movesHistory)
-                tile.setDirectionImage(to: direction)
+                player.updateHistoryWithDirections(at: tile.position, moving: direction)
+                
                 tile.open()
+                tile.updateDirectionImage(to: direction, from: previousDirection, oldTile: previousTile)
+                
+                game.updateGameHistory(with: player.movesHistory)
             } else {
                 print("Forbidden move.")
             }
@@ -168,7 +186,27 @@ class GameViewController: UIViewController {
         print(player.movesHistory)
     }
     
+    private func accessTile(with coordinates: Coordinate, in view: UIView) -> Tile? {
+        let row = coordinates.x
+        let column = coordinates.y
+        
+        if let view = view.subviews.first as? UIStackView {
+            if let row = view.arrangedSubviews[row] as? UIStackView {
+                if let tile = row.arrangedSubviews[column] as? Tile {
+                    print("Coordinates given: \(coordinates). (Tile open: \(tile.isOpen()).)")
+                    return tile
+                }
+            }
+        }
+        
+        return nil
+    }
+    
     private func updateMovesLabel(with value: Int) {
         self.movesLabel.text = "\(value) moves left"
+    }
+    
+    private func enableFinishButton() {
+        self.finishButton.isEnabled = true
     }
 }

@@ -98,10 +98,12 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="finishButton" destination="Vop-64-fjf" id="YXk-qb-VM5"/>
                         <outlet property="gameView" destination="ykD-wi-ZWY" id="AuY-JZ-Bh9"/>
                         <outlet property="movesLabel" destination="JQs-fq-qxl" id="wQW-Tt-W0T"/>
                         <outlet property="optionsButton" destination="qHe-QY-Ur5" id="Xc8-un-xbY"/>
                         <outlet property="turnLabel" destination="sEa-W9-TVt" id="QvK-jr-4XE"/>
+                        <outlet property="undoButton" destination="xwH-Zm-e8h" id="Vjw-xK-oCb"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

@@ -5,7 +5,7 @@
 //  Created by Imran Hajiyev on 12.05.23.
 //
 
-struct Coordinate {
+struct Coordinate: Hashable {
     var x: Int
     var y: Int
 }

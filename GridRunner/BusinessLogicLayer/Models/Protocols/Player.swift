@@ -7,6 +7,7 @@
 
 protocol Player {
     typealias History = [Coordinate]
+    typealias HistoryWithDirection = [Coordinate: MoveDirection]
     
     var type: PlayerType { get }
     var numberOfMoves: Int { get set }
