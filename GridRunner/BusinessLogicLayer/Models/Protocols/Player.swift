@@ -11,14 +11,18 @@ protocol Player {
     
     var type: PlayerType { get }
 
-    var maximumNumberOfMoves: Int { get set }
-    var numberOfMoves: Int { get set }
-    var movesHistory: History { get set }
+    var maximumNumberOfMoves: Int { get }
+    var numberOfMoves: Int { get }
+    var movesHistory: History { get }
     
     var didWin: Bool { get set }
     
+    func incrementNumberOfMoves()
+    func updateNumberOfMoves(to value: Int)
     func updateMaximumNumberOfMoves(to maximumValue: Int)
-    func move(to coordinate: Coordinate)
+    
     func undo()
+    func move(to coordinate: Coordinate)
+    
     func win()
 }

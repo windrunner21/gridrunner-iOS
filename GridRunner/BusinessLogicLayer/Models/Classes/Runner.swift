@@ -25,6 +25,14 @@ class Runner: Player {
         movesHistoryWithDirection[position] = .unknown
     }
     
+    func incrementNumberOfMoves() {
+        self.numberOfMoves += 1
+    }
+    
+    func updateNumberOfMoves(to value: Int) {
+        self.numberOfMoves = value
+    }
+    
     func updateMaximumNumberOfMoves(to maximumValue: Int) {
         self.maximumNumberOfMoves = maximumValue
     }

@@ -75,7 +75,11 @@ class GameViewController: UIViewController {
     }
     
     @IBAction func onFinish(_ sender: Any) {
-        print("finish clicked")
+        guard let player = game.getPlayer() else { return }
+        player.incrementNumberOfMoves()
+        self.updateMovesLabel(with: player.numberOfMoves)
+        
+        self.undoButton.isEnabled = false
         self.finishButton.isEnabled = false
     }
     
