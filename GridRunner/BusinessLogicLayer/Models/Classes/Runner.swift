@@ -10,6 +10,7 @@ class Runner: Player {
     var type: PlayerType = .runner
     var didWin: Bool = false
     
+    var maximumNumberOfMoves: Int = 2
     var numberOfMoves: Int = 2
     var movesHistory: History = []
     
@@ -19,6 +20,13 @@ class Runner: Player {
     
     init(at position: Coordinate) {
         self.position = position
+        // On creating Runner with initial position, add this position as root element of history.
+        movesHistory.append(position)
+        movesHistoryWithDirection[position] = .unknown
+    }
+    
+    func updateMaximumNumberOfMoves(to maximumValue: Int) {
+        self.maximumNumberOfMoves = maximumValue
     }
     
     func move(to coordinate: Coordinate) {
@@ -28,6 +36,17 @@ class Runner: Player {
             self.position = coordinate
             self.movesHistory.append(coordinate)
         }
+    }
+    
+    func undo() {
+        numberOfMoves += 1
+        let positionToRemove = self.position
+        
+        self.movesHistory.removeLast()
+        self.movesHistoryWithDirection[positionToRemove] = nil
+        
+        guard let previousPosition = movesHistory.last else { return }
+        self.position = previousPosition
     }
     
     func updateHistoryWithDirections(at position: Coordinate, moving direction: MoveDirection) {

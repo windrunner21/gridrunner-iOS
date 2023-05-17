@@ -47,6 +47,34 @@ class Tile: UIButton {
         self.backgroundColor = .systemIndigo.withAlphaComponent(0.5)
     }
     
+    func close() {
+        self.hasBeenOpened = false
+        self.backgroundColor = .systemGray3
+        self.setImage(nil, for: .normal)
+    }
+    
+    func updateDirectionImageOnUndo(to direction: MoveDirection) {
+        self.setDirectionImage(to: ArrowDirection(from: direction))
+    }
+    
+    func setupTile(at row: Int, and column: Int, with dimensions: MapDimensions) {
+        if row == 0 && column == 0 {
+            self.type = .exit
+            self.backgroundColor = .systemMint
+        } else if row == dimensions.getNumberOfRows() / 2 &&
+                  column == dimensions.getNumberOfColumns() / 2 {
+            self.type = .start
+            self.backgroundColor = .systemIndigo
+        } else if row == dimensions.getNumberOfRows() - 1 &&
+                  column == dimensions.getNumberOfColumns() - 1 {
+            self.type = .exit
+            self.backgroundColor = .systemMint
+        } else {
+            self.type = .basic
+            self.backgroundColor = .systemGray3
+        }
+    }
+    
     func updateDirectionImage(to: MoveDirection, from: MoveDirection? = nil, oldTile: Tile? = nil) {
         switch (from, to) {
         case (.up, .left):

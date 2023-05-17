@@ -47,7 +47,31 @@ class GameViewController: UIViewController {
     }
     
     @IBAction func onUndo(_ sender: Any) {
-        print("undo clicked")
+        guard let player = game.getPlayer() else { return }
+        
+        if let coordinatesToClear = player.movesHistory.last {
+            let tile = self.accessTile(with: coordinatesToClear, in: gameView)
+            tile?.close()
+        }
+        
+        player.undo()
+        self.updateMovesLabel(with: player.numberOfMoves)
+        
+        if player.numberOfMoves == player.maximumNumberOfMoves {
+            self.undoButton.isEnabled = false
+        }
+        
+        print(player.movesHistory)
+        
+        if let player = player as? Runner {
+            if let coordinatesToUpdate = player.movesHistory.last {
+                let tile = self.accessTile(with: coordinatesToUpdate, in: gameView)
+                guard let direction = player.getHistoryWithDirections()[coordinatesToUpdate] else { return }
+                tile?.updateDirectionImageOnUndo(to: direction)
+            }
+            
+            print(player.getHistoryWithDirections())
+        }
     }
     
     @IBAction func onFinish(_ sender: Any) {
@@ -92,8 +116,7 @@ class GameViewController: UIViewController {
                 
                 tile.position = Coordinate(x: row, y: column)
                 tile.setIdentifier("\(row)\(column)")
-                
-                decorateTile(tile, at: row, and: column)
+                tile.setupTile(at: row, and: column, with: game.getMap().getDimensions())
                 tile.layer.cornerRadius = 6
                 tile.addTarget(self, action: #selector(gridButtonClicked), for: .touchUpInside)
                 
@@ -112,24 +135,6 @@ class GameViewController: UIViewController {
         verticalStackView.leftAnchor.constraint(equalTo: rootView.leftAnchor, constant: 0).isActive = true
     }
     
-    private func decorateTile(_ tile: Tile, at row: Int, and column: Int) {
-        if row == 0 && column == 0 {
-            tile.type = .exit
-            tile.backgroundColor = .systemMint
-        } else if row == game.getMap().getDimensions().getNumberOfRows() / 2 &&
-                  column == game.getMap().getDimensions().getNumberOfColumns() / 2 {
-            tile.type = .start
-            tile.backgroundColor = .systemIndigo
-        } else if row == game.getMap().getDimensions().getNumberOfRows() - 1 &&
-                  column == game.getMap().getDimensions().getNumberOfColumns() - 1 {
-            tile.type = .exit
-            tile.backgroundColor = .systemMint
-        } else {
-            tile.type = .basic
-            tile.backgroundColor = .systemGray3
-        }
-    }
-    
     @objc func gridButtonClicked(_ tile: Tile) {
         guard let player = game.getPlayer() else { return }
         
@@ -142,9 +147,6 @@ class GameViewController: UIViewController {
             if player.numberOfMoves > 0 { basicTileTapped(tile, by: player) }
         }
         
-        if player.numberOfMoves == 0 {
-            self.enableFinishButton()
-        }
     }
     
     private func startTileTapped(_ tile: Tile) {
@@ -183,7 +185,21 @@ class GameViewController: UIViewController {
         }
         
         self.updateMovesLabel(with: player.numberOfMoves)
+        
+        // Handle enabling finish and undo buttons.
+        if player.numberOfMoves < player.maximumNumberOfMoves  {
+            self.enableUndoButton()
+        }
+        
+        if player.numberOfMoves == 0 {
+            self.enableFinishButton()
+        }
+        
         print(player.movesHistory)
+        
+        if let player = player as? Runner {
+            print(player.getHistoryWithDirections())
+        }
     }
     
     private func accessTile(with coordinates: Coordinate, in view: UIView) -> Tile? {
@@ -204,6 +220,10 @@ class GameViewController: UIViewController {
     
     private func updateMovesLabel(with value: Int) {
         self.movesLabel.text = "\(value) moves left"
+    }
+    
+    private func enableUndoButton() {
+        self.undoButton.isEnabled = true
     }
     
     private func enableFinishButton() {

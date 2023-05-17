@@ -10,10 +10,15 @@ protocol Player {
     typealias HistoryWithDirection = [Coordinate: MoveDirection]
     
     var type: PlayerType { get }
+
+    var maximumNumberOfMoves: Int { get set }
     var numberOfMoves: Int { get set }
     var movesHistory: History { get set }
+    
     var didWin: Bool { get set }
     
+    func updateMaximumNumberOfMoves(to maximumValue: Int)
     func move(to coordinate: Coordinate)
+    func undo()
     func win()
 }
