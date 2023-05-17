@@ -185,12 +185,19 @@ class GameViewController: UIViewController {
             let allowedMove = player.canMoveBeAllowed(from: player.position, to: tile.position)
             let direction: MoveDirection = player.identifyMovingDirection(from: player.position, to: tile.position)
 
-
+            // Manage previous tile arrow direction if previous tile exists.
+            var previousDirection: MoveDirection? = nil
+            let previousTile = self.accessTile(with: player.position, in: gameView)
+            if let previousTile = previousTile {
+                previousDirection = player.getHistoryWithDirections()[previousTile.position]
+            }
+            
             if allowedMove && direction != .unknown {
                 player.move(to: tile.position)
                 player.updateHistoryWithDirections(at: tile.position, moving: direction)
                 
                 tile.open()
+                tile.updateDirectionImage(to: direction, from: previousDirection, oldTile: previousTile)
                 
                 player.win()
             } else {
