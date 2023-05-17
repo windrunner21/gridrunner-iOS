@@ -73,10 +73,33 @@ class GameViewController: UIViewController {
     
     @IBAction func onFinish(_ sender: Any) {
         guard let player = game.getPlayer() else { return }
-        player.incrementNumberOfMoves()
-        // TODO: Update maximum number of moves at correct place, take into account power ups.
-        player.updateMaximumNumberOfMoves(to: 1)
-        self.updateMovesLabel(with: player.numberOfMoves)
+        
+        if player.didWin {
+            NSLog("Game has been concluded.")
+            
+            let alert = UIAlertController(title: "Game Over", message: "Congratulations! You have won.", preferredStyle: .alert)
+            alert.addAction(
+                UIAlertAction(
+                    title: NSLocalizedString("Main Menu", comment: "Default action"),
+                    style: .default,
+                    handler: { _ in
+                        let mainStoryboard: UIStoryboard = UIStoryboard(name: "Main", bundle: .main)
+                        let mainViewController: UIViewController = mainStoryboard.instantiateViewController(identifier: "MainScreen") as MainViewController
+                        
+                        let sceneDelegate = UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate
+                        sceneDelegate?.transitionViewController.transition(to: mainViewController, with: [.transitionCurlDown])
+                        
+                    }
+                )
+            )
+            
+            self.present(alert, animated: true, completion: nil)
+        } else {
+            player.incrementNumberOfMoves()
+            // TODO: Update maximum number of moves at correct place, take into account power ups.
+            player.updateMaximumNumberOfMoves(to: 1)
+            self.updateMovesLabel(with: player.numberOfMoves)
+        }
         
         self.undoButton.isEnabled = false
         self.finishButton.isEnabled = false
@@ -145,7 +168,7 @@ class GameViewController: UIViewController {
         case .start:
             self.startTileTapped(tile)
         case .exit:
-            self.exitTileTapped(tile)
+            self.exitTileTapped(tile, by: player)
         default:
             if player.numberOfMoves > 0 { basicTileTapped(tile, by: player) }
         }
@@ -156,8 +179,30 @@ class GameViewController: UIViewController {
         print("Start tile with id: \(tile.getIdentifier()) tapped.")
     }
     
-    private func exitTileTapped(_ tile: Tile) {
-        print("Exit tile with id: \(tile.getIdentifier()) tapped.")
+    private func exitTileTapped(_ tile: Tile, by player: Player) {
+        if let player = player as? Runner {
+            
+            let allowedMove = player.canMoveBeAllowed(from: player.position, to: tile.position)
+            let direction: MoveDirection = player.identifyMovingDirection(from: player.position, to: tile.position)
+
+
+            if allowedMove && direction != .unknown {
+                player.move(to: tile.position)
+                player.updateHistoryWithDirections(at: tile.position, moving: direction)
+                
+                tile.open()
+                
+                player.win()
+            } else {
+                print("Forbidden move.")
+            }
+        }
+        
+        self.updateMovesLabel(with: player.numberOfMoves)
+        
+        if player.numberOfMoves == 0 {
+            self.enableFinishButton()
+        }
     }
     
     private func basicTileTapped(_ tile: Tile, by player: Player) {

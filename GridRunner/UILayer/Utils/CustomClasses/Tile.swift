@@ -44,7 +44,7 @@ class Tile: UIButton {
     
     func open() {
         self.hasBeenOpened = true
-        self.backgroundColor = .systemIndigo.withAlphaComponent(0.5)
+        self.backgroundColor = self.type == .exit ? .systemGreen : .systemIndigo.withAlphaComponent(0.5)
     }
     
     func close() {
