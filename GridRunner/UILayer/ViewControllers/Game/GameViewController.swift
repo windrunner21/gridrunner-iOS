@@ -32,7 +32,7 @@ class GameViewController: UIViewController {
         )
         
         // If player could not have been instatiated return.
-        // TODO: replace with error screen later
+        // TODO: Replace with error screen later
         guard let player = game.getPlayer() else { return }
         
         // Prepare game grid.
@@ -57,26 +57,25 @@ class GameViewController: UIViewController {
         player.undo()
         self.updateMovesLabel(with: player.numberOfMoves)
         
-        if player.numberOfMoves == player.maximumNumberOfMoves {
-            self.undoButton.isEnabled = false
-        }
-        
-        print(player.movesHistory)
-        
         if let player = player as? Runner {
             if let coordinatesToUpdate = player.movesHistory.last {
                 let tile = self.accessTile(with: coordinatesToUpdate, in: gameView)
                 guard let direction = player.getHistoryWithDirections()[coordinatesToUpdate] else { return }
                 tile?.updateDirectionImageOnUndo(to: direction)
             }
-            
-            print(player.getHistoryWithDirections())
+        }
+        
+        if player.numberOfMoves == player.maximumNumberOfMoves {
+            self.undoButton.isEnabled = false
+            self.finishButton.isEnabled = false
         }
     }
     
     @IBAction func onFinish(_ sender: Any) {
         guard let player = game.getPlayer() else { return }
         player.incrementNumberOfMoves()
+        // TODO: Update maximum number of moves at correct place, take into account power ups.
+        player.updateMaximumNumberOfMoves(to: 1)
         self.updateMovesLabel(with: player.numberOfMoves)
         
         self.undoButton.isEnabled = false
@@ -200,10 +199,6 @@ class GameViewController: UIViewController {
         }
         
         print(player.movesHistory)
-        
-        if let player = player as? Runner {
-            print(player.getHistoryWithDirections())
-        }
     }
     
     private func accessTile(with coordinates: Coordinate, in view: UIView) -> Tile? {
