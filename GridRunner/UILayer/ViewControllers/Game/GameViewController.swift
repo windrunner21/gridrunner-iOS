@@ -31,6 +31,28 @@ class GameViewController: UIViewController {
             for: Runner(at: map.getCenterCoordinates())
         )
         
+        // MARK: For Seeker gameplay testing purposes.
+//        self.game.createSession(
+//            with: map,
+//            for: Runner(at: map.getCenterCoordinates()),
+//            with: GameHistory(
+//                runnerHistory: [
+//                    Coordinate(x: 6, y: 6),
+//                    Coordinate(x: 6, y: 5),
+//                    Coordinate(x: 6, y: 4),
+//                    Coordinate(x: 6, y: 3),
+//                    Coordinate(x: 6, y: 2),
+//                    Coordinate(x: 5, y: 2),
+//                    Coordinate(x: 4, y: 2),
+//                    Coordinate(x: 4, y: 3),
+//                    Coordinate(x: 4, y: 4),
+//                    Coordinate(x: 5, y: 4),
+//                    Coordinate(x: 6, y: 4),
+//                    Coordinate(x: 7, y: 4),
+//                    Coordinate(x: 8, y: 4)],
+//                seekerHistory: [])
+//        )
+        
         // If player could not have been instatiated return.
         // TODO: Replace with error screen later
         guard let player = game.getPlayer() else { return }
@@ -93,7 +115,7 @@ class GameViewController: UIViewController {
                 )
             )
             
-            self.present(alert, animated: true, completion: nil)
+            self.present(alert, animated: true)
         } else {
             player.incrementNumberOfMoves()
             // TODO: Update maximum number of moves at correct place, take into account power ups.
@@ -233,7 +255,7 @@ class GameViewController: UIViewController {
                 tile.open()
                 tile.updateDirectionImage(to: direction, from: previousDirection, oldTile: previousTile)
                 
-                game.updateGameHistory(with: player.movesHistory)
+                game.getHistory()?.updateRunnerHistory(with: player.movesHistory)
             } else {
                 print("Forbidden move.")
             }

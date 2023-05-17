@@ -8,37 +8,33 @@
 class Game {
     private var map: Map
     private var player: Player?
-    
-    typealias History = [Coordinate]
-    private var history: History = []
+    private var gameHistory: GameHistory?
     
     convenience init() {
         self.init(map: Map())
     }
     
-    init(map: Map, player: Player? = nil) {
+    init(map: Map, player: Player? = nil, gameHistory: GameHistory? = nil) {
         self.map = map
         self.player = player
+        self.gameHistory = gameHistory
     }
     
-    func getHistory() -> History {
-        self.history
+    func getHistory() -> GameHistory? {
+        self.gameHistory
     }
     
     func getMap() -> Map {
-        map
+        self.map
     }
     
     func getPlayer() -> Player? {
-        player
+        self.player
     }
     
-    func createSession(with map: Map, for player: Player) {
+    func createSession(with map: Map, for player: Player, with gameHistory: GameHistory? = nil) {
         self.map = map
         self.player = player
-    }
-    
-    func updateGameHistory(with history: History) {
-        self.history += history
+        self.gameHistory = gameHistory
     }
 }
