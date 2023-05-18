@@ -50,10 +50,14 @@ class GameViewController: UIViewController {
                     Coordinate(x: 5, y: 4),
                     Coordinate(x: 6, y: 4),
                     Coordinate(x: 7, y: 4),
-                    Coordinate(x: 8, y: 4)],
+                    Coordinate(x: 8, y: 4)
+                ],
                 seekerHistory: []
             )
         )
+        
+        // If game history exists create runner history with directions
+        game.getHistory()?.convertRunnerHistoryToHistoryWithDirection()
         
         // If player could not have been instatiated return.
         guard let player = game.getPlayer() else {
@@ -106,6 +110,10 @@ class GameViewController: UIViewController {
     
     @IBAction func onFinish(_ sender: Any) {
         guard let player = game.getPlayer() else { return }
+        
+        if let seeker = player as? Seeker {
+            self.seekerClickedFinish(seeker)
+        }
         
         if player.didWin {
             NSLog("Game has been concluded.")
@@ -234,6 +242,49 @@ class GameViewController: UIViewController {
         tile?.closeBy(.seeker)
     }
     
+    private func seekerClickedFinish(_ seeker: Seeker) {
+        guard let coordinates = seeker.movesHistory.last else { return }
+        
+        // Get clicked tile - the one seeker is currently standing on.
+        guard let seekerTile = self.accessTile(with: coordinates, in: gameView) else { return }
+        // Get next tile of runner if it exists.
+        guard let latestIndexOfSeekerTile = game.getHistory()?.getRunnerHistory().lastIndex(of: seekerTile.position) else { return }
+        
+        // If it is the last one in the Runner's history - Seeker wins.
+        if seekerTile.position == game.getHistory()?.getRunnerHistory().last {
+            print("i have found you - from runner history - last")
+            seeker.win()
+            
+            guard let direction = game.getHistory()?.getRunnerHistoryWithDirection()[seekerTile.position] else { return }
+            seekerTile.updateDirectionImage(to: direction)
+            
+            return
+        }
+        
+        // Get runner history and check if tile has been opened by runner.
+        if let gameHistory = game.getHistory(), gameHistory.getRunnerHistory().contains(seekerTile.position) {
+            print("i have found you - from runner history")
+            
+            guard let runnerDirectionAtSeekerTile = gameHistory.getRunnerHistoryWithDirection()[seekerTile.position] else { return }
+   
+            let nextRunnerTile = gameHistory.getRunnerHistory()[latestIndexOfSeekerTile + 1]
+            let nextRunnerDirection = gameHistory.getRunnerHistoryWithDirection()[nextRunnerTile]
+            seekerTile.updateDirectionImage(from: runnerDirectionAtSeekerTile, to: nextRunnerDirection)
+        }
+        
+        // Get tile open status and check if tile has been opened by runner.
+        if seekerTile.hasBeenOpenedBy(.runner) {
+            print("i have found you - from tile open status")
+
+            guard let gameHistory = game.getHistory() else { return }
+            guard let runnerDirectionAtSeekerTile = game.getHistory()?.getRunnerHistoryWithDirection()[seekerTile.position] else { return }
+
+            let nextTile = gameHistory.getRunnerHistory()[latestIndexOfSeekerTile + 1]
+            let nextDirection = gameHistory.getRunnerHistoryWithDirection()[nextTile]
+            seekerTile.updateDirectionImage(from: runnerDirectionAtSeekerTile, to: nextDirection)
+        }
+    }
+    
     private func runnerTappedTile(runner: Runner, tile: Tile, isExitTile: Bool? = nil) {
         let allowedMove = runner.canMoveBeAllowed(from: runner.position, to: tile.position)
         let direction: MoveDirection = runner.identifyMovingDirection(from: runner.position, to: tile.position)
@@ -269,16 +320,6 @@ class GameViewController: UIViewController {
         tile.openBySeeker(explicit: true)
         
         game.getHistory()?.updateSeekerHistory(with: seeker.movesHistory)
-        
-        // get runner history and check if tile has been opened by runner
-        if let gameHistory = game.getHistory(), gameHistory.getRunnerHistory().contains(tile.position) {
-            print("i have found you - from runner history")
-        }
-        
-        // get tile open status and check if tile has been opened by runner
-        if tile.hasBeenOpenedBy(.runner) {
-            print("i have found you - from tile open status")
-        }
     }
     
     private func accessTile(with coordinates: Coordinate, in view: UIView) -> Tile? {

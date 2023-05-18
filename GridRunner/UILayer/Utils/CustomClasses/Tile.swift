@@ -109,8 +109,8 @@ class Tile: UIButton {
         }
     }
     
-    func updateDirectionImage(to: MoveDirection, from: MoveDirection? = nil, oldTile: Tile? = nil) {
-        switch (from, to) {
+    func updateDirectionImage(to currentDirection: MoveDirection, from oldDirection: MoveDirection? = nil, oldTile: Tile? = nil) {
+        switch (oldDirection, currentDirection) {
         case (.up, .left):
             self.setDirectionImages(newDirection: .left, oldDirection: .upLeft, for: oldTile)
         case (.up, .right):
@@ -128,7 +128,30 @@ class Tile: UIButton {
         case (.left, .up):
             self.setDirectionImages(newDirection: .up, oldDirection: .leftUp, for: oldTile)
         default:
-            self.setDirectionImage(to: ArrowDirection(from: to))
+            self.setDirectionImage(to: ArrowDirection(from: currentDirection))
+        }
+    }
+    
+    func updateDirectionImage(from currentDirection: MoveDirection, to newDirection: MoveDirection? = nil) {
+        switch (currentDirection, newDirection) {
+        case (.up, .left):
+            self.setDirectionImage(to: .upLeft)
+        case (.up, .right):
+            self.setDirectionImage(to: .upRight)
+        case (.right, .up):
+            self.setDirectionImage(to: .rightUp)
+        case (.right, .down):
+            self.setDirectionImage(to: .rightDown)
+        case (.down, .right):
+            self.setDirectionImage(to: .downRight)
+        case (.down, .left):
+            self.setDirectionImage(to: .downLeft)
+        case (.left, .down):
+            self.setDirectionImage(to: .leftDown)
+        case (.left, .up):
+            self.setDirectionImage(to: .leftUp)
+        default:
+            self.setDirectionImage(to: ArrowDirection(from: currentDirection))
         }
     }
     
