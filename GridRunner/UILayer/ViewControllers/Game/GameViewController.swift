@@ -30,6 +30,7 @@ class GameViewController: UIViewController {
             with: map,
             for: Runner(at: map.getCenterCoordinates())
         )
+        NSLog("Game has been instantiated.")
         
         // MARK: For Seeker gameplay testing purposes.
 //        self.game.createSession(
@@ -54,8 +55,10 @@ class GameViewController: UIViewController {
 //        )
         
         // If player could not have been instatiated return.
-        // TODO: Replace with error screen later
-        guard let player = game.getPlayer() else { return }
+        guard let player = game.getPlayer() else {
+            self.presentErrorAlert()
+            return
+        }
         
         // Prepare game grid.
         self.createGameGrid(
@@ -70,27 +73,19 @@ class GameViewController: UIViewController {
     
     @IBAction func onUndo(_ sender: Any) {
         guard let player = game.getPlayer() else { return }
-        
-        if let coordinatesToClear = player.movesHistory.last {
-            let tile = self.accessTile(with: coordinatesToClear, in: gameView)
-            tile?.close()
-        }
+        guard let coordinatesToClear = player.movesHistory.last else { return }
         
         player.undo()
         self.updateMovesLabel(with: player.numberOfMoves)
+        let tile = self.accessTile(with: coordinatesToClear, in: gameView)
+        tile?.close()
         
         if let player = player as? Runner {
-            if let coordinatesToUpdate = player.movesHistory.last {
-                let tile = self.accessTile(with: coordinatesToUpdate, in: gameView)
-                guard let direction = player.getHistoryWithDirections()[coordinatesToUpdate] else { return }
-                tile?.updateDirectionImageOnUndo(to: direction)
-            }
+            self.runnerClickedUndo(player)
         }
         
-        if player.numberOfMoves == player.maximumNumberOfMoves {
-            self.undoButton.isEnabled = false
-            self.finishButton.isEnabled = false
-        }
+        self.undoButton.isEnabled = player.numberOfMoves != player.maximumNumberOfMoves
+        self.finishButton.isEnabled = player.numberOfMoves != player.maximumNumberOfMoves
     }
     
     @IBAction func onFinish(_ sender: Any) {
@@ -98,24 +93,7 @@ class GameViewController: UIViewController {
         
         if player.didWin {
             NSLog("Game has been concluded.")
-            
-            let alert = UIAlertController(title: "Game Over", message: "Congratulations! You have won.", preferredStyle: .alert)
-            alert.addAction(
-                UIAlertAction(
-                    title: NSLocalizedString("Main Menu", comment: "Default action"),
-                    style: .default,
-                    handler: { _ in
-                        let mainStoryboard: UIStoryboard = UIStoryboard(name: "Main", bundle: .main)
-                        let mainViewController: UIViewController = mainStoryboard.instantiateViewController(identifier: "MainScreen") as MainViewController
-                        
-                        let sceneDelegate = UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate
-                        sceneDelegate?.transitionViewController.transition(to: mainViewController, with: [.transitionCurlDown])
-                        
-                    }
-                )
-            )
-            
-            self.present(alert, animated: true)
+            self.presentWinAlert()
         } else {
             player.incrementNumberOfMoves()
             // TODO: Update maximum number of moves at correct place, take into account power ups.
@@ -128,13 +106,8 @@ class GameViewController: UIViewController {
     }
     
     private func setUpOptionsButton() {
-        
         let mainMenuClosure = {(action: UIAction) in
-            let mainStoryboard: UIStoryboard = UIStoryboard(name: "Main", bundle: .main)
-            let mainViewController: UIViewController = mainStoryboard.instantiateViewController(identifier: "MainScreen") as MainViewController
-            
-            let sceneDelegate = UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate
-            sceneDelegate?.transitionViewController.transition(to: mainViewController, with: [.transitionCurlDown])
+            self.transitionToMainScreen()
         }
         
         self.optionsButton.menu = UIMenu(children: [
@@ -203,76 +176,64 @@ class GameViewController: UIViewController {
     
     private func exitTileTapped(_ tile: Tile, by player: Player) {
         if let player = player as? Runner {
-            
-            let allowedMove = player.canMoveBeAllowed(from: player.position, to: tile.position)
-            let direction: MoveDirection = player.identifyMovingDirection(from: player.position, to: tile.position)
-
-            // Manage previous tile arrow direction if previous tile exists.
-            var previousDirection: MoveDirection? = nil
-            let previousTile = self.accessTile(with: player.position, in: gameView)
-            if let previousTile = previousTile {
-                previousDirection = player.getHistoryWithDirections()[previousTile.position]
-            }
-            
-            if allowedMove && direction != .unknown {
-                player.move(to: tile.position)
-                player.updateHistoryWithDirections(at: tile.position, moving: direction)
-                
-                tile.open()
-                tile.updateDirectionImage(to: direction, from: previousDirection, oldTile: previousTile)
-                
-                player.win()
-            } else {
-                print("Forbidden move.")
-            }
+            self.runnerTappedTile(runner: player, tile: tile, isExitTile: true)
         }
         
         self.updateMovesLabel(with: player.numberOfMoves)
-        
-        if player.numberOfMoves == 0 {
-            self.enableFinishButton()
-        }
+
+        // Handle enabling finish button.
+        self.enableFinishButton(on: player.numberOfMoves == 0)
     }
     
     private func basicTileTapped(_ tile: Tile, by player: Player) {
         print("Basic tile with id: \(tile.getIdentifier()) tapped. (Tile open: \(tile.isOpen()).)")
         
         if let player = player as? Runner {
-            let allowedMove = player.canMoveBeAllowed(from: player.position, to: tile.position)
-            let direction: MoveDirection = player.identifyMovingDirection(from: player.position, to: tile.position)
-            
-            // Manage previous tile arrow direction if previous tile exists.
-            var previousDirection: MoveDirection? = nil
-            let previousTile = self.accessTile(with: player.position, in: gameView)
-            if let previousTile = previousTile {
-                previousDirection = player.getHistoryWithDirections()[previousTile.position]
-            }
-            
-            if allowedMove && direction != .unknown {
-                player.move(to: tile.position)
-                player.updateHistoryWithDirections(at: tile.position, moving: direction)
-                
-                tile.open()
-                tile.updateDirectionImage(to: direction, from: previousDirection, oldTile: previousTile)
-                
-                game.getHistory()?.updateRunnerHistory(with: player.movesHistory)
-            } else {
-                print("Forbidden move.")
-            }
+            self.runnerTappedTile(runner: player, tile: tile)
         }
         
         self.updateMovesLabel(with: player.numberOfMoves)
         
         // Handle enabling finish and undo buttons.
-        if player.numberOfMoves < player.maximumNumberOfMoves  {
-            self.enableUndoButton()
-        }
-        
-        if player.numberOfMoves == 0 {
-            self.enableFinishButton()
-        }
-        
+        self.enableUndoButton(on: player.numberOfMoves < player.maximumNumberOfMoves)
+        self.enableFinishButton(on: player.numberOfMoves == 0)
         print(player.movesHistory)
+    }
+    
+    private func runnerClickedUndo(_ runner: Runner) {
+        if let coordinatesToUpdate = runner.movesHistory.last {
+            let tile = self.accessTile(with: coordinatesToUpdate, in: gameView)
+            guard let direction = runner.getHistoryWithDirections()[coordinatesToUpdate] else { return }
+            tile?.updateDirectionImageOnUndo(to: direction)
+        }
+    }
+    
+    private func runnerTappedTile(runner: Runner, tile: Tile, isExitTile: Bool? = nil) {
+        let allowedMove = runner.canMoveBeAllowed(from: runner.position, to: tile.position)
+        let direction: MoveDirection = runner.identifyMovingDirection(from: runner.position, to: tile.position)
+        
+        // Manage previous tile arrow direction if previous tile exists.
+        var previousDirection: MoveDirection? = nil
+        let previousTile = self.accessTile(with: runner.position, in: gameView)
+        if let previousTile = previousTile {
+            previousDirection = runner.getHistoryWithDirections()[previousTile.position]
+        }
+        
+        if allowedMove && direction != .unknown {
+            runner.move(to: tile.position)
+            runner.updateHistoryWithDirections(at: tile.position, moving: direction)
+            
+            tile.open()
+            tile.updateDirectionImage(to: direction, from: previousDirection, oldTile: previousTile)
+            
+            game.getHistory()?.updateRunnerHistory(with: runner.movesHistory)
+            
+            if let isExitTile = isExitTile, isExitTile {
+                runner.win()
+            }
+        } else {
+            print("Forbidden move for Runner.")
+        }
     }
     
     private func accessTile(with coordinates: Coordinate, in view: UIView) -> Tile? {
@@ -295,11 +256,59 @@ class GameViewController: UIViewController {
         self.movesLabel.text = "\(value) moves left"
     }
     
-    private func enableUndoButton() {
-        self.undoButton.isEnabled = true
+    private func enableUndoButton(on condition: Bool? = nil) {
+        if let condition = condition {
+            self.undoButton.isEnabled = condition
+        } else {
+            self.undoButton.isEnabled = true
+        }
     }
     
-    private func enableFinishButton() {
-        self.finishButton.isEnabled = true
+    private func enableFinishButton(on condition: Bool? = nil) {
+        if let condition = condition {
+            self.finishButton.isEnabled = condition
+        } else {
+            self.finishButton.isEnabled = true
+        }
+    }
+    
+    private func presentWinAlert() {
+        let alert = UIAlertController(title: "Game Over", message: "Congratulations! You have won.", preferredStyle: .alert)
+        
+        alert.addAction(
+            UIAlertAction(
+                title: NSLocalizedString("Main Menu", comment: "Default action"),
+                style: .default,
+                handler: { _ in
+                    self.transitionToMainScreen()
+                }
+            )
+        )
+        
+        self.present(alert, animated: true)
+    }
+    
+    private func presentErrorAlert() {
+        let alert = UIAlertController(title: "Oops.", message: "Something went wrong. Please try again.", preferredStyle: .alert)
+        
+        alert.addAction(
+            UIAlertAction(
+                title: NSLocalizedString("Main Menu", comment: "Default action"),
+                style: .default,
+                handler: { _ in
+                    self.transitionToMainScreen()
+                }
+            )
+        )
+        
+        self.present(alert, animated: true)
+    }
+    
+    private func transitionToMainScreen() {
+        let mainStoryboard: UIStoryboard = UIStoryboard(name: "Main", bundle: .main)
+        let mainViewController: UIViewController = mainStoryboard.instantiateViewController(identifier: "MainScreen") as MainViewController
+        
+        let sceneDelegate = UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate
+        sceneDelegate?.transitionViewController.transition(to: mainViewController, with: [.transitionCurlDown])
     }
 }

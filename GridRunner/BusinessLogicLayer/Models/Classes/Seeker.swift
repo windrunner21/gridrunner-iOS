@@ -30,6 +30,7 @@ class Seeker: Player {
         if numberOfMoves > 0 {
             numberOfMoves -= 1
             print("Seeker is opening tile at x: \(coordinate.x) and y: \(coordinate.y)")
+            movesHistory.append(coordinate)
         }
     }
     
