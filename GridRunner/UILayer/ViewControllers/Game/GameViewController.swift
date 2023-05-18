@@ -26,35 +26,18 @@ class GameViewController: UIViewController {
         
         // Prepare game class.
         let map = Map(with: MapDimensions(13, by: 13))
-        self.game.createSession(
-            with: map,
-            for: Runner(at: map.getCenterCoordinates())
-        )
+//        self.game.createSession(
+//            with: map,
+//            for: Runner(at: map.getCenterCoordinates())
+//        )
         NSLog("Game has been instantiated.")
         
         // MARK: For Seeker gameplay testing purposes.
-//        self.game.createSession(
-//            with: map,
-//            for: Seeker(),
-//            with: GameHistory(
-//                runnerHistory: [
-//                    Coordinate(x: 6, y: 6),
-//                    Coordinate(x: 6, y: 5),
-//                    Coordinate(x: 6, y: 4),
-//                    Coordinate(x: 6, y: 3),
-//                    Coordinate(x: 6, y: 2),
-//                    Coordinate(x: 5, y: 2),
-//                    Coordinate(x: 4, y: 2),
-//                    Coordinate(x: 4, y: 3),
-//                    Coordinate(x: 4, y: 4),
-//                    Coordinate(x: 5, y: 4),
-//                    Coordinate(x: 6, y: 4),
-//                    Coordinate(x: 7, y: 4),
-//                    Coordinate(x: 8, y: 4)
-//                ],
-//                seekerHistory: []
-//            )
-//        )
+        self.game.createSession(
+            with: map,
+            for: Seeker(),
+            with: GameHistoryExamples().example1
+        )
         
         // If game history exists create runner history with directions
         game.getHistory()?.convertRunnerHistoryToHistoryWithDirection()
