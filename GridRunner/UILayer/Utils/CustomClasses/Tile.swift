@@ -51,7 +51,7 @@ class Tile: UIButton {
     func openByRunner(explicit: Bool) {
         self.openedByRunner = true
         if explicit {
-            self.backgroundColor = self.type == .exit ? .systemGreen : .systemIndigo.withAlphaComponent(0.5)
+            self.backgroundColor = .systemIndigo.withAlphaComponent(0.5)
         }
     }
     
@@ -153,6 +153,16 @@ class Tile: UIButton {
         default:
             self.setDirectionImage(to: ArrowDirection(from: currentDirection))
         }
+    }
+    
+    func decorateRunnerWin() {
+        self.backgroundColor = .systemGreen
+        self.setImage(UIImage(systemName: "flag.checkered.2.crossed"), for: .normal)
+    }
+    
+    func decorateSeekerWin() {
+        self.backgroundColor = .systemGreen
+        self.setImage(UIImage(systemName: "figure.walk"), for: .normal)
     }
     
     private func setDirectionImages(newDirection: ArrowDirection, oldDirection: ArrowDirection, for oldTile: Tile?) {
