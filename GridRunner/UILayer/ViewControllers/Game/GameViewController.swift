@@ -26,33 +26,34 @@ class GameViewController: UIViewController {
         
         // Prepare game class.
         let map = Map(with: MapDimensions(13, by: 13))
-        self.game.createSession(
-            with: map,
-            for: Runner(at: map.getCenterCoordinates())
-        )
+//        self.game.createSession(
+//            with: map,
+//            for: Runner(at: map.getCenterCoordinates())
+//        )
         NSLog("Game has been instantiated.")
         
         // MARK: For Seeker gameplay testing purposes.
-//        self.game.createSession(
-//            with: map,
-//            for: Runner(at: map.getCenterCoordinates()),
-//            with: GameHistory(
-//                runnerHistory: [
-//                    Coordinate(x: 6, y: 6),
-//                    Coordinate(x: 6, y: 5),
-//                    Coordinate(x: 6, y: 4),
-//                    Coordinate(x: 6, y: 3),
-//                    Coordinate(x: 6, y: 2),
-//                    Coordinate(x: 5, y: 2),
-//                    Coordinate(x: 4, y: 2),
-//                    Coordinate(x: 4, y: 3),
-//                    Coordinate(x: 4, y: 4),
-//                    Coordinate(x: 5, y: 4),
-//                    Coordinate(x: 6, y: 4),
-//                    Coordinate(x: 7, y: 4),
-//                    Coordinate(x: 8, y: 4)],
-//                seekerHistory: [])
-//        )
+        self.game.createSession(
+            with: map,
+            for: Seeker(),
+            with: GameHistory(
+                runnerHistory: [
+                    Coordinate(x: 6, y: 6),
+                    Coordinate(x: 6, y: 5),
+                    Coordinate(x: 6, y: 4),
+                    Coordinate(x: 6, y: 3),
+                    Coordinate(x: 6, y: 2),
+                    Coordinate(x: 5, y: 2),
+                    Coordinate(x: 4, y: 2),
+                    Coordinate(x: 4, y: 3),
+                    Coordinate(x: 4, y: 4),
+                    Coordinate(x: 5, y: 4),
+                    Coordinate(x: 6, y: 4),
+                    Coordinate(x: 7, y: 4),
+                    Coordinate(x: 8, y: 4)],
+                seekerHistory: []
+            )
+        )
         
         // If player could not have been instatiated return.
         guard let player = game.getPlayer() else {
@@ -60,6 +61,18 @@ class GameViewController: UIViewController {
             return
         }
         
+        // If game session instantiated with history, populate history of players.
+        if let history = game.getHistory()?.getGameHistory() {
+            switch game.getPlayer()?.type {
+            case .runner:
+                game.getPlayer()?.updateMovesHistory(with: history.runner)
+            case .seeker:
+                game.getPlayer()?.updateMovesHistory(with: history.seeker)
+            default:
+                break
+            }
+        }
+       
         // Prepare game grid.
         self.createGameGrid(
             rows: game.getMap().getDimensions().getNumberOfRows(),
@@ -78,10 +91,13 @@ class GameViewController: UIViewController {
         player.undo()
         self.updateMovesLabel(with: player.numberOfMoves)
         let tile = self.accessTile(with: coordinatesToClear, in: gameView)
-        tile?.close()
         
-        if let player = player as? Runner {
-            self.runnerClickedUndo(player)
+        if let runner = player as? Runner {
+            self.runnerClickedUndo(runner, on: tile)
+        }
+        
+        if let seeker = player as? Seeker {
+            self.seekerClickedUndo(seeker, on: tile)
         }
         
         self.undoButton.isEnabled = player.numberOfMoves != player.maximumNumberOfMoves
@@ -137,7 +153,7 @@ class GameViewController: UIViewController {
                 
                 tile.position = Coordinate(x: row, y: column)
                 tile.setIdentifier("\(row)\(column)")
-                tile.setupTile(at: row, and: column, with: game.getMap().getDimensions())
+                tile.setupTile(at: row, and: column, with: game.getMap().getDimensions(), and: game.getHistory())
                 tile.layer.cornerRadius = 6
                 tile.addTarget(self, action: #selector(gridButtonClicked), for: .touchUpInside)
                 
@@ -175,8 +191,8 @@ class GameViewController: UIViewController {
     }
     
     private func exitTileTapped(_ tile: Tile, by player: Player) {
-        if let player = player as? Runner {
-            self.runnerTappedTile(runner: player, tile: tile, isExitTile: true)
+        if let runner = player as? Runner {
+            self.runnerTappedTile(runner: runner, tile: tile, isExitTile: true)
         }
         
         self.updateMovesLabel(with: player.numberOfMoves)
@@ -186,10 +202,14 @@ class GameViewController: UIViewController {
     }
     
     private func basicTileTapped(_ tile: Tile, by player: Player) {
-        print("Basic tile with id: \(tile.getIdentifier()) tapped. (Tile open: \(tile.isOpen()).)")
+        print("Basic tile with id: \(tile.getIdentifier()) tapped. (Tile opened by Runner: \(tile.hasBeenOpened().byRunner ).) (Tile opened by Seeker: \(tile.hasBeenOpened().bySeeker ).)")
         
-        if let player = player as? Runner {
-            self.runnerTappedTile(runner: player, tile: tile)
+        if let runner = player as? Runner {
+            self.runnerTappedTile(runner: runner, tile: tile)
+        }
+        
+        if let seeker = player as? Seeker {
+            self.seekerTappedTile(seeker: seeker, tile: tile)
         }
         
         self.updateMovesLabel(with: player.numberOfMoves)
@@ -200,12 +220,18 @@ class GameViewController: UIViewController {
         print(player.movesHistory)
     }
     
-    private func runnerClickedUndo(_ runner: Runner) {
+    private func runnerClickedUndo(_ runner: Runner, on tile: Tile?) {
+        tile?.closeBy(.runner)
+        
         if let coordinatesToUpdate = runner.movesHistory.last {
             let tile = self.accessTile(with: coordinatesToUpdate, in: gameView)
             guard let direction = runner.getHistoryWithDirections()[coordinatesToUpdate] else { return }
             tile?.updateDirectionImageOnUndo(to: direction)
         }
+    }
+    
+    private func seekerClickedUndo(_ seeker: Seeker, on tile: Tile?) {
+        tile?.closeBy(.seeker)
     }
     
     private func runnerTappedTile(runner: Runner, tile: Tile, isExitTile: Bool? = nil) {
@@ -223,7 +249,7 @@ class GameViewController: UIViewController {
             runner.move(to: tile.position)
             runner.updateHistoryWithDirections(at: tile.position, moving: direction)
             
-            tile.open()
+            tile.openByRunner(explicit: true)
             tile.updateDirectionImage(to: direction, from: previousDirection, oldTile: previousTile)
             
             game.getHistory()?.updateRunnerHistory(with: runner.movesHistory)
@@ -236,6 +262,20 @@ class GameViewController: UIViewController {
         }
     }
     
+    private func seekerTappedTile(seeker: Seeker, tile: Tile) {
+        tile.openBySeeker(explicit: true)
+        
+        // get runner history and check if tile has been opened by runner
+        if let gameHistory = game.getHistory(), gameHistory.getRunnerHistory().contains(tile.position) {
+            print("i have found you - from runner history")
+        }
+        
+        // get tile open status and check if tile has been opened by runner
+        if tile.hasBeenOpenedBy(.runner) {
+            print("i have found you - from tile open status")
+        }
+    }
+    
     private func accessTile(with coordinates: Coordinate, in view: UIView) -> Tile? {
         let row = coordinates.x
         let column = coordinates.y
@@ -243,7 +283,7 @@ class GameViewController: UIViewController {
         if let view = view.subviews.first as? UIStackView {
             if let row = view.arrangedSubviews[row] as? UIStackView {
                 if let tile = row.arrangedSubviews[column] as? Tile {
-                    print("Coordinates given: \(coordinates). (Tile open: \(tile.isOpen()).)")
+                    print("Coordinates given: \(coordinates). (Tile opened by Runner: \(tile.hasBeenOpened().byRunner ).) (Tile opened by Seeker: \(tile.hasBeenOpened().bySeeker ).)")
                     return tile
                 }
             }

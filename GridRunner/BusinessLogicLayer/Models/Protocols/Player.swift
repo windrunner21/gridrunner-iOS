@@ -21,6 +21,8 @@ protocol Player {
     func updateNumberOfMoves(to value: Int)
     func updateMaximumNumberOfMoves(to maximumValue: Int)
     
+    func updateMovesHistory(with history: History)
+    
     func undo()
     func move(to coordinate: Coordinate)
     

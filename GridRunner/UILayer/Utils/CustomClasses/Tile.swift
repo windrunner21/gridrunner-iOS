@@ -8,13 +8,15 @@
 import UIKit
 
 class Tile: UIButton {
+    typealias OpenState = (byRunner: Bool, bySeeker: Bool)
     var type: TileType = .unknown
     
     private var identifier: String = String()
     var position: Coordinate
     
-    private var hasBeenOpened: Bool = false
-    
+    private var openedByRunner: Bool = false
+    private var openedBySeeker: Bool = false
+
     convenience init() {
         self.init(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
         self.imageView?.tintColor = .white
@@ -34,21 +36,39 @@ class Tile: UIButton {
         self.identifier
     }
     
-    func isOpen() -> Bool {
-        self.hasBeenOpened
+    func hasBeenOpened() -> OpenState {
+        (byRunner: self.openedByRunner, bySeeker: self.openedBySeeker)
+    }
+    
+    func hasBeenOpenedBy(_ playerType: PlayerType) -> Bool {
+        playerType == .runner ? self.openedByRunner : self.openedBySeeker
     }
 
     func setIdentifier(_ id: String) {
         self.identifier = id
     }
     
-    func open() {
-        self.hasBeenOpened = true
-        self.backgroundColor = self.type == .exit ? .systemGreen : .systemIndigo.withAlphaComponent(0.5)
+    func openByRunner(explicit: Bool) {
+        self.openedByRunner = true
+        if explicit {
+            self.backgroundColor = self.type == .exit ? .systemGreen : .systemIndigo.withAlphaComponent(0.5)
+        }
     }
     
-    func close() {
-        self.hasBeenOpened = false
+    func openBySeeker(explicit: Bool) {
+        self.openedBySeeker = true
+        if explicit {
+            self.backgroundColor = .systemYellow.withAlphaComponent(0.5)
+        }
+    }
+    
+    func closeBy(_ playerType: PlayerType) {
+        if playerType == .runner {
+            self.openedByRunner = false
+        } else {
+            self.openedBySeeker = false
+        }
+        
         self.backgroundColor = .systemGray3
         self.setImage(nil, for: .normal)
     }
@@ -57,7 +77,9 @@ class Tile: UIButton {
         self.setDirectionImage(to: ArrowDirection(from: direction))
     }
     
-    func setupTile(at row: Int, and column: Int, with dimensions: MapDimensions) {
+    func setupTile(at row: Int, and column: Int, with dimensions: MapDimensions, and gameHistory: GameHistory? = nil) {
+       
+        // Handle tile type and color
         if row == 0 && column == 0 {
             self.type = .exit
             self.backgroundColor = .systemMint
@@ -72,6 +94,18 @@ class Tile: UIButton {
         } else {
             self.type = .basic
             self.backgroundColor = .systemGray3
+        }
+        
+        // Handle tile with history
+        if let gameHistory = gameHistory {
+            let tilePosition = Coordinate(x: row, y: column)
+            if gameHistory.getRunnerHistory().contains(tilePosition) {
+                self.openByRunner(explicit: false)
+            }
+            
+            if gameHistory.getSeekerHistory().contains(tilePosition) {
+                self.openBySeeker(explicit: true)
+            }
         }
     }
     

@@ -37,6 +37,18 @@ class Runner: Player {
         self.maximumNumberOfMoves = maximumValue
     }
     
+    func updateMovesHistory(with history: History) {
+        self.movesHistory = history
+    }
+    
+    func updateHistoryWithDirections(at position: Coordinate, moving direction: MoveDirection) {
+        self.movesHistoryWithDirection[position] = direction
+    }
+    
+    func getHistoryWithDirections() -> HistoryWithDirection {
+        self.movesHistoryWithDirection
+    }
+    
     func move(to coordinate: Coordinate) {
         if numberOfMoves > 0 {
             numberOfMoves -= 1
@@ -55,14 +67,6 @@ class Runner: Player {
         
         guard let previousPosition = movesHistory.last else { return }
         self.position = previousPosition
-    }
-    
-    func updateHistoryWithDirections(at position: Coordinate, moving direction: MoveDirection) {
-        self.movesHistoryWithDirection[position] = direction
-    }
-    
-    func getHistoryWithDirections() -> HistoryWithDirection {
-        self.movesHistoryWithDirection
     }
     
     func win() {

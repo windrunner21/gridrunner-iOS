@@ -26,6 +26,10 @@ class Seeker: Player {
         self.maximumNumberOfMoves = maximumValue
     }
     
+    func updateMovesHistory(with history: History) {
+        self.movesHistory = history
+    }
+    
     func move(to coordinate: Coordinate) {
         if numberOfMoves > 0 {
             numberOfMoves -= 1
