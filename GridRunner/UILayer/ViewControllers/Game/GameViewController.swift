@@ -263,7 +263,12 @@ class GameViewController: UIViewController {
     }
     
     private func seekerTappedTile(seeker: Seeker, tile: Tile) {
+        seeker.move(to: tile.position)
+        seeker.updateMovesHistory(with: seeker.movesHistory)
+        
         tile.openBySeeker(explicit: true)
+        
+        game.getHistory()?.updateSeekerHistory(with: seeker.movesHistory)
         
         // get runner history and check if tile has been opened by runner
         if let gameHistory = game.getHistory(), gameHistory.getRunnerHistory().contains(tile.position) {

@@ -40,6 +40,7 @@ class Seeker: Player {
     
     func undo() {
         numberOfMoves += 1
+        self.movesHistory.removeLast()
     }
     
     func win() {
