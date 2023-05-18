@@ -275,9 +275,18 @@ class GameViewController: UIViewController {
             
             guard let runnerDirectionAtSeekerTile = gameHistory.getRunnerHistoryWithDirection()[seekerTile.position] else { return }
    
-            let nextRunnerTile = gameHistory.getRunnerHistory()[latestIndexOfSeekerTile + 1]
-            let nextRunnerDirection = gameHistory.getRunnerHistoryWithDirection()[nextRunnerTile]
-            seekerTile.updateDirectionImage(from: runnerDirectionAtSeekerTile, to: nextRunnerDirection)
+            let nextRunnerTileCoordinates = gameHistory.getRunnerHistory()[latestIndexOfSeekerTile + 1]
+            let nextRunnerDirection = gameHistory.getRunnerHistoryWithDirection()[nextRunnerTileCoordinates]
+            if let nextRunnerTile = self.accessTile(with: nextRunnerTileCoordinates, in: gameView) {
+                seekerTile.updateDirectionImage(
+                    from: runnerDirectionAtSeekerTile,
+                    oldTile: seekerTile,
+                    to: nextRunnerDirection,
+                    newTile: nextRunnerTile
+                )
+            } else {
+                seekerTile.updateDirectionImage(from: runnerDirectionAtSeekerTile, to: nextRunnerDirection)
+            }
         }
         
         // Get tile open status and check if tile has been opened by runner.
@@ -290,9 +299,18 @@ class GameViewController: UIViewController {
             }
             guard let runnerDirectionAtSeekerTile = game.getHistory()?.getRunnerHistoryWithDirection()[seekerTile.position] else { return }
 
-            let nextTile = gameHistory.getRunnerHistory()[latestIndexOfSeekerTile + 1]
-            let nextDirection = gameHistory.getRunnerHistoryWithDirection()[nextTile]
-            seekerTile.updateDirectionImage(from: runnerDirectionAtSeekerTile, to: nextDirection)
+            let nextRunnerTileCoordinates = gameHistory.getRunnerHistory()[latestIndexOfSeekerTile + 1]
+            let nextRunnerDirection = gameHistory.getRunnerHistoryWithDirection()[nextRunnerTileCoordinates]
+            if let nextRunnerTile = self.accessTile(with: nextRunnerTileCoordinates, in: gameView) {
+                seekerTile.updateDirectionImage(
+                    from: runnerDirectionAtSeekerTile,
+                    oldTile: seekerTile,
+                    to: nextRunnerDirection,
+                    newTile: nextRunnerTile
+                )
+            } else {
+                seekerTile.updateDirectionImage(from: runnerDirectionAtSeekerTile, to: nextRunnerDirection)
+            }
         }
     }
     
