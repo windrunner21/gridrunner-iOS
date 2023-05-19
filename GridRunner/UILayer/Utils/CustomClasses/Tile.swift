@@ -109,6 +109,7 @@ class Tile: UIButton {
         }
     }
     
+    /// Updates old and current Tile's direction image for Runner.
     func updateDirectionImage(to currentDirection: MoveDirection, from oldDirection: MoveDirection? = nil, oldTile: Tile? = nil) {
         switch (oldDirection, currentDirection) {
         case (.up, .left):
@@ -132,57 +133,32 @@ class Tile: UIButton {
         }
     }
     
+    /// Updates current and new Tile's direction image for Seeker.
     func updateDirectionImage(from currentDirection: MoveDirection, oldTile: Tile? = nil, to newDirection: MoveDirection? = nil, newTile: Tile? = nil) {
-        switch (currentDirection, newDirection) {
-        case (.up, .left):
-            if oldTile?.position.x == newTile?.position.x {
+        
+        if let oldX = oldTile?.position.x, let newX = newTile?.position.x,
+           let oldY = oldTile?.position.y, let newY = newTile?.position.y {
+            switch (currentDirection, newDirection) {
+            case (.up, .left) where oldX == newX:
                 self.setDirectionImage(to: .upLeft)
-            } else {
-                self.setDirectionImage(to: ArrowDirection(from: currentDirection))
-            }
-        case (.up, .right):
-            if oldTile?.position.x == newTile?.position.x {
+            case (.up, .right) where oldX == newX:
                 self.setDirectionImage(to: .upRight)
-            } else {
-                self.setDirectionImage(to: ArrowDirection(from: currentDirection))
-            }
-        case (.right, .up):
-            if oldTile?.position.y == newTile?.position.y {
+            case (.right, .up) where oldY == newY:
                 self.setDirectionImage(to: .rightUp)
-            } else {
-                self.setDirectionImage(to: ArrowDirection(from: currentDirection))
-            }
-        case (.right, .down):
-            if oldTile?.position.y == newTile?.position.y {
+            case (.right, .down) where oldY == newY:
                 self.setDirectionImage(to: .rightDown)
-            } else {
-                self.setDirectionImage(to: ArrowDirection(from: currentDirection))
-            }
-        case (.down, .right):
-            if oldTile?.position.x == newTile?.position.x {
+            case (.down, .right) where oldX == newX:
                 self.setDirectionImage(to: .downRight)
-            } else {
-                self.setDirectionImage(to: ArrowDirection(from: currentDirection))
-            }
-        case (.down, .left):
-            if oldTile?.position.x == newTile?.position.x {
+            case (.down, .left) where oldX == newX:
                 self.setDirectionImage(to: .downLeft)
-            } else {
-                self.setDirectionImage(to: ArrowDirection(from: currentDirection))
-            }
-        case (.left, .down):
-            if oldTile?.position.y == newTile?.position.y {
+            case (.left, .down) where oldY == newY:
                 self.setDirectionImage(to: .leftDown)
-            } else {
-                self.setDirectionImage(to: ArrowDirection(from: currentDirection))
-            }
-        case (.left, .up):
-            if oldTile?.position.y == newTile?.position.y {
+            case (.left, .up) where oldY == newY:
                 self.setDirectionImage(to: .leftUp)
-            } else {
+            default:
                 self.setDirectionImage(to: ArrowDirection(from: currentDirection))
             }
-        default:
+        } else {
             self.setDirectionImage(to: ArrowDirection(from: currentDirection))
         }
     }
