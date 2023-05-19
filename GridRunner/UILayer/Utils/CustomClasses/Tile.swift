@@ -135,7 +135,6 @@ class Tile: UIButton {
     
     /// Updates current and new Tile's direction image for Seeker.
     func updateDirectionImage(from currentDirection: MoveDirection, oldTile: Tile? = nil, to newDirection: MoveDirection? = nil, newTile: Tile? = nil) {
-        
         if let oldX = oldTile?.position.x, let newX = newTile?.position.x,
            let oldY = oldTile?.position.y, let newY = newTile?.position.y {
             switch (currentDirection, newDirection) {
