@@ -10,97 +10,95 @@ class Runner: Player {
     var type: PlayerType = .runner
     var didWin: Bool = false
     
-    var maximumNumberOfMoves: Int = 2
+    var currentTurn: Int = 1
     var numberOfMoves: Int = 2
-    var movesHistory: History = []
+    
+    var history: [Turn] = []
     
     var position: Coordinate
     
-    private var movesHistoryWithDirection: HistoryWithDirection = [:]
-    
     init(at position: Coordinate) {
         self.position = position
-        // On creating Runner with initial position, add this position as root element of history.
-        movesHistory.append(position)
-        movesHistoryWithDirection[position] = .unknown
-    }
-    
-    func incrementNumberOfMoves() {
-        self.numberOfMoves += 1
     }
     
     func updateNumberOfMoves(to value: Int) {
         self.numberOfMoves = value
     }
     
-    func updateMaximumNumberOfMoves(to maximumValue: Int) {
-        self.maximumNumberOfMoves = maximumValue
+    func setHistory(to history: [Turn]) {
+        self.history = history
     }
     
-    func updateMovesHistory(with history: History) {
-        self.movesHistory = history
+    func appendHistory(with history: [Turn]) {
+        self.history += history
     }
     
-    func updateHistoryWithDirections(at position: Coordinate, moving direction: MoveDirection) {
-        self.movesHistoryWithDirection[position] = direction
-    }
-    
-    func getHistoryWithDirections() -> HistoryWithDirection {
-        self.movesHistoryWithDirection
-    }
-    
-    func move(to coordinate: Coordinate) {
-        if numberOfMoves > 0 {
-            numberOfMoves -= 1
-            print("Runner is moving to x: \(coordinate.x) and y: \(coordinate.y)")
-            self.position = coordinate
-            self.movesHistory.append(coordinate)
+    func move(to tile: Tile) {
+        if self.movesExist() {
+            // Setup upcoming new move.
+            let newMove = Move(from: self.position, to: tile.position)
+
+            // Check whether new move can be allowed to be made and direction is correct.
+            let allowedMove = newMove.canMoveBeAllowed()
+            let direction: MoveDirection = newMove.identifyMoveDirection()
+            
+            if allowedMove && direction != .unknown {
+                print("Runner is moving to position: \(tile.position)")
+                
+                tile.openByRunner(explicit: true)
+                tile.updateDirectionImage(to: direction)
+                
+                if currentTurn > self.history.count {
+                    self.createTurn(with: [newMove])
+                } else {
+                    self.history.last?.appendMove(newMove)
+                }
+                
+                self.position = tile.position
+                
+                numberOfMoves -= 1
+            } else {
+                print("Runner move: \(newMove) cannot be allowed.")
+            }
+        } else {
+            print("No more moves left for Runner.")
         }
-    }
-    
-    func undo() {
-        numberOfMoves += 1
-        let positionToRemove = self.position
-        
-        self.movesHistory.removeLast()
-        self.movesHistoryWithDirection[positionToRemove] = nil
-        
-        guard let previousPosition = movesHistory.last else { return }
-        self.position = previousPosition
     }
     
     func win() {
         didWin = true
     }
     
-    func canMoveBeAllowed(from oldPosition: Coordinate, to newPosition: Coordinate) -> Bool {        
-        let isCorrectHorizontalMove = abs(newPosition.y - oldPosition.y) == 1 && newPosition.x == oldPosition.x
-        let isCorrectVerticalMove = abs(newPosition.x - oldPosition.x) == 1 && newPosition.y == oldPosition.y
+    func finish(on tile: Tile) {
+        self.currentTurn += 1
+        self.numberOfMoves += 1
         
-        return isCorrectHorizontalMove || isCorrectVerticalMove
+        if tile.type == .exit {
+            self.win()
+            tile.decorateRunnerWin()
+        }
     }
     
-    func identifyMovingDirection(from oldPosition: Coordinate, to newPosition: Coordinate) -> MoveDirection {
-        // horizontal movement
-        // left
-        if oldPosition.x == newPosition.x && oldPosition.y > newPosition.y {
-            return .left
-        }
-        // right
-        if oldPosition.x == newPosition.x && oldPosition.y < newPosition.y {
-            return .right
+    func undo() {
+        guard let previousPosition = self.history.last?.getMoves().last?.from else {
+            print("Could not get previous position for Runner. Returning...")
+            return
         }
         
-        // vertical movement
-        // up
-        if oldPosition.x > newPosition.x && oldPosition.y == newPosition.y {
-            return .up
-        }
-        // down
-        if oldPosition.x < newPosition.x && oldPosition.y == newPosition.y {
-            return .down
-        }
+        self.position = previousPosition
         
-        return .unknown
+        self.history.last?.removeLastMove()
+    
+        numberOfMoves += 1
+    }
+    
+    /// Creates turn with empty initialized Move.
+    private func createTurn(with moves: [Move]) {
+        let newTurn: Turn = Turn(moves: moves)
+        self.history.append(newTurn)
+    }
+    
+    private func movesExist() -> Bool {
+        self.numberOfMoves > 0
     }
 }

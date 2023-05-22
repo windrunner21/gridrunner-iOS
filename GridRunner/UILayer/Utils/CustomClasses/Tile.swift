@@ -77,7 +77,7 @@ class Tile: UIButton {
         self.setDirectionImage(to: ArrowDirection(from: direction))
     }
     
-    func setupTile(at row: Int, and column: Int, with dimensions: MapDimensions, and gameHistory: GameHistory? = nil) {
+    func setupTile(at row: Int, and column: Int, with dimensions: MapDimensions, and history: History? = nil) {
        
         // Handle tile type and color
         if row == 0 && column == 0 {
@@ -97,16 +97,16 @@ class Tile: UIButton {
         }
         
         // Handle tile with history
-        if let gameHistory = gameHistory {
-            let tilePosition = Coordinate(x: row, y: column)
-            if gameHistory.getRunnerHistory().contains(tilePosition) {
-                self.openByRunner(explicit: false)
-            }
-            
-            if gameHistory.getSeekerHistory().contains(tilePosition) {
-                self.openBySeeker(explicit: true)
-            }
-        }
+//        if let gameHistory = gameHistory {
+//            let tilePosition = Coordinate(x: row, y: column)
+//            if gameHistory.getRunnerHistory().contains(tilePosition) {
+//                self.openByRunner(explicit: false)
+//            }
+//
+//            if gameHistory.getSeekerHistory().contains(tilePosition) {
+//                self.openBySeeker(explicit: true)
+//            }
+//        }
     }
     
     /// Updates old and current Tile's direction image for Runner.

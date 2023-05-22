@@ -19,8 +19,10 @@
 		CA0AAC3B2A0E7528008367FB /* PowerUp.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA0AAC3A2A0E7528008367FB /* PowerUp.swift */; };
 		CA0AAC3D2A121EE2008367FB /* MoveDirection.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA0AAC3C2A121EE2008367FB /* MoveDirection.swift */; };
 		CA0AAC3F2A13A2A0008367FB /* ArrowDirection.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA0AAC3E2A13A2A0008367FB /* ArrowDirection.swift */; };
-		CA0AAC412A150C5C008367FB /* GameHistory.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA0AAC402A150C5C008367FB /* GameHistory.swift */; };
 		CA0AAC432A166F18008367FB /* GameHistoryExamples.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA0AAC422A166F18008367FB /* GameHistoryExamples.swift */; };
+		CA0AAC5B2A1B7EDF008367FB /* History.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA0AAC5A2A1B7EDF008367FB /* History.swift */; };
+		CA0AAC5D2A1B7EE6008367FB /* Turn.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA0AAC5C2A1B7EE6008367FB /* Turn.swift */; };
+		CA0AAC5F2A1B7EEF008367FB /* Move.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA0AAC5E2A1B7EEF008367FB /* Move.swift */; };
 		CA4E3F542A07A80E00D36266 /* Game.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CA4E3F532A07A80E00D36266 /* Game.storyboard */; };
 		CA4E3F582A07A85900D36266 /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA4E3F572A07A85900D36266 /* GameViewController.swift */; };
 		CA4E3F5C2A07BBF100D36266 /* PlayerType.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA4E3F5B2A07BBF100D36266 /* PlayerType.swift */; };
@@ -70,8 +72,10 @@
 		CA0AAC3A2A0E7528008367FB /* PowerUp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PowerUp.swift; sourceTree = "<group>"; };
 		CA0AAC3C2A121EE2008367FB /* MoveDirection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoveDirection.swift; sourceTree = "<group>"; };
 		CA0AAC3E2A13A2A0008367FB /* ArrowDirection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArrowDirection.swift; sourceTree = "<group>"; };
-		CA0AAC402A150C5C008367FB /* GameHistory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameHistory.swift; sourceTree = "<group>"; };
 		CA0AAC422A166F18008367FB /* GameHistoryExamples.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameHistoryExamples.swift; sourceTree = "<group>"; };
+		CA0AAC5A2A1B7EDF008367FB /* History.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = History.swift; sourceTree = "<group>"; };
+		CA0AAC5C2A1B7EE6008367FB /* Turn.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Turn.swift; sourceTree = "<group>"; };
+		CA0AAC5E2A1B7EEF008367FB /* Move.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Move.swift; sourceTree = "<group>"; };
 		CA4E3F532A07A80E00D36266 /* Game.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Game.storyboard; sourceTree = "<group>"; };
 		CA4E3F572A07A85900D36266 /* GameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameViewController.swift; sourceTree = "<group>"; };
 		CA4E3F5B2A07BBF100D36266 /* PlayerType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerType.swift; sourceTree = "<group>"; };
@@ -127,7 +131,9 @@
 				CA0AAC272A0E2BF1008367FB /* Runner.swift */,
 				CA0AAC312A0E637E008367FB /* Game.swift */,
 				CA0AAC332A0E6395008367FB /* Map.swift */,
-				CA0AAC402A150C5C008367FB /* GameHistory.swift */,
+				CA0AAC5A2A1B7EDF008367FB /* History.swift */,
+				CA0AAC5C2A1B7EE6008367FB /* Turn.swift */,
+				CA0AAC5E2A1B7EEF008367FB /* Move.swift */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -475,6 +481,7 @@
 				CA0AAC3D2A121EE2008367FB /* MoveDirection.swift in Sources */,
 				CA0AAC342A0E6395008367FB /* Map.swift in Sources */,
 				CA4E3F5C2A07BBF100D36266 /* PlayerType.swift in Sources */,
+				CA0AAC5D2A1B7EE6008367FB /* Turn.swift in Sources */,
 				CA4E3F582A07A85900D36266 /* GameViewController.swift in Sources */,
 				CA4E3F642A08DCB400D36266 /* ViewControllerExtension.swift in Sources */,
 				CA0AAC3F2A13A2A0008367FB /* ArrowDirection.swift in Sources */,
@@ -485,11 +492,12 @@
 				CA4E3F662A0BCD3300D36266 /* MapExits.swift in Sources */,
 				CA0AAC3B2A0E7528008367FB /* PowerUp.swift in Sources */,
 				CA0AAC392A0E722C008367FB /* TileType.swift in Sources */,
+				CA0AAC5F2A1B7EEF008367FB /* Move.swift in Sources */,
 				CA0AAC432A166F18008367FB /* GameHistoryExamples.swift in Sources */,
 				CA4E3F602A0891F300D36266 /* RegisterViewController.swift in Sources */,
 				CA0AAC302A0E484F008367FB /* Coordinate.swift in Sources */,
+				CA0AAC5B2A1B7EDF008367FB /* History.swift in Sources */,
 				CAFED48D2A02496E00FB4B9B /* AppDelegate.swift in Sources */,
-				CA0AAC412A150C5C008367FB /* GameHistory.swift in Sources */,
 				CA0AAC282A0E2BF1008367FB /* Runner.swift in Sources */,
 				CA0AAC262A0E2BE6008367FB /* Seeker.swift in Sources */,
 				CAFED48F2A02496E00FB4B9B /* SceneDelegate.swift in Sources */,

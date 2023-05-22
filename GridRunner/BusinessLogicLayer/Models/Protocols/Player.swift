@@ -6,25 +6,31 @@
 //
 
 protocol Player {
-    typealias History = [Coordinate]
-    typealias HistoryWithDirection = [Coordinate: MoveDirection]
-    
+    // Self related properties
     var type: PlayerType { get }
-
-    var maximumNumberOfMoves: Int { get }
-    var numberOfMoves: Int { get }
-    var movesHistory: History { get }
-    
     var didWin: Bool { get set }
     
-    func incrementNumberOfMoves()
+    // Turn related properties
+    var currentTurn: Int { get }
+    
+    // Number of moves related properties
+    var numberOfMoves: Int { get }
+    
+    // History related properties
+    var history: [Turn] { get }
+    
+    // Number of moves manipulation
     func updateNumberOfMoves(to value: Int)
-    func updateMaximumNumberOfMoves(to maximumValue: Int)
     
-    func updateMovesHistory(with history: History)
+    // History manipulation
+    func setHistory(to history: [Turn])
+    func appendHistory(with history: [Turn])
     
-    func undo()
-    func move(to coordinate: Coordinate)
-    
+    // Self actions
+    func move(to tile: Tile)
     func win()
+    
+    // Button clicks
+    func finish(on tile: Tile)
+    func undo()
 }
