@@ -202,9 +202,7 @@ class GameViewController: UIViewController {
         
     }
     
-    private func startTileTapped(_ tile: Tile) {
-        print("Start tile with id: \(tile.getIdentifier()) tapped.")
-    }
+    private func startTileTapped(_ tile: Tile) { }
     
     private func exitTileTapped(_ tile: Tile, by player: AnyPlayer) {
         if let runner = player as? Runner {
@@ -242,8 +240,6 @@ class GameViewController: UIViewController {
         if let view = view.subviews.first as? UIStackView {
             if let row = view.arrangedSubviews[row] as? UIStackView {
                 if let tile = row.arrangedSubviews[column] as? Tile {
-                    print("Retrieving tile at coordinates: \(coordinates).")
-                    print("Tile opened by Runner: \(tile.hasBeenOpened().byRunner ) | by Seeker: \(tile.hasBeenOpened().bySeeker ).")
                     return tile
                 }
             }
