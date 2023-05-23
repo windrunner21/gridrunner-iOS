@@ -91,8 +91,8 @@ class Runner: Player {
         self.history.last?.removeLastMove()
         self.numberOfMoves += 1
         
-        let lastTurn = self.getLastTurn()
-        tile?.updateDirectionImageOnUndo(to: lastTurn?.getMoves().last?.identifyMoveDirection() ?? .unknown)
+        guard tile?.type != .start else { return }
+        tile?.decorateRunner()
     }
     
     private func createTurn(with moves: [Move]) {

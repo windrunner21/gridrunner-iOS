@@ -73,24 +73,17 @@ class Tile: UIButton {
         self.setImage(nil, for: .normal)
     }
     
-    func updateDirectionImageOnUndo(to direction: MoveDirection) {
-        self.setDirectionImage(to: ArrowDirection(from: direction))
-    }
-    
     func setupTile(at row: Int, and column: Int, with dimensions: MapDimensions, and history: History? = nil) {
-       
         // Handle tile type and color
-        if row == 0 && column == 0 {
+        if (row == 0 && column == 0) ||
+            (row == dimensions.getNumberOfRows() - 1 &&
+            column == dimensions.getNumberOfColumns() - 1)  {
             self.type = .exit
-            self.backgroundColor = .systemMint
+            self.decorateExit()
         } else if row == dimensions.getNumberOfRows() / 2 &&
                   column == dimensions.getNumberOfColumns() / 2 {
             self.type = .start
-            self.backgroundColor = .systemIndigo
-        } else if row == dimensions.getNumberOfRows() - 1 &&
-                  column == dimensions.getNumberOfColumns() - 1 {
-            self.type = .exit
-            self.backgroundColor = .systemMint
+            self.decorateSpawn()
         } else {
             self.type = .basic
             self.backgroundColor = .systemGray3
@@ -129,7 +122,7 @@ class Tile: UIButton {
         case (.left, .up):
             self.setDirectionImages(newDirection: .up, oldDirection: .leftUp, for: oldTile)
         default:
-            self.setDirectionImage(to: ArrowDirection(from: currentDirection))
+            self.setDirectionImages(newDirection: ArrowDirection(from: currentDirection), oldDirection: ArrowDirection(from: currentDirection), for: oldTile)
         }
     }
     
@@ -162,6 +155,21 @@ class Tile: UIButton {
         }
     }
     
+    func decorateExit() {
+        self.backgroundColor = .systemMint
+        self.setImage(UIImage(systemName: "flag.checkered"), for: .normal)
+    }
+    
+    func decorateSpawn() {
+        self.backgroundColor = .systemIndigo
+        self.setImage(UIImage(systemName: "house.fill"), for: .normal)
+    }
+    
+    func decorateRunner() {
+        self.backgroundColor = .systemIndigo
+        self.setImage(UIImage(systemName: "face.smiling.fill"), for: .normal)
+    }
+    
     func decorateRunnerWin() {
         self.backgroundColor = .systemGreen
         self.setImage(UIImage(systemName: "flag.checkered.2.crossed"), for: .normal)
@@ -173,8 +181,11 @@ class Tile: UIButton {
     }
     
     private func setDirectionImages(newDirection: ArrowDirection, oldDirection: ArrowDirection, for oldTile: Tile?) {
+        self.decorateRunner()
+        
+        guard oldTile?.type != .start else { return }
         oldTile?.setDirectionImage(to: oldDirection)
-        self.setDirectionImage(to: newDirection)
+        oldTile?.backgroundColor = .systemIndigo.withAlphaComponent(0.5)
     }
         
     private func setDirectionImage(to direction: ArrowDirection) {
