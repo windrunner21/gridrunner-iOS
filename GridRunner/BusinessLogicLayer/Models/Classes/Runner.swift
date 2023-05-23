@@ -50,22 +50,13 @@ class Runner: Player {
             
             if allowedMove && direction != .unknown {
                 print("Runner moved to position: \(newTile.position)")
-                
+        
                 newTile.openByRunner(explicit: true)
                 
-                /*
-                    In case the last turn exists
-                    Handle case for if last turn is empty, then access last move from previous turn
-                    Otherwise just add with new move's direction
-                */
-                if let lastTurn = self.history.last {
-                    var previousTurn = self.getPreviousTurn(of: lastTurn)
-                    newTile.updateDirectionImage(to: direction,
-                                                 from: previousTurn?.getMoves().last?.identifyMoveDirection(),
-                                                 oldTile: oldTile)
-                } else {
-                    newTile.updateDirectionImage(to: direction)
-                }
+                let lastTurn = self.getLastTurn()
+                newTile.updateDirectionImage(to: direction,
+                                             from: lastTurn?.getMoves().last?.identifyMoveDirection(),
+                                             oldTile: oldTile)
                 
                 if currentTurn > self.history.count {
                     self.createTurn(with: [newMove])
@@ -96,17 +87,12 @@ class Runner: Player {
     }
     
     func undo(_ move: Move, returnTo tile: Tile? = nil) {
-        guard let lastTurn = self.history.last else {
-            print("Could not access last turn from history")
-            return
-        }
-        
         self.position = move.from
-        lastTurn.removeLastMove()
+        self.history.last?.removeLastMove()
         self.numberOfMoves += 1
         
-        var previousTurn = self.getPreviousTurn(of: lastTurn)
-        tile?.updateDirectionImageOnUndo(to: previousTurn?.getMoves().last?.identifyMoveDirection() ?? .unknown)
+        let lastTurn = self.getLastTurn()
+        tile?.updateDirectionImageOnUndo(to: lastTurn?.getMoves().last?.identifyMoveDirection() ?? .unknown)
     }
     
     private func createTurn(with moves: [Move]) {
@@ -118,9 +104,9 @@ class Runner: Player {
         self.numberOfMoves > 0
     }
     
-    private func getPreviousTurn(of lastTurn: Turn) -> Turn? {
+    private func getLastTurn() -> Turn? {
         // Handle case for if last turn is empty, then access last move from previous turn
-        if lastTurn.getMoves().isEmpty && self.history.count >= 2 {
+        if let lastTurn = self.history.last, lastTurn.getMoves().isEmpty && self.history.count >= 2 {
             return self.history[self.history.count - 2]
         } else {
             return self.history.last
