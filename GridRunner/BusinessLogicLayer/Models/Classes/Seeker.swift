@@ -10,9 +10,13 @@ class Seeker: Player {
     var didWin: Bool = false
     
     var currentTurn: Int = 1
+    
     var numberOfMoves: Int = 1
+    var maximumNumberOfMoves: Int = 1
     
     var history: [Turn] = []
+    
+    var position: Coordinate = Coordinate(x: -1, y: -1)
     
     func updateNumberOfMoves(to value: Int) {
         self.numberOfMoves = value
@@ -26,12 +30,12 @@ class Seeker: Player {
         self.history += history
     }
     
-    func move(to tile: Tile) {
+    func move(from oldTile: Tile? = nil, to newTile: Tile) {
         if numberOfMoves > 0 {
             numberOfMoves -= 1
-            print("Seeker is opening tile at: \(tile.position)")
-            tile.openBySeeker(explicit: true)
-            history.last?.appendMove(Move(from: tile.position, to: tile.position))
+            print("Seeker is opening tile at: \(newTile.position)")
+            newTile.openBySeeker(explicit: true)
+            history.last?.appendMove(Move(from: newTile.position, to: newTile.position))
         }
     }
     
@@ -44,7 +48,7 @@ class Seeker: Player {
         self.numberOfMoves += 1
     }
     
-    func undo() {
+    func undo(_ move: Move, returnTo tile: Tile?) {
         self.history.last?.removeLastMove()
         numberOfMoves += 1
     }

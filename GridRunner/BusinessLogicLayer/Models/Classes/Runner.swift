@@ -11,7 +11,9 @@ class Runner: Player {
     var didWin: Bool = false
     
     var currentTurn: Int = 1
+    
     var numberOfMoves: Int = 2
+    var maximumNumberOfMoves: Int = 2
     
     var history: [Turn] = []
     
@@ -33,20 +35,23 @@ class Runner: Player {
         self.history += history
     }
     
-    func move(to tile: Tile) {
+    func move(from oldTile: Tile? = nil, to newTile: Tile) {
         if self.movesExist() {
             // Setup upcoming new move.
-            let newMove = Move(from: self.position, to: tile.position)
+            let newMove = Move(from: self.position, to: newTile.position)
 
             // Check whether new move can be allowed to be made and direction is correct.
             let allowedMove = newMove.canMoveBeAllowed()
             let direction: MoveDirection = newMove.identifyMoveDirection()
             
             if allowedMove && direction != .unknown {
-                print("Runner is moving to position: \(tile.position)")
+                print("Runner moved to position: \(newTile.position)")
                 
-                tile.openByRunner(explicit: true)
-                tile.updateDirectionImage(to: direction)
+                newTile.openByRunner(explicit: true)
+                
+                newTile.updateDirectionImage(to: direction,
+                                             from: self.history.last?.getMoves().last?.identifyMoveDirection(),
+                                             oldTile: oldTile)
                 
                 if currentTurn > self.history.count {
                     self.createTurn(with: [newMove])
@@ -54,7 +59,7 @@ class Runner: Player {
                     self.history.last?.appendMove(newMove)
                 }
                 
-                self.position = tile.position
+                self.position = newTile.position
                 
                 numberOfMoves -= 1
             } else {
@@ -72,6 +77,7 @@ class Runner: Player {
     func finish(on tile: Tile) {
         self.currentTurn += 1
         self.numberOfMoves += 1
+        self.maximumNumberOfMoves = 1
         
         if tile.type == .exit {
             self.win()
@@ -79,17 +85,12 @@ class Runner: Player {
         }
     }
     
-    func undo() {
-        guard let previousPosition = self.history.last?.getMoves().last?.from else {
-            print("Could not get previous position for Runner. Returning...")
-            return
-        }
-        
-        self.position = previousPosition
-        
+    func undo(_ move: Move, returnTo tile: Tile? = nil) {
+        self.position = move.from
         self.history.last?.removeLastMove()
-    
-        numberOfMoves += 1
+        self.numberOfMoves += 1
+        
+        tile?.updateDirectionImageOnUndo(to: self.history.last?.getMoves().last?.identifyMoveDirection() ?? .unknown)
     }
     
     /// Creates turn with empty initialized Move.

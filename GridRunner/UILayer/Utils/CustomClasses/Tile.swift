@@ -62,8 +62,8 @@ class Tile: UIButton {
         }
     }
     
-    func closeBy(_ playerType: PlayerType) {
-        if playerType == .runner {
+    func closeBy(_ player: Player) {
+        if player.type == .runner {
             self.openedByRunner = false
         } else {
             self.openedBySeeker = false

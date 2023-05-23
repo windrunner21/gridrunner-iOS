@@ -74,24 +74,21 @@ class GameViewController: UIViewController {
             return
         }
         
-        guard let moveToClear = player.history.last?.getMoves().last else {
+        guard let lastMove = player.history.last?.getMoves().last else {
+            print("Could not get last move from Player. Returning...")
             presentErrorAlert()
             return
         }
         
-        player.undo()
+        let lastTile = self.accessTile(with: lastMove.to, in: gameView)
+        let previousTile = self.accessTile(with: lastMove.from, in: gameView)
+        
+        lastTile?.closeBy(player)
+        
+        player.undo(lastMove, returnTo: previousTile)
         self.updateMovesLabel(with: player.numberOfMoves)
-        let tile = self.accessTile(with: moveToClear.to, in: gameView)
-        
-        if let runner = player as? Runner {
-            self.runnerClickedUndo(runner, on: tile)
-        }
-        
-        if let seeker = player as? Seeker {
-            self.seekerClickedUndo(seeker, on: tile)
-        }
-        
-        self.undoButton.isEnabled = player.numberOfMoves < player.history.count
+    
+        self.undoButton.isEnabled = player.numberOfMoves < player.maximumNumberOfMoves
         self.finishButton.isEnabled = player.numberOfMoves == 0
     }
     
@@ -120,6 +117,16 @@ class GameViewController: UIViewController {
         
         self.undoButton.isEnabled = false
         self.finishButton.isEnabled = false
+        
+        for (index, turn) in player.history.enumerated() {
+            print("\(index + 1)th TURN")
+            for (index, move) in turn.getMoves().enumerated() {
+                print("\(index + 1)th MOVE")
+                print("from: \(move.from)")
+                print("to: \(move.to)")
+            }
+            print("==========")
+        }
     }
     
     private func setUpOptionsButton() {
@@ -195,7 +202,8 @@ class GameViewController: UIViewController {
     
     private func exitTileTapped(_ tile: Tile, by player: Player) {
         if let runner = player as? Runner {
-            self.runnerTappedTile(runner: runner, tile: tile)
+            runner.move(to: tile)
+            game.getHistory().setRunnerHistory(to: runner.history)
         }
         
         self.updateMovesLabel(with: player.numberOfMoves)
@@ -205,49 +213,26 @@ class GameViewController: UIViewController {
     }
     
     private func basicTileTapped(_ tile: Tile, by player: Player) {
-        print("Basic tile with id: \(tile.getIdentifier()) tapped. (Tile opened by Runner: \(tile.hasBeenOpened().byRunner ).) (Tile opened by Seeker: \(tile.hasBeenOpened().bySeeker ).)")
+        print("Basic tile with id: \(tile.getIdentifier()) tapped.")
+        print("Tile opened by Runner: \(tile.hasBeenOpened().byRunner ) | by Seeker: \(tile.hasBeenOpened().bySeeker ).")
         
-        if let runner = player as? Runner {
-            self.runnerTappedTile(runner: runner, tile: tile)
-        }
+        let previousTile = self.accessTile(with: player.position, in: gameView)
         
-        if let seeker = player as? Seeker {
-            self.seekerTappedTile(seeker: seeker, tile: tile)
-        }
+        player.move(from: previousTile, to: tile)
+        game.getHistory().setHistory(of: player, to: player.history)
         
         self.updateMovesLabel(with: player.numberOfMoves)
         
         // Handle enabling finish and undo buttons.
-        self.enableUndoButton(on: player.numberOfMoves < player.history.count)
+        self.enableUndoButton(on: player.numberOfMoves < player.maximumNumberOfMoves)
         self.enableFinishButton(on: player.numberOfMoves == 0)
-        for (index, turn) in player.history.enumerated() {
-            print("\(index)th TURN")
-            for move in turn.getMoves() {
-                print(move.from)
-                print(move.to)
-            }
-            print("==========")
-        }
-    }
-    
-    private func runnerClickedUndo(_ runner: Runner, on tile: Tile?) {
-        tile?.closeBy(.runner)
-        
-        if let latestMove = runner.history.last?.getMoves().last {
-            let tile = self.accessTile(with: latestMove.to, in: gameView)
-            tile?.updateDirectionImageOnUndo(to: .left)
-        }
-    }
-    
-    private func seekerClickedUndo(_ seeker: Seeker, on tile: Tile?) {
-        tile?.closeBy(.seeker)
     }
     
     private func seekerClickedFinish(_ seeker: Seeker) {
-        guard let latestMove = seeker.history.last?.getMoves().last else { return }
-        
-        // Get clicked tile - the one Seeker is currently standing on.
-        guard let seekerTile = self.accessTile(with: latestMove.to, in: gameView) else { return }
+//        guard let latestMove = seeker.history.last?.getMoves().last else { return }
+//
+//        // Get clicked tile - the one Seeker is currently standing on.
+//        guard let seekerTile = self.accessTile(with: latestMove.to, in: gameView) else { return }
 //        // Get next tile of runner if it exists.
 //        guard let latestIndexOfSeekerTile = game.getHistory()?.getRunnerHistory().lastIndex(of: seekerTile.position) else { return }
 //
@@ -304,22 +289,6 @@ class GameViewController: UIViewController {
 //        }
     }
     
-    private func runnerTappedTile(runner: Runner, tile: Tile) {
-        runner.move(to: tile)
-        game.getHistory().setRunnerHistory(to: runner.history)
-        // Manage previous tile arrow direction if previous tile exists.
-//        var previousDirection: MoveDirection? = nil
-//        let previousTile = self.accessTile(with: runner.position, in: gameView)
-//        if let previousTile = previousTile {
-//            previousDirection = runner.getHistoryWithDirections()[previousTile.position]
-//        }
-    }
-    
-    private func seekerTappedTile(seeker: Seeker, tile: Tile) {
-        seeker.move(to: tile)
-        game.getHistory().setSeekerHistory(to: seeker.history)
-    }
-    
     private func accessTile(with coordinates: Coordinate, in view: UIView) -> Tile? {
         let row = coordinates.x
         let column = coordinates.y
@@ -327,7 +296,8 @@ class GameViewController: UIViewController {
         if let view = view.subviews.first as? UIStackView {
             if let row = view.arrangedSubviews[row] as? UIStackView {
                 if let tile = row.arrangedSubviews[column] as? Tile {
-                    print("Coordinates given: \(coordinates). (Tile opened by Runner: \(tile.hasBeenOpened().byRunner ).) (Tile opened by Seeker: \(tile.hasBeenOpened().bySeeker ).)")
+                    print("Retrieving tile at coordinates: \(coordinates).")
+                    print("Tile opened by Runner: \(tile.hasBeenOpened().byRunner ) | by Seeker: \(tile.hasBeenOpened().bySeeker ).")
                     return tile
                 }
             }

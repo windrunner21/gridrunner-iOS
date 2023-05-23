@@ -21,6 +21,22 @@ class History {
         self.seekerHistory
     }
     
+    func setHistory(of player: Player, to history: [Turn]) {
+        if player.type == .runner {
+            self.setRunnerHistory(to: history)
+        } else {
+            self.setSeekerHistory(to: history)
+        }
+    }
+    
+    func appendHistory(of player: Player, with history: [Turn]) {
+        if player.type == .runner {
+            self.appendRunnerHistory(with: history)
+        } else {
+            self.appendSeekerHistory(with: history)
+        }
+    }
+    
     func setRunnerHistory(to history: [Turn]) {
         self.runnerHistory = history
     }
