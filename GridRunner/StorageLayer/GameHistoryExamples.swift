@@ -6,51 +6,26 @@
 //
 
 struct GameHistoryExamples {
-//    var example1 = GameHistory(
-//        runnerHistory: [
-//            Coordinate(x: 6, y: 6),
-//            Coordinate(x: 6, y: 5),
-//            Coordinate(x: 6, y: 4),
-//            Coordinate(x: 6, y: 3),
-//            Coordinate(x: 6, y: 2),
-//            Coordinate(x: 5, y: 2),
-//            Coordinate(x: 4, y: 2),
-//            Coordinate(x: 4, y: 3),
-//            Coordinate(x: 4, y: 4),
-//            Coordinate(x: 5, y: 4),
-//            Coordinate(x: 6, y: 4),
-//            Coordinate(x: 7, y: 4),
-//            Coordinate(x: 8, y: 4)
-//        ],
-//        seekerHistory: []
-//    )
-//
-//    var example2 = GameHistory(
-//        runnerHistory: [
-//            Coordinate(x: 6, y: 6),
-//            Coordinate(x: 6, y: 5),
-//            Coordinate(x: 6, y: 4),
-//            Coordinate(x: 7, y: 4),
-//            Coordinate(x: 7, y: 3),
-//            Coordinate(x: 6, y: 3),
-//            Coordinate(x: 5, y: 3),
-//            Coordinate(x: 5, y: 4),
-//            Coordinate(x: 5, y: 5),
-//            Coordinate(x: 5, y: 6),
-//            Coordinate(x: 5, y: 7),
-//            Coordinate(x: 6, y: 7),
-//            Coordinate(x: 7, y: 7),
-//            Coordinate(x: 7, y: 6),
-//            Coordinate(x: 7, y: 5),
-//            Coordinate(x: 8, y: 5),
-//            Coordinate(x: 9, y: 5),
-//            Coordinate(x: 10, y: 5),
-//            Coordinate(x: 10, y: 4),
-//            Coordinate(x: 9, y: 4),
-//            Coordinate(x: 9, y: 5),
-//            Coordinate(x: 9, y: 6),
-//            Coordinate(x: 9, y: 7)
-//        ],
-//        seekerHistory: []
-//    )
+    var runnerHistory1: [Turn] = []
+    
+    var runnerHistory2: [Turn] = [
+        Turn(moves: [
+            Move(from: Coordinate(x: 6, y: 6), to: Coordinate(x: 6, y: 5)),
+            Move(from: Coordinate(x: 6, y: 5), to: Coordinate(x: 6, y: 4))
+        ]),
+        Turn(moves: [
+            Move(from: Coordinate(x: 6, y: 4), to: Coordinate(x: 6, y: 3))
+        ])
+    ]
+    
+    var seekerHistory1: [Turn] = []
+    
+    var seekerHistory2: [Turn] = [
+        Turn(moves: [
+            Move(from: Coordinate(x: 6, y: 6), to: Coordinate(x: 6, y: 5))
+        ]),
+        Turn(moves: [
+            Move(from: Coordinate(x: 6, y: 5), to: Coordinate(x: 5, y: 5))
+        ])
+    ]
 }

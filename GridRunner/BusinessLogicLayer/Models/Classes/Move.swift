@@ -42,10 +42,14 @@ class Move: CustomStringConvertible {
         return .unknown
     }
     
-    func canMoveBeAllowed() -> Bool {
+    func canRunnerMoveBeAllowed() -> Bool {
         let isCorrectHorizontalMove = abs(from.y - to.y) == 1 && from.x == to.x
         let isCorrectVerticalMove = abs(from.x - to.x) == 1 && from.y == to.y
         
         return isCorrectHorizontalMove || isCorrectVerticalMove
+    }
+    
+    func canSeekerMoveBeAllowed() -> Bool {
+        return from.y != to.y || from.x != to.x
     }
 }

@@ -9,6 +9,11 @@ class History {
     private var runnerHistory: [Turn] = []
     private var seekerHistory: [Turn] = []
     
+    func setHistory(runnerHistory: [Turn], seekerHistory: [Turn]) {
+        self.runnerHistory = runnerHistory
+        self.seekerHistory = seekerHistory
+    }
+    
     func getHistory() -> (runnerHistory: [Turn], seekerHistory: [Turn]) {
         (self.runnerHistory, self.seekerHistory)
     }
@@ -21,7 +26,7 @@ class History {
         self.seekerHistory
     }
     
-    func setHistory(of player: Player, to history: [Turn]) {
+    func setHistory(of player: AnyPlayer, to history: [Turn]) {
         if player.type == .runner {
             self.setRunnerHistory(to: history)
         } else {
@@ -29,7 +34,7 @@ class History {
         }
     }
     
-    func appendHistory(of player: Player, with history: [Turn]) {
+    func appendHistory(of player: AnyPlayer, with history: [Turn]) {
         if player.type == .runner {
             self.appendRunnerHistory(with: history)
         } else {

@@ -5,7 +5,7 @@
 //  Created by Imran Hajiyev on 12.05.23.
 //
 
-protocol Player {
+protocol AnyPlayer {
     // Self related properties
     var type: PlayerType { get }
     var didWin: Bool { get set }
@@ -23,6 +23,9 @@ protocol Player {
     // Position of the Player at any given moment.
     var position: Coordinate { get }
     
+    // Current turn manipulation
+    func updateCurrentTurn(to value: Int)
+    
     // Number of moves manipulation
     func updateNumberOfMoves(to value: Int)
     func updateMaximumNumberOfMoves(to value: Int)
@@ -35,6 +38,8 @@ protocol Player {
     func move(from oldTile: Tile?, to newTile: Tile)
     
     // Button clicks
-    func finish(on tile: Tile)
+    func finish()
     func undo(_ move: Move, returnTo tile: Tile?)
+    
+    func createTurn(with moves: [Move])
 }

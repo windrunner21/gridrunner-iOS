@@ -7,14 +7,14 @@
 
 class Game {
     private var map: Map
-    private var player: Player?
+    private var player: AnyPlayer?
     private var history: History
     
     convenience init() {
         self.init(map: Map())
     }
     
-    init(map: Map, player: Player? = nil, history: History? = nil) {
+    init(map: Map, player: AnyPlayer? = nil, history: History? = nil) {
         self.map = map
         self.player = player
         self.history = history ?? History()
@@ -24,7 +24,7 @@ class Game {
         self.map
     }
     
-    func getPlayer() -> Player? {
+    func getPlayer() -> AnyPlayer? {
         self.player
     }
     
@@ -32,7 +32,7 @@ class Game {
         self.history
     }
     
-    func createSession(with map: Map, for player: Player, with history: History? = nil) {
+    func createSession(with map: Map, for player: AnyPlayer, with history: History? = nil) {
         self.map = map
         self.player = player
         self.history = history ?? History()

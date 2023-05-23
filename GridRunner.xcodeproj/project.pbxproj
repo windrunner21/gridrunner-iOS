@@ -9,14 +9,14 @@
 /* Begin PBXBuildFile section */
 		CA0AAC262A0E2BE6008367FB /* Seeker.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA0AAC252A0E2BE6008367FB /* Seeker.swift */; };
 		CA0AAC282A0E2BF1008367FB /* Runner.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA0AAC272A0E2BF1008367FB /* Runner.swift */; };
-		CA0AAC2B2A0E2C17008367FB /* Player.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA0AAC2A2A0E2C17008367FB /* Player.swift */; };
+		CA0AAC2B2A0E2C17008367FB /* AnyPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA0AAC2A2A0E2C17008367FB /* AnyPlayer.swift */; };
 		CA0AAC2E2A0E2F0F008367FB /* Tile.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA0AAC2D2A0E2F0F008367FB /* Tile.swift */; };
 		CA0AAC302A0E484F008367FB /* Coordinate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA0AAC2F2A0E484F008367FB /* Coordinate.swift */; };
 		CA0AAC322A0E637E008367FB /* Game.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA0AAC312A0E637E008367FB /* Game.swift */; };
 		CA0AAC342A0E6395008367FB /* Map.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA0AAC332A0E6395008367FB /* Map.swift */; };
 		CA0AAC362A0E6428008367FB /* MapDimensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA0AAC352A0E6428008367FB /* MapDimensions.swift */; };
 		CA0AAC392A0E722C008367FB /* TileType.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA0AAC382A0E722C008367FB /* TileType.swift */; };
-		CA0AAC3B2A0E7528008367FB /* PowerUp.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA0AAC3A2A0E7528008367FB /* PowerUp.swift */; };
+		CA0AAC3B2A0E7528008367FB /* AnyPowerUp.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA0AAC3A2A0E7528008367FB /* AnyPowerUp.swift */; };
 		CA0AAC3D2A121EE2008367FB /* MoveDirection.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA0AAC3C2A121EE2008367FB /* MoveDirection.swift */; };
 		CA0AAC3F2A13A2A0008367FB /* ArrowDirection.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA0AAC3E2A13A2A0008367FB /* ArrowDirection.swift */; };
 		CA0AAC432A166F18008367FB /* GameHistoryExamples.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA0AAC422A166F18008367FB /* GameHistoryExamples.swift */; };
@@ -62,14 +62,14 @@
 /* Begin PBXFileReference section */
 		CA0AAC252A0E2BE6008367FB /* Seeker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Seeker.swift; sourceTree = "<group>"; };
 		CA0AAC272A0E2BF1008367FB /* Runner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Runner.swift; sourceTree = "<group>"; };
-		CA0AAC2A2A0E2C17008367FB /* Player.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Player.swift; sourceTree = "<group>"; };
+		CA0AAC2A2A0E2C17008367FB /* AnyPlayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnyPlayer.swift; sourceTree = "<group>"; };
 		CA0AAC2D2A0E2F0F008367FB /* Tile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tile.swift; sourceTree = "<group>"; };
 		CA0AAC2F2A0E484F008367FB /* Coordinate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinate.swift; sourceTree = "<group>"; };
 		CA0AAC312A0E637E008367FB /* Game.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Game.swift; sourceTree = "<group>"; };
 		CA0AAC332A0E6395008367FB /* Map.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Map.swift; sourceTree = "<group>"; };
 		CA0AAC352A0E6428008367FB /* MapDimensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapDimensions.swift; sourceTree = "<group>"; };
 		CA0AAC382A0E722C008367FB /* TileType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TileType.swift; sourceTree = "<group>"; };
-		CA0AAC3A2A0E7528008367FB /* PowerUp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PowerUp.swift; sourceTree = "<group>"; };
+		CA0AAC3A2A0E7528008367FB /* AnyPowerUp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnyPowerUp.swift; sourceTree = "<group>"; };
 		CA0AAC3C2A121EE2008367FB /* MoveDirection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoveDirection.swift; sourceTree = "<group>"; };
 		CA0AAC3E2A13A2A0008367FB /* ArrowDirection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArrowDirection.swift; sourceTree = "<group>"; };
 		CA0AAC422A166F18008367FB /* GameHistoryExamples.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameHistoryExamples.swift; sourceTree = "<group>"; };
@@ -141,8 +141,8 @@
 		CA0AAC292A0E2C09008367FB /* Protocols */ = {
 			isa = PBXGroup;
 			children = (
-				CA0AAC2A2A0E2C17008367FB /* Player.swift */,
-				CA0AAC3A2A0E7528008367FB /* PowerUp.swift */,
+				CA0AAC2A2A0E2C17008367FB /* AnyPlayer.swift */,
+				CA0AAC3A2A0E7528008367FB /* AnyPowerUp.swift */,
 			);
 			path = Protocols;
 			sourceTree = "<group>";
@@ -485,12 +485,12 @@
 				CA4E3F582A07A85900D36266 /* GameViewController.swift in Sources */,
 				CA4E3F642A08DCB400D36266 /* ViewControllerExtension.swift in Sources */,
 				CA0AAC3F2A13A2A0008367FB /* ArrowDirection.swift in Sources */,
-				CA0AAC2B2A0E2C17008367FB /* Player.swift in Sources */,
+				CA0AAC2B2A0E2C17008367FB /* AnyPlayer.swift in Sources */,
 				CA0AAC362A0E6428008367FB /* MapDimensions.swift in Sources */,
 				CA0AAC2E2A0E2F0F008367FB /* Tile.swift in Sources */,
 				CAFED4912A02496E00FB4B9B /* MainViewController.swift in Sources */,
 				CA4E3F662A0BCD3300D36266 /* MapExits.swift in Sources */,
-				CA0AAC3B2A0E7528008367FB /* PowerUp.swift in Sources */,
+				CA0AAC3B2A0E7528008367FB /* AnyPowerUp.swift in Sources */,
 				CA0AAC392A0E722C008367FB /* TileType.swift in Sources */,
 				CA0AAC5F2A1B7EEF008367FB /* Move.swift in Sources */,
 				CA0AAC432A166F18008367FB /* GameHistoryExamples.swift in Sources */,

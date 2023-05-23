@@ -26,16 +26,23 @@ class GameViewController: UIViewController {
         
         // Prepare game class.
         let map = Map(with: MapDimensions(13, by: 13))
+        
+//        let history = History()
+//        history.setHistory(
+//            runnerHistory: GameHistoryExamples().runnerHistory2,
+//            seekerHistory: GameHistoryExamples().seekerHistory1
+//        )
+        
         self.game.createSession(
             with: map,
             for: Runner(at: map.getCenterCoordinates())
         )
-        
 //        self.game.createSession(
 //            with: map,
-//            for: Seeker(),
-//            with: GameHistoryExamples().example1
+//            for: Seeker(at: map.getCenterCoordinates()),
+//            with: history
 //        )
+        
         NSLog("Game has been instantiated.")
         
         // If player could not have been instatiated return.
@@ -48,8 +55,10 @@ class GameViewController: UIViewController {
         switch game.getPlayer()?.type {
         case .runner:
             game.getPlayer()?.setHistory(to: game.getHistory().getRunnerHistory())
+            game.getPlayer()?.updateCurrentTurn(to: game.getHistory().getRunnerHistory().count + 1)
         case .seeker:
             game.getPlayer()?.setHistory(to: game.getHistory().getSeekerHistory())
+            game.getPlayer()?.updateCurrentTurn(to: game.getHistory().getSeekerHistory().count + 1)
         default:
             break
         }
@@ -99,7 +108,15 @@ class GameViewController: UIViewController {
         // Get clicked tile - the one player is currently standing on.
         guard let latestTile = self.accessTile(with: latestMove.to, in: gameView) else { return }
         
-        player.finish(on: latestTile)
+        player.finish()
+        
+        if let runner = player as? Runner {
+            runner.finish(on: latestTile)
+        }
+        
+        if let seeker = player as? Seeker {
+            seeker.finish(on: latestTile, with: game.getHistory().getRunnerHistory())
+        }
         
         if player.didWin {
             NSLog("Game has been concluded.")
@@ -193,7 +210,7 @@ class GameViewController: UIViewController {
         print("Start tile with id: \(tile.getIdentifier()) tapped.")
     }
     
-    private func exitTileTapped(_ tile: Tile, by player: Player) {
+    private func exitTileTapped(_ tile: Tile, by player: AnyPlayer) {
         if let runner = player as? Runner {
             let previousTile = self.accessTile(with: runner.position, in: gameView)
             runner.move(from: previousTile, to: tile)
@@ -206,7 +223,7 @@ class GameViewController: UIViewController {
         self.enableFinishButton(on: player.numberOfMoves == 0)
     }
     
-    private func basicTileTapped(_ tile: Tile, by player: Player) {
+    private func basicTileTapped(_ tile: Tile, by player: AnyPlayer) {
         print("Basic tile with id: \(tile.getIdentifier()) tapped.")
         print("Tile opened by Runner: \(tile.hasBeenOpened().byRunner ) | by Seeker: \(tile.hasBeenOpened().bySeeker ).")
         
@@ -220,67 +237,6 @@ class GameViewController: UIViewController {
         // Handle enabling finish and undo buttons.
         self.enableUndoButton(on: player.numberOfMoves < player.maximumNumberOfMoves)
         self.enableFinishButton(on: player.numberOfMoves == 0)
-    }
-    
-    private func seekerClickedFinish(_ seeker: Seeker) {
-//        guard let latestMove = seeker.history.last?.getMoves().last else { return }
-//
-//        // Get clicked tile - the one Seeker is currently standing on.
-//        guard let seekerTile = self.accessTile(with: latestMove.to, in: gameView) else { return }
-//        // Get next tile of runner if it exists.
-//        guard let latestIndexOfSeekerTile = game.getHistory()?.getRunnerHistory().lastIndex(of: seekerTile.position) else { return }
-//
-//        // If it is the last one in the Runner's history - Seeker wins.
-//        if seekerTile.position == game.getHistory()?.getRunnerHistory().last {
-//            print("i have found you - from runner history - last")
-//            seeker.win()
-//            seekerTile.decorateSeekerWin()
-//            return
-//        }
-//
-//        // Get runner history and check if tile has been opened by runner.
-//        if let gameHistory = game.getHistory(), gameHistory.getRunnerHistory().contains(seekerTile.position) {
-//            print("i have found you - from runner history")
-//
-//            guard let runnerDirectionAtSeekerTile = gameHistory.getRunnerHistoryWithDirection()[seekerTile.position] else { return }
-//
-//            let nextRunnerTileCoordinates = gameHistory.getRunnerHistory()[latestIndexOfSeekerTile + 1]
-//            let nextRunnerDirection = gameHistory.getRunnerHistoryWithDirection()[nextRunnerTileCoordinates]
-//            if let nextRunnerTile = self.accessTile(with: nextRunnerTileCoordinates, in: gameView) {
-//                seekerTile.updateDirectionImage(
-//                    from: runnerDirectionAtSeekerTile,
-//                    oldTile: seekerTile,
-//                    to: nextRunnerDirection,
-//                    newTile: nextRunnerTile
-//                )
-//            } else {
-//                seekerTile.updateDirectionImage(from: runnerDirectionAtSeekerTile, to: nextRunnerDirection)
-//            }
-//        }
-//
-//        // Get tile open status and check if tile has been opened by runner.
-//        if seekerTile.hasBeenOpenedBy(.runner) {
-//            print("i have found you - from tile open status")
-//
-//            guard let gameHistory = game.getHistory() else {
-//                presentErrorAlert()
-//                return
-//            }
-//            guard let runnerDirectionAtSeekerTile = game.getHistory()?.getRunnerHistoryWithDirection()[seekerTile.position] else { return }
-//
-//            let nextRunnerTileCoordinates = gameHistory.getRunnerHistory()[latestIndexOfSeekerTile + 1]
-//            let nextRunnerDirection = gameHistory.getRunnerHistoryWithDirection()[nextRunnerTileCoordinates]
-//            if let nextRunnerTile = self.accessTile(with: nextRunnerTileCoordinates, in: gameView) {
-//                seekerTile.updateDirectionImage(
-//                    from: runnerDirectionAtSeekerTile,
-//                    oldTile: seekerTile,
-//                    to: nextRunnerDirection,
-//                    newTile: nextRunnerTile
-//                )
-//            } else {
-//                seekerTile.updateDirectionImage(from: runnerDirectionAtSeekerTile, to: nextRunnerDirection)
-//            }
-//        }
     }
     
     private func accessTile(with coordinates: Coordinate, in view: UIView) -> Tile? {

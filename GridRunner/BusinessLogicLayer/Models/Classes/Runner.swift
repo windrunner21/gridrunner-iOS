@@ -6,7 +6,7 @@
 //
 
 
-class Runner: Player {
+class Runner: AnyPlayer {
     var type: PlayerType = .runner
     var didWin: Bool = false
     
@@ -21,6 +21,10 @@ class Runner: Player {
     
     init(at position: Coordinate) {
         self.position = position
+    }
+    
+    func updateCurrentTurn(to value: Int) {
+        self.currentTurn = value
     }
     
     func updateNumberOfMoves(to value: Int) {
@@ -45,7 +49,7 @@ class Runner: Player {
             let newMove = Move(from: self.position, to: newTile.position)
 
             // Check whether new move can be allowed to be made and direction is correct.
-            let allowedMove = newMove.canMoveBeAllowed()
+            let allowedMove = newMove.canRunnerMoveBeAllowed()
             let direction: MoveDirection = newMove.identifyMoveDirection()
             
             if allowedMove && direction != .unknown {
@@ -58,15 +62,14 @@ class Runner: Player {
                                              from: lastTurn?.getMoves().last?.identifyMoveDirection(),
                                              oldTile: oldTile)
                 
-                if currentTurn > self.history.count {
+                if self.currentTurn > self.history.count {
                     self.createTurn(with: [newMove])
                 } else {
                     self.history.last?.appendMove(newMove)
                 }
                 
                 self.position = newTile.position
-                
-                numberOfMoves -= 1
+                self.numberOfMoves -= 1
             } else {
                 print("Runner move: \(newMove) cannot be allowed.")
             }
@@ -75,11 +78,13 @@ class Runner: Player {
         }
     }
     
-    func finish(on tile: Tile) {
+    func finish() {
         self.currentTurn += 1
         self.numberOfMoves += 1
         self.maximumNumberOfMoves = 1
-        
+    }
+    
+    func finish(on tile: Tile) {
         if tile.type == .exit {
             self.didWin = true
             tile.decorateRunnerWin()
@@ -95,7 +100,7 @@ class Runner: Player {
         tile?.decorateRunner()
     }
     
-    private func createTurn(with moves: [Move]) {
+    func createTurn(with moves: [Move]) {
         let newTurn: Turn = Turn(moves: moves)
         self.history.append(newTurn)
     }
