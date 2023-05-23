@@ -26,8 +26,7 @@ class GameViewController: UIViewController {
         
         // Prepare game class.
         let map = Map(with: MapDimensions(13, by: 13))
-        
-//        let history = History()
+        let history = History()
 //        history.setHistory(
 //            runnerHistory: GameHistoryExamples().runnerHistory2,
 //            seekerHistory: GameHistoryExamples().seekerHistory1
@@ -35,7 +34,8 @@ class GameViewController: UIViewController {
         
         self.game.createSession(
             with: map,
-            for: Runner(at: map.getCenterCoordinates())
+            for: Runner(at: map.getCenterCoordinates()),
+            with: history
         )
 //        self.game.createSession(
 //            with: map,
@@ -132,15 +132,7 @@ class GameViewController: UIViewController {
         self.undoButton.isEnabled = false
         self.finishButton.isEnabled = false
         
-        for (index, turn) in player.history.enumerated() {
-            print("\(index + 1)th TURN")
-            for (index, move) in turn.getMoves().enumerated() {
-                print("\(index + 1)th MOVE")
-                print("from: \(move.from)")
-                print("to: \(move.to)")
-            }
-            print("==========")
-        }
+        player.outputHistory()
     }
     
     private func setUpOptionsButton() {

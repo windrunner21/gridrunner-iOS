@@ -42,4 +42,6 @@ protocol AnyPlayer {
     func undo(_ move: Move)
     
     func createTurn(with moves: [Move])
+    
+    func outputHistory()
 }

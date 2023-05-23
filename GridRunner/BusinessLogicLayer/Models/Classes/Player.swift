@@ -67,4 +67,13 @@ class Player {
     func movesExist() -> Bool {
         self.numberOfMoves > 0
     }
+    
+    func outputHistory() {
+        for (index, turn) in self.history.enumerated() {
+            print("\nTURN #\(index + 1)\n")
+            for (index, move) in turn.getMoves().enumerated() {
+                print("Move #\(index + 1): moving from \(move.from) to \(move.to) ")
+            }
+        }
+    }
 }
