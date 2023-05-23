@@ -5,41 +5,15 @@
 //  Created by Imran Hajiyev on 12.05.23.
 //
 
-class Seeker: AnyPlayer {
+class Seeker: Player, AnyPlayer {
     var type: PlayerType = .seeker
-    var didWin: Bool = false
     
-    var currentTurn: Int = 1
-    
-    var numberOfMoves: Int = 1
-    var maximumNumberOfMoves: Int = 1
-    
-    var history: [Turn] = []
-    
-    var position: Coordinate
-    
-    init(at position: Coordinate) {
-        self.position = position
-    }
-    
-    func updateCurrentTurn(to value: Int) {
-        self.currentTurn = value
-    }
-    
-    func updateNumberOfMoves(to value: Int) {
-        self.numberOfMoves = value
-    }
-    
-    func updateMaximumNumberOfMoves(to value: Int) {
-        self.maximumNumberOfMoves = value
-    }
-    
-    func setHistory(to history: [Turn]) {
-        self.history = history
-    }
-    
-    func appendHistory(with history: [Turn]) {
-        self.history += history
+    override init(at position: Coordinate) {
+        super.init(at: position)
+        
+        // set number and maximum number of moves on Seeker initialization
+        self.updateNumberOfMoves(to: 1)
+        self.updateMaximumNumberOfMoves(to: 1)
     }
     
     func move(from oldTile: Tile? = nil, to newTile: Tile) {
@@ -55,7 +29,7 @@ class Seeker: AnyPlayer {
                 
                 newTile.openBySeeker(explicit: true)
                 
-                if self.currentTurn > self.history.count {
+                if self.currentTurnNumber > self.history.count {
                     self.createTurn(with: [newMove])
                 } else {
                     self.history.last?.appendMove(newMove)
@@ -71,12 +45,6 @@ class Seeker: AnyPlayer {
         }
     }
     
-    func finish() {
-        self.currentTurn += 1
-        self.numberOfMoves += 1
-        self.maximumNumberOfMoves = 1
-    }
-    
     func finish(on tile: Tile, with runnerHistory: [Turn]) {        
         // If it is the last one in the Runner's history - Seeker wins.
         if self.position == runnerHistory.last?.getMoves().last?.to {
@@ -84,20 +52,5 @@ class Seeker: AnyPlayer {
             self.didWin = true
             tile.decorateSeekerWin()
         }
-    }
-    
-    func undo(_ move: Move, returnTo tile: Tile?) {
-        self.position = move.from
-        self.history.last?.removeLastMove()
-        numberOfMoves += 1
-    }
-    
-    func createTurn(with moves: [Move]) {
-        let newTurn: Turn = Turn(moves: moves)
-        self.history.append(newTurn)
-    }
-    
-    private func movesExist() -> Bool {
-        self.numberOfMoves > 0
     }
 }

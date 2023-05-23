@@ -51,7 +51,7 @@ class GameViewController: UIViewController {
             return
         }
         
-        // If game session instantiated with history, populate history of players.
+        // Game session always instantiated with history, populate history of players.
         switch game.getPlayer()?.type {
         case .runner:
             game.getPlayer()?.setHistory(to: game.getHistory().getRunnerHistory())
@@ -91,7 +91,11 @@ class GameViewController: UIViewController {
         
         lastTile?.closeBy(player)
         
-        player.undo(lastMove, returnTo: previousTile)
+        player.undo(lastMove)
+        
+        if let runner = player as? Runner {
+            runner.undo(previousTile: previousTile)
+        }
         self.updateMovesLabel(with: player.numberOfMoves)
     
         self.undoButton.isEnabled = player.numberOfMoves < player.maximumNumberOfMoves

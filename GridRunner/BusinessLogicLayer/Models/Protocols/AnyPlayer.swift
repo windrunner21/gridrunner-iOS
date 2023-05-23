@@ -11,7 +11,7 @@ protocol AnyPlayer {
     var didWin: Bool { get set }
     
     // Turn related properties
-    var currentTurn: Int { get }
+    var currentTurnNumber: Int { get }
     
     // Number of moves related properties
     var numberOfMoves: Int { get }
@@ -39,7 +39,7 @@ protocol AnyPlayer {
     
     // Button clicks
     func finish()
-    func undo(_ move: Move, returnTo tile: Tile?)
+    func undo(_ move: Move)
     
     func createTurn(with moves: [Move])
 }
