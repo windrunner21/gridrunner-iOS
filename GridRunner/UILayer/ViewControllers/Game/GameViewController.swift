@@ -38,9 +38,6 @@ class GameViewController: UIViewController {
 //        )
         NSLog("Game has been instantiated.")
         
-        // If game history exists create runner history with directions
-//        game.getHistory()?.convertRunnerHistoryToHistoryWithDirection()
-        
         // If player could not have been instatiated return.
         guard let player = game.getPlayer() else {
             self.presentErrorAlert()
@@ -99,14 +96,10 @@ class GameViewController: UIViewController {
         }
         
         guard let latestMove = player.history.last?.getMoves().last else { return }
-        // Get clicked tile - the one Runner is currently standing on.
+        // Get clicked tile - the one player is currently standing on.
         guard let latestTile = self.accessTile(with: latestMove.to, in: gameView) else { return }
         
         player.finish(on: latestTile)
-        
-        if let seeker = player as? Seeker {
-            self.seekerClickedFinish(seeker)
-        }
         
         if player.didWin {
             NSLog("Game has been concluded.")
@@ -191,7 +184,7 @@ class GameViewController: UIViewController {
         case .exit:
             self.exitTileTapped(tile, by: player)
         default:
-            if player.numberOfMoves > 0 { basicTileTapped(tile, by: player) }
+            self.basicTileTapped(tile, by: player)
         }
         
     }
@@ -202,7 +195,8 @@ class GameViewController: UIViewController {
     
     private func exitTileTapped(_ tile: Tile, by player: Player) {
         if let runner = player as? Runner {
-            runner.move(to: tile)
+            let previousTile = self.accessTile(with: runner.position, in: gameView)
+            runner.move(from: previousTile, to: tile)
             game.getHistory().setRunnerHistory(to: runner.history)
         }
         

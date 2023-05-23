@@ -5,9 +5,13 @@
 //  Created by Imran Hajiyev on 22.05.23.
 //
 
-class Move {
+class Move: CustomStringConvertible {
     var from: Coordinate
     var to: Coordinate
+    
+    var description: String {
+        return ("Move made from: \(from) to: \(to)")
+    }
     
     init(from: Coordinate, to: Coordinate) {
         self.from = from

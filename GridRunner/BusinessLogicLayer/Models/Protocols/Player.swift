@@ -20,10 +20,12 @@ protocol Player {
     // History related properties
     var history: [Turn] { get }
     
+    // Position of the Player at any given moment.
     var position: Coordinate { get }
     
     // Number of moves manipulation
     func updateNumberOfMoves(to value: Int)
+    func updateMaximumNumberOfMoves(to value: Int)
     
     // History manipulation
     func setHistory(to history: [Turn])
@@ -31,7 +33,6 @@ protocol Player {
     
     // Self actions
     func move(from oldTile: Tile?, to newTile: Tile)
-    func win()
     
     // Button clicks
     func finish(on tile: Tile)

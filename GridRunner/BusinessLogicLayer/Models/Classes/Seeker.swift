@@ -22,6 +22,11 @@ class Seeker: Player {
         self.numberOfMoves = value
     }
     
+    func updateMaximumNumberOfMoves(to value: Int) {
+        self.maximumNumberOfMoves = value
+    }
+    
+    
     func setHistory(to history: [Turn]) {
         self.history = history
     }
@@ -37,10 +42,6 @@ class Seeker: Player {
             newTile.openBySeeker(explicit: true)
             history.last?.appendMove(Move(from: newTile.position, to: newTile.position))
         }
-    }
-    
-    func win() {
-        didWin = true
     }
     
     func finish(on tile: Tile) {
