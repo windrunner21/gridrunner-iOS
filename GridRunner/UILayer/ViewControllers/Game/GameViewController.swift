@@ -27,11 +27,11 @@ class GameViewController: UIViewController {
         // Prepare game class.
         let map = Map(with: MapDimensions(13, by: 13))
         
-        let history = History(with: GameHistoryExamples().runnerHistory1, and: GameHistoryExamples().seekerHistory1)
+        let history = History(with: GameHistoryExamples().runnerHistory2, and: GameHistoryExamples().seekerHistory1)
         
         self.game.createSession(
             with: map,
-            for: Runner(at: map.getCenterCoordinates()), // Seeker(at: map.getCenterCoordinates())
+            for: Seeker(at: map.getCenterCoordinates()),
             with: history
         )
         

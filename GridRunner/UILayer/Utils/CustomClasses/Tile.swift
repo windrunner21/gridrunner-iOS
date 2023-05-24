@@ -73,7 +73,7 @@ class Tile: UIButton {
         self.setImage(nil, for: .normal)
     }
     
-    func setupTile(at row: Int, and column: Int, with dimensions: MapDimensions, and history: History? = nil) {
+    func setupTile(at row: Int, and column: Int, with dimensions: MapDimensions, and history: History) {
         // Handle tile type and color
         if (row == 0 && column == 0) ||
             (row == dimensions.getNumberOfRows() - 1 &&
@@ -90,16 +90,19 @@ class Tile: UIButton {
         }
         
         // Handle tile with history
-//        if let gameHistory = gameHistory {
-//            let tilePosition = Coordinate(x: row, y: column)
-//            if gameHistory.getRunnerHistory().contains(tilePosition) {
-//                self.openByRunner(explicit: false)
-//            }
-//
-//            if gameHistory.getSeekerHistory().contains(tilePosition) {
-//                self.openBySeeker(explicit: true)
-//            }
-//        }
+        if !history.getRunnerHistory().isEmpty {
+            let tilePosition = Coordinate(x: row, y: column)
+            if history.historyContains(coordinate: tilePosition, of: .runner) {
+                self.openByRunner(explicit: true)
+            }
+        }
+        
+        if !history.getSeekerHistory().isEmpty {
+            let tilePosition = Coordinate(x: row, y: column)
+            if history.historyContains(coordinate: tilePosition, of: .seeker) {
+                self.openBySeeker(explicit: true)
+            }
+        }
     }
     
     /// Updates old and current Tile's direction image for Runner.
@@ -122,7 +125,11 @@ class Tile: UIButton {
         case (.left, .up):
             self.setDirectionImages(newDirection: .up, oldDirection: .leftUp, for: oldTile)
         default:
-            self.setDirectionImages(newDirection: ArrowDirection(from: currentDirection), oldDirection: ArrowDirection(from: currentDirection), for: oldTile)
+            self.setDirectionImages(
+                newDirection: ArrowDirection(from: currentDirection),
+                oldDirection: ArrowDirection(from: currentDirection),
+                for: oldTile
+            )
         }
     }
     

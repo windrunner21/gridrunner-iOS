@@ -15,6 +15,9 @@ struct GameHistoryExamples {
         ]),
         Turn(moves: [
             Move(from: Coordinate(x: 6, y: 4), to: Coordinate(x: 6, y: 3))
+        ]),
+        Turn(moves: [
+            Move(from: Coordinate(x: 6, y: 3), to: Coordinate(x: 5, y: 3))
         ])
     ]
     
