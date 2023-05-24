@@ -31,6 +31,8 @@ class Runner: Player, AnyPlayer {
         
                 newTile.openByRunner(explicit: true)
                 
+                print("Tile has been opened by Runner: \(newTile.hasBeenOpened().byRunner ).\n Has been opened by Seeker: \(newTile.hasBeenOpened().bySeeker ).")
+                
                 let lastTurn = self.getLastTurn()
                 newTile.updateDirectionImage(to: direction,
                                              from: lastTurn?.getMoves().last?.identifyMoveDirection(),

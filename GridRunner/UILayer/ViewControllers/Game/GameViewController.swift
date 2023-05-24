@@ -88,10 +88,8 @@ class GameViewController: UIViewController {
         if let runner = player as? Runner {
             runner.undo(previousTile: previousTile)
         }
-        self.updateMovesLabel(with: player.numberOfMoves)
-    
-        self.undoButton.isEnabled = player.numberOfMoves < player.maximumNumberOfMoves
-        self.finishButton.isEnabled = player.numberOfMoves == 0
+        
+        self.updateGameHUD(of: player)
     }
     
     @IBAction func onFinish(_ sender: Any) {
@@ -203,26 +201,16 @@ class GameViewController: UIViewController {
             game.getHistory().setRunnerHistory(to: runner.history)
         }
         
-        self.updateMovesLabel(with: player.numberOfMoves)
-
-        // Handle enabling finish button.
-        self.enableFinishButton(on: player.numberOfMoves == 0)
+        self.updateGameHUD(of: player)
     }
     
     private func basicTileTapped(_ tile: Tile, by player: AnyPlayer) {
-        print("Basic tile with id: \(tile.getIdentifier()) tapped.")
-        print("Tile opened by Runner: \(tile.hasBeenOpened().byRunner ) | by Seeker: \(tile.hasBeenOpened().bySeeker ).")
-        
         let previousTile = self.accessTile(with: player.position, in: gameView)
         
         player.move(from: previousTile, to: tile)
         game.getHistory().setHistory(of: player, to: player.history)
         
-        self.updateMovesLabel(with: player.numberOfMoves)
-        
-        // Handle enabling finish and undo buttons.
-        self.enableUndoButton(on: player.numberOfMoves < player.maximumNumberOfMoves)
-        self.enableFinishButton(on: player.numberOfMoves == 0)
+        self.updateGameHUD(of: player)
     }
     
     private func accessTile(with coordinates: Coordinate, in view: UIView) -> Tile? {
@@ -258,6 +246,14 @@ class GameViewController: UIViewController {
         } else {
             self.finishButton.isEnabled = true
         }
+    }
+    
+    private func updateGameHUD(of player: AnyPlayer) {
+        self.updateMovesLabel(with: player.numberOfMoves)
+        
+        // Handle enabling finish and undo buttons.
+        self.enableUndoButton(on: player.numberOfMoves < player.maximumNumberOfMoves)
+        self.enableFinishButton(on: player.numberOfMoves == 0)
     }
     
     private func presentWinAlert() {
