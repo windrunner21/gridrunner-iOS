@@ -26,22 +26,14 @@ class GameViewController: UIViewController {
         
         // Prepare game class.
         let map = Map(with: MapDimensions(13, by: 13))
-        let history = History()
-//        history.setHistory(
-//            runnerHistory: GameHistoryExamples().runnerHistory2,
-//            seekerHistory: GameHistoryExamples().seekerHistory1
-//        )
+        
+        let history = History(with: GameHistoryExamples().runnerHistory1, and: GameHistoryExamples().seekerHistory1)
         
         self.game.createSession(
             with: map,
-            for: Runner(at: map.getCenterCoordinates()),
+            for: Runner(at: map.getCenterCoordinates()), // Seeker(at: map.getCenterCoordinates())
             with: history
         )
-//        self.game.createSession(
-//            with: map,
-//            for: Seeker(at: map.getCenterCoordinates()),
-//            with: history
-//        )
         
         NSLog("Game has been instantiated.")
         

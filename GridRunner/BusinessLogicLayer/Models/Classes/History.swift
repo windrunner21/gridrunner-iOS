@@ -6,10 +6,14 @@
 //
 
 class History {
-    private var runnerHistory: [Turn] = []
-    private var seekerHistory: [Turn] = []
+    private var runnerHistory: [Turn]
+    private var seekerHistory: [Turn]
     
-    func setHistory(runnerHistory: [Turn], seekerHistory: [Turn]) {
+    convenience init() {
+        self.init(with: [], and: [])
+    }
+    
+    init(with runnerHistory: [Turn], and seekerHistory: [Turn]) {
         self.runnerHistory = runnerHistory
         self.seekerHistory = seekerHistory
     }
