@@ -24,6 +24,27 @@
 		CA0AAC5D2A1B7EE6008367FB /* Turn.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA0AAC5C2A1B7EE6008367FB /* Turn.swift */; };
 		CA0AAC5F2A1B7EEF008367FB /* Move.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA0AAC5E2A1B7EEF008367FB /* Move.swift */; };
 		CA0AAC612A1D1D1D008367FB /* Player.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA0AAC602A1D1D1D008367FB /* Player.swift */; };
+		CA0AAC752A25D6D3008367FB /* Kanit-ExtraBoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = CA0AAC632A25D6D3008367FB /* Kanit-ExtraBoldItalic.ttf */; };
+		CA0AAC762A25D6D3008367FB /* Kanit-MediumItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = CA0AAC642A25D6D3008367FB /* Kanit-MediumItalic.ttf */; };
+		CA0AAC772A25D6D3008367FB /* Kanit-Italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = CA0AAC652A25D6D3008367FB /* Kanit-Italic.ttf */; };
+		CA0AAC782A25D6D3008367FB /* Kanit-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = CA0AAC662A25D6D3008367FB /* Kanit-Medium.ttf */; };
+		CA0AAC792A25D6D3008367FB /* Kanit-LightItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = CA0AAC672A25D6D3008367FB /* Kanit-LightItalic.ttf */; };
+		CA0AAC7A2A25D6D3008367FB /* Kanit-Thin.ttf in Resources */ = {isa = PBXBuildFile; fileRef = CA0AAC682A25D6D3008367FB /* Kanit-Thin.ttf */; };
+		CA0AAC7B2A25D6D3008367FB /* Kanit-BlackItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = CA0AAC692A25D6D3008367FB /* Kanit-BlackItalic.ttf */; };
+		CA0AAC7C2A25D6D3008367FB /* Kanit-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = CA0AAC6A2A25D6D3008367FB /* Kanit-SemiBold.ttf */; };
+		CA0AAC7D2A25D6D3008367FB /* Kanit-Black.ttf in Resources */ = {isa = PBXBuildFile; fileRef = CA0AAC6B2A25D6D3008367FB /* Kanit-Black.ttf */; };
+		CA0AAC7E2A25D6D3008367FB /* Kanit-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = CA0AAC6C2A25D6D3008367FB /* Kanit-Regular.ttf */; };
+		CA0AAC7F2A25D6D3008367FB /* Kanit-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = CA0AAC6D2A25D6D3008367FB /* Kanit-Light.ttf */; };
+		CA0AAC802A25D6D3008367FB /* Kanit-ExtraLight.ttf in Resources */ = {isa = PBXBuildFile; fileRef = CA0AAC6E2A25D6D3008367FB /* Kanit-ExtraLight.ttf */; };
+		CA0AAC812A25D6D3008367FB /* Kanit-BoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = CA0AAC6F2A25D6D3008367FB /* Kanit-BoldItalic.ttf */; };
+		CA0AAC822A25D6D3008367FB /* Kanit-ThinItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = CA0AAC702A25D6D3008367FB /* Kanit-ThinItalic.ttf */; };
+		CA0AAC832A25D6D3008367FB /* Kanit-ExtraBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = CA0AAC712A25D6D3008367FB /* Kanit-ExtraBold.ttf */; };
+		CA0AAC842A25D6D3008367FB /* Kanit-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = CA0AAC722A25D6D3008367FB /* Kanit-Bold.ttf */; };
+		CA0AAC852A25D6D3008367FB /* Kanit-ExtraLightItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = CA0AAC732A25D6D3008367FB /* Kanit-ExtraLightItalic.ttf */; };
+		CA0AAC862A25D6D3008367FB /* Kanit-SemiBoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = CA0AAC742A25D6D3008367FB /* Kanit-SemiBoldItalic.ttf */; };
+		CA0AAC892A25DF8C008367FB /* ProfileIcon.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA0AAC882A25DF8C008367FB /* ProfileIcon.swift */; };
+		CA0AAC8E2A26219B008367FB /* MenuItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA0AAC8D2A26219B008367FB /* MenuItemView.swift */; };
+		CA0AAC942A2621E7008367FB /* MenuItem.xib in Resources */ = {isa = PBXBuildFile; fileRef = CA0AAC932A2621E7008367FB /* MenuItem.xib */; };
 		CA4E3F542A07A80E00D36266 /* Game.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CA4E3F532A07A80E00D36266 /* Game.storyboard */; };
 		CA4E3F582A07A85900D36266 /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA4E3F572A07A85900D36266 /* GameViewController.swift */; };
 		CA4E3F5C2A07BBF100D36266 /* PlayerType.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA4E3F5B2A07BBF100D36266 /* PlayerType.swift */; };
@@ -78,6 +99,27 @@
 		CA0AAC5C2A1B7EE6008367FB /* Turn.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Turn.swift; sourceTree = "<group>"; };
 		CA0AAC5E2A1B7EEF008367FB /* Move.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Move.swift; sourceTree = "<group>"; };
 		CA0AAC602A1D1D1D008367FB /* Player.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Player.swift; sourceTree = "<group>"; };
+		CA0AAC632A25D6D3008367FB /* Kanit-ExtraBoldItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Kanit-ExtraBoldItalic.ttf"; path = "../../../../../Downloads/Kanit/Kanit-ExtraBoldItalic.ttf"; sourceTree = "<group>"; };
+		CA0AAC642A25D6D3008367FB /* Kanit-MediumItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Kanit-MediumItalic.ttf"; path = "../../../../../Downloads/Kanit/Kanit-MediumItalic.ttf"; sourceTree = "<group>"; };
+		CA0AAC652A25D6D3008367FB /* Kanit-Italic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Kanit-Italic.ttf"; path = "../../../../../Downloads/Kanit/Kanit-Italic.ttf"; sourceTree = "<group>"; };
+		CA0AAC662A25D6D3008367FB /* Kanit-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Kanit-Medium.ttf"; path = "../../../../../Downloads/Kanit/Kanit-Medium.ttf"; sourceTree = "<group>"; };
+		CA0AAC672A25D6D3008367FB /* Kanit-LightItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Kanit-LightItalic.ttf"; path = "../../../../../Downloads/Kanit/Kanit-LightItalic.ttf"; sourceTree = "<group>"; };
+		CA0AAC682A25D6D3008367FB /* Kanit-Thin.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Kanit-Thin.ttf"; path = "../../../../../Downloads/Kanit/Kanit-Thin.ttf"; sourceTree = "<group>"; };
+		CA0AAC692A25D6D3008367FB /* Kanit-BlackItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Kanit-BlackItalic.ttf"; path = "../../../../../Downloads/Kanit/Kanit-BlackItalic.ttf"; sourceTree = "<group>"; };
+		CA0AAC6A2A25D6D3008367FB /* Kanit-SemiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Kanit-SemiBold.ttf"; path = "../../../../../Downloads/Kanit/Kanit-SemiBold.ttf"; sourceTree = "<group>"; };
+		CA0AAC6B2A25D6D3008367FB /* Kanit-Black.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Kanit-Black.ttf"; path = "../../../../../Downloads/Kanit/Kanit-Black.ttf"; sourceTree = "<group>"; };
+		CA0AAC6C2A25D6D3008367FB /* Kanit-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Kanit-Regular.ttf"; path = "../../../../../Downloads/Kanit/Kanit-Regular.ttf"; sourceTree = "<group>"; };
+		CA0AAC6D2A25D6D3008367FB /* Kanit-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Kanit-Light.ttf"; path = "../../../../../Downloads/Kanit/Kanit-Light.ttf"; sourceTree = "<group>"; };
+		CA0AAC6E2A25D6D3008367FB /* Kanit-ExtraLight.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Kanit-ExtraLight.ttf"; path = "../../../../../Downloads/Kanit/Kanit-ExtraLight.ttf"; sourceTree = "<group>"; };
+		CA0AAC6F2A25D6D3008367FB /* Kanit-BoldItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Kanit-BoldItalic.ttf"; path = "../../../../../Downloads/Kanit/Kanit-BoldItalic.ttf"; sourceTree = "<group>"; };
+		CA0AAC702A25D6D3008367FB /* Kanit-ThinItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Kanit-ThinItalic.ttf"; path = "../../../../../Downloads/Kanit/Kanit-ThinItalic.ttf"; sourceTree = "<group>"; };
+		CA0AAC712A25D6D3008367FB /* Kanit-ExtraBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Kanit-ExtraBold.ttf"; path = "../../../../../Downloads/Kanit/Kanit-ExtraBold.ttf"; sourceTree = "<group>"; };
+		CA0AAC722A25D6D3008367FB /* Kanit-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Kanit-Bold.ttf"; path = "../../../../../Downloads/Kanit/Kanit-Bold.ttf"; sourceTree = "<group>"; };
+		CA0AAC732A25D6D3008367FB /* Kanit-ExtraLightItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Kanit-ExtraLightItalic.ttf"; path = "../../../../../Downloads/Kanit/Kanit-ExtraLightItalic.ttf"; sourceTree = "<group>"; };
+		CA0AAC742A25D6D3008367FB /* Kanit-SemiBoldItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Kanit-SemiBoldItalic.ttf"; path = "../../../../../Downloads/Kanit/Kanit-SemiBoldItalic.ttf"; sourceTree = "<group>"; };
+		CA0AAC882A25DF8C008367FB /* ProfileIcon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileIcon.swift; sourceTree = "<group>"; };
+		CA0AAC8D2A26219B008367FB /* MenuItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuItemView.swift; sourceTree = "<group>"; };
+		CA0AAC932A2621E7008367FB /* MenuItem.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MenuItem.xib; sourceTree = "<group>"; };
 		CA4E3F532A07A80E00D36266 /* Game.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Game.storyboard; sourceTree = "<group>"; };
 		CA4E3F572A07A85900D36266 /* GameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameViewController.swift; sourceTree = "<group>"; };
 		CA4E3F5B2A07BBF100D36266 /* PlayerType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerType.swift; sourceTree = "<group>"; };
@@ -157,6 +199,55 @@
 				CA0AAC2F2A0E484F008367FB /* Coordinate.swift */,
 			);
 			path = Structs;
+			sourceTree = "<group>";
+		};
+		CA0AAC622A25D628008367FB /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				CA0AAC6B2A25D6D3008367FB /* Kanit-Black.ttf */,
+				CA0AAC692A25D6D3008367FB /* Kanit-BlackItalic.ttf */,
+				CA0AAC722A25D6D3008367FB /* Kanit-Bold.ttf */,
+				CA0AAC6F2A25D6D3008367FB /* Kanit-BoldItalic.ttf */,
+				CA0AAC712A25D6D3008367FB /* Kanit-ExtraBold.ttf */,
+				CA0AAC632A25D6D3008367FB /* Kanit-ExtraBoldItalic.ttf */,
+				CA0AAC6E2A25D6D3008367FB /* Kanit-ExtraLight.ttf */,
+				CA0AAC732A25D6D3008367FB /* Kanit-ExtraLightItalic.ttf */,
+				CA0AAC652A25D6D3008367FB /* Kanit-Italic.ttf */,
+				CA0AAC6D2A25D6D3008367FB /* Kanit-Light.ttf */,
+				CA0AAC672A25D6D3008367FB /* Kanit-LightItalic.ttf */,
+				CA0AAC662A25D6D3008367FB /* Kanit-Medium.ttf */,
+				CA0AAC642A25D6D3008367FB /* Kanit-MediumItalic.ttf */,
+				CA0AAC6C2A25D6D3008367FB /* Kanit-Regular.ttf */,
+				CA0AAC6A2A25D6D3008367FB /* Kanit-SemiBold.ttf */,
+				CA0AAC742A25D6D3008367FB /* Kanit-SemiBoldItalic.ttf */,
+				CA0AAC682A25D6D3008367FB /* Kanit-Thin.ttf */,
+				CA0AAC702A25D6D3008367FB /* Kanit-ThinItalic.ttf */,
+			);
+			path = Fonts;
+			sourceTree = "<group>";
+		};
+		CA0AAC872A25DF74008367FB /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				CA0AAC882A25DF8C008367FB /* ProfileIcon.swift */,
+			);
+			path = Utils;
+			sourceTree = "<group>";
+		};
+		CA0AAC8C2A262160008367FB /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				CA0AAC8D2A26219B008367FB /* MenuItemView.swift */,
+				CA0AAC932A2621E7008367FB /* MenuItem.xib */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		CA0AAC922A2621D4008367FB /* New Group */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = "New Group";
 			sourceTree = "<group>";
 		};
 		CA4E3F502A07A75800D36266 /* Authentication */ = {
@@ -273,6 +364,7 @@
 				CAFED48E2A02496E00FB4B9B /* SceneDelegate.swift */,
 				CAFED4952A02497000FB4B9B /* Assets.xcassets */,
 				CAFED49A2A02497000FB4B9B /* Info.plist */,
+				CA0AAC622A25D628008367FB /* Fonts */,
 			);
 			path = GridRunner;
 			sourceTree = "<group>";
@@ -312,7 +404,9 @@
 		CAFED4BE2A0249CF00FB4B9B /* UILayer */ = {
 			isa = PBXGroup;
 			children = (
+				CA0AAC922A2621D4008367FB /* New Group */,
 				CA4E3F612A08DCA100D36266 /* Utils */,
+				CA0AAC8C2A262160008367FB /* Views */,
 				CAFED4C12A0249DC00FB4B9B /* ViewControllers */,
 				CAFED4C02A0249D700FB4B9B /* Storyboards */,
 			);
@@ -322,6 +416,7 @@
 		CAFED4BF2A0249D200FB4B9B /* BusinessLogicLayer */ = {
 			isa = PBXGroup;
 			children = (
+				CA0AAC872A25DF74008367FB /* Utils */,
 				CA4E3F592A07BBE100D36266 /* Models */,
 			);
 			path = BusinessLogicLayer;
@@ -450,10 +545,29 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CA0AAC802A25D6D3008367FB /* Kanit-ExtraLight.ttf in Resources */,
+				CA0AAC942A2621E7008367FB /* MenuItem.xib in Resources */,
 				CA4E3F542A07A80E00D36266 /* Game.storyboard in Resources */,
+				CA0AAC862A25D6D3008367FB /* Kanit-SemiBoldItalic.ttf in Resources */,
 				CAFED4992A02497000FB4B9B /* LaunchScreen.storyboard in Resources */,
+				CA0AAC752A25D6D3008367FB /* Kanit-ExtraBoldItalic.ttf in Resources */,
+				CA0AAC792A25D6D3008367FB /* Kanit-LightItalic.ttf in Resources */,
 				CAFED4962A02497000FB4B9B /* Assets.xcassets in Resources */,
+				CA0AAC7E2A25D6D3008367FB /* Kanit-Regular.ttf in Resources */,
+				CA0AAC7A2A25D6D3008367FB /* Kanit-Thin.ttf in Resources */,
+				CA0AAC852A25D6D3008367FB /* Kanit-ExtraLightItalic.ttf in Resources */,
+				CA0AAC7F2A25D6D3008367FB /* Kanit-Light.ttf in Resources */,
+				CA0AAC812A25D6D3008367FB /* Kanit-BoldItalic.ttf in Resources */,
 				CAFED4942A02496E00FB4B9B /* Main.storyboard in Resources */,
+				CA0AAC762A25D6D3008367FB /* Kanit-MediumItalic.ttf in Resources */,
+				CA0AAC822A25D6D3008367FB /* Kanit-ThinItalic.ttf in Resources */,
+				CA0AAC7B2A25D6D3008367FB /* Kanit-BlackItalic.ttf in Resources */,
+				CA0AAC7C2A25D6D3008367FB /* Kanit-SemiBold.ttf in Resources */,
+				CA0AAC842A25D6D3008367FB /* Kanit-Bold.ttf in Resources */,
+				CA0AAC772A25D6D3008367FB /* Kanit-Italic.ttf in Resources */,
+				CA0AAC832A25D6D3008367FB /* Kanit-ExtraBold.ttf in Resources */,
+				CA0AAC782A25D6D3008367FB /* Kanit-Medium.ttf in Resources */,
+				CA0AAC7D2A25D6D3008367FB /* Kanit-Black.ttf in Resources */,
 				CA4E3F5E2A0891D800D36266 /* Register.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -483,10 +597,12 @@
 				CA0AAC322A0E637E008367FB /* Game.swift in Sources */,
 				CA0AAC3D2A121EE2008367FB /* MoveDirection.swift in Sources */,
 				CA0AAC342A0E6395008367FB /* Map.swift in Sources */,
+				CA0AAC8E2A26219B008367FB /* MenuItemView.swift in Sources */,
 				CA4E3F5C2A07BBF100D36266 /* PlayerType.swift in Sources */,
 				CA0AAC5D2A1B7EE6008367FB /* Turn.swift in Sources */,
 				CA4E3F582A07A85900D36266 /* GameViewController.swift in Sources */,
 				CA4E3F642A08DCB400D36266 /* ViewControllerExtension.swift in Sources */,
+				CA0AAC892A25DF8C008367FB /* ProfileIcon.swift in Sources */,
 				CA0AAC3F2A13A2A0008367FB /* ArrowDirection.swift in Sources */,
 				CA0AAC2B2A0E2C17008367FB /* AnyPlayer.swift in Sources */,
 				CA0AAC362A0E6428008367FB /* MapDimensions.swift in Sources */,

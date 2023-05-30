@@ -135,6 +135,7 @@ class GameViewController: UIViewController {
         ])
         
         self.optionsButton.showsMenuAsPrimaryAction = true
+        self.optionsButton.changesSelectionAsPrimaryAction = true
     }
     
     private func createGameGrid(rows: Int, columns: Int, inside rootView: UIView, spacing: CGFloat = 5) {

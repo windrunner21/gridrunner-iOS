@@ -7,34 +7,56 @@
 
 import UIKit
 
-class MainViewController: UIViewController, UITextFieldDelegate {
+class MainViewController: UIViewController {
     
     // Storyboard properties.
-    @IBOutlet weak var codeRoomTextField: UITextField!
+    @IBOutlet weak var rankView: UIView!
+    @IBOutlet weak var trophyIconView: UIView!
+    
+    @IBOutlet weak var profileView: UIView!
+    @IBOutlet weak var emojiIconView: UIView!
+    @IBOutlet weak var emojiLabel: UILabel!
+    
+    @IBOutlet weak var quickPlayView: MenuItemView!
+    @IBOutlet weak var rankedPlayView: MenuItemView!
+    @IBOutlet weak var roomPlayView: MenuItemView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        // Manage delegate to override UITextField methods.
-        codeRoomTextField.delegate = self
+        // Set corner radius to half of the height of parent views for circle sides.
+        self.rankView.layer.cornerRadius = self.rankView.bounds.size.height / 2
+        self.trophyIconView.layer.cornerRadius = self.trophyIconView.bounds.size.height / 2
+        self.profileView.layer.cornerRadius = self.profileView.bounds.size.height / 2
+        self.emojiIconView.layer.cornerRadius = self.emojiIconView.bounds.size.height / 2
         
-        // Close any open editing on any outside click.
-        let closeEditingTap = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
+        // Set random emoji from profile icon to emoji label.
+        self.emojiLabel.text = ProfileIcon().getEmoji()
         
-        self.view.addGestureRecognizer(closeEditingTap)
+        // Open user profile menu on profile view tap.
+        let openProfileMenuTap = UITapGestureRecognizer(target: self, action: #selector(openProfileMenu))
+        self.profileView.addGestureRecognizer(openProfileMenuTap)
+        
+        let interaction = UIContextMenuInteraction(delegate: self)
+        self.profileView.addInteraction(interaction)
+    
+        // Decorate and set up visually menu items.
+        self.setUpMenuItems()
     }
     
-    @objc func dismissKeyboard() {
-        self.view.endEditing(true)
+    @objc func openProfileMenu(_ gesture: UITapGestureRecognizer) {
+        self.openRegisterModal()
     }
     
-    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        textField.resignFirstResponder()
+    private func startGame() {
+        let gameStoryboard: UIStoryboard = UIStoryboard(name: "Game", bundle: .main)
+        let gameViewController: UIViewController = gameStoryboard.instantiateViewController(identifier: "GameScreen") as GameViewController
         
-        return true
+        let sceneDelegate = UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate
+        sceneDelegate?.transitionViewController.transition(to: gameViewController, with: [.transitionCurlUp])
     }
     
-    @IBAction func onLogin(_ sender: Any) {
+    private func openRegisterModal() {
         let registerStoryboard: UIStoryboard = UIStoryboard(name: "Register", bundle: .main)
         let registerViewController = registerStoryboard.instantiateViewController(withIdentifier: "RegisterScreen")
         
@@ -45,25 +67,71 @@ class MainViewController: UIViewController, UITextFieldDelegate {
         self.present(registerViewController, animated: true)
     }
     
-    @IBAction func onCopyRoomCode(_ sender: Any) {
-        let pasteboard = UIPasteboard.general
-        pasteboard.string = codeRoomTextField.text
-    }
-    
-    @IBAction func onPlayWithFriend(_ sender: Any) {
-        let gameStoryboard: UIStoryboard = UIStoryboard(name: "Game", bundle: .main)
-        let gameViewController: UIViewController = gameStoryboard.instantiateViewController(identifier: "GameScreen") as GameViewController
-
-        let sceneDelegate = UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate
-        sceneDelegate?.transitionViewController.transition(to: gameViewController, with: [.transitionCurlUp])
-    }
-    
-    @IBAction func onPlayWithRandoms(_ sender: Any) {
-        let gameStoryboard: UIStoryboard = UIStoryboard(name: "Game", bundle: .main)
-        let gameViewController: UIViewController = gameStoryboard.instantiateViewController(identifier: "GameScreen") as GameViewController
+    private func setUpMenuItems() {
+        self.quickPlayView.decorateMenuItem(
+            icon: "🎲",
+            title: "Quick Play with Randoms",
+            description: "find your opponent around the world",
+            image: "MapIcon"
+        )
         
-        let sceneDelegate = UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate
-        sceneDelegate?.transitionViewController.transition(to: gameViewController, with: [.transitionCurlUp])
+        self.transformWhite(view: self.quickPlayView, angle: 1.5)
+        
+        self.quickPlayView.playNowButtonAction = { [weak self] in
+            self?.startGame()
+        }
+        
+        self.rankedPlayView.decorateMenuItem(
+            icon: "🥇",
+            title: "Competitive Play",
+            description: "play for rank and move up the \"best\" ladder",
+            image: "WorldIcon"
+        )
+        
+        self.rankedPlayView.playNowButtonAction = { [weak self] in
+            self?.startGame()
+        }
+        
+        self.roomPlayView.decorateMenuItem(
+            icon: "🤝",
+            title: "Play with a Friend",
+            description: "enter room code and jump into the game",
+            image: "FriendsIcon"
+        )
+        
+        self.roomPlayView.playNowButtonAction = { [weak self] in
+            self?.startGame()
+        }
+        
+        self.transformWhite(view: self.roomPlayView, angle: -1.5)
+    }
+    
+    // Decorate menu item view with specified color and angle.
+    private func transformWhite(view: MenuItemView, angle: CGFloat?) {
+        let radians = (angle ?? 0) * Double.pi / 180
+        view.contentView.backgroundColor = .white
+        view.playModeLabel.textColor = UIColor(named: "FrostBlackColor")
+        view.transform = CGAffineTransform(rotationAngle: radians)
+    }
+}
+
+extension MainViewController: UIContextMenuInteractionDelegate {
+      func contextMenuInteraction(_ interaction: UIContextMenuInteraction, configurationForMenuAtLocation location: CGPoint) -> UIContextMenuConfiguration? {
+        return UIContextMenuConfiguration(identifier: nil, previewProvider: nil) { suggestedActions in
+            
+            // Create an action for signing in.
+            let login = UIAction(title: "Login", image: UIImage(systemName: "door.right.hand.open")) { action in
+                self.openRegisterModal()
+            }
+    
+            // Here we specify the "destructive" attribute to show that it’s destructive in nature.
+            let logout = UIAction(title: "Log out", image: UIImage(systemName: "door.right.hand.closed"), attributes: .destructive) { action in
+                // Perform logout.
+            }
+    
+            // Create and return a UIMenu with all of the actions as children
+            return UIMenu(title: "", children: [login, logout])
+        }
     }
 }
 
