@@ -41,6 +41,12 @@ class MenuItemView: UIView {
         
         self.contentView.layer.cornerRadius = 20
         self.playButton.layer.cornerRadius = 10
+        
+        // Adding elevation/shadow to menu item content view
+        self.contentView.layer.shadowColor = UIColor.black.withAlphaComponent(0.4).cgColor
+        self.contentView.layer.shadowOpacity = 0.5
+        self.contentView.layer.shadowOffset = .zero
+        self.contentView.layer.shadowRadius = 10
     }
     
     func decorateMenuItem(icon: String, title: String, description: String, image: String? = nil) {
