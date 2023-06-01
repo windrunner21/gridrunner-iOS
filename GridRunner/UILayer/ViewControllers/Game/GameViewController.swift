@@ -14,7 +14,6 @@ class GameViewController: UIViewController {
     @IBOutlet weak var movesLabel: UILabel!
     @IBOutlet weak var gameView: UIView!
     
-    @IBOutlet weak var optionsButton: UIButton!
     @IBOutlet weak var undoButton: UIButton!
     @IBOutlet weak var finishButton: UIButton!
     
@@ -62,7 +61,6 @@ class GameViewController: UIViewController {
             inside: gameView
         )
         
-        self.setUpOptionsButton()
         self.updateMovesLabel(with: player.numberOfMoves)
     }
     
@@ -123,19 +121,6 @@ class GameViewController: UIViewController {
         self.finishButton.isEnabled = false
         
         player.outputHistory()
-    }
-    
-    private func setUpOptionsButton() {
-        let mainMenuClosure = {(action: UIAction) in
-            self.transitionToMainScreen()
-        }
-        
-        self.optionsButton.menu = UIMenu(children: [
-            UIAction(title: "Main Menu", state: .off, handler: mainMenuClosure)
-        ])
-        
-        self.optionsButton.showsMenuAsPrimaryAction = true
-        self.optionsButton.changesSelectionAsPrimaryAction = true
     }
     
     private func createGameGrid(rows: Int, columns: Int, inside rootView: UIView, spacing: CGFloat = 5) {
