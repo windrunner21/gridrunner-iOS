@@ -23,13 +23,9 @@ class RegisterViewController: UIViewController, UITextFieldDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        self.cancelView.layer.cornerRadius = self.cancelView.bounds.size.height / 2
-        // Adding elevation/shadow to cancel view
-        self.cancelView.layer.shadowColor = UIColor.black.withAlphaComponent(0.8).cgColor
-        self.cancelView.layer.shadowOpacity = 0.3
-        self.cancelView.layer.shadowOffset = .zero
-        self.cancelView.layer.shadowRadius = 4
-        
+        self.cancelView.transformToCircle()
+        self.cancelView.addButtonElevation()
+
         self.signUpButton.layer.cornerRadius = 10
 
         // Manage delegate to override UITextField methods.

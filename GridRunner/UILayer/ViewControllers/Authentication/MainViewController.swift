@@ -24,17 +24,13 @@ class MainViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        // Set corner radius to half of the height of parent views for circle sides.
-        self.rankView.layer.cornerRadius = self.rankView.bounds.size.height / 2
-        self.trophyIconView.layer.cornerRadius = self.trophyIconView.bounds.size.height / 2
-        self.profileView.layer.cornerRadius = self.profileView.bounds.size.height / 2
-        self.emojiIconView.layer.cornerRadius = self.emojiIconView.bounds.size.height / 2
+        self.rankView.transformToCircle()
+        self.trophyIconView.transformToCircle()
+        self.profileView.transformToCircle()
+        self.emojiIconView.transformToCircle()
         
         // Adding elevation/shadow to cancel view
-        self.profileView.layer.shadowColor = UIColor.black.withAlphaComponent(0.8).cgColor
-        self.profileView.layer.shadowOpacity = 0.3
-        self.profileView.layer.shadowOffset = .zero
-        self.profileView.layer.shadowRadius = 4
+        self.profileView.addButtonElevation()
         
         // Set random emoji from profile icon to emoji label.
         self.emojiLabel.text = ProfileIcon().getEmoji()

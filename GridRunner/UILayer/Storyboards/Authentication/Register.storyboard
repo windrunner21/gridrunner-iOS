@@ -198,7 +198,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="Startup" width="200" height="180"/>
+        <image name="Startup" width="200" height="179.5"/>
         <namedColor name="BackgroundColor">
             <color red="0.96100002527236938" green="0.96100002527236938" blue="0.96100002527236938" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
