@@ -58,6 +58,16 @@ class RegisterViewController: UIViewController, UITextFieldDelegate {
         return true
     }
     
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        textField.layer.cornerRadius = 6
+        textField.layer.borderWidth = 1
+        textField.layer.borderColor = UIColor(named: "RedAccentColor")?.cgColor
+    }
+    
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        textField.layer.borderWidth = 0
+    }
+    
     @objc func closeView() {
         self.dismiss(animated: true)
     }
