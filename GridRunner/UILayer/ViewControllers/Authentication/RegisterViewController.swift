@@ -9,24 +9,40 @@ import UIKit
 
 class RegisterViewController: UIViewController, UITextFieldDelegate {
 
+    
+    @IBOutlet weak var cancelView: UIView!
+    
     @IBOutlet weak var usernameTextField: UITextField!
     @IBOutlet weak var emailTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
     
-    @IBOutlet weak var signUpButtonBottomConstraint: NSLayoutConstraint!
+    @IBOutlet weak var signUpButton: UIButton!
     
+    @IBOutlet weak var signUpButtonBottomConstraint: NSLayoutConstraint!
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Manage delegate to override UITextField methods.
-        usernameTextField.delegate = self
-        emailTextField.delegate = self
-        passwordTextField.delegate = self
+        self.cancelView.layer.cornerRadius = self.cancelView.bounds.size.height / 2
+        // Adding elevation/shadow to cancel view
+        self.cancelView.layer.shadowColor = UIColor.black.withAlphaComponent(0.8).cgColor
+        self.cancelView.layer.shadowOpacity = 0.3
+        self.cancelView.layer.shadowOffset = .zero
+        self.cancelView.layer.shadowRadius = 4
         
+        self.signUpButton.layer.cornerRadius = 10
+
+        // Manage delegate to override UITextField methods.
+        self.usernameTextField.delegate = self
+        self.emailTextField.delegate = self
+        self.passwordTextField.delegate = self
+        
+        // Close current view, dismiss with animation, on cancel view tap.
+        let cancelViewTap = UITapGestureRecognizer(target: self, action: #selector(closeView))
+        self.cancelView.addGestureRecognizer(cancelViewTap)
         
         // On keyboard show and hide notification move UI elements.
-        configureKeyboardNotifications()
+        self.configureKeyboardNotifications()
     }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
@@ -46,7 +62,7 @@ class RegisterViewController: UIViewController, UITextFieldDelegate {
         return true
     }
     
-    @IBAction func onCancel(_ sender: Any) {
+    @objc func closeView() {
         self.dismiss(animated: true)
     }
     
@@ -57,7 +73,7 @@ class RegisterViewController: UIViewController, UITextFieldDelegate {
             name: UIResponder.keyboardWillShowNotification,
             object: nil
         )
-        
+
         NotificationCenter.default.addObserver(
             self,
             selector: #selector(keyboardWillHide),
@@ -65,14 +81,14 @@ class RegisterViewController: UIViewController, UITextFieldDelegate {
             object: nil
         )
     }
-    
+
     @objc func keyboardWillShow(_ notification: NSNotification) {
         if usernameTextField.isEditing || emailTextField.isEditing || passwordTextField.isEditing {
-            moveWithKeyboard(on: notification, by: 30, this: signUpButtonBottomConstraint, up: true)
+            moveWithKeyboard(on: notification, by: 40, this: signUpButtonBottomConstraint, up: true)
         }
     }
-    
+
     @objc func keyboardWillHide(_ notification: NSNotification) {
-        moveWithKeyboard(on: notification, by: 30, this: signUpButtonBottomConstraint, up: false)
+        moveWithKeyboard(on: notification, by: 40, this: signUpButtonBottomConstraint, up: false)
     }
 }

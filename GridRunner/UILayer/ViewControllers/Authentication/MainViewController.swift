@@ -30,6 +30,12 @@ class MainViewController: UIViewController {
         self.profileView.layer.cornerRadius = self.profileView.bounds.size.height / 2
         self.emojiIconView.layer.cornerRadius = self.emojiIconView.bounds.size.height / 2
         
+        // Adding elevation/shadow to cancel view
+        self.profileView.layer.shadowColor = UIColor.black.withAlphaComponent(0.8).cgColor
+        self.profileView.layer.shadowOpacity = 0.3
+        self.profileView.layer.shadowOffset = .zero
+        self.profileView.layer.shadowRadius = 4
+        
         // Set random emoji from profile icon to emoji label.
         self.emojiLabel.text = ProfileIcon().getEmoji()
         
