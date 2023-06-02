@@ -10,9 +10,13 @@ import UIKit
 class GameViewController: UIViewController {
     
     // Storyboard properties.
-    @IBOutlet weak var turnLabel: UILabel!
     @IBOutlet weak var movesLabel: UILabel!
+    @IBOutlet weak var emojiIconLabel: UILabel!
+    
     @IBOutlet weak var gameView: UIView!
+    @IBOutlet weak var profileView: UIView!
+    @IBOutlet weak var emojiIconView: UIView!
+    @IBOutlet weak var cancelView: UIView!
     
     @IBOutlet weak var undoButton: UIButton!
     @IBOutlet weak var finishButton: UIButton!
@@ -22,15 +26,18 @@ class GameViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.decorateViews()
+        let cancelTap = UITapGestureRecognizer(target: self, action: #selector(cancel))
+        self.cancelView.addGestureRecognizer(cancelTap)
         
         // Prepare game class.
-        let map = Map(with: MapDimensions(13, by: 13))
+        let map = Map(with: MapDimensions(5, by: 5))
         
         let history = History(with: GameHistoryExamples().runnerHistory2, and: GameHistoryExamples().seekerHistory1)
         
         self.game.createSession(
             with: map,
-            for: Seeker(at: map.getCenterCoordinates()),
+            for: Runner(at: map.getCenterCoordinates()),
             with: history
         )
         
@@ -62,6 +69,10 @@ class GameViewController: UIViewController {
         )
         
         self.updateMovesLabel(with: player.numberOfMoves)
+    }
+    
+    @objc private func cancel() {
+        self.transitionToMainScreen()
     }
     
     @IBAction func onUndo(_ sender: Any) {
@@ -139,12 +150,14 @@ class GameViewController: UIViewController {
             
             for column in 0..<columns {
                 let tile = Tile()
-                
+
                 tile.position = Coordinate(x: row, y: column)
                 tile.setIdentifier("\(row)\(column)")
                 tile.setupTile(at: row, and: column, with: game.getMap().getDimensions(), and: game.getHistory())
                 tile.layer.cornerRadius = 6
-                tile.addTarget(self, action: #selector(gridButtonClicked), for: .touchUpInside)
+
+                let tileTap = UITapGestureRecognizer(target: self, action: #selector(tileTapped))
+                tile.addGestureRecognizer(tileTap)
                 
                 horizontalStackView.addArrangedSubview(tile)
             }
@@ -161,12 +174,17 @@ class GameViewController: UIViewController {
         verticalStackView.leftAnchor.constraint(equalTo: rootView.leftAnchor, constant: 0).isActive = true
     }
     
-    @objc func gridButtonClicked(_ tile: Tile) {
+    @objc func tileTapped(_ sender: UITapGestureRecognizer) {
         guard let player = game.getPlayer() else {
             presentErrorAlert()
             return
         }
         
+        guard let tile = sender.view as? Tile else  {
+            presentErrorAlert()
+            return
+        }
+
         switch tile.type {
         case .start:
             self.startTileTapped(tile)
@@ -215,7 +233,7 @@ class GameViewController: UIViewController {
     }
     
     private func updateMovesLabel(with value: Int) {
-        self.movesLabel.text = "\(value) moves left"
+        self.movesLabel.text = "\(value)"
     }
     
     private func enableUndoButton(on condition: Bool? = nil) {
@@ -280,5 +298,13 @@ class GameViewController: UIViewController {
         
         let sceneDelegate = UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate
         sceneDelegate?.transitionViewController.transition(to: mainViewController, with: [.transitionCurlDown])
+    }
+    
+    private func decorateViews() {
+        self.cancelView.transformToCircle()
+        self.cancelView.addButtonElevation()
+        self.profileView.transformToCircle()
+        self.emojiIconView.transformToCircle()
+        self.emojiIconLabel.text = ProfileIcon().getEmoji()
     }
 }

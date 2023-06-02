@@ -7,28 +7,33 @@
 
 import UIKit
 
-class Tile: UIButton {
+class Tile: UIView {
     typealias OpenState = (byRunner: Bool, bySeeker: Bool)
     var type: TileType = .unknown
+    var position: Coordinate
     
     private var identifier: String = String()
-    var position: Coordinate
+    private var imageView: UIImageView
     
     private var openedByRunner: Bool = false
     private var openedBySeeker: Bool = false
 
     convenience init() {
         self.init(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
-        self.imageView?.tintColor = .white
+        self.setupImageView()
     }
     
     override init(frame: CGRect) {
         self.position = Coordinate(x: 0, y: 0)
+        self.imageView = UIImageView()
+        
         super.init(frame: frame)
     }
     
     required init?(coder: NSCoder) {
         self.position = Coordinate(x: 0, y: 0)
+        self.imageView = UIImageView()
+        
         super.init(coder: coder)
     }
     
@@ -70,7 +75,7 @@ class Tile: UIButton {
         }
         
         self.backgroundColor = .systemGray3
-        self.setImage(nil, for: .normal)
+        self.imageView.image = nil
     }
     
     func setupTile(at row: Int, and column: Int, with dimensions: MapDimensions, and history: History) {
@@ -164,27 +169,27 @@ class Tile: UIButton {
     
     func decorateExit() {
         self.backgroundColor = .systemMint
-        self.setImage(UIImage(systemName: "flag.checkered"), for: .normal)
+        self.imageView.image = UIImage(systemName: "flag.checkered")
     }
     
     func decorateSpawn() {
         self.backgroundColor = .systemIndigo
-        self.setImage(UIImage(systemName: "house.fill"), for: .normal)
+        self.imageView.image = UIImage(systemName: "house.fill")
     }
     
     func decorateRunner() {
         self.backgroundColor = .systemIndigo
-        self.setImage(UIImage(systemName: "face.smiling.fill"), for: .normal)
+        self.imageView.image = UIImage(systemName: "face.smiling.fill")
     }
     
     func decorateRunnerWin() {
         self.backgroundColor = .systemGreen
-        self.setImage(UIImage(systemName: "flag.checkered.2.crossed"), for: .normal)
+        self.imageView.image = UIImage(systemName: "flag.checkered.2.crossed")
     }
     
     func decorateSeekerWin() {
         self.backgroundColor = .systemGreen
-        self.setImage(UIImage(systemName: "figure.walk"), for: .normal)
+        self.imageView.image = UIImage(systemName: "figure.walk")
     }
     
     private func setDirectionImages(newDirection: ArrowDirection, oldDirection: ArrowDirection, for oldTile: Tile?) {
@@ -198,31 +203,44 @@ class Tile: UIButton {
     private func setDirectionImage(to direction: ArrowDirection) {
         switch direction {
         case .up:
-            self.setImage(UIImage(systemName: "arrow.up"), for: .normal)
+            self.imageView.image = UIImage(systemName: "arrow.up")
         case .right:
-            self.setImage(UIImage(systemName: "arrow.right"), for: .normal)
+            self.imageView.image = UIImage(systemName: "arrow.right")
         case .down:
-            self.setImage(UIImage(systemName: "arrow.down"), for: .normal)
+            self.imageView.image = UIImage(systemName: "arrow.down")
         case .left:
-            self.setImage(UIImage(systemName: "arrow.left"), for: .normal)
+            self.imageView.image = UIImage(systemName: "arrow.left")
         case .upLeft:
-            self.setImage(UIImage(systemName: "arrow.turn.up.left"), for: .normal)
+            self.imageView.image = UIImage(systemName: "arrow.turn.up.left")
         case .upRight:
-            self.setImage(UIImage(systemName: "arrow.turn.up.right"), for: .normal)
+            self.imageView.image = UIImage(systemName: "arrow.turn.up.right")
         case .rightUp:
-            self.setImage(UIImage(systemName: "arrow.turn.right.up"), for: .normal)
+            self.imageView.image = UIImage(systemName: "arrow.turn.right.up")
         case .rightDown:
-            self.setImage(UIImage(systemName: "arrow.turn.right.down"), for: .normal)
+            self.imageView.image = UIImage(systemName: "arrow.turn.right.down")
         case .downRight:
-            self.setImage(UIImage(systemName: "arrow.turn.down.right"), for: .normal)
+            self.imageView.image = UIImage(systemName: "arrow.turn.down.right")
         case .downLeft:
-            self.setImage(UIImage(systemName: "arrow.turn.down.left"), for: .normal)
+            self.imageView.image = UIImage(systemName: "arrow.turn.down.left")
         case .leftDown:
-            self.setImage(UIImage(systemName: "arrow.turn.left.down"), for: .normal)
+            self.imageView.image = UIImage(systemName: "arrow.turn.left.down")
         case .leftUp:
-            self.setImage(UIImage(systemName: "arrow.turn.left.up"), for: .normal)
+            self.imageView.image = UIImage(systemName: "arrow.turn.left.up")
         case .unknown:
             break;
         }
+    }
+    
+    private func setupImageView() {
+        self.imageView.translatesAutoresizingMaskIntoConstraints = false
+        self.imageView.image = nil
+        self.addSubview(imageView)
+
+        NSLayoutConstraint.activate([
+            imageView.centerXAnchor.constraint(equalTo: self.centerXAnchor),
+            imageView.centerYAnchor.constraint(equalTo: self.centerYAnchor)
+        ])
+
+        self.imageView.tintColor = .white
     }
 }
