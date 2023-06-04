@@ -56,14 +56,14 @@ class Tile: UIView {
     func openByRunner(explicit: Bool) {
         self.openedByRunner = true
         if explicit {
-            self.backgroundColor = .systemIndigo.withAlphaComponent(0.5)
+            self.backgroundColor = UIColor(named: "RedAccentColor")?.withAlphaComponent(0.5)
         }
     }
     
     func openBySeeker(explicit: Bool) {
         self.openedBySeeker = true
         if explicit {
-            self.backgroundColor = .systemYellow.withAlphaComponent(0.5)
+            self.backgroundColor = UIColor(named: "FrostBlackColor")?.withAlphaComponent(0.5)
         }
     }
     
@@ -168,17 +168,17 @@ class Tile: UIView {
     }
     
     func decorateExit() {
-        self.backgroundColor = .systemMint
+        self.backgroundColor = UIColor(named: "FrostBlackColor")
         self.imageView.image = UIImage(systemName: "flag.checkered")
     }
     
     func decorateSpawn() {
-        self.backgroundColor = .systemIndigo
+        self.backgroundColor = UIColor(named: "FrostBlackColor")
         self.imageView.image = UIImage(systemName: "house.fill")
     }
     
     func decorateRunner() {
-        self.backgroundColor = .systemIndigo
+        self.backgroundColor = UIColor(named: "FrostBlackColor")
         self.imageView.image = UIImage(systemName: "face.smiling.fill")
     }
     
@@ -197,7 +197,7 @@ class Tile: UIView {
         
         guard oldTile?.type != .start else { return }
         oldTile?.setDirectionImage(to: oldDirection)
-        oldTile?.backgroundColor = .systemIndigo.withAlphaComponent(0.5)
+        oldTile?.backgroundColor = UIColor(named: "FrostBlackColor")?.withAlphaComponent(0.5)
     }
         
     private func setDirectionImage(to direction: ArrowDirection) {

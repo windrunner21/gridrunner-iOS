@@ -10,13 +10,17 @@ import UIKit
 class GameViewController: UIViewController {
     
     // Storyboard properties.
+    @IBOutlet weak var playerTypeLabel: UILabel!
     @IBOutlet weak var movesLabel: UILabel!
     @IBOutlet weak var emojiIconLabel: UILabel!
+    @IBOutlet weak var againstEmojiIconLabel: UILabel!
     
     @IBOutlet weak var gameView: UIView!
     @IBOutlet weak var profileView: UIView!
     @IBOutlet weak var emojiIconView: UIView!
     @IBOutlet weak var cancelView: UIView!
+    @IBOutlet weak var versusProfileView: UIView!
+    @IBOutlet weak var versusEmojiIconView: UIView!
     
     @IBOutlet weak var undoButton: UIButton!
     @IBOutlet weak var finishButton: UIButton!
@@ -26,49 +30,10 @@ class GameViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        self.setupCancelButton()
+        self.initializeGame()
         self.decorateViews()
-        let cancelTap = UITapGestureRecognizer(target: self, action: #selector(cancel))
-        self.cancelView.addGestureRecognizer(cancelTap)
-        
-        // Prepare game class.
-        let map = Map(with: MapDimensions(5, by: 5))
-        
-        let history = History(with: GameHistoryExamples().runnerHistory2, and: GameHistoryExamples().seekerHistory1)
-        
-        self.game.createSession(
-            with: map,
-            for: Runner(at: map.getCenterCoordinates()),
-            with: history
-        )
-        
-        NSLog("Game has been instantiated.")
-        
-        // If player could not have been instatiated return.
-        guard let player = game.getPlayer() else {
-            self.presentErrorAlert()
-            return
-        }
-        
-        // Game session always instantiated with history, populate history of players.
-        switch game.getPlayer()?.type {
-        case .runner:
-            game.getPlayer()?.setHistory(to: game.getHistory().getRunnerHistory())
-            game.getPlayer()?.updateCurrentTurn(to: game.getHistory().getRunnerHistory().count + 1)
-        case .seeker:
-            game.getPlayer()?.setHistory(to: game.getHistory().getSeekerHistory())
-            game.getPlayer()?.updateCurrentTurn(to: game.getHistory().getSeekerHistory().count + 1)
-        default:
-            break
-        }
-       
-        // Prepare game grid.
-        self.createGameGrid(
-            rows: game.getMap().getDimensions().getNumberOfRows(),
-            columns: game.getMap().getDimensions().getNumberOfColumns(),
-            inside: gameView
-        )
-        
-        self.updateMovesLabel(with: player.numberOfMoves)
     }
     
     @objc private func cancel() {
@@ -128,8 +93,8 @@ class GameViewController: UIViewController {
             self.updateMovesLabel(with: player.numberOfMoves)
         }
         
-        self.undoButton.isEnabled = false
-        self.finishButton.isEnabled = false
+        self.undoButton.disable()
+        self.finishButton.disable()
         
         player.outputHistory()
     }
@@ -237,18 +202,18 @@ class GameViewController: UIViewController {
     }
     
     private func enableUndoButton(on condition: Bool? = nil) {
-        if let condition = condition {
-            self.undoButton.isEnabled = condition
+        if let condition = condition, !condition {
+            self.undoButton.disable()
         } else {
-            self.undoButton.isEnabled = true
+            self.undoButton.enable()
         }
     }
     
     private func enableFinishButton(on condition: Bool? = nil) {
-        if let condition = condition {
-            self.finishButton.isEnabled = condition
+        if let condition = condition, !condition {
+            self.finishButton.disable()
         } else {
-            self.finishButton.isEnabled = true
+            self.finishButton.enable()
         }
     }
     
@@ -300,11 +265,78 @@ class GameViewController: UIViewController {
         sceneDelegate?.transitionViewController.transition(to: mainViewController, with: [.transitionCurlDown])
     }
     
+    private func initializeGame() {
+        // Prepare game class.
+        let map = Map(with: MapDimensions(13, by: 13))
+        
+        let history = History(with: GameHistoryExamples().runnerHistory1, and: GameHistoryExamples().seekerHistory1)
+        
+        self.game.createSession(
+            with: map,
+            for: Runner(at: map.getCenterCoordinates()),
+            with: history
+        )
+        
+        NSLog("Game has been instantiated.")
+        
+        // If player could not have been instatiated return.
+        guard let player = game.getPlayer() else {
+            self.presentErrorAlert()
+            return
+        }
+        
+        // Game session always instantiated with history, populate history of players.
+        switch game.getPlayer()?.type {
+        case .runner:
+            game.getPlayer()?.setHistory(to: game.getHistory().getRunnerHistory())
+            game.getPlayer()?.updateCurrentTurn(to: game.getHistory().getRunnerHistory().count + 1)
+        case .seeker:
+            game.getPlayer()?.setHistory(to: game.getHistory().getSeekerHistory())
+            game.getPlayer()?.updateCurrentTurn(to: game.getHistory().getSeekerHistory().count + 1)
+        default:
+            break
+        }
+       
+        // Prepare game grid.
+        self.createGameGrid(
+            rows: game.getMap().getDimensions().getNumberOfRows(),
+            columns: game.getMap().getDimensions().getNumberOfColumns(),
+            inside: gameView
+        )
+        
+        self.updateMovesLabel(with: player.numberOfMoves)
+    }
+    
     private func decorateViews() {
-        self.cancelView.transformToCircle()
-        self.cancelView.addButtonElevation()
+        guard let player = self.game.getPlayer() else {
+            presentErrorAlert()
+            return
+        }
+        
+        self.playerTypeLabel.text = player.type == .runner ? "Runner" : "Seeker"
+        
+        self.finishButton.setup()
+        self.finishButton.disable()
+        self.undoButton.setup()
+        self.undoButton.disable()
+        
+        self.versusProfileView.transformToCircle()
+        self.versusEmojiIconView.transformToCircle()
+        self.versusEmojiIconView.backgroundColor = player.type == .seeker ? UIColor(named: "RedAccentColor")?.withAlphaComponent(0.5) : UIColor(named: "FrostBlackColor")?.withAlphaComponent(0.5)
+        
         self.profileView.transformToCircle()
         self.emojiIconView.transformToCircle()
+        self.emojiIconView.backgroundColor = player.type == .runner ? UIColor(named: "RedAccentColor")?.withAlphaComponent(0.5) : UIColor(named: "FrostBlackColor")?.withAlphaComponent(0.5)
+        
         self.emojiIconLabel.text = ProfileIcon().getEmoji()
+        self.againstEmojiIconLabel.text = ProfileIcon().getEmoji()
+    }
+    
+    private func setupCancelButton() {
+        self.cancelView.transformToCircle()
+        self.cancelView.addButtonElevation()
+        
+        let cancelTap = UITapGestureRecognizer(target: self, action: #selector(cancel))
+        self.cancelView.addGestureRecognizer(cancelTap)
     }
 }

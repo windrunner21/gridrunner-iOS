@@ -26,7 +26,7 @@ class RegisterViewController: UIViewController, UITextFieldDelegate {
         self.cancelView.transformToCircle()
         self.cancelView.addButtonElevation()
 
-        self.signUpButton.layer.cornerRadius = 10
+        self.signUpButton.setup()
 
         // Manage delegate to override UITextField methods.
         self.usernameTextField.delegate = self

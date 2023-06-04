@@ -40,7 +40,7 @@ class MenuItemView: UIView {
         self.contentView.autoresizingMask = [.flexibleHeight, .flexibleWidth]
         
         self.contentView.layer.cornerRadius = 20
-        self.playButton.layer.cornerRadius = 10
+        self.playButton.setup()
         
         self.contentView.addElevation()
     }
