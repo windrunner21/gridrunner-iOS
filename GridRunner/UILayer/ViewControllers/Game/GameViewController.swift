@@ -119,7 +119,6 @@ class GameViewController: UIViewController {
                 tile.position = Coordinate(x: row, y: column)
                 tile.setIdentifier("\(row)\(column)")
                 tile.setupTile(at: row, and: column, with: game.getMap().getDimensions(), and: game.getHistory())
-                tile.layer.cornerRadius = 6
 
                 let tileTap = UITapGestureRecognizer(target: self, action: #selector(tileTapped))
                 tile.addGestureRecognizer(tileTap)
@@ -325,6 +324,7 @@ class GameViewController: UIViewController {
         self.versusEmojiIconView.backgroundColor = player.type == .seeker ? UIColor(named: "RedAccentColor")?.withAlphaComponent(0.5) : UIColor(named: "FrostBlackColor")?.withAlphaComponent(0.5)
         
         self.profileView.transformToCircle()
+        self.profileView.backgroundColor = .systemGreen.withAlphaComponent(0.5)
         self.emojiIconView.transformToCircle()
         self.emojiIconView.backgroundColor = player.type == .runner ? UIColor(named: "RedAccentColor")?.withAlphaComponent(0.5) : UIColor(named: "FrostBlackColor")?.withAlphaComponent(0.5)
         

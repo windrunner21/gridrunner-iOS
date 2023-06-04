@@ -94,6 +94,28 @@ class Tile: UIView {
             self.backgroundColor = .systemGray3
         }
         
+        if row == 0 && column == 0 {
+            self.layer.cornerRadius = 10
+            self.layer.maskedCorners = [.layerMinXMinYCorner]
+        }
+        
+        if row == 0 && column == dimensions.getNumberOfColumns() - 1 {
+            self.layer.cornerRadius = 10
+            self.layer.maskedCorners = [.layerMaxXMinYCorner]
+        }
+        
+        
+        if row == dimensions.getNumberOfRows() - 1 && column == 0 {
+            self.layer.cornerRadius = 10
+            self.layer.maskedCorners = [.layerMinXMaxYCorner]
+        }
+        
+        
+        if row == dimensions.getNumberOfRows() - 1 && column == dimensions.getNumberOfColumns() - 1 {
+            self.layer.cornerRadius = 10
+            self.layer.maskedCorners = [.layerMaxXMaxYCorner]
+        }
+        
         // Handle tile with history
         if !history.getRunnerHistory().isEmpty {
             let tilePosition = Coordinate(x: row, y: column)
