@@ -17,6 +17,7 @@ class RegisterViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var passwordTextField: UITextField!
     
     @IBOutlet weak var signUpButton: UIButton!
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     
     @IBOutlet weak var signUpButtonBottomConstraint: NSLayoutConstraint!
     
@@ -27,6 +28,7 @@ class RegisterViewController: UIViewController, UITextFieldDelegate {
         self.cancelView.addButtonElevation()
 
         self.signUpButton.setup()
+        self.activityIndicator.setup()
 
         // Manage delegate to override UITextField methods.
         self.usernameTextField.delegate = self
@@ -96,5 +98,25 @@ class RegisterViewController: UIViewController, UITextFieldDelegate {
 
     @objc func keyboardWillHide(_ notification: NSNotification) {
         moveWithKeyboard(on: notification, by: 40, this: signUpButtonBottomConstraint, up: false)
+    }
+    
+    @IBAction func onSignUpTouchDown(_ sender: Any) {
+        self.signUpButton.onTouchDown()
+    }
+    
+    @IBAction func onSignUpTouchUpOutside(_ sender: Any) {
+        self.signUpButton.onTouchUpOutside()
+    }
+    
+    @IBAction func onSignUp(_ sender: Any) {
+        self.signUpButton.disable()
+        self.activityIndicator.start()
+        let credentials = LoginCredentials(username: "kenny", password: "123123123")
+        AuthService().login(with: credentials) { data, error in
+            DispatchQueue.main.async {
+                self.activityIndicator.stopAnimating()
+                self.signUpButton.enable()
+            }
+        }
     }
 }

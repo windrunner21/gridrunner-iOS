@@ -55,6 +55,20 @@
 		CA4E3F662A0BCD3300D36266 /* MapExits.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA4E3F652A0BCD3300D36266 /* MapExits.swift */; };
 		CA4E3F692A0CE31200D36266 /* TransitionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA4E3F682A0CE31200D36266 /* TransitionViewController.swift */; };
 		CAB6EAAF2A2A086C00997852 /* ButtonExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAB6EAAE2A2A086C00997852 /* ButtonExtension.swift */; };
+		CAF8EC9F2A2DBD1A00179EF1 /* APIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAF8EC9E2A2DBD1A00179EF1 /* APIClient.swift */; };
+		CAF8ECA22A2DBD5500179EF1 /* AuthService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAF8ECA12A2DBD5500179EF1 /* AuthService.swift */; };
+		CAF8ECA42A2DBD6700179EF1 /* GameService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAF8ECA32A2DBD6700179EF1 /* GameService.swift */; };
+		CAF8ECA92A2DBF9400179EF1 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAF8ECA82A2DBF9400179EF1 /* User.swift */; };
+		CAF8ECAE2A2DC38200179EF1 /* Method.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAF8ECAD2A2DC38200179EF1 /* Method.swift */; };
+		CAF8ECB12A2DC5BD00179EF1 /* RequestInterceptor.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAF8ECB02A2DC5BD00179EF1 /* RequestInterceptor.swift */; };
+		CAF8ECB32A2DD23600179EF1 /* BaseURL.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAF8ECB22A2DD23600179EF1 /* BaseURL.swift */; };
+		CAF8ECB52A2E1FCE00179EF1 /* LoginCredentials.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAF8ECB42A2E1FCE00179EF1 /* LoginCredentials.swift */; };
+		CAF8ECB72A2E1FDE00179EF1 /* RegisterCredentials.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAF8ECB62A2E1FDE00179EF1 /* RegisterCredentials.swift */; };
+		CAF8ECB92A2E205700179EF1 /* Credentials.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAF8ECB82A2E205700179EF1 /* Credentials.swift */; };
+		CAF8ECBD2A2F6CFC00179EF1 /* ActivityIndicatorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAF8ECBC2A2F6CFC00179EF1 /* ActivityIndicatorExtension.swift */; };
+		CAF8ECBF2A2F741900179EF1 /* URLPath.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAF8ECBE2A2F741900179EF1 /* URLPath.swift */; };
+		CAF8ECC12A2F767600179EF1 /* Login.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CAF8ECC02A2F767600179EF1 /* Login.storyboard */; };
+		CAF8ECC32A2F78A600179EF1 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAF8ECC22A2F78A600179EF1 /* LoginViewController.swift */; };
 		CAFED48D2A02496E00FB4B9B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAFED48C2A02496E00FB4B9B /* AppDelegate.swift */; };
 		CAFED48F2A02496E00FB4B9B /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAFED48E2A02496E00FB4B9B /* SceneDelegate.swift */; };
 		CAFED4912A02496E00FB4B9B /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAFED4902A02496E00FB4B9B /* MainViewController.swift */; };
@@ -132,6 +146,20 @@
 		CA4E3F652A0BCD3300D36266 /* MapExits.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapExits.swift; sourceTree = "<group>"; };
 		CA4E3F682A0CE31200D36266 /* TransitionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransitionViewController.swift; sourceTree = "<group>"; };
 		CAB6EAAE2A2A086C00997852 /* ButtonExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonExtension.swift; sourceTree = "<group>"; };
+		CAF8EC9E2A2DBD1A00179EF1 /* APIClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIClient.swift; sourceTree = "<group>"; };
+		CAF8ECA12A2DBD5500179EF1 /* AuthService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthService.swift; sourceTree = "<group>"; };
+		CAF8ECA32A2DBD6700179EF1 /* GameService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameService.swift; sourceTree = "<group>"; };
+		CAF8ECA82A2DBF9400179EF1 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		CAF8ECAD2A2DC38200179EF1 /* Method.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Method.swift; sourceTree = "<group>"; };
+		CAF8ECB02A2DC5BD00179EF1 /* RequestInterceptor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestInterceptor.swift; sourceTree = "<group>"; };
+		CAF8ECB22A2DD23600179EF1 /* BaseURL.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseURL.swift; sourceTree = "<group>"; };
+		CAF8ECB42A2E1FCE00179EF1 /* LoginCredentials.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginCredentials.swift; sourceTree = "<group>"; };
+		CAF8ECB62A2E1FDE00179EF1 /* RegisterCredentials.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterCredentials.swift; sourceTree = "<group>"; };
+		CAF8ECB82A2E205700179EF1 /* Credentials.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Credentials.swift; sourceTree = "<group>"; };
+		CAF8ECBC2A2F6CFC00179EF1 /* ActivityIndicatorExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityIndicatorExtension.swift; sourceTree = "<group>"; };
+		CAF8ECBE2A2F741900179EF1 /* URLPath.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLPath.swift; sourceTree = "<group>"; };
+		CAF8ECC02A2F767600179EF1 /* Login.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Login.storyboard; sourceTree = "<group>"; };
+		CAF8ECC22A2F78A600179EF1 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		CAFED4892A02496E00FB4B9B /* GridRunner.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GridRunner.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CAFED48C2A02496E00FB4B9B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		CAFED48E2A02496E00FB4B9B /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -247,18 +275,12 @@
 			path = Views;
 			sourceTree = "<group>";
 		};
-		CA0AAC922A2621D4008367FB /* New Group */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = "New Group";
-			sourceTree = "<group>";
-		};
 		CA4E3F502A07A75800D36266 /* Authentication */ = {
 			isa = PBXGroup;
 			children = (
 				CAFED4922A02496E00FB4B9B /* Main.storyboard */,
 				CA4E3F5D2A0891D800D36266 /* Register.storyboard */,
+				CAF8ECC02A2F767600179EF1 /* Login.storyboard */,
 			);
 			path = Authentication;
 			sourceTree = "<group>";
@@ -276,6 +298,7 @@
 			children = (
 				CAFED4902A02496E00FB4B9B /* MainViewController.swift */,
 				CA4E3F5F2A0891F300D36266 /* RegisterViewController.swift */,
+				CAF8ECC22A2F78A600179EF1 /* LoginViewController.swift */,
 			);
 			path = Authentication;
 			sourceTree = "<group>";
@@ -326,6 +349,7 @@
 				CA4E3F632A08DCB400D36266 /* ViewControllerExtension.swift */,
 				CA35E7B62A28D0B60057BAB6 /* ViewExtension.swift */,
 				CAB6EAAE2A2A086C00997852 /* ButtonExtension.swift */,
+				CAF8ECBC2A2F6CFC00179EF1 /* ActivityIndicatorExtension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -337,6 +361,54 @@
 				CA0AAC2D2A0E2F0F008367FB /* Tile.swift */,
 			);
 			path = CustomClasses;
+			sourceTree = "<group>";
+		};
+		CAF8ECA02A2DBD2900179EF1 /* Service */ = {
+			isa = PBXGroup;
+			children = (
+				CAF8ECA12A2DBD5500179EF1 /* AuthService.swift */,
+				CAF8ECA32A2DBD6700179EF1 /* GameService.swift */,
+			);
+			name = Service;
+			sourceTree = "<group>";
+		};
+		CAF8ECA72A2DBF8600179EF1 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				CAF8ECAF2A2DC5B300179EF1 /* Protocols */,
+				CAF8ECAC2A2DC35500179EF1 /* Classes */,
+				CAF8ECAB2A2DC34E00179EF1 /* Enums */,
+			);
+			name = Models;
+			sourceTree = "<group>";
+		};
+		CAF8ECAB2A2DC34E00179EF1 /* Enums */ = {
+			isa = PBXGroup;
+			children = (
+				CAF8ECAD2A2DC38200179EF1 /* Method.swift */,
+				CAF8ECB22A2DD23600179EF1 /* BaseURL.swift */,
+				CAF8ECBE2A2F741900179EF1 /* URLPath.swift */,
+			);
+			name = Enums;
+			sourceTree = "<group>";
+		};
+		CAF8ECAC2A2DC35500179EF1 /* Classes */ = {
+			isa = PBXGroup;
+			children = (
+				CAF8ECA82A2DBF9400179EF1 /* User.swift */,
+				CAF8ECB42A2E1FCE00179EF1 /* LoginCredentials.swift */,
+				CAF8ECB62A2E1FDE00179EF1 /* RegisterCredentials.swift */,
+			);
+			name = Classes;
+			sourceTree = "<group>";
+		};
+		CAF8ECAF2A2DC5B300179EF1 /* Protocols */ = {
+			isa = PBXGroup;
+			children = (
+				CAF8ECB02A2DC5BD00179EF1 /* RequestInterceptor.swift */,
+				CAF8ECB82A2E205700179EF1 /* Credentials.swift */,
+			);
+			name = Protocols;
 			sourceTree = "<group>";
 		};
 		CAFED4802A02496E00FB4B9B = {
@@ -403,6 +475,9 @@
 		CAFED4BD2A0249C800FB4B9B /* ServiceLayer */ = {
 			isa = PBXGroup;
 			children = (
+				CAF8ECA72A2DBF8600179EF1 /* Models */,
+				CAF8ECA02A2DBD2900179EF1 /* Service */,
+				CAF8EC9E2A2DBD1A00179EF1 /* APIClient.swift */,
 			);
 			path = ServiceLayer;
 			sourceTree = "<group>";
@@ -410,7 +485,6 @@
 		CAFED4BE2A0249CF00FB4B9B /* UILayer */ = {
 			isa = PBXGroup;
 			children = (
-				CA0AAC922A2621D4008367FB /* New Group */,
 				CA4E3F612A08DCA100D36266 /* Utils */,
 				CA0AAC8C2A262160008367FB /* Views */,
 				CAFED4C12A0249DC00FB4B9B /* ViewControllers */,
@@ -559,6 +633,7 @@
 				CA0AAC752A25D6D3008367FB /* Kanit-ExtraBoldItalic.ttf in Resources */,
 				CA0AAC792A25D6D3008367FB /* Kanit-LightItalic.ttf in Resources */,
 				CAFED4962A02497000FB4B9B /* Assets.xcassets in Resources */,
+				CAF8ECC12A2F767600179EF1 /* Login.storyboard in Resources */,
 				CA0AAC7E2A25D6D3008367FB /* Kanit-Regular.ttf in Resources */,
 				CA0AAC7A2A25D6D3008367FB /* Kanit-Thin.ttf in Resources */,
 				CA0AAC852A25D6D3008367FB /* Kanit-ExtraLightItalic.ttf in Resources */,
@@ -599,14 +674,21 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CAF8ECA42A2DBD6700179EF1 /* GameService.swift in Sources */,
 				CA4E3F692A0CE31200D36266 /* TransitionViewController.swift in Sources */,
+				CAF8ECBF2A2F741900179EF1 /* URLPath.swift in Sources */,
+				CAF8ECB92A2E205700179EF1 /* Credentials.swift in Sources */,
 				CA0AAC322A0E637E008367FB /* Game.swift in Sources */,
 				CA0AAC3D2A121EE2008367FB /* MoveDirection.swift in Sources */,
 				CA0AAC342A0E6395008367FB /* Map.swift in Sources */,
+				CAF8ECAE2A2DC38200179EF1 /* Method.swift in Sources */,
+				CAF8ECB52A2E1FCE00179EF1 /* LoginCredentials.swift in Sources */,
 				CA0AAC8E2A26219B008367FB /* MenuItemView.swift in Sources */,
+				CAF8ECBD2A2F6CFC00179EF1 /* ActivityIndicatorExtension.swift in Sources */,
 				CA4E3F5C2A07BBF100D36266 /* PlayerType.swift in Sources */,
 				CA0AAC5D2A1B7EE6008367FB /* Turn.swift in Sources */,
 				CA4E3F582A07A85900D36266 /* GameViewController.swift in Sources */,
+				CAF8ECB32A2DD23600179EF1 /* BaseURL.swift in Sources */,
 				CA4E3F642A08DCB400D36266 /* ViewControllerExtension.swift in Sources */,
 				CA0AAC892A25DF8C008367FB /* ProfileIcon.swift in Sources */,
 				CA0AAC3F2A13A2A0008367FB /* ArrowDirection.swift in Sources */,
@@ -614,14 +696,19 @@
 				CA0AAC362A0E6428008367FB /* MapDimensions.swift in Sources */,
 				CA0AAC2E2A0E2F0F008367FB /* Tile.swift in Sources */,
 				CAFED4912A02496E00FB4B9B /* MainViewController.swift in Sources */,
+				CAF8ECA22A2DBD5500179EF1 /* AuthService.swift in Sources */,
 				CA4E3F662A0BCD3300D36266 /* MapExits.swift in Sources */,
+				CAF8ECB12A2DC5BD00179EF1 /* RequestInterceptor.swift in Sources */,
 				CA0AAC3B2A0E7528008367FB /* AnyPowerUp.swift in Sources */,
 				CA0AAC392A0E722C008367FB /* TileType.swift in Sources */,
 				CA0AAC5F2A1B7EEF008367FB /* Move.swift in Sources */,
 				CA35E7B72A28D0B60057BAB6 /* ViewExtension.swift in Sources */,
 				CA0AAC432A166F18008367FB /* GameHistoryExamples.swift in Sources */,
 				CA0AAC612A1D1D1D008367FB /* Player.swift in Sources */,
+				CAF8ECA92A2DBF9400179EF1 /* User.swift in Sources */,
 				CA4E3F602A0891F300D36266 /* RegisterViewController.swift in Sources */,
+				CAF8ECB72A2E1FDE00179EF1 /* RegisterCredentials.swift in Sources */,
+				CAF8ECC32A2F78A600179EF1 /* LoginViewController.swift in Sources */,
 				CA0AAC302A0E484F008367FB /* Coordinate.swift in Sources */,
 				CA0AAC5B2A1B7EDF008367FB /* History.swift in Sources */,
 				CAFED48D2A02496E00FB4B9B /* AppDelegate.swift in Sources */,
@@ -629,6 +716,7 @@
 				CAB6EAAF2A2A086C00997852 /* ButtonExtension.swift in Sources */,
 				CA0AAC262A0E2BE6008367FB /* Seeker.swift in Sources */,
 				CAFED48F2A02496E00FB4B9B /* SceneDelegate.swift in Sources */,
+				CAF8EC9F2A2DBD1A00179EF1 /* APIClient.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

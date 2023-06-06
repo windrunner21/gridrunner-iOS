@@ -12,12 +12,22 @@ extension UIButton {
         self.layer.cornerRadius = 10
     }
     
+    func onTouchDown() {
+        self.alpha = 0.5
+    }
+    
+    func onTouchUpOutside() {
+        self.alpha = 1
+    }
+    
     func disable() {
+        self.alpha = 0.5
         self.isEnabled = false
         self.backgroundColor = UIColor(named: "SecondaryColor")
     }
     
     func enable() {
+        self.alpha = 1
         self.isEnabled = true
         self.backgroundColor = UIColor(named: "RedAccentColor")
     }
