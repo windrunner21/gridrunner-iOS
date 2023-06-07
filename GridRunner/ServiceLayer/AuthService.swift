@@ -12,7 +12,7 @@ class AuthService {
     let loginURL = URL(string: BaseURL.serverless.url + URLPath.login.path)!
     let registerURL = URL(string: BaseURL.serverless.url + URLPath.register.path)!
     
-    func login(with credentials: LoginCredentials, completion: @escaping(Response) -> Void) {
+    func login(with credentials: LoginCredentials, completion: @escaping(Response, User?) -> Void) {
         client.sendRequest(
             path: URLPath.login.path,
             method: .POST,
@@ -21,12 +21,10 @@ class AuthService {
             
             if let error = error {
                 NSLog("Error occured: \(error)")
-                completion(.networkError)
+                completion(.networkError, nil)
             } else if let response = response as? HTTPURLResponse, response.statusCode == 200, let data = data {
                 let user = User.decode(data: data)
-                
-                print(user!)
-                
+    
                 if let headers = response.allHeaderFields as? [String: String] {
                     let cookies = HTTPCookie.cookies(withResponseHeaderFields: headers, for: self.loginURL)
                     for cookie in cookies {
@@ -34,9 +32,9 @@ class AuthService {
                     }
                 }
                 
-                completion(.success)
+                completion(.success, user)
             } else {
-                completion(.requestError)
+                completion(.requestError, nil)
             }
         }
     }
