@@ -8,6 +8,8 @@
 import UIKit
 
 class LoginViewController: UIViewController, UITextFieldDelegate {
+    
+    var mainViewController: MainViewController!
 
     @IBOutlet weak var cancelView: UIView!
     
@@ -64,7 +66,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     }
     
     @objc func closeView() {
-        self.dismiss(animated: true)
+        self.mainViewController.dismiss(animated: true)
     }
     
     private func configureKeyboardNotifications() {

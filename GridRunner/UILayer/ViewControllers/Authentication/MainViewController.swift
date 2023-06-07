@@ -60,11 +60,9 @@ class MainViewController: UIViewController {
     
     private func openRegisterModal() {
         let registerStoryboard: UIStoryboard = UIStoryboard(name: "Register", bundle: .main)
-        let registerViewController = registerStoryboard.instantiateViewController(withIdentifier: "RegisterScreen")
+        let registerViewController: RegisterViewController = registerStoryboard.instantiateViewController(identifier: "RegisterScreen")
         
-        if let registerPresentationController = registerViewController.presentationController as? UISheetPresentationController {
-            registerPresentationController.detents = [.medium(), .large()]
-        }
+        registerViewController.mainViewController = self
         
         self.present(registerViewController, animated: true)
     }

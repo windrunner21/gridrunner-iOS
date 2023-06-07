@@ -9,6 +9,7 @@ import UIKit
 
 class RegisterViewController: UIViewController, UITextFieldDelegate {
 
+    var mainViewController: MainViewController!
     
     @IBOutlet weak var cancelView: UIView!
     
@@ -70,7 +71,7 @@ class RegisterViewController: UIViewController, UITextFieldDelegate {
     }
     
     @objc func closeView() {
-        self.dismiss(animated: true)
+        self.mainViewController.dismiss(animated: true)
     }
     
     private func configureKeyboardNotifications() {
@@ -119,9 +120,10 @@ class RegisterViewController: UIViewController, UITextFieldDelegate {
     
     @IBAction func onSignIn(_ sender: Any) {
         let loginStoryboard: UIStoryboard = UIStoryboard(name: "Login", bundle: .main)
-        let loginViewController: UIViewController = loginStoryboard.instantiateViewController(identifier: "LoginScreen") as LoginViewController
+        let loginViewController: LoginViewController = loginStoryboard.instantiateViewController(identifier: "LoginScreen")
+        
+        loginViewController.mainViewController = self.mainViewController
         
         self.present(loginViewController, animated: true)
     }
-    
 }
