@@ -27,7 +27,7 @@ class APIClient {
         headers: [String: String]? = nil,
         customInterceptor: RequestInterceptor? = nil,
         completion: @escaping(Data?, URLResponse?, Error?) -> Void) {
-            let url = URL(string: baseURL.rawValue + path)!
+            let url = URL(string: baseURL.url + path)!
             
             var request = URLRequest(url: url)
             

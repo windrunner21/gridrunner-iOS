@@ -10,7 +10,9 @@ import UIKit
 class RegisterViewController: UIViewController, UITextFieldDelegate {
 
     var mainViewController: MainViewController!
+    var alertAdapter: AlertAdapter = AlertAdapter()
     
+    // Storyboard related properties.
     @IBOutlet weak var cancelView: UIView!
     
     @IBOutlet weak var usernameTextField: UITextField!
@@ -110,10 +112,26 @@ class RegisterViewController: UIViewController, UITextFieldDelegate {
     
     @IBAction func onSignUp(_ sender: Any) {
         self.signUpButton.disable()
-        let credentials = LoginCredentials(username: "kenny", password: "123123123")
-        AuthService().login(with: credentials) { data, error in
+        
+        guard let username = usernameTextField.text, let password = passwordTextField.text, let email = emailTextField.text else {
+            self.signUpButton.enable()
+            return
+        }
+        
+        let credentials = RegisterCredentials(username: username,password: password, email: email)
+        AuthService().register(with: credentials) { completed in
             DispatchQueue.main.async {
                 self.signUpButton.enable()
+                
+                if completed {
+                    self.mainViewController.dismiss(animated: true)
+                } else {
+                    let alert = self.alertAdapter.createNetworkError(defaultActionHandler: { [weak self] in
+                            self?.mainViewController.dismiss(animated: true)
+                    })
+                    
+                    self.present(alert, animated: true)
+                }
             }
         }
     }

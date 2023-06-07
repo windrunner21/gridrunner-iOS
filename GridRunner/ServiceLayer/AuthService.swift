@@ -9,21 +9,20 @@ import Foundation
 
 class AuthService {
     let client = APIClient(baseURL: .serverless)
-    let loginURL = URL(string: BaseURL.serverless.rawValue + URLPath.login.rawValue)!
+    let loginURL = URL(string: BaseURL.serverless.url + URLPath.login.path)!
+    let registerURL = URL(string: BaseURL.serverless.url + URLPath.register.path)!
     
-    func login(with credentials: LoginCredentials, completion: @escaping(Data?, Error?) -> Void) {
-        
+    func login(with credentials: LoginCredentials, completion: @escaping(Bool) -> Void) {
         client.sendRequest(
-            path: URLPath.login.rawValue,
+            path: URLPath.login.path,
             method: .POST,
             parameters: credentials.encode()
         ) { data, response, error in
             
             if let error = error {
-                print("in error")
-                completion(nil, error)
+                NSLog("Error occured: \(error)")
+                completion(false)
             } else if let data = data {
-                print("in data")
                 if let responseDataString = String(data: data, encoding: .utf8) {
                     print(responseDataString)
                 }
@@ -31,31 +30,54 @@ class AuthService {
                 if let response = response as? HTTPURLResponse {
                     
                     if response.statusCode != 200 {
-                        completion(nil, error)
+                        completion(false)
                         return
                     }
                     
                     if let headers = response.allHeaderFields as? [String: String] {
                         let cookies = HTTPCookie.cookies(withResponseHeaderFields: headers, for: self.loginURL)
                         for cookie in cookies {
-                            print("Cookie: \(cookie.name) = \(cookie.value)")
+                            print("Cookie from login: \(cookie.name) = \(cookie.value)")
                         }
                     }
                     
-                    completion(data, nil)
+                    completion(true)
                 }
             }
         }
     }
     
-    func register(with credentials: RegisterCredentials) {
-        client.sendRequest(path: "/signup", method: .POST, parameters: credentials.encode()) { data, response, error in
+    func register(with credentials: RegisterCredentials, completion: @escaping(Bool) -> Void) {
+        client.sendRequest(
+            path: URLPath.register.path,
+            method: .POST,
+            parameters: credentials.encode()
+        ) { data, response, error in
+            
             if let error = error {
-                print(error)
+                NSLog("Error occured: \(error)")
+                completion(false)
             } else if let data = data {
                 if let responseDataString = String(data: data, encoding: .utf8) {
                     print(responseDataString)
                 }
+                
+                if let response = response as? HTTPURLResponse {
+                    if response.statusCode != 200 {
+                        completion(false)
+                        return
+                    }
+                    
+                    if let headers = response.allHeaderFields as? [String: String] {
+                        let cookies = HTTPCookie.cookies(withResponseHeaderFields: headers, for: self.registerURL)
+                        
+                        for cookie in cookies {
+                            print("Cookie from register: \(cookie.name) = \(cookie.value)")
+                        }
+                    }
+                }
+                
+                completion(true)
             }
         }
     }

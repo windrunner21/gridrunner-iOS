@@ -10,7 +10,9 @@ import UIKit
 class LoginViewController: UIViewController, UITextFieldDelegate {
     
     var mainViewController: MainViewController!
-
+    var alertAdapter: AlertAdapter = AlertAdapter()
+    
+    // Storyboard related properties.
     @IBOutlet weak var cancelView: UIView!
     
     @IBOutlet weak var usernameTextField: UITextField!
@@ -106,7 +108,30 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     }
     
     @IBAction func onSignIn(_ sender: Any) {
+        self.signInButton.disable()
         
+        guard let username = usernameTextField.text, let password = passwordTextField.text else {
+            self.signInButton.enable()
+            return
+        }
+        
+        let credentials = LoginCredentials(username: username, password: password)
+        
+        AuthService().login(with: credentials) { completed in
+            DispatchQueue.main.async {
+                self.signInButton.enable()
+                
+                if completed {
+                    self.mainViewController.dismiss(animated: true)
+                } else {
+                    let alert = self.alertAdapter.createNetworkError(defaultActionHandler: { [weak self] in
+                            self?.mainViewController.dismiss(animated: true)
+                    })
+                    
+                    self.present(alert, animated: true)
+                }
+            }
+        }
     }
     
     @IBAction func onSignUp(_ sender: Any) {

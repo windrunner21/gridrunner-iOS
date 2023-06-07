@@ -27,6 +27,7 @@ class GameViewController: UIViewController {
     
     // Controller properties.
     var game = Game()
+    var alertAdapter = AlertAdapter()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -225,33 +226,17 @@ class GameViewController: UIViewController {
     }
     
     private func presentWinAlert() {
-        let alert = UIAlertController(title: "Game Over", message: "Congratulations! You have won.", preferredStyle: .alert)
-        
-        alert.addAction(
-            UIAlertAction(
-                title: NSLocalizedString("Main Menu", comment: "Default action"),
-                style: .default,
-                handler: { _ in
-                    self.transitionToMainScreen()
-                }
-            )
-        )
+        let alert = alertAdapter.createGameOverAlert(alertActionHandler: { [weak self] in
+            self?.transitionToMainScreen()
+        })
         
         self.present(alert, animated: true)
     }
     
     private func presentErrorAlert() {
-        let alert = UIAlertController(title: "Oops.", message: "Something went wrong. Please try again.", preferredStyle: .alert)
-        
-        alert.addAction(
-            UIAlertAction(
-                title: NSLocalizedString("Main Menu", comment: "Default action"),
-                style: .default,
-                handler: { _ in
-                    self.transitionToMainScreen()
-                }
-            )
-        )
+        let alert = alertAdapter.createGameErrorAlert(alertActionHandler: { [weak self] in
+            self?.transitionToMainScreen()
+        })
         
         self.present(alert, animated: true)
     }
