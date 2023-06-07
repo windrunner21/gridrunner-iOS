@@ -50,6 +50,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
             passwordTextField.becomeFirstResponder()
         case passwordTextField:
             passwordTextField.resignFirstResponder()
+            self.sendLoginRequest()
         default:
             textField.resignFirstResponder()
         }
@@ -108,6 +109,14 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     }
     
     @IBAction func onSignIn(_ sender: Any) {
+        self.sendLoginRequest()
+    }
+    
+    @IBAction func onSignUp(_ sender: Any) {
+        self.dismiss(animated: true)
+    }
+    
+    private func sendLoginRequest() {
         self.signInButton.disable()
         
         guard let username = usernameTextField.text, let password = passwordTextField.text else {
@@ -117,24 +126,21 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         
         let credentials = LoginCredentials(username: username, password: password)
         
-        AuthService().login(with: credentials) { completed in
+        AuthService().login(with: credentials) { response in
             DispatchQueue.main.async {
                 self.signInButton.enable()
                 
-                if completed {
+                switch response {
+                case .success:
                     self.mainViewController.dismiss(animated: true)
-                } else {
-                    let alert = self.alertAdapter.createNetworkError(defaultActionHandler: { [weak self] in
-                            self?.mainViewController.dismiss(animated: true)
-                    })
-                    
+                case .networkError:
+                    let alert = self.alertAdapter.createNetworkErrorAlert()
+                    self.present(alert, animated: true)
+                case .requestError:
+                    let alert = self.alertAdapter.createServiceRequestErrorAlert()
                     self.present(alert, animated: true)
                 }
             }
         }
-    }
-    
-    @IBAction func onSignUp(_ sender: Any) {
-        self.dismiss(animated: true)
     }
 }

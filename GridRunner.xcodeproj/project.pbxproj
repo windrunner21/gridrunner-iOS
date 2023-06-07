@@ -55,6 +55,8 @@
 		CA4E3F662A0BCD3300D36266 /* MapExits.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA4E3F652A0BCD3300D36266 /* MapExits.swift */; };
 		CA4E3F692A0CE31200D36266 /* TransitionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA4E3F682A0CE31200D36266 /* TransitionViewController.swift */; };
 		CA852A312A30A20200961E65 /* AlertAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA852A302A30A20200961E65 /* AlertAdapter.swift */; };
+		CA852A332A30ABB700961E65 /* Response.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA852A322A30ABB700961E65 /* Response.swift */; };
+		CA852A392A30B19100961E65 /* UserRole.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA852A382A30B19100961E65 /* UserRole.swift */; };
 		CAB6EAAF2A2A086C00997852 /* ButtonExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAB6EAAE2A2A086C00997852 /* ButtonExtension.swift */; };
 		CAF8EC9F2A2DBD1A00179EF1 /* APIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAF8EC9E2A2DBD1A00179EF1 /* APIClient.swift */; };
 		CAF8ECA22A2DBD5500179EF1 /* AuthService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAF8ECA12A2DBD5500179EF1 /* AuthService.swift */; };
@@ -147,6 +149,8 @@
 		CA4E3F652A0BCD3300D36266 /* MapExits.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapExits.swift; sourceTree = "<group>"; };
 		CA4E3F682A0CE31200D36266 /* TransitionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransitionViewController.swift; sourceTree = "<group>"; };
 		CA852A302A30A20200961E65 /* AlertAdapter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertAdapter.swift; sourceTree = "<group>"; };
+		CA852A322A30ABB700961E65 /* Response.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Response.swift; sourceTree = "<group>"; };
+		CA852A382A30B19100961E65 /* UserRole.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserRole.swift; sourceTree = "<group>"; };
 		CAB6EAAE2A2A086C00997852 /* ButtonExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonExtension.swift; sourceTree = "<group>"; };
 		CAF8EC9E2A2DBD1A00179EF1 /* APIClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIClient.swift; sourceTree = "<group>"; };
 		CAF8ECA12A2DBD5500179EF1 /* AuthService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthService.swift; sourceTree = "<group>"; };
@@ -205,14 +209,8 @@
 		CA0AAC242A0E2BDD008367FB /* Classes */ = {
 			isa = PBXGroup;
 			children = (
-				CA0AAC312A0E637E008367FB /* Game.swift */,
-				CA0AAC332A0E6395008367FB /* Map.swift */,
-				CA0AAC602A1D1D1D008367FB /* Player.swift */,
-				CA0AAC252A0E2BE6008367FB /* Seeker.swift */,
-				CA0AAC272A0E2BF1008367FB /* Runner.swift */,
-				CA0AAC5A2A1B7EDF008367FB /* History.swift */,
-				CA0AAC5C2A1B7EE6008367FB /* Turn.swift */,
-				CA0AAC5E2A1B7EEF008367FB /* Move.swift */,
+				CA852A352A30B14700961E65 /* Game */,
+				CA852A342A30B13B00961E65 /* System */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -327,11 +325,8 @@
 		CA4E3F5A2A07BBE400D36266 /* Enums */ = {
 			isa = PBXGroup;
 			children = (
-				CA0AAC382A0E722C008367FB /* TileType.swift */,
-				CA4E3F5B2A07BBF100D36266 /* PlayerType.swift */,
-				CA4E3F652A0BCD3300D36266 /* MapExits.swift */,
-				CA0AAC3C2A121EE2008367FB /* MoveDirection.swift */,
-				CA0AAC3E2A13A2A0008367FB /* ArrowDirection.swift */,
+				CA852A362A30B17800961E65 /* Game */,
+				CA852A372A30B17B00961E65 /* System */,
 			);
 			path = Enums;
 			sourceTree = "<group>";
@@ -374,6 +369,48 @@
 			path = Structs;
 			sourceTree = "<group>";
 		};
+		CA852A342A30B13B00961E65 /* System */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = System;
+			sourceTree = "<group>";
+		};
+		CA852A352A30B14700961E65 /* Game */ = {
+			isa = PBXGroup;
+			children = (
+				CA0AAC312A0E637E008367FB /* Game.swift */,
+				CA0AAC332A0E6395008367FB /* Map.swift */,
+				CA0AAC602A1D1D1D008367FB /* Player.swift */,
+				CA0AAC252A0E2BE6008367FB /* Seeker.swift */,
+				CA0AAC272A0E2BF1008367FB /* Runner.swift */,
+				CA0AAC5A2A1B7EDF008367FB /* History.swift */,
+				CA0AAC5C2A1B7EE6008367FB /* Turn.swift */,
+				CA0AAC5E2A1B7EEF008367FB /* Move.swift */,
+			);
+			path = Game;
+			sourceTree = "<group>";
+		};
+		CA852A362A30B17800961E65 /* Game */ = {
+			isa = PBXGroup;
+			children = (
+				CA0AAC382A0E722C008367FB /* TileType.swift */,
+				CA4E3F5B2A07BBF100D36266 /* PlayerType.swift */,
+				CA4E3F652A0BCD3300D36266 /* MapExits.swift */,
+				CA0AAC3C2A121EE2008367FB /* MoveDirection.swift */,
+				CA0AAC3E2A13A2A0008367FB /* ArrowDirection.swift */,
+			);
+			path = Game;
+			sourceTree = "<group>";
+		};
+		CA852A372A30B17B00961E65 /* System */ = {
+			isa = PBXGroup;
+			children = (
+				CA852A382A30B19100961E65 /* UserRole.swift */,
+			);
+			path = System;
+			sourceTree = "<group>";
+		};
 		CAF8ECA02A2DBD2900179EF1 /* Service */ = {
 			isa = PBXGroup;
 			children = (
@@ -399,6 +436,7 @@
 				CAF8ECAD2A2DC38200179EF1 /* Method.swift */,
 				CAF8ECB22A2DD23600179EF1 /* BaseURL.swift */,
 				CAF8ECBE2A2F741900179EF1 /* URLPath.swift */,
+				CA852A322A30ABB700961E65 /* Response.swift */,
 			);
 			name = Enums;
 			sourceTree = "<group>";
@@ -689,11 +727,13 @@
 				CA4E3F692A0CE31200D36266 /* TransitionViewController.swift in Sources */,
 				CAF8ECBF2A2F741900179EF1 /* URLPath.swift in Sources */,
 				CAF8ECB92A2E205700179EF1 /* Credentials.swift in Sources */,
+				CA852A332A30ABB700961E65 /* Response.swift in Sources */,
 				CA0AAC322A0E637E008367FB /* Game.swift in Sources */,
 				CA0AAC3D2A121EE2008367FB /* MoveDirection.swift in Sources */,
 				CA0AAC342A0E6395008367FB /* Map.swift in Sources */,
 				CAF8ECAE2A2DC38200179EF1 /* Method.swift in Sources */,
 				CAF8ECB52A2E1FCE00179EF1 /* LoginCredentials.swift in Sources */,
+				CA852A392A30B19100961E65 /* UserRole.swift in Sources */,
 				CA0AAC8E2A26219B008367FB /* MenuItemView.swift in Sources */,
 				CAF8ECBD2A2F6CFC00179EF1 /* ActivityIndicatorExtension.swift in Sources */,
 				CA4E3F5C2A07BBF100D36266 /* PlayerType.swift in Sources */,

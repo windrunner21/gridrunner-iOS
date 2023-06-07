@@ -7,7 +7,7 @@
 
 import Foundation
 
-class LoginCredentials: Credentials, Codable {
+class LoginCredentials: Credentials, Encodable {
     var username: String
     var password: String
     
@@ -24,19 +24,6 @@ class LoginCredentials: Credentials, Codable {
             return encodedData
         } catch {
             print("Error encoding request body: \(error)")
-        }
-        
-        return nil
-    }
-    
-    func decode(data: Data) -> Credentials? {
-        let decoder = JSONDecoder()
-        
-        do {
-            let decodedData = try decoder.decode(LoginCredentials.self, from: data)
-            return decodedData
-        } catch {
-            print("Error decoding JSON: \(error)")
         }
         
         return nil

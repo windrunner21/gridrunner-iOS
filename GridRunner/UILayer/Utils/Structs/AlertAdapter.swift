@@ -40,7 +40,7 @@ class AlertAdapter {
         return alert
     }
     
-    func createNetworkError(defaultActionHandler: @escaping () -> Void, cancelActionHandler: (() -> Void)? = nil) -> UIAlertController {
+    func createNetworkErrorAlert() -> UIAlertController {
         let alert = UIAlertController(title: "Network Error.", message: "Something went wrong. Please try later.", preferredStyle: .alert)
         
         alert.addAction(
@@ -48,17 +48,23 @@ class AlertAdapter {
                 title: NSLocalizedString("Try again", comment: "Default action"),
                 style: .default,
                 handler: { _ in
-                    defaultActionHandler()
+                    alert.dismiss(animated: true)
                 }
             )
         )
         
+        return alert
+    }
+    
+    func createServiceRequestErrorAlert() -> UIAlertController {
+        let alert = UIAlertController(title: "Error.", message: "Something went wrong. Check your credentials.", preferredStyle: .alert)
+        
         alert.addAction(
             UIAlertAction(
-                title: NSLocalizedString("Cancel", comment: "Default action"),
-                style: .cancel,
+                title: NSLocalizedString("OK", comment: "Default action"),
+                style: .default,
                 handler: { _ in
-                    cancelActionHandler?() ?? alert.dismiss(animated: true)
+                    alert.dismiss(animated: true)
                 }
             )
         )

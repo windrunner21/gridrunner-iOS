@@ -55,6 +55,7 @@ class RegisterViewController: UIViewController, UITextFieldDelegate {
             passwordTextField.becomeFirstResponder()
         case passwordTextField:
             passwordTextField.resignFirstResponder()
+            self.sendRegisterRequest()
         default:
             textField.resignFirstResponder()
         }
@@ -111,29 +112,7 @@ class RegisterViewController: UIViewController, UITextFieldDelegate {
     }
     
     @IBAction func onSignUp(_ sender: Any) {
-        self.signUpButton.disable()
-        
-        guard let username = usernameTextField.text, let password = passwordTextField.text, let email = emailTextField.text else {
-            self.signUpButton.enable()
-            return
-        }
-        
-        let credentials = RegisterCredentials(username: username,password: password, email: email)
-        AuthService().register(with: credentials) { completed in
-            DispatchQueue.main.async {
-                self.signUpButton.enable()
-                
-                if completed {
-                    self.mainViewController.dismiss(animated: true)
-                } else {
-                    let alert = self.alertAdapter.createNetworkError(defaultActionHandler: { [weak self] in
-                            self?.mainViewController.dismiss(animated: true)
-                    })
-                    
-                    self.present(alert, animated: true)
-                }
-            }
-        }
+        self.sendRegisterRequest()
     }
     
     @IBAction func onSignIn(_ sender: Any) {
@@ -143,5 +122,32 @@ class RegisterViewController: UIViewController, UITextFieldDelegate {
         loginViewController.mainViewController = self.mainViewController
         
         self.present(loginViewController, animated: true)
+    }
+    
+    private func sendRegisterRequest() {
+        self.signUpButton.disable()
+        
+        guard let username = usernameTextField.text, let password = passwordTextField.text, let email = emailTextField.text else {
+            self.signUpButton.enable()
+            return
+        }
+        
+        let credentials = RegisterCredentials(username: username,password: password, email: email)
+        AuthService().register(with: credentials) { response in
+            DispatchQueue.main.async {
+                self.signUpButton.enable()
+                
+                switch response {
+                case .success:
+                    self.mainViewController.dismiss(animated: true)
+                case .networkError:
+                    let alert = self.alertAdapter.createNetworkErrorAlert()
+                    self.present(alert, animated: true)
+                case .requestError:
+                    let alert = self.alertAdapter.createServiceRequestErrorAlert()
+                    self.present(alert, animated: true)
+                }
+            }
+        }
     }
 }

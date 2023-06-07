@@ -12,5 +12,4 @@ protocol Credentials {
     var password: String { get }
     
     func encode() -> Data?
-    func decode(data: Data) -> Credentials?
 }
