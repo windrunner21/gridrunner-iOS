@@ -16,8 +16,8 @@ class RegisterViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var emailTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
     
+    @IBOutlet weak var signInButton: UIButton!
     @IBOutlet weak var signUpButton: UIButton!
-    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     
     @IBOutlet weak var signUpButtonBottomConstraint: NSLayoutConstraint!
     
@@ -28,7 +28,6 @@ class RegisterViewController: UIViewController, UITextFieldDelegate {
         self.cancelView.addButtonElevation()
 
         self.signUpButton.setup()
-        self.activityIndicator.setup()
 
         // Manage delegate to override UITextField methods.
         self.usernameTextField.delegate = self
@@ -110,13 +109,19 @@ class RegisterViewController: UIViewController, UITextFieldDelegate {
     
     @IBAction func onSignUp(_ sender: Any) {
         self.signUpButton.disable()
-        self.activityIndicator.start()
         let credentials = LoginCredentials(username: "kenny", password: "123123123")
         AuthService().login(with: credentials) { data, error in
             DispatchQueue.main.async {
-                self.activityIndicator.stopAnimating()
                 self.signUpButton.enable()
             }
         }
     }
+    
+    @IBAction func onSignIn(_ sender: Any) {
+        let loginStoryboard: UIStoryboard = UIStoryboard(name: "Login", bundle: .main)
+        let loginViewController: UIViewController = loginStoryboard.instantiateViewController(identifier: "LoginScreen") as LoginViewController
+        
+        self.present(loginViewController, animated: true)
+    }
+    
 }
