@@ -51,4 +51,15 @@ class APIClient {
             
             task.resume()
     }
+    
+    func getCookie(from response: HTTPURLResponse, from url: URL) {
+        if let headers = response.allHeaderFields as? [String: String] {
+            let cookies = HTTPCookie.cookies(withResponseHeaderFields: headers, for: url)
+            for cookie in cookies {
+                if cookie.name == "gridrun-session" {
+                    UserDefaults.standard.setValue(cookie, forKey: "session")
+                }
+            }
+        }
+    }
 }

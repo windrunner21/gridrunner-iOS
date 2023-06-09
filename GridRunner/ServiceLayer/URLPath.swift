@@ -8,6 +8,7 @@
 enum URLPath {
     case login
     case register
+    case user
 }
 
 extension URLPath {
@@ -17,6 +18,8 @@ extension URLPath {
            return "/login"
         case .register:
            return "/signup"
+        case .user:
+            return "/user"
         }
     }
 }

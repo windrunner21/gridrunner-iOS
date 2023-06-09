@@ -8,6 +8,9 @@
 import Foundation
 
 class User: Decodable, CustomStringConvertible {
+    
+    static let shared = User()
+    
     var id: Int
     var uuid: String
     var email: String
@@ -15,6 +18,11 @@ class User: Decodable, CustomStringConvertible {
     var role: UserRole
     var runnerElo: Int
     var seekerElo: Int
+    var isLoggedIn: Bool
+    
+    var description: String {
+        return "User (id: \(id), uuid: \(uuid)) with email: \(email) and username: \(username). Has runner elo of \(runnerElo) and seeker elo of \(seekerElo). Role: \(role)"
+    }
     
     enum CodingKeys: String, CodingKey {
         case id
@@ -24,20 +32,29 @@ class User: Decodable, CustomStringConvertible {
         case role
         case runnerElo = "runner_elo"
         case seekerElo = "seeker_elo"
+        case isLoggedIn
     }
     
-    var description: String {
-        return "User (id: \(id), uuid: \(uuid)) with email: \(email) and username: \(username). Has runner elo of \(runnerElo) and seeker elo of \(seekerElo). Role: \(role)"
+    private init() {
+        self.id = -1
+        self.uuid = String()
+        self.email = String()
+        self.username = String()
+        self.role = .UNKNOWN
+        self.runnerElo = Int()
+        self.seekerElo = Int()
+        self.isLoggedIn = false
     }
     
-    init(id: Int, uuid: String, email: String, username: String, role: UserRole, runnerElo: Int, seekerElo: Int) {
-        self.id = id
-        self.uuid = uuid
-        self.email = email
-        self.username = username
-        self.role = role
-        self.runnerElo = runnerElo
-        self.seekerElo = seekerElo
+    func update(with decodedUser: User) {
+        self.id = decodedUser.id
+        self.uuid = decodedUser.uuid
+        self.email = decodedUser.email
+        self.username = decodedUser.username
+        self.role = decodedUser.role
+        self.runnerElo = decodedUser.runnerElo
+        self.seekerElo = decodedUser.seekerElo
+        self.isLoggedIn = decodedUser.isLoggedIn
     }
     
     static func decode(data: Data) -> User? {

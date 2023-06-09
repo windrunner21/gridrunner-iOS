@@ -9,4 +9,5 @@ enum Response {
     case success
     case networkError
     case requestError
+    case decoderError
 }

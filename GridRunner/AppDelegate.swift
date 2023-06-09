@@ -13,6 +13,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+        
+        let session = UserDefaults.standard.value(forKey: "session")
+        if let session = session {
+            print(session)
+        } else {
+            print("No session found.")
+        }
+        
         return true
     }
 

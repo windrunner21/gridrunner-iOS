@@ -126,20 +126,22 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         
         let credentials = LoginCredentials(username: username, password: password)
         
-        AuthService().login(with: credentials) { response, user in
+        AuthService().login(with: credentials) { response in
             DispatchQueue.main.async {
                 self.signInButton.enable()
                 
                 switch response {
                 case .success:
                     self.mainViewController.dismiss(animated: true)
-                    print(user!)
+                    print(User.shared)
                 case .networkError:
                     let alert = self.alertAdapter.createNetworkErrorAlert()
                     self.present(alert, animated: true)
                 case .requestError:
                     let alert = self.alertAdapter.createServiceRequestErrorAlert()
                     self.present(alert, animated: true)
+                case .decoderError:
+                    print("to handle")
                 }
             }
         }

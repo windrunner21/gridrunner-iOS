@@ -8,4 +8,5 @@
 enum UserRole: String, Decodable {
     case ADMIN = "ADMIN"
     case USER = "USER"
+    case UNKNOWN = "UNKNOWN"
 }
