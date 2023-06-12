@@ -16,6 +16,8 @@ class MainViewController: UIViewController {
     @IBOutlet weak var profileView: UIView!
     @IBOutlet weak var emojiIconView: UIView!
     @IBOutlet weak var emojiLabel: UILabel!
+    @IBOutlet weak var rankLabel: UILabel!
+    @IBOutlet weak var usernameLabel: UILabel!
     
     @IBOutlet weak var quickPlayView: MenuItemView!
     @IBOutlet weak var rankedPlayView: MenuItemView!
@@ -23,6 +25,12 @@ class MainViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        // Check if the user is authenticated.
+        self.rankView.isHidden = !User.shared.isLoggedIn
+
+        self.rankLabel.text = "\(User.shared.runnerElo) GRank"
+        self.usernameLabel.text = User.shared.username
         
         self.rankView.transformToCircle()
         self.trophyIconView.transformToCircle()
@@ -91,6 +99,12 @@ class MainViewController: UIViewController {
         self.rankedPlayView.playNowButtonAction = { [weak self] in
             self?.startGame()
         }
+        
+        self.rankedPlayView.shouldBeEnabled(
+            if: User.shared.isLoggedIn,
+            iconAndDescription: (icon: "🥇", description: "play for rank and move up the \"best\" ladder"),
+            else: (icon: "🔒", description: "create or login into account to start playing ranked")
+        )
         
         self.roomPlayView.decorateMenuItem(
             icon: "🤝",

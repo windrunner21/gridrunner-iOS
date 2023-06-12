@@ -141,7 +141,8 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
                     let alert = self.alertAdapter.createServiceRequestErrorAlert()
                     self.present(alert, animated: true)
                 case .decoderError:
-                    print("to handle")
+                    let alert = self.alertAdapter.createDecoderErrorAlert()
+                    self.present(alert, animated: true)
                 }
             }
         }

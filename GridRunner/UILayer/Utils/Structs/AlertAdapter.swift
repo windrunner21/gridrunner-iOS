@@ -71,4 +71,20 @@ class AlertAdapter {
         
         return alert
     }
+    
+    func createDecoderErrorAlert() -> UIAlertController {
+        let alert = UIAlertController(title: "Oh no.", message: "Something went wrong. Please try again.", preferredStyle: .alert)
+        
+        alert.addAction(
+            UIAlertAction(
+                title: NSLocalizedString("OK", comment: "Default action"),
+                style: .default,
+                handler: { _ in
+                    alert.dismiss(animated: true)
+                }
+            )
+       )
+        
+        return alert
+    }
 }

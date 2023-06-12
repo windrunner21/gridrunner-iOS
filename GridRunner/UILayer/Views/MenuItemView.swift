@@ -42,6 +42,9 @@ class MenuItemView: UIView {
         self.contentView.layer.cornerRadius = 20
         self.playButton.setup()
         
+        self.playButton.setTitle("Play now", for: .normal)
+        self.playButton.setTitle("Locked", for: .disabled)
+        
         self.contentView.addElevation()
     }
     
@@ -52,7 +55,20 @@ class MenuItemView: UIView {
         guard let image = image else { return }
         self.imageView.image = UIImage(named: image)
     }
+    
+    func shouldBeEnabled(if enabled: Bool, iconAndDescription: (icon: String, description: String), else iconAndDescriptionDisabled: (icon: String, description: String)) {
+        if enabled {
+            self.contentView.alpha = 1
+            self.playModeIconLabel.text = iconAndDescription.icon
+            self.playModeDescriptionLabel.text = iconAndDescription.description
+        } else {
+            self.contentView.alpha = 0.3
+            self.playModeIconLabel.text = iconAndDescriptionDisabled.icon
+            self.playModeDescriptionLabel.text = iconAndDescriptionDisabled.description
+        }
 
+        self.playButton.shouldBeEnabled(if: enabled)
+    }
     
     @IBAction func onPlay(_ sender: Any) {
         self.playNowButtonAction?()

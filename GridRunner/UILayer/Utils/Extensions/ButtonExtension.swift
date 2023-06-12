@@ -31,4 +31,12 @@ extension UIButton {
         self.isEnabled = true
         self.backgroundColor = UIColor(named: "RedAccentColor")
     }
+    
+    func shouldBeEnabled(if enabled: Bool) {
+        if enabled {
+            self.enable()
+        } else {
+            self.disable()
+        }
+    }
 }
