@@ -305,10 +305,12 @@ class GameViewController: UIViewController {
         self.undoButton.disable()
         
         self.versusProfileView.transformToCircle()
+        self.versusProfileView.addLightBorder()
         self.versusEmojiIconView.transformToCircle()
         self.versusEmojiIconView.backgroundColor = player.type == .seeker ? UIColor(named: "RedAccentColor")?.withAlphaComponent(0.5) : UIColor(named: "FrostBlackColor")?.withAlphaComponent(0.5)
         
         self.profileView.transformToCircle()
+        self.profileView.addLightBorder()
         self.profileView.backgroundColor = .systemGreen.withAlphaComponent(0.5)
         self.emojiIconView.transformToCircle()
         self.emojiIconView.backgroundColor = player.type == .runner ? UIColor(named: "RedAccentColor")?.withAlphaComponent(0.5) : UIColor(named: "FrostBlackColor")?.withAlphaComponent(0.5)

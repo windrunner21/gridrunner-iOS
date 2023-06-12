@@ -29,9 +29,7 @@ class MainViewController: UIViewController {
         super.viewDidLoad()
         
         // Check if the user is authenticated.
-        self.rankView.isHidden = !User.shared.isLoggedIn
-        self.rankLabel.text = "\(User.shared.runnerElo) GRank"
-        self.usernameLabel.text = "@\(User.shared.username)"
+        self.checkUserAuthentication()
         
         self.rankView.transformToCircle()
         self.trophyIconView.transformToCircle()
@@ -56,7 +54,7 @@ class MainViewController: UIViewController {
     }
     
     @objc func openProfileMenu(_ gesture: UITapGestureRecognizer) {
-        self.openRegisterModal()
+        User.shared.isLoggedIn ? self.openAccountModal() : self.openRegisterModal()
     }
     
     private func startGame() {
@@ -85,6 +83,27 @@ class MainViewController: UIViewController {
         self.present(loginViewController, animated: true)
     }
     
+    private func openAccountModal() {
+        let profileStoryboard: UIStoryboard = UIStoryboard(name: "Profile", bundle: .main)
+        let profileViewController: ProfileViewController = profileStoryboard.instantiateViewController(identifier: "ProfileScreen")
+        
+        profileViewController.mainViewController = self
+        
+        self.present(profileViewController, animated: true)
+    }
+    
+    func checkUserAuthentication() {
+        // Check if the user is authenticated.
+        self.rankView.isHidden = !User.shared.isLoggedIn
+        self.rankLabel.text = "\(User.shared.runnerElo) GRank"
+        self.usernameLabel.text = "@\(User.shared.username)"
+        
+        self.rankedPlayView.shouldBeEnabled(
+            if: User.shared.isLoggedIn,
+            iconAndDescription: (icon: "🥇", description: "play for rank and move up the \"best\" ladder"),
+            else: (icon: "🔒", description: "create or login into account to start playing ranked")
+        )
+    }
     
     private func setUpMenuItems() {
         self.quickPlayView.decorateMenuItem(
@@ -144,7 +163,6 @@ extension MainViewController: UIContextMenuInteractionDelegate {
       func contextMenuInteraction(_ interaction: UIContextMenuInteraction, configurationForMenuAtLocation location: CGPoint) -> UIContextMenuConfiguration? {
         return UIContextMenuConfiguration(identifier: nil, previewProvider: nil) { suggestedActions in
             
-            
             // Create an action for signing in.
             let login = UIAction(title: "Login", image: UIImage(systemName: "door.right.hand.open")) { action in
                 self.openLoginModal()
@@ -165,7 +183,7 @@ extension MainViewController: UIContextMenuInteractionDelegate {
                     DispatchQueue.main.async {
                         switch response {
                         case .success:
-                            self.view.layoutIfNeeded()
+                            self.checkUserAuthentication()
                         case .networkError:
                             let alert = self.alertAdapter.createNetworkErrorAlert()
                             self.present(alert, animated: true)

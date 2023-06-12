@@ -132,7 +132,9 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
                 
                 switch response {
                 case .success:
-                    self.mainViewController.dismiss(animated: true)
+                    self.mainViewController.dismiss(animated: true) {
+                        self.mainViewController.checkUserAuthentication()
+                    }
                 case .networkError:
                     let alert = self.alertAdapter.createNetworkErrorAlert()
                     self.present(alert, animated: true)

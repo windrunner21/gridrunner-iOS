@@ -60,6 +60,8 @@
 		CA852A3B2A331B8300961E65 /* UserService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA852A3A2A331B8300961E65 /* UserService.swift */; };
 		CA852A3D2A370A2100961E65 /* LaunchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA852A3C2A370A2100961E65 /* LaunchViewController.swift */; };
 		CA852A3F2A370A9400961E65 /* Launch.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CA852A3E2A370A9400961E65 /* Launch.storyboard */; };
+		CA852A422A3742B200961E65 /* Profile.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CA852A412A3742B200961E65 /* Profile.storyboard */; };
+		CA852A452A3742C900961E65 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA852A442A3742C900961E65 /* ProfileViewController.swift */; };
 		CAB6EAAF2A2A086C00997852 /* ButtonExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAB6EAAE2A2A086C00997852 /* ButtonExtension.swift */; };
 		CAF8EC9F2A2DBD1A00179EF1 /* APIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAF8EC9E2A2DBD1A00179EF1 /* APIClient.swift */; };
 		CAF8ECA22A2DBD5500179EF1 /* AuthService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAF8ECA12A2DBD5500179EF1 /* AuthService.swift */; };
@@ -157,6 +159,8 @@
 		CA852A3A2A331B8300961E65 /* UserService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserService.swift; sourceTree = "<group>"; };
 		CA852A3C2A370A2100961E65 /* LaunchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchViewController.swift; sourceTree = "<group>"; };
 		CA852A3E2A370A9400961E65 /* Launch.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Launch.storyboard; sourceTree = "<group>"; };
+		CA852A412A3742B200961E65 /* Profile.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Profile.storyboard; sourceTree = "<group>"; };
+		CA852A442A3742C900961E65 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		CAB6EAAE2A2A086C00997852 /* ButtonExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonExtension.swift; sourceTree = "<group>"; };
 		CAF8EC9E2A2DBD1A00179EF1 /* APIClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIClient.swift; sourceTree = "<group>"; };
 		CAF8ECA12A2DBD5500179EF1 /* AuthService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthService.swift; sourceTree = "<group>"; };
@@ -417,6 +421,22 @@
 			path = System;
 			sourceTree = "<group>";
 		};
+		CA852A402A3742AA00961E65 /* Profile */ = {
+			isa = PBXGroup;
+			children = (
+				CA852A412A3742B200961E65 /* Profile.storyboard */,
+			);
+			path = Profile;
+			sourceTree = "<group>";
+		};
+		CA852A432A3742BF00961E65 /* Profile */ = {
+			isa = PBXGroup;
+			children = (
+				CA852A442A3742C900961E65 /* ProfileViewController.swift */,
+			);
+			path = Profile;
+			sourceTree = "<group>";
+		};
 		CAF8ECA02A2DBD2900179EF1 /* Service */ = {
 			isa = PBXGroup;
 			children = (
@@ -561,6 +581,7 @@
 		CAFED4C02A0249D700FB4B9B /* Storyboards */ = {
 			isa = PBXGroup;
 			children = (
+				CA852A402A3742AA00961E65 /* Profile */,
 				CA4E3F512A07A7FB00D36266 /* Game */,
 				CA4E3F502A07A75800D36266 /* Authentication */,
 				CAFED4972A02497000FB4B9B /* LaunchScreen.storyboard */,
@@ -572,6 +593,7 @@
 		CAFED4C12A0249DC00FB4B9B /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				CA852A432A3742BF00961E65 /* Profile */,
 				CA4E3F562A07A84800D36266 /* Game */,
 				CA4E3F552A07A84400D36266 /* Authentication */,
 				CA852A3C2A370A2100961E65 /* LaunchViewController.swift */,
@@ -689,6 +711,7 @@
 				CA0AAC862A25D6D3008367FB /* Kanit-SemiBoldItalic.ttf in Resources */,
 				CAFED4992A02497000FB4B9B /* LaunchScreen.storyboard in Resources */,
 				CA0AAC752A25D6D3008367FB /* Kanit-ExtraBoldItalic.ttf in Resources */,
+				CA852A422A3742B200961E65 /* Profile.storyboard in Resources */,
 				CA0AAC792A25D6D3008367FB /* Kanit-LightItalic.ttf in Resources */,
 				CAFED4962A02497000FB4B9B /* Assets.xcassets in Resources */,
 				CAF8ECC12A2F767600179EF1 /* Login.storyboard in Resources */,
@@ -765,6 +788,7 @@
 				CA0AAC392A0E722C008367FB /* TileType.swift in Sources */,
 				CA0AAC5F2A1B7EEF008367FB /* Move.swift in Sources */,
 				CA852A3D2A370A2100961E65 /* LaunchViewController.swift in Sources */,
+				CA852A452A3742C900961E65 /* ProfileViewController.swift in Sources */,
 				CA35E7B72A28D0B60057BAB6 /* ViewExtension.swift in Sources */,
 				CA0AAC432A166F18008367FB /* GameHistoryExamples.swift in Sources */,
 				CA0AAC612A1D1D1D008367FB /* Player.swift in Sources */,

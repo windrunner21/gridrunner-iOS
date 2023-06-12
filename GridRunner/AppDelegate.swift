@@ -49,8 +49,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 }
             }
         } else {
-            NSLog("No session found.")
-            completion(.requestError)
+            DispatchQueue.main.async {
+                NSLog("No session found.")
+                completion(.requestError)
+            }
         }
     }
 
