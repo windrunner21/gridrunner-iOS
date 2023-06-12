@@ -9,6 +9,8 @@ import UIKit
 
 class MainViewController: UIViewController {
     
+    let alertAdapter = AlertAdapter()
+    
     // Storyboard properties.
     @IBOutlet weak var rankView: UIView!
     @IBOutlet weak var trophyIconView: UIView!
@@ -158,8 +160,25 @@ extension MainViewController: UIContextMenuInteractionDelegate {
             }
     
             // Here we specify the "destructive" attribute to show that it’s destructive in nature.
-            let logout = UIAction(title: "Log out", image: UIImage(systemName: "door.right.hand.closed"), attributes: .destructive) { action in
-                // Perform logout.
+            let logout = UIAction(title: "Log out", image: UIImage(systemName: "door.right.hand.closed"), attributes: .destructive) { _ in
+                AuthService().logout { response in
+                    DispatchQueue.main.async {
+                        switch response {
+                        case .success:
+                            self.view.layoutIfNeeded()
+                        case .networkError:
+                            let alert = self.alertAdapter.createNetworkErrorAlert()
+                            self.present(alert, animated: true)
+                        case .requestError:
+                            let alert = self.alertAdapter.createServiceRequestErrorAlert()
+                            self.present(alert, animated: true)
+                        case .decoderError:
+                            let alert = self.alertAdapter.createDecoderErrorAlert()
+                            self.present(alert, animated: true)
+                        }
+
+                    }
+                }
             }
     
             // Create and return a UIMenu with all of the actions as children

@@ -57,6 +57,17 @@ class User: Decodable, CustomStringConvertible {
         self.isLoggedIn = decodedUser.isLoggedIn
     }
     
+    func remove() {
+        self.id = -1
+        self.uuid = String()
+        self.email = String()
+        self.username = String()
+        self.role = .UNKNOWN
+        self.runnerElo = Int()
+        self.seekerElo = Int()
+        self.isLoggedIn = false
+    }
+    
     static func decode(data: Data) -> User? {
         let decoder = JSONDecoder()
         

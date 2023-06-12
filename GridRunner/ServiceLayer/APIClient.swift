@@ -62,4 +62,8 @@ class APIClient {
             }
         }
     }
+    
+    func removeCookie() {
+        UserDefaults.standard.removeObject(forKey: "session")
+    }
 }

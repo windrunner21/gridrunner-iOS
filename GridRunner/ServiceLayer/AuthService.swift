@@ -33,8 +33,8 @@ class AuthService {
                     NSLog("Error occured in AuthService().login(): Cannot decode JSON to User class.")
                     completion(.decoderError)
                 }
-                
             } else {
+                NSLog("Error occured in AuthService().login(): Incorrect request.")
                 completion(.requestError)
             }
         }
@@ -61,8 +61,35 @@ class AuthService {
                     NSLog("Error occured in AuthService().register(): Cannot decode JSON to User class.")
                     completion(.decoderError)
                 }
-               
             } else {
+                NSLog("Error occured in AuthService().register(): Incorrect request.")
+                completion(.requestError)
+            }
+        }
+    }
+    
+    func logout(completion: @escaping(Response) -> Void) {
+        self.client.sendRequest(
+            path: URLPath.logout.path,
+            method: .GET
+        ) { data, response, error in
+            
+            if let error = error {
+                NSLog("Error occured in AuthService().logout(): \(error)")
+                completion(.networkError)
+            } else if let response = response as? HTTPURLResponse, response.statusCode == 200, let data = data {
+                let user = User.decode(data: data)
+                
+                if let user = user {
+                    User.shared.update(with: user)
+                    self.client.removeCookie()
+                    completion(.success)
+                } else {
+                    NSLog("Error occured in AuthService().logout(): Cannot decode JSON to User class.")
+                    completion(.decoderError)
+                }
+            } else {
+                NSLog("Error occured in AuthService().logout(): Incorrect request.")
                 completion(.requestError)
             }
         }
