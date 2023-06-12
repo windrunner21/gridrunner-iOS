@@ -95,7 +95,7 @@ class MainViewController: UIViewController {
     func checkUserAuthentication() {
         // Check if the user is authenticated.
         self.rankView.isHidden = !User.shared.isLoggedIn
-        self.rankLabel.text = "\(User.shared.runnerElo) GRank"
+        self.rankLabel.text = "\(User.shared.runnerElo) GR"
         self.usernameLabel.text = "@\(User.shared.username)"
         
         self.rankedPlayView.shouldBeEnabled(
@@ -129,12 +129,6 @@ class MainViewController: UIViewController {
         self.rankedPlayView.playNowButtonAction = { [weak self] in
             self?.startGame()
         }
-        
-        self.rankedPlayView.shouldBeEnabled(
-            if: User.shared.isLoggedIn,
-            iconAndDescription: (icon: "🥇", description: "play for rank and move up the \"best\" ladder"),
-            else: (icon: "🔒", description: "create or login into account to start playing ranked")
-        )
         
         self.roomPlayView.decorateMenuItem(
             icon: "🤝",
