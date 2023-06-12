@@ -28,9 +28,8 @@ class MainViewController: UIViewController {
         
         // Check if the user is authenticated.
         self.rankView.isHidden = !User.shared.isLoggedIn
-
         self.rankLabel.text = "\(User.shared.runnerElo) GRank"
-        self.usernameLabel.text = User.shared.username
+        self.usernameLabel.text = "@\(User.shared.username)"
         
         self.rankView.transformToCircle()
         self.trophyIconView.transformToCircle()
@@ -74,6 +73,16 @@ class MainViewController: UIViewController {
         
         self.present(registerViewController, animated: true)
     }
+    
+    private func openLoginModal() {
+        let loginStoryboard: UIStoryboard = UIStoryboard(name: "Login", bundle: .main)
+        let loginViewController: LoginViewController = loginStoryboard.instantiateViewController(identifier: "LoginScreen")
+        
+        loginViewController.mainViewController = self
+        
+        self.present(loginViewController, animated: true)
+    }
+    
     
     private func setUpMenuItems() {
         self.quickPlayView.decorateMenuItem(
@@ -133,9 +142,19 @@ extension MainViewController: UIContextMenuInteractionDelegate {
       func contextMenuInteraction(_ interaction: UIContextMenuInteraction, configurationForMenuAtLocation location: CGPoint) -> UIContextMenuConfiguration? {
         return UIContextMenuConfiguration(identifier: nil, previewProvider: nil) { suggestedActions in
             
+            
             // Create an action for signing in.
             let login = UIAction(title: "Login", image: UIImage(systemName: "door.right.hand.open")) { action in
+                self.openLoginModal()
+            }
+            
+            // Create an action for signing in.
+            let register = UIAction(title: "Register", image: UIImage(systemName: "door.right.hand.open")) { action in
                 self.openRegisterModal()
+            }
+            
+            let account = UIAction(title: "Account", image: UIImage(systemName: "person.circle.fill")) { action in
+                self.openLoginModal()
             }
     
             // Here we specify the "destructive" attribute to show that it’s destructive in nature.
@@ -144,7 +163,15 @@ extension MainViewController: UIContextMenuInteractionDelegate {
             }
     
             // Create and return a UIMenu with all of the actions as children
-            return UIMenu(title: "", children: [login, logout])
+            
+            var children: [UIMenuElement] {
+                if User.shared.isLoggedIn {
+                    return [account, logout]
+                } else {
+                    return [login, register]
+                }
+            }
+            return UIMenu(title: "", children: children)
         }
     }
 }

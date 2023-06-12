@@ -21,7 +21,7 @@ class User: Decodable, CustomStringConvertible {
     var isLoggedIn: Bool
     
     var description: String {
-        return "User (id: \(id), uuid: \(uuid)) with email: \(email) and username: \(username). Has runner elo of \(runnerElo) and seeker elo of \(seekerElo). Role: \(role)"
+        return "User (id: \(id), uuid: \(uuid)) with email: \(email) and username: \(username). Has runner elo of \(runnerElo) and seeker elo of \(seekerElo). Role: \(role). Logged in: \(isLoggedIn)."
     }
     
     enum CodingKeys: String, CodingKey {

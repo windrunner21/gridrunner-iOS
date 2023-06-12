@@ -57,7 +57,7 @@ class APIClient {
             let cookies = HTTPCookie.cookies(withResponseHeaderFields: headers, for: url)
             for cookie in cookies {
                 if cookie.name == "gridrun-session" {
-                    UserDefaults.standard.setValue(cookie, forKey: "session")
+                    UserDefaults.standard.setValue(cookie.value, forKey: "session")
                 }
             }
         }

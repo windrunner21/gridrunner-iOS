@@ -140,7 +140,6 @@ class RegisterViewController: UIViewController, UITextFieldDelegate {
                 switch response {
                 case .success:
                     self.mainViewController.dismiss(animated: true)
-                    print(User.shared)
                 case .networkError:
                     let alert = self.alertAdapter.createNetworkErrorAlert()
                     self.present(alert, animated: true)

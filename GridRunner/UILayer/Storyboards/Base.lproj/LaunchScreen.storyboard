@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Z8h-EH-icv">
-    <device id="retina4_0" orientation="landscape" appearance="light"/>
+    <device id="retina6_12" orientation="landscape" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21678"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21679"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -14,20 +14,20 @@
             <objects>
                 <viewController id="Z8h-EH-icv" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Ezi-wH-WOw">
-                        <rect key="frame" x="0.0" y="0.0" width="568" height="320"/>
+                        <rect key="frame" x="0.0" y="0.0" width="852" height="393"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="LaunchScreen" highlightedImage="LaunchScreen" translatesAutoresizingMaskIntoConstraints="NO" id="bbQ-ZK-HOR">
-                                <rect key="frame" x="0.0" y="0.0" width="568" height="320"/>
+                                <rect key="frame" x="59" y="0.0" width="734" height="372"/>
                             </imageView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="WAR-TH-oty"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="bbQ-ZK-HOR" firstAttribute="leading" secondItem="WAR-TH-oty" secondAttribute="leading" id="50Q-4l-u7c"/>
-                            <constraint firstItem="WAR-TH-oty" firstAttribute="trailing" secondItem="bbQ-ZK-HOR" secondAttribute="trailing" id="XMF-KK-Vay"/>
-                            <constraint firstItem="WAR-TH-oty" firstAttribute="bottom" secondItem="bbQ-ZK-HOR" secondAttribute="bottom" id="qCV-qU-c9d"/>
-                            <constraint firstItem="bbQ-ZK-HOR" firstAttribute="top" secondItem="WAR-TH-oty" secondAttribute="top" id="vyc-9e-yT7"/>
+                            <constraint firstItem="bbQ-ZK-HOR" firstAttribute="bottom" secondItem="WAR-TH-oty" secondAttribute="bottom" id="FPl-aW-Qml"/>
+                            <constraint firstItem="WAR-TH-oty" firstAttribute="trailing" secondItem="bbQ-ZK-HOR" secondAttribute="trailing" id="MQv-c5-KlY"/>
+                            <constraint firstItem="bbQ-ZK-HOR" firstAttribute="top" secondItem="WAR-TH-oty" secondAttribute="top" id="Oy0-Ry-Vsa"/>
+                            <constraint firstItem="bbQ-ZK-HOR" firstAttribute="leading" secondItem="WAR-TH-oty" secondAttribute="leading" id="ZiI-pg-5nI"/>
                         </constraints>
                     </view>
                 </viewController>
