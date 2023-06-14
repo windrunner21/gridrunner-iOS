@@ -83,9 +83,8 @@ class ProfileViewController: UIViewController {
                 
                 switch response {
                 case .success:
-                    self.mainViewController.dismiss(animated: true) {
-                        self.mainViewController.view.layoutIfNeeded()
-                    }
+                    self.mainViewController.checkUserAuthentication()
+                    self.mainViewController.dismiss(animated: true)
                 case .networkError:
                     let alert = self.alertAdapter.createNetworkErrorAlert()
                     self.present(alert, animated: true)
