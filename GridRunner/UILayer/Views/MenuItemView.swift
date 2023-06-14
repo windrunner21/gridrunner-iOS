@@ -35,7 +35,7 @@ class MenuItemView: UIView {
     
     private func commonInit() {
         Bundle.main.loadNibNamed("MenuItem", owner: self)
-        addSubview(contentView)
+        self.addSubview(contentView)
         self.contentView.frame = self.bounds
         self.contentView.autoresizingMask = [.flexibleHeight, .flexibleWidth]
         

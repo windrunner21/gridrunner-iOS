@@ -62,6 +62,12 @@
 		CA852A3F2A370A9400961E65 /* Launch.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CA852A3E2A370A9400961E65 /* Launch.storyboard */; };
 		CA852A422A3742B200961E65 /* Profile.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CA852A412A3742B200961E65 /* Profile.storyboard */; };
 		CA852A452A3742C900961E65 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA852A442A3742C900961E65 /* ProfileViewController.swift */; };
+		CA852A492A38626100961E65 /* Ably in Frameworks */ = {isa = PBXBuildFile; productRef = CA852A482A38626100961E65 /* Ably */; };
+		CA852A4B2A38655A00961E65 /* AblyService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA852A4A2A38655A00961E65 /* AblyService.swift */; };
+		CA852A4D2A387D6200961E65 /* LoaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA852A4C2A387D6200961E65 /* LoaderView.swift */; };
+		CA852A4F2A387D6F00961E65 /* Loader.xib in Resources */ = {isa = PBXBuildFile; fileRef = CA852A4E2A387D6F00961E65 /* Loader.xib */; };
+		CA852A512A39ABC600961E65 /* GameType.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA852A502A39ABC600961E65 /* GameType.swift */; };
+		CA852A542A39ABF900961E65 /* GameTypeExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA852A532A39ABF900961E65 /* GameTypeExtension.swift */; };
 		CAB6EAAF2A2A086C00997852 /* ButtonExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAB6EAAE2A2A086C00997852 /* ButtonExtension.swift */; };
 		CAF8EC9F2A2DBD1A00179EF1 /* APIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAF8EC9E2A2DBD1A00179EF1 /* APIClient.swift */; };
 		CAF8ECA22A2DBD5500179EF1 /* AuthService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAF8ECA12A2DBD5500179EF1 /* AuthService.swift */; };
@@ -161,6 +167,11 @@
 		CA852A3E2A370A9400961E65 /* Launch.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Launch.storyboard; sourceTree = "<group>"; };
 		CA852A412A3742B200961E65 /* Profile.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Profile.storyboard; sourceTree = "<group>"; };
 		CA852A442A3742C900961E65 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
+		CA852A4A2A38655A00961E65 /* AblyService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AblyService.swift; sourceTree = "<group>"; };
+		CA852A4C2A387D6200961E65 /* LoaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoaderView.swift; sourceTree = "<group>"; };
+		CA852A4E2A387D6F00961E65 /* Loader.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = Loader.xib; sourceTree = "<group>"; };
+		CA852A502A39ABC600961E65 /* GameType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameType.swift; sourceTree = "<group>"; };
+		CA852A532A39ABF900961E65 /* GameTypeExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameTypeExtension.swift; sourceTree = "<group>"; };
 		CAB6EAAE2A2A086C00997852 /* ButtonExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonExtension.swift; sourceTree = "<group>"; };
 		CAF8EC9E2A2DBD1A00179EF1 /* APIClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIClient.swift; sourceTree = "<group>"; };
 		CAF8ECA12A2DBD5500179EF1 /* AuthService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthService.swift; sourceTree = "<group>"; };
@@ -196,6 +207,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CA852A492A38626100961E65 /* Ably in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -271,6 +283,7 @@
 		CA0AAC872A25DF74008367FB /* Utils */ = {
 			isa = PBXGroup;
 			children = (
+				CA852A522A39ABEA00961E65 /* Extensions */,
 				CA0AAC882A25DF8C008367FB /* ProfileIcon.swift */,
 			);
 			path = Utils;
@@ -281,6 +294,8 @@
 			children = (
 				CA0AAC8D2A26219B008367FB /* MenuItemView.swift */,
 				CA0AAC932A2621E7008367FB /* MenuItem.xib */,
+				CA852A4C2A387D6200961E65 /* LoaderView.swift */,
+				CA852A4E2A387D6F00961E65 /* Loader.xib */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -417,6 +432,7 @@
 			isa = PBXGroup;
 			children = (
 				CA852A382A30B19100961E65 /* UserRole.swift */,
+				CA852A502A39ABC600961E65 /* GameType.swift */,
 			);
 			path = System;
 			sourceTree = "<group>";
@@ -437,12 +453,21 @@
 			path = Profile;
 			sourceTree = "<group>";
 		};
+		CA852A522A39ABEA00961E65 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				CA852A532A39ABF900961E65 /* GameTypeExtension.swift */,
+			);
+			name = Extensions;
+			sourceTree = "<group>";
+		};
 		CAF8ECA02A2DBD2900179EF1 /* Service */ = {
 			isa = PBXGroup;
 			children = (
 				CAF8ECA12A2DBD5500179EF1 /* AuthService.swift */,
 				CAF8ECA32A2DBD6700179EF1 /* GameService.swift */,
 				CA852A3A2A331B8300961E65 /* UserService.swift */,
+				CA852A4A2A38655A00961E65 /* AblyService.swift */,
 			);
 			name = Service;
 			sourceTree = "<group>";
@@ -617,6 +642,9 @@
 			dependencies = (
 			);
 			name = GridRunner;
+			packageProductDependencies = (
+				CA852A482A38626100961E65 /* Ably */,
+			);
 			productName = GridRunner;
 			productReference = CAFED4892A02496E00FB4B9B /* GridRunner.app */;
 			productType = "com.apple.product-type.application";
@@ -689,6 +717,9 @@
 				Base,
 			);
 			mainGroup = CAFED4802A02496E00FB4B9B;
+			packageReferences = (
+				CA852A472A38626100961E65 /* XCRemoteSwiftPackageReference "ably-cocoa" */,
+			);
 			productRefGroup = CAFED48A2A02496E00FB4B9B /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -707,6 +738,7 @@
 			files = (
 				CA0AAC802A25D6D3008367FB /* Kanit-ExtraLight.ttf in Resources */,
 				CA0AAC942A2621E7008367FB /* MenuItem.xib in Resources */,
+				CA852A4F2A387D6F00961E65 /* Loader.xib in Resources */,
 				CA4E3F542A07A80E00D36266 /* Game.storyboard in Resources */,
 				CA0AAC862A25D6D3008367FB /* Kanit-SemiBoldItalic.ttf in Resources */,
 				CAFED4992A02497000FB4B9B /* LaunchScreen.storyboard in Resources */,
@@ -765,10 +797,12 @@
 				CA0AAC3D2A121EE2008367FB /* MoveDirection.swift in Sources */,
 				CA0AAC342A0E6395008367FB /* Map.swift in Sources */,
 				CAF8ECAE2A2DC38200179EF1 /* Method.swift in Sources */,
+				CA852A4B2A38655A00961E65 /* AblyService.swift in Sources */,
 				CAF8ECB52A2E1FCE00179EF1 /* LoginCredentials.swift in Sources */,
 				CA852A392A30B19100961E65 /* UserRole.swift in Sources */,
 				CA0AAC8E2A26219B008367FB /* MenuItemView.swift in Sources */,
 				CAF8ECBD2A2F6CFC00179EF1 /* ActivityIndicatorExtension.swift in Sources */,
+				CA852A4D2A387D6200961E65 /* LoaderView.swift in Sources */,
 				CA4E3F5C2A07BBF100D36266 /* PlayerType.swift in Sources */,
 				CA0AAC5D2A1B7EE6008367FB /* Turn.swift in Sources */,
 				CA4E3F582A07A85900D36266 /* GameViewController.swift in Sources */,
@@ -783,7 +817,9 @@
 				CAFED4912A02496E00FB4B9B /* MainViewController.swift in Sources */,
 				CAF8ECA22A2DBD5500179EF1 /* AuthService.swift in Sources */,
 				CA4E3F662A0BCD3300D36266 /* MapExits.swift in Sources */,
+				CA852A512A39ABC600961E65 /* GameType.swift in Sources */,
 				CAF8ECB12A2DC5BD00179EF1 /* RequestInterceptor.swift in Sources */,
+				CA852A542A39ABF900961E65 /* GameTypeExtension.swift in Sources */,
 				CA0AAC3B2A0E7528008367FB /* AnyPowerUp.swift in Sources */,
 				CA0AAC392A0E722C008367FB /* TileType.swift in Sources */,
 				CA0AAC5F2A1B7EEF008367FB /* Move.swift in Sources */,
@@ -1160,6 +1196,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		CA852A472A38626100961E65 /* XCRemoteSwiftPackageReference "ably-cocoa" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/ably/ably-cocoa";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		CA852A482A38626100961E65 /* Ably */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = CA852A472A38626100961E65 /* XCRemoteSwiftPackageReference "ably-cocoa" */;
+			productName = Ably;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = CAFED4812A02496E00FB4B9B /* Project object */;
 }

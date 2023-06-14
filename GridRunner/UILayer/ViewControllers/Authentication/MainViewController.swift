@@ -10,6 +10,7 @@ import UIKit
 class MainViewController: UIViewController {
     
     let alertAdapter = AlertAdapter()
+    let loader = LoaderView(frame: CGRect(x: UIScreen.main.bounds.width / 2 - 150, y: 0, width: 300, height: 150))
     
     // Storyboard properties.
     @IBOutlet weak var rankView: UIView!
@@ -54,7 +55,13 @@ class MainViewController: UIViewController {
     }
     
     @objc func openProfileMenu(_ gesture: UITapGestureRecognizer) {
-        User.shared.isLoggedIn ? self.openAccountModal() : self.openRegisterModal()
+        User.shared.isLoggedIn ? self.openAccountScreen() : self.openRegisterScreen()
+    }
+    
+    private func searchGame(by gameType: GameType) {
+        loader.setup(with: gameType, and: "Searching for opponents...")
+        self.view.addSubview(loader)
+        loader.slideIn()
     }
     
     private func startGame() {
@@ -65,7 +72,7 @@ class MainViewController: UIViewController {
         sceneDelegate?.transitionViewController.transition(to: gameViewController, with: [.transitionCurlUp])
     }
     
-    private func openRegisterModal() {
+    private func openRegisterScreen() {
         let registerStoryboard: UIStoryboard = UIStoryboard(name: "Register", bundle: .main)
         let registerViewController: RegisterViewController = registerStoryboard.instantiateViewController(identifier: "RegisterScreen")
         
@@ -74,7 +81,7 @@ class MainViewController: UIViewController {
         self.present(registerViewController, animated: true)
     }
     
-    private func openLoginModal() {
+    private func openLoginScreen() {
         let loginStoryboard: UIStoryboard = UIStoryboard(name: "Login", bundle: .main)
         let loginViewController: LoginViewController = loginStoryboard.instantiateViewController(identifier: "LoginScreen")
         
@@ -83,7 +90,7 @@ class MainViewController: UIViewController {
         self.present(loginViewController, animated: true)
     }
     
-    private func openAccountModal() {
+    private func openAccountScreen() {
         let profileStoryboard: UIStoryboard = UIStoryboard(name: "Profile", bundle: .main)
         let profileViewController: ProfileViewController = profileStoryboard.instantiateViewController(identifier: "ProfileScreen")
         
@@ -116,7 +123,7 @@ class MainViewController: UIViewController {
         self.transformWhite(view: self.quickPlayView, angle: 1.5)
         
         self.quickPlayView.playNowButtonAction = { [weak self] in
-            self?.startGame()
+            self?.searchGame(by: .quickplay)
         }
         
         self.rankedPlayView.decorateMenuItem(
@@ -127,7 +134,7 @@ class MainViewController: UIViewController {
         )
         
         self.rankedPlayView.playNowButtonAction = { [weak self] in
-            self?.startGame()
+            self?.searchGame(by: .rankedplay)
         }
         
         self.roomPlayView.decorateMenuItem(
@@ -138,7 +145,9 @@ class MainViewController: UIViewController {
         )
         
         self.roomPlayView.playNowButtonAction = { [weak self] in
-            self?.startGame()
+            let actionSheet = self?.alertAdapter.createEnterRoomAlert()
+            self?.present(actionSheet!, animated: true)
+            //self?.startGame()
         }
         
         self.transformWhite(view: self.roomPlayView, angle: -1.5)
@@ -159,16 +168,16 @@ extension MainViewController: UIContextMenuInteractionDelegate {
             
             // Create an action for signing in.
             let login = UIAction(title: "Login", image: UIImage(systemName: "door.right.hand.open")) { action in
-                self.openLoginModal()
+                self.openLoginScreen()
             }
             
             // Create an action for signing in.
             let register = UIAction(title: "Register", image: UIImage(systemName: "door.right.hand.open")) { action in
-                self.openRegisterModal()
+                self.openRegisterScreen()
             }
             
             let account = UIAction(title: "Account", image: UIImage(systemName: "person.circle.fill")) { action in
-                self.openLoginModal()
+                self.openAccountScreen()
             }
     
             // Here we specify the "destructive" attribute to show that it’s destructive in nature.
@@ -194,7 +203,6 @@ extension MainViewController: UIContextMenuInteractionDelegate {
             }
     
             // Create and return a UIMenu with all of the actions as children
-            
             var children: [UIMenuElement] {
                 if User.shared.isLoggedIn {
                     return [account, logout]
@@ -202,6 +210,7 @@ extension MainViewController: UIContextMenuInteractionDelegate {
                     return [login, register]
                 }
             }
+            
             return UIMenu(title: "", children: children)
         }
     }

@@ -25,20 +25,31 @@ class APIClient {
         method: HTTPMethod,
         parameters: Data? = nil,
         headers: [String: String]? = nil,
+        cookies: (name: String, value: String?)? = nil,
         customInterceptor: RequestInterceptor? = nil,
         completion: @escaping(Data?, URLResponse?, Error?) -> Void) {
             let url = URL(string: baseURL.url + path)!
             
             var request = URLRequest(url: url)
             
+            // Handle method.
             request.httpMethod = method.rawValue
             
+            // Handle custom headers.
             request.allHTTPHeaderFields = headers
             request.addValue("application/json", forHTTPHeaderField: "Content-Type")
             request.addValue("application/json", forHTTPHeaderField: "Accept")
             
+            // Handle cookies.
+            if let cookies = cookies, let cookieValue = cookies.value  {
+                request.httpShouldHandleCookies = true
+                request.setValue("\(cookies.name)=\(cookieValue)", forHTTPHeaderField: "Cookie")
+            }
+            
+            // Handle body.
             request.httpBody = parameters
             
+            // Handle custom interceptors.
             if let customInterceptor = customInterceptor {
                 customInterceptor.intercept(request: &request)
             } else if let interceptor = self.interceptor {

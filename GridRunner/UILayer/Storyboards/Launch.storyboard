@@ -10,8 +10,8 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <customFonts key="customFonts">
-        <array key="Kanit-SemiBold.ttf">
-            <string>Kanit-SemiBold</string>
+        <array key="Kanit-Medium.ttf">
+            <string>Kanit-Medium</string>
         </array>
     </customFonts>
     <scenes>
@@ -24,16 +24,16 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="OlY-Sg-Tqj">
-                                <rect key="frame" x="374.33333333333331" y="160" width="103.66666666666669" height="73"/>
+                                <rect key="frame" x="375.33333333333331" y="160" width="101.66666666666669" height="73"/>
                                 <subviews>
                                     <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" animating="YES" style="large" translatesAutoresizingMaskIntoConstraints="NO" id="yyH-9w-gL3">
-                                        <rect key="frame" x="33.333333333333371" y="0.0" width="37" height="37"/>
+                                        <rect key="frame" x="32.333333333333371" y="0.0" width="37" height="37"/>
                                         <color key="tintColor" name="RedAccentColor"/>
                                         <color key="color" name="FrostBlackColor"/>
                                     </activityIndicatorView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Loading..." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="djB-Km-HKr">
-                                        <rect key="frame" x="0.0" y="37" width="103.66666666666667" height="36"/>
-                                        <fontDescription key="fontDescription" name="Kanit-SemiBold" family="Kanit SemiBold" pointSize="24"/>
+                                        <rect key="frame" x="0.0" y="37" width="101.66666666666667" height="36"/>
+                                        <fontDescription key="fontDescription" name="Kanit-Medium" family="Kanit Medium" pointSize="24"/>
                                         <color key="textColor" name="FrostBlackColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>

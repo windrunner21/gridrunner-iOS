@@ -87,4 +87,20 @@ class AlertAdapter {
         
         return alert
     }
+    
+    func createEnterRoomAlert() -> UIAlertController {
+        let actionSheet = UIAlertController(title: "Enter room code", message: "Need to enter room code", preferredStyle: .actionSheet)
+        
+        actionSheet.addAction(
+            UIAlertAction(
+                title: "OK",
+                style: .default,
+                handler: { _ in
+                    actionSheet.dismiss(animated: true)
+                }
+            )
+        )
+        
+        return actionSheet
+    }
 }
