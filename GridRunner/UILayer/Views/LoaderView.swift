@@ -8,7 +8,7 @@
 import UIKit
 
 class LoaderView: UIView {
-    
+
     private let overlayView = UIView()
     
     // Main view to display inside parent UIViewController.
@@ -53,6 +53,7 @@ class LoaderView: UIView {
     
     @IBAction func onCancel(_ sender: Any) {
         self.slideOut()
+        AblyService.shared.leaveQueue()
     }
     
     func setup(with gameType: GameType, and label: String) {

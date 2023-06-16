@@ -33,13 +33,13 @@
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <subviews>
                 <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="Ck2-09-KJx">
-                    <rect key="frame" x="20" y="20" width="331" height="80"/>
+                    <rect key="frame" x="132.33333333333334" y="20" width="106.66666666666666" height="80"/>
                     <subviews>
                         <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" animating="YES" style="large" translatesAutoresizingMaskIntoConstraints="NO" id="alq-Lx-BKy">
                             <rect key="frame" x="0.0" y="21.666666666666664" width="37" height="37"/>
                         </activityIndicatorView>
                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" translatesAutoresizingMaskIntoConstraints="NO" id="MUK-LV-5F0" userLabel="Text">
-                            <rect key="frame" x="57" y="14.666666666666664" width="274" height="50.999999999999993"/>
+                            <rect key="frame" x="57" y="14.666666666666664" width="49.666666666666657" height="50.999999999999993"/>
                             <subviews>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sKx-Wk-jCS">
                                     <rect key="frame" x="0.0" y="0.0" width="41.333333333333336" height="30"/>
@@ -72,12 +72,11 @@
             <color key="backgroundColor" name="BackgroundColor"/>
             <constraints>
                 <constraint firstAttribute="bottom" secondItem="NRF-EJ-Mzv" secondAttribute="bottom" id="3na-92-DDT"/>
-                <constraint firstItem="Ck2-09-KJx" firstAttribute="leading" secondItem="YYs-zZ-43Y" secondAttribute="leading" constant="20" id="BmN-NE-gWI"/>
                 <constraint firstItem="Ck2-09-KJx" firstAttribute="top" secondItem="YYs-zZ-43Y" secondAttribute="top" constant="20" id="HP2-UA-cTE"/>
                 <constraint firstItem="NRF-EJ-Mzv" firstAttribute="top" secondItem="Ck2-09-KJx" secondAttribute="bottom" constant="20" id="J5P-3j-GqV"/>
-                <constraint firstAttribute="trailing" secondItem="Ck2-09-KJx" secondAttribute="trailing" constant="20" id="RcH-5K-vhi"/>
                 <constraint firstItem="NRF-EJ-Mzv" firstAttribute="leading" secondItem="YYs-zZ-43Y" secondAttribute="leading" id="Tr2-fC-ZhU"/>
                 <constraint firstAttribute="trailing" secondItem="NRF-EJ-Mzv" secondAttribute="trailing" id="dZ4-Ri-dvi"/>
+                <constraint firstItem="Ck2-09-KJx" firstAttribute="centerX" secondItem="YYs-zZ-43Y" secondAttribute="centerX" id="dkf-63-yyD"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <point key="canvasLocation" x="302.46478873239437" y="-587.02290076335873"/>

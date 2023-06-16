@@ -126,7 +126,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         
         let credentials = LoginCredentials(username: username, password: password)
         
-        AuthService().login(with: credentials) { response in
+        AuthService.shared.login(with: credentials) { response in
             DispatchQueue.main.async {
                 self.signInButton.enable()
                 

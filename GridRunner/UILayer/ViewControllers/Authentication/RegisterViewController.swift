@@ -133,7 +133,7 @@ class RegisterViewController: UIViewController, UITextFieldDelegate {
         }
         
         let credentials = RegisterCredentials(username: username,password: password, email: email)
-        AuthService().register(with: credentials) { response in
+        AuthService.shared.register(with: credentials) { response in
             DispatchQueue.main.async {
                 self.signUpButton.enable()
                 

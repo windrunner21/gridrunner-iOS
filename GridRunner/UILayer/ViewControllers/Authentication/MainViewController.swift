@@ -52,6 +52,13 @@ class MainViewController: UIViewController {
     
         // Decorate and set up visually menu items.
         self.setUpMenuItems()
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(openGameScreen), name: NSNotification.Name("Success::Matchmaking"), object: nil)
+
+    }
+    
+    @objc func openGameScreen(_ notification: Notification) {
+        self.startGame()
     }
     
     @objc func openProfileMenu(_ gesture: UITapGestureRecognizer) {
@@ -59,9 +66,49 @@ class MainViewController: UIViewController {
     }
     
     private func searchGame(by gameType: GameType) {
-        loader.setup(with: gameType, and: "Searching for opponents...")
+        self.loader.setup(with: gameType, and: "Searching for opponents...")
         self.view.addSubview(loader)
-        loader.slideIn()
+        self.loader.slideIn()
+        
+        AblyJWTService().getJWT() { response, token in
+            
+            switch response {
+            case .success:
+                guard let token = token else {
+                    DispatchQueue.main.async {
+                        let alert = self.alertAdapter.createNetworkErrorAlert()
+                        self.present(alert, animated: true)
+                    }
+                    return
+                }
+                
+                let channelName: String = {
+                    switch gameType {
+                    case .quickplay:
+                        return "quick-play-queue"
+                    case .rankedplay:
+                        return "ranked-play-queue"
+                    case .roomplay:
+                        return "quick-play-queue"
+                    }
+                }()
+                
+                AblyService.shared.update(with: token, and: channelName)
+                AblyService.shared.enterQueue()
+            case .requestError:
+                DispatchQueue.main.async {
+                    self.loader.slideOut()
+                    let alert = self.alertAdapter.createServiceRequestErrorAlert()
+                    self.present(alert, animated: true)
+                }
+            default:
+                DispatchQueue.main.async {
+                    self.loader.slideOut()
+                    let alert = self.alertAdapter.createNetworkErrorAlert()
+                    self.present(alert, animated: true)
+                }
+            }
+        }
     }
     
     private func startGame() {
@@ -182,7 +229,7 @@ extension MainViewController: UIContextMenuInteractionDelegate {
     
             // Here we specify the "destructive" attribute to show that it’s destructive in nature.
             let logout = UIAction(title: "Log out", image: UIImage(systemName: "door.right.hand.closed"), attributes: .destructive) { _ in
-                AuthService().logout { response in
+                AuthService.shared.logout { response in
                     DispatchQueue.main.async {
                         switch response {
                         case .success:

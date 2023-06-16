@@ -32,6 +32,8 @@ class GameViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        AblyService.shared.startGame()
+        
         self.setupCancelButton()
         self.initializeGame()
         self.decorateViews()

@@ -76,8 +76,7 @@ class ProfileViewController: UIViewController {
     
     @IBAction func onLogout(_ sender: Any) {
         self.logoutButton.disable()
-        
-        AuthService().logout { response in
+        AuthService.shared.logout { response in
             DispatchQueue.main.async {
                 self.logoutButton.enable()
                 

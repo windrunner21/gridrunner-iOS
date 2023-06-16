@@ -8,9 +8,11 @@
 import Foundation
 
 class AuthService {
-    let client = APIClient(baseURL: .serverless)
-    let loginURL = URL(string: BaseURL.serverless.url + URLPath.login.path)!
-    let registerURL = URL(string: BaseURL.serverless.url + URLPath.register.path)!
+    static let shared = AuthService()
+    
+    private let client = APIClient(baseURL: .serverless)
+    private let loginURL = URL(string: BaseURL.serverless.url + URLPath.login.path)!
+    private let registerURL = URL(string: BaseURL.serverless.url + URLPath.register.path)!
     
     func login(with credentials: LoginCredentials, completion: @escaping(Response) -> Void) {
         self.client.sendRequest(

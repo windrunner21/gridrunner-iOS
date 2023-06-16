@@ -9,7 +9,11 @@ enum URLPath {
     case login
     case register
     case logout
+    
     case user
+    
+    case createRoom
+    case joinRoom
 }
 
 extension URLPath {
@@ -23,6 +27,10 @@ extension URLPath {
             return "/logout"
         case .user:
             return "/user"
+        case .createRoom:
+            return "/grid/createGridRoom"
+        case .joinRoom:
+            return "/grid/joinGridRoom"
         }
     }
 }

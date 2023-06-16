@@ -63,11 +63,13 @@
 		CA852A422A3742B200961E65 /* Profile.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CA852A412A3742B200961E65 /* Profile.storyboard */; };
 		CA852A452A3742C900961E65 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA852A442A3742C900961E65 /* ProfileViewController.swift */; };
 		CA852A492A38626100961E65 /* Ably in Frameworks */ = {isa = PBXBuildFile; productRef = CA852A482A38626100961E65 /* Ably */; };
-		CA852A4B2A38655A00961E65 /* AblyService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA852A4A2A38655A00961E65 /* AblyService.swift */; };
+		CA852A4B2A38655A00961E65 /* AblyJWTService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA852A4A2A38655A00961E65 /* AblyJWTService.swift */; };
 		CA852A4D2A387D6200961E65 /* LoaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA852A4C2A387D6200961E65 /* LoaderView.swift */; };
 		CA852A4F2A387D6F00961E65 /* Loader.xib in Resources */ = {isa = PBXBuildFile; fileRef = CA852A4E2A387D6F00961E65 /* Loader.xib */; };
 		CA852A512A39ABC600961E65 /* GameType.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA852A502A39ABC600961E65 /* GameType.swift */; };
 		CA852A542A39ABF900961E65 /* GameTypeExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA852A532A39ABF900961E65 /* GameTypeExtension.swift */; };
+		CA852A582A39C96D00961E65 /* AblyService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA852A572A39C96D00961E65 /* AblyService.swift */; };
+		CA852A5A2A3C4E9400961E65 /* GameSessionDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA852A592A3C4E9400961E65 /* GameSessionDetails.swift */; };
 		CAB6EAAF2A2A086C00997852 /* ButtonExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAB6EAAE2A2A086C00997852 /* ButtonExtension.swift */; };
 		CAF8EC9F2A2DBD1A00179EF1 /* APIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAF8EC9E2A2DBD1A00179EF1 /* APIClient.swift */; };
 		CAF8ECA22A2DBD5500179EF1 /* AuthService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAF8ECA12A2DBD5500179EF1 /* AuthService.swift */; };
@@ -167,11 +169,13 @@
 		CA852A3E2A370A9400961E65 /* Launch.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Launch.storyboard; sourceTree = "<group>"; };
 		CA852A412A3742B200961E65 /* Profile.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Profile.storyboard; sourceTree = "<group>"; };
 		CA852A442A3742C900961E65 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
-		CA852A4A2A38655A00961E65 /* AblyService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AblyService.swift; sourceTree = "<group>"; };
+		CA852A4A2A38655A00961E65 /* AblyJWTService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AblyJWTService.swift; sourceTree = "<group>"; };
 		CA852A4C2A387D6200961E65 /* LoaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoaderView.swift; sourceTree = "<group>"; };
 		CA852A4E2A387D6F00961E65 /* Loader.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = Loader.xib; sourceTree = "<group>"; };
 		CA852A502A39ABC600961E65 /* GameType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameType.swift; sourceTree = "<group>"; };
 		CA852A532A39ABF900961E65 /* GameTypeExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameTypeExtension.swift; sourceTree = "<group>"; };
+		CA852A572A39C96D00961E65 /* AblyService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AblyService.swift; sourceTree = "<group>"; };
+		CA852A592A3C4E9400961E65 /* GameSessionDetails.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameSessionDetails.swift; sourceTree = "<group>"; };
 		CAB6EAAE2A2A086C00997852 /* ButtonExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonExtension.swift; sourceTree = "<group>"; };
 		CAF8EC9E2A2DBD1A00179EF1 /* APIClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIClient.swift; sourceTree = "<group>"; };
 		CAF8ECA12A2DBD5500179EF1 /* AuthService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthService.swift; sourceTree = "<group>"; };
@@ -461,13 +465,21 @@
 			name = Extensions;
 			sourceTree = "<group>";
 		};
+		CA852A552A39C94500961E65 /* Ably */ = {
+			isa = PBXGroup;
+			children = (
+				CA852A572A39C96D00961E65 /* AblyService.swift */,
+			);
+			name = Ably;
+			sourceTree = "<group>";
+		};
 		CAF8ECA02A2DBD2900179EF1 /* Service */ = {
 			isa = PBXGroup;
 			children = (
 				CAF8ECA12A2DBD5500179EF1 /* AuthService.swift */,
 				CAF8ECA32A2DBD6700179EF1 /* GameService.swift */,
 				CA852A3A2A331B8300961E65 /* UserService.swift */,
-				CA852A4A2A38655A00961E65 /* AblyService.swift */,
+				CA852A4A2A38655A00961E65 /* AblyJWTService.swift */,
 			);
 			name = Service;
 			sourceTree = "<group>";
@@ -499,6 +511,7 @@
 				CAF8ECA82A2DBF9400179EF1 /* User.swift */,
 				CAF8ECB42A2E1FCE00179EF1 /* LoginCredentials.swift */,
 				CAF8ECB62A2E1FDE00179EF1 /* RegisterCredentials.swift */,
+				CA852A592A3C4E9400961E65 /* GameSessionDetails.swift */,
 			);
 			name = Classes;
 			sourceTree = "<group>";
@@ -576,6 +589,7 @@
 		CAFED4BD2A0249C800FB4B9B /* ServiceLayer */ = {
 			isa = PBXGroup;
 			children = (
+				CA852A552A39C94500961E65 /* Ably */,
 				CAF8ECA72A2DBF8600179EF1 /* Models */,
 				CAF8ECA02A2DBD2900179EF1 /* Service */,
 				CAF8EC9E2A2DBD1A00179EF1 /* APIClient.swift */,
@@ -790,6 +804,7 @@
 			files = (
 				CAF8ECA42A2DBD6700179EF1 /* GameService.swift in Sources */,
 				CA4E3F692A0CE31200D36266 /* TransitionViewController.swift in Sources */,
+				CA852A5A2A3C4E9400961E65 /* GameSessionDetails.swift in Sources */,
 				CAF8ECBF2A2F741900179EF1 /* URLPath.swift in Sources */,
 				CAF8ECB92A2E205700179EF1 /* Credentials.swift in Sources */,
 				CA852A332A30ABB700961E65 /* Response.swift in Sources */,
@@ -797,7 +812,7 @@
 				CA0AAC3D2A121EE2008367FB /* MoveDirection.swift in Sources */,
 				CA0AAC342A0E6395008367FB /* Map.swift in Sources */,
 				CAF8ECAE2A2DC38200179EF1 /* Method.swift in Sources */,
-				CA852A4B2A38655A00961E65 /* AblyService.swift in Sources */,
+				CA852A4B2A38655A00961E65 /* AblyJWTService.swift in Sources */,
 				CAF8ECB52A2E1FCE00179EF1 /* LoginCredentials.swift in Sources */,
 				CA852A392A30B19100961E65 /* UserRole.swift in Sources */,
 				CA0AAC8E2A26219B008367FB /* MenuItemView.swift in Sources */,
@@ -831,6 +846,7 @@
 				CAF8ECA92A2DBF9400179EF1 /* User.swift in Sources */,
 				CA4E3F602A0891F300D36266 /* RegisterViewController.swift in Sources */,
 				CAF8ECB72A2E1FDE00179EF1 /* RegisterCredentials.swift in Sources */,
+				CA852A582A39C96D00961E65 /* AblyService.swift in Sources */,
 				CAF8ECC32A2F78A600179EF1 /* LoginViewController.swift in Sources */,
 				CA0AAC302A0E484F008367FB /* Coordinate.swift in Sources */,
 				CA0AAC5B2A1B7EDF008367FB /* History.swift in Sources */,

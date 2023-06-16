@@ -8,8 +8,10 @@
 import Foundation
 
 class UserService {
-    let client = APIClient(baseURL: .serverless)
-    let userURL = URL(string: BaseURL.serverless.url + URLPath.user.path)!
+    static let shared = UserService()
+    
+    private let client = APIClient(baseURL: .serverless)
+    private let userURL = URL(string: BaseURL.serverless.url + URLPath.user.path)!
     
     func getUser(completion: @escaping(Response)-> Void) {
         self.client.sendRequest(
