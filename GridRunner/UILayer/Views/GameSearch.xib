@@ -19,7 +19,7 @@
         </array>
     </customFonts>
     <objects>
-        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="LoaderView" customModule="GridRunner" customModuleProvider="target">
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="GameSearchView" customModule="GridRunner" customModuleProvider="target">
             <connections>
                 <outlet property="actionLabel" destination="uMQ-7U-nQ1" id="ST5-3b-0G2"/>
                 <outlet property="cancelButton" destination="NRF-EJ-Mzv" id="gZH-Ue-7bd"/>

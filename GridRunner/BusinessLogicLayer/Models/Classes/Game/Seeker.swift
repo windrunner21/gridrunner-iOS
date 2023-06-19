@@ -10,10 +10,6 @@ class Seeker: Player, AnyPlayer {
     
     override init(at position: Coordinate) {
         super.init(at: position)
-        
-        // set number and maximum number of moves on Seeker initialization
-        self.updateNumberOfMoves(to: 1)
-        self.updateMaximumNumberOfMoves(to: 1)
     }
     
     func move(from oldTile: Tile? = nil, to newTile: Tile) {

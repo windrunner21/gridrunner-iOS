@@ -39,6 +39,7 @@ class AblyService {
     
     func enterGame() {
         self.leaveQueue()
+        
         if client.connection.state == .connected {
             self._enterGame()
         } else {
@@ -86,7 +87,10 @@ class AblyService {
             print(String(describing: message.data))
             if let data = message.data as? [String: Any] {
                 if let payload = GameConfig.toJSONAndDecode(data: data, type: GameConfig.self) {
-                    print(payload)
+                    GameConfig.shared.update(with: payload)
+                    DispatchQueue.main.async {
+                        NotificationCenter.default.post(name: NSNotification.Name("Success:GameConfig"), object: nil)
+                    }
                 }
             }
             

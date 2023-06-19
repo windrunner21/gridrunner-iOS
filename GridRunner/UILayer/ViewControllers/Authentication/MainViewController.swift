@@ -10,7 +10,7 @@ import UIKit
 class MainViewController: UIViewController {
     
     let alertAdapter = AlertAdapter()
-    let loader = LoaderView(frame: CGRect(x: UIScreen.main.bounds.width / 2 - 150, y: 0, width: 300, height: 150))
+    let gameSearchView = GameSearchView(frame: CGRect(x: UIScreen.main.bounds.width / 2 - 150, y: 0, width: 300, height: 150))
     
     // Storyboard properties.
     @IBOutlet weak var rankView: UIView!
@@ -66,9 +66,9 @@ class MainViewController: UIViewController {
     }
     
     private func searchGame(by gameType: GameType) {
-        self.loader.setup(with: gameType, and: "Searching for opponents...")
-        self.view.addSubview(loader)
-        self.loader.slideIn()
+        self.gameSearchView.setup(with: gameType, and: "Searching for opponents...")
+        self.view.addSubview(gameSearchView)
+        self.gameSearchView.slideIn()
         
         AblyJWTService().getJWT() { response, token in
             
@@ -97,13 +97,13 @@ class MainViewController: UIViewController {
                 AblyService.shared.enterQueue()
             case .requestError:
                 DispatchQueue.main.async {
-                    self.loader.slideOut()
+                    self.gameSearchView.slideOut()
                     let alert = self.alertAdapter.createServiceRequestErrorAlert()
                     self.present(alert, animated: true)
                 }
             default:
                 DispatchQueue.main.async {
-                    self.loader.slideOut()
+                    self.gameSearchView.slideOut()
                     let alert = self.alertAdapter.createNetworkErrorAlert()
                     self.present(alert, animated: true)
                 }

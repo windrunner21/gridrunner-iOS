@@ -12,13 +12,14 @@ class GameConfig: ResponseParser, Decodable, CustomStringConvertible {
     
     var grid: Grid
     var movesLeft: Int
-    var runner: String
+    var runner: String?
+    var seeker: String?
     var turn: String
     var turnHistory: TurnHistory
     var type: String
     
     var description: String {
-        "GameConfig is initialized. Current turn is \(turn)'s. Runner is: \(runner). Number of moves left: \(movesLeft). Type: \(type). \(grid). \(turnHistory)"
+        "GameConfig is initialized. Current turn is \(turn)'s. Runner is: \(runner ?? "X"). Seeker is: \(seeker ?? "X"). Number of moves left: \(movesLeft). Type: \(type). \(grid). \(turnHistory)"
     }
     
     private override init() {

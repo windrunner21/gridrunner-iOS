@@ -7,7 +7,7 @@
 
 import UIKit
 
-class LoaderView: UIView {
+class GameSearchView: UIView {
 
     private let overlayView = UIView()
     
@@ -29,7 +29,7 @@ class LoaderView: UIView {
     }
     
     private func commonInit() {
-        Bundle.main.loadNibNamed("Loader", owner: self)
+        Bundle.main.loadNibNamed("GameSearch", owner: self)
         self.addSubview(contentView)
         self.contentView.frame = self.bounds
         self.contentView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
@@ -74,7 +74,6 @@ class LoaderView: UIView {
             self.overlayView.removeFromSuperview()
         }) { _ in 
             self.removeFromSuperview()
-
         }
     }
     

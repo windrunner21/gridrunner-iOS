@@ -9,11 +9,13 @@ import UIKit
 
 class GameViewController: UIViewController {
     
+    let loadingView = LoadingView(frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height))
+    
     // Storyboard properties.
     @IBOutlet weak var playerTypeLabel: UILabel!
     @IBOutlet weak var movesLabel: UILabel!
     @IBOutlet weak var emojiIconLabel: UILabel!
-    @IBOutlet weak var againstEmojiIconLabel: UILabel!
+    @IBOutlet weak var versusEmojiIconLabel: UILabel!
     
     @IBOutlet weak var gameView: UIView!
     @IBOutlet weak var profileView: UIView!
@@ -31,12 +33,24 @@ class GameViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.view.addSubview(self.loadingView)
         
         AblyService.shared.enterGame()
-        
+
+        NotificationCenter.default.addObserver(self, selector: #selector(setupGame), name: NSNotification.Name("Success:GameConfig"), object: nil)
+    }
+    
+    @objc private func setupGame() {
         self.setupCancelButton()
+        self.setupUndoButton()
+        self.setupFinishButton()
+        
+        self.loadingView.remove()
+        
         self.initializeGame()
-        self.decorateViews()
+        
+        self.setupProfileView()
+        self.setupVersusProfileView()
     }
     
     @objc private func cancel() {
@@ -254,13 +268,31 @@ class GameViewController: UIViewController {
     
     private func initializeGame() {
         // Prepare game class.
-        let map = Map(with: MapDimensions(13, by: 13))
+        print(GameConfig.shared)
         
-        let history = History(with: GameHistoryExamples().runnerHistory1, and: GameHistoryExamples().seekerHistory1)
+        let map = Map(with: MapDimensions(GameConfig.shared.grid.height, by: GameConfig.shared.grid.width))
+        
+        guard let spawnTile = GameConfig.shared.grid.specialTiles.first(where: {$0.type == "spawn"}) else {
+            print("Cound not get Spawn Tile")
+            self.presentErrorAlert()
+            return
+        }
+        
+        let spawnCoordinate: Coordinate = Coordinate(x: spawnTile.x, y: spawnTile.y)
+        
+        var player: AnyPlayer {
+            return User.shared.username == GameConfig.shared.runner ?
+            Runner(at: spawnCoordinate) : Seeker(at: spawnCoordinate)
+        }
+        
+        let history = History(
+            with: GameConfig.shared.turnHistory.convertToTurnType().runnerHistory,
+            and: GameConfig.shared.turnHistory.convertToTurnType().seekerHistory
+        )
         
         self.game.createSession(
             with: map,
-            for: Runner(at: map.getCenterCoordinates()),
+            for: player,
             with: history
         )
         
@@ -268,6 +300,7 @@ class GameViewController: UIViewController {
         
         // If player could not have been instatiated return.
         guard let player = game.getPlayer() else {
+            print("Cound not get Player")
             self.presentErrorAlert()
             return
         }
@@ -294,23 +327,21 @@ class GameViewController: UIViewController {
         self.updateMovesLabel(with: player.numberOfMoves)
     }
     
-    private func decorateViews() {
+    private func setupCancelButton() {
+        self.cancelView.transformToCircle()
+        self.cancelView.addButtonElevation()
+        
+        let cancelTap = UITapGestureRecognizer(target: self, action: #selector(cancel))
+        self.cancelView.addGestureRecognizer(cancelTap)
+    }
+    
+    private func setupProfileView() {
         guard let player = self.game.getPlayer() else {
             presentErrorAlert()
             return
         }
         
         self.playerTypeLabel.text = player.type == .runner ? "Runner" : "Seeker"
-        
-        self.finishButton.setup()
-        self.finishButton.disable()
-        self.undoButton.setup()
-        self.undoButton.disable()
-        
-        self.versusProfileView.transformToCircle()
-        self.versusProfileView.addLightBorder()
-        self.versusEmojiIconView.transformToCircle()
-        self.versusEmojiIconView.backgroundColor = player.type == .seeker ? UIColor(named: "RedAccentColor")?.withAlphaComponent(0.5) : UIColor(named: "FrostBlackColor")?.withAlphaComponent(0.5)
         
         self.profileView.transformToCircle()
         self.profileView.addLightBorder()
@@ -319,14 +350,29 @@ class GameViewController: UIViewController {
         self.emojiIconView.backgroundColor = player.type == .runner ? UIColor(named: "RedAccentColor")?.withAlphaComponent(0.5) : UIColor(named: "FrostBlackColor")?.withAlphaComponent(0.5)
         
         self.emojiIconLabel.text = ProfileIcon().getEmoji()
-        self.againstEmojiIconLabel.text = ProfileIcon().getEmoji()
     }
     
-    private func setupCancelButton() {
-        self.cancelView.transformToCircle()
-        self.cancelView.addButtonElevation()
+    private func setupVersusProfileView() {
+        guard let player = self.game.getPlayer() else {
+            presentErrorAlert()
+            return
+        }
         
-        let cancelTap = UITapGestureRecognizer(target: self, action: #selector(cancel))
-        self.cancelView.addGestureRecognizer(cancelTap)
+        self.versusProfileView.transformToCircle()
+        self.versusProfileView.addLightBorder()
+        self.versusEmojiIconView.transformToCircle()
+        self.versusEmojiIconView.backgroundColor = player.type == .seeker ? UIColor(named: "RedAccentColor")?.withAlphaComponent(0.5) : UIColor(named: "FrostBlackColor")?.withAlphaComponent(0.5)
+        
+        self.versusEmojiIconLabel.text = ProfileIcon().getEmoji()
+    }
+    
+    private func setupUndoButton() {
+        self.undoButton.setup()
+        self.undoButton.disable()
+    }
+    
+    private func setupFinishButton() {
+        self.finishButton.setup()
+        self.finishButton.disable()
     }
 }
