@@ -32,7 +32,7 @@ class GameViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        AblyService.shared.startGame()
+        AblyService.shared.enterGame()
         
         self.setupCancelButton()
         self.initializeGame()
@@ -40,6 +40,7 @@ class GameViewController: UIViewController {
     }
     
     @objc private func cancel() {
+        AblyService.shared.leaveGame()
         self.transitionToMainScreen()
     }
     

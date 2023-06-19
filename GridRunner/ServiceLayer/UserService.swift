@@ -23,7 +23,7 @@ class UserService {
                 NSLog("Error occured in UserService().getUser(): \(error)")
                 completion(.networkError)
             } else if let response = response as? HTTPURLResponse, response.statusCode == 200, let data = data {
-                let user = User.decode(data: data)
+                let user = User.decode(data: data, type: User.self)
                 
                 if let user = user {
                     User.shared.update(with: user)

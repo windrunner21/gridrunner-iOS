@@ -7,7 +7,7 @@
 
 import Foundation
 
-class User: Decodable, CustomStringConvertible {
+class User: ResponseParser, Decodable, CustomStringConvertible {
     
     static let shared = User()
     
@@ -35,7 +35,7 @@ class User: Decodable, CustomStringConvertible {
         case isLoggedIn
     }
     
-    private init() {
+    private override init() {
         self.id = -1
         self.uuid = String()
         self.email = String()
@@ -55,18 +55,5 @@ class User: Decodable, CustomStringConvertible {
         self.runnerElo = decodedUser.runnerElo
         self.seekerElo = decodedUser.seekerElo
         self.isLoggedIn = decodedUser.isLoggedIn
-    }
-    
-    static func decode(data: Data) -> User? {
-        let decoder = JSONDecoder()
-        
-        do {
-            let decodedData = try decoder.decode(User.self, from: data)
-            return decodedData
-        } catch {
-            print("Error decoding JSON: \(error)")
-        }
-        
-        return nil
     }
 }

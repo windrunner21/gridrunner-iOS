@@ -25,7 +25,7 @@ class AuthService {
                 NSLog("Error occured in AuthService().login(): \(error)")
                 completion(.networkError)
             } else if let response = response as? HTTPURLResponse, response.statusCode == 200, let data = data {
-                let user = User.decode(data: data)
+                let user = User.decode(data: data, type: User.self)
                 
                 if let user = user {
                     User.shared.update(with: user)
@@ -53,7 +53,7 @@ class AuthService {
                 NSLog("Error occured in AuthService().register(): \(error)")
                 completion(.networkError)
             } else if let response = response as? HTTPURLResponse, response.statusCode == 200, let data = data {
-                let user = User.decode(data: data)
+                let user = User.decode(data: data, type: User.self)
                 
                 if let user = user {
                     User.shared.update(with: user)
@@ -80,7 +80,7 @@ class AuthService {
                 NSLog("Error occured in AuthService().logout(): \(error)")
                 completion(.networkError)
             } else if let response = response as? HTTPURLResponse, response.statusCode == 200, let data = data {
-                let user = User.decode(data: data)
+                let user = User.decode(data: data, type: User.self)
                 
                 if let user = user {
                     User.shared.update(with: user)

@@ -7,7 +7,7 @@
 
 import Foundation
 
-class GameSessionDetails: CustomStringConvertible {
+class GameSessionDetails: ResponseParser, Decodable, CustomStringConvertible {
     
     static let shared = GameSessionDetails()
     
@@ -19,7 +19,7 @@ class GameSessionDetails: CustomStringConvertible {
         "Game Session initialized with room code: \(roomCode), runner id: \(runner), seeker id: \(seeker)"
     }
     
-    private init() {
+    private override init() {
         self.roomCode = String()
         self.runner = String()
         self.seeker = String()
@@ -35,14 +35,5 @@ class GameSessionDetails: CustomStringConvertible {
         self.roomCode = details.roomCode
         self.runner = details.runner
         self.seeker = details.seeker
-    }
-    
-    static func decode(data: [String: Any]) -> GameSessionDetails? {
-        // Extract the necessary values from the data dictionary
-        guard let roomCode = data["roomCode"] as? String, let runner = data["runner"] as? String, let seeker = data["seeker"] as? String else {
-            return nil
-        }
-        
-        return GameSessionDetails(roomCode: roomCode, runner: runner, seeker: seeker)
     }
 }

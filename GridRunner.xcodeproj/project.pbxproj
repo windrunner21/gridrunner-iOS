@@ -70,6 +70,12 @@
 		CA852A542A39ABF900961E65 /* GameTypeExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA852A532A39ABF900961E65 /* GameTypeExtension.swift */; };
 		CA852A582A39C96D00961E65 /* AblyService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA852A572A39C96D00961E65 /* AblyService.swift */; };
 		CA852A5A2A3C4E9400961E65 /* GameSessionDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA852A592A3C4E9400961E65 /* GameSessionDetails.swift */; };
+		CA852A5F2A4029A900961E65 /* GameConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA852A5E2A4029A900961E65 /* GameConfig.swift */; };
+		CA852A612A40425800961E65 /* AnyResponseParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA852A602A40425800961E65 /* AnyResponseParser.swift */; };
+		CA852A632A4042D900961E65 /* ResponseParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA852A622A4042D900961E65 /* ResponseParser.swift */; };
+		CA852A672A40487900961E65 /* TurnHistory.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA852A662A40487800961E65 /* TurnHistory.swift */; };
+		CA852A692A40489000961E65 /* Grid.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA852A682A40488F00961E65 /* Grid.swift */; };
+		CA852A6B2A40597A00961E65 /* SpecialTile.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA852A6A2A40597A00961E65 /* SpecialTile.swift */; };
 		CAB6EAAF2A2A086C00997852 /* ButtonExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAB6EAAE2A2A086C00997852 /* ButtonExtension.swift */; };
 		CAF8EC9F2A2DBD1A00179EF1 /* APIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAF8EC9E2A2DBD1A00179EF1 /* APIClient.swift */; };
 		CAF8ECA22A2DBD5500179EF1 /* AuthService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAF8ECA12A2DBD5500179EF1 /* AuthService.swift */; };
@@ -176,6 +182,12 @@
 		CA852A532A39ABF900961E65 /* GameTypeExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameTypeExtension.swift; sourceTree = "<group>"; };
 		CA852A572A39C96D00961E65 /* AblyService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AblyService.swift; sourceTree = "<group>"; };
 		CA852A592A3C4E9400961E65 /* GameSessionDetails.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameSessionDetails.swift; sourceTree = "<group>"; };
+		CA852A5E2A4029A900961E65 /* GameConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameConfig.swift; sourceTree = "<group>"; };
+		CA852A602A40425800961E65 /* AnyResponseParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnyResponseParser.swift; sourceTree = "<group>"; };
+		CA852A622A4042D900961E65 /* ResponseParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResponseParser.swift; sourceTree = "<group>"; };
+		CA852A662A40487800961E65 /* TurnHistory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TurnHistory.swift; sourceTree = "<group>"; };
+		CA852A682A40488F00961E65 /* Grid.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Grid.swift; sourceTree = "<group>"; };
+		CA852A6A2A40597A00961E65 /* SpecialTile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpecialTile.swift; sourceTree = "<group>"; };
 		CAB6EAAE2A2A086C00997852 /* ButtonExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonExtension.swift; sourceTree = "<group>"; };
 		CAF8EC9E2A2DBD1A00179EF1 /* APIClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIClient.swift; sourceTree = "<group>"; };
 		CAF8ECA12A2DBD5500179EF1 /* AuthService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthService.swift; sourceTree = "<group>"; };
@@ -473,6 +485,18 @@
 			name = Ably;
 			sourceTree = "<group>";
 		};
+		CA852A642A40485700961E65 /* Game */ = {
+			isa = PBXGroup;
+			children = (
+				CA852A592A3C4E9400961E65 /* GameSessionDetails.swift */,
+				CA852A5E2A4029A900961E65 /* GameConfig.swift */,
+				CA852A662A40487800961E65 /* TurnHistory.swift */,
+				CA852A682A40488F00961E65 /* Grid.swift */,
+				CA852A6A2A40597A00961E65 /* SpecialTile.swift */,
+			);
+			name = Game;
+			sourceTree = "<group>";
+		};
 		CAF8ECA02A2DBD2900179EF1 /* Service */ = {
 			isa = PBXGroup;
 			children = (
@@ -508,10 +532,11 @@
 		CAF8ECAC2A2DC35500179EF1 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				CA852A642A40485700961E65 /* Game */,
 				CAF8ECA82A2DBF9400179EF1 /* User.swift */,
 				CAF8ECB42A2E1FCE00179EF1 /* LoginCredentials.swift */,
 				CAF8ECB62A2E1FDE00179EF1 /* RegisterCredentials.swift */,
-				CA852A592A3C4E9400961E65 /* GameSessionDetails.swift */,
+				CA852A622A4042D900961E65 /* ResponseParser.swift */,
 			);
 			name = Classes;
 			sourceTree = "<group>";
@@ -521,6 +546,7 @@
 			children = (
 				CAF8ECB02A2DC5BD00179EF1 /* RequestInterceptor.swift */,
 				CAF8ECB82A2E205700179EF1 /* Credentials.swift */,
+				CA852A602A40425800961E65 /* AnyResponseParser.swift */,
 			);
 			name = Protocols;
 			sourceTree = "<group>";
@@ -821,9 +847,13 @@
 				CA4E3F5C2A07BBF100D36266 /* PlayerType.swift in Sources */,
 				CA0AAC5D2A1B7EE6008367FB /* Turn.swift in Sources */,
 				CA4E3F582A07A85900D36266 /* GameViewController.swift in Sources */,
+				CA852A632A4042D900961E65 /* ResponseParser.swift in Sources */,
 				CAF8ECB32A2DD23600179EF1 /* BaseURL.swift in Sources */,
 				CA4E3F642A08DCB400D36266 /* ViewControllerExtension.swift in Sources */,
 				CA0AAC892A25DF8C008367FB /* ProfileIcon.swift in Sources */,
+				CA852A692A40489000961E65 /* Grid.swift in Sources */,
+				CA852A612A40425800961E65 /* AnyResponseParser.swift in Sources */,
+				CA852A672A40487900961E65 /* TurnHistory.swift in Sources */,
 				CA0AAC3F2A13A2A0008367FB /* ArrowDirection.swift in Sources */,
 				CA0AAC2B2A0E2C17008367FB /* AnyPlayer.swift in Sources */,
 				CA0AAC362A0E6428008367FB /* MapDimensions.swift in Sources */,
@@ -848,11 +878,13 @@
 				CAF8ECB72A2E1FDE00179EF1 /* RegisterCredentials.swift in Sources */,
 				CA852A582A39C96D00961E65 /* AblyService.swift in Sources */,
 				CAF8ECC32A2F78A600179EF1 /* LoginViewController.swift in Sources */,
+				CA852A6B2A40597A00961E65 /* SpecialTile.swift in Sources */,
 				CA0AAC302A0E484F008367FB /* Coordinate.swift in Sources */,
 				CA0AAC5B2A1B7EDF008367FB /* History.swift in Sources */,
 				CA852A312A30A20200961E65 /* AlertAdapter.swift in Sources */,
 				CAFED48D2A02496E00FB4B9B /* AppDelegate.swift in Sources */,
 				CA0AAC282A0E2BF1008367FB /* Runner.swift in Sources */,
+				CA852A5F2A4029A900961E65 /* GameConfig.swift in Sources */,
 				CAB6EAAF2A2A086C00997852 /* ButtonExtension.swift in Sources */,
 				CA0AAC262A0E2BE6008367FB /* Seeker.swift in Sources */,
 				CAFED48F2A02496E00FB4B9B /* SceneDelegate.swift in Sources */,

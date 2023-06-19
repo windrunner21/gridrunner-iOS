@@ -9,47 +9,54 @@ import Ably
 
 class AblyService {
     private var client: ARTRealtime
-    private var channel: ARTRealtimeChannel
+    private var queueChannel: ARTRealtimeChannel
+    private var gameChannel: ARTRealtimeChannel
     
     static let shared = AblyService()
     
     private init() {
         self.client = ARTRealtime(token: "token")
-        self.channel = client.channels.get("channelName")
+        self.queueChannel = client.channels.get("queuechannelName")
+        self.gameChannel = client.channels.get("gameChannelName")
     }
     
-    func update(with token: String, and channelName: String) {
+    func update(with token: String, and queue: String) {
         self.client = ARTRealtime(token: token)
-        self.channel = client.channels.get(channelName)
+        self.queueChannel = client.channels.get(queue)
     }
     
+    // Public methods for rest of the project to interact with: enter, leave queues and start game.
     func enterQueue() {
         client.connection.on(.connected) { stateChange in
             NSLog("Connected to Ably.")
-            self.enter()
+            self._enter()
         }
     }
     
     func leaveQueue() {
-        self.leave()
+        self._leave()
     }
     
-    func startGame() {
+    func enterGame() {
         self.leaveQueue()
-        self.client.connect()
-        client.connection.on(.connected) { stateChange in
-            NSLog("Connected to Ably.")
-            self.game()
+        if client.connection.state == .connected {
+            self._enterGame()
+        } else {
+            NSLog("Could not enter game")
         }
     }
     
-    private func enter() {
-        NSLog("Entering channel \"\(self.channel.name)\" queue.")
+    func leaveGame() {
+        self._leaveGame()
+    }
     
-        self.channel.subscribe("game") { message in
+    private func _enter() {
+        NSLog("Entering channel \"\(self.queueChannel.name)\" queue.")
+    
+        self.queueChannel.subscribe("game") { message in
             if let data = message.data as? [String: Any] {
-                // check if ids are same
-               if let payload = GameSessionDetails.decode(data: data) {
+                // Make sure that ids and username are the same to match correct accounts.
+               if let payload = GameSessionDetails.toJSONAndDecode(data: data, type: GameSessionDetails.self) {
                    if payload.runner == User.shared.username || payload.seeker == User.shared.username {
                        GameSessionDetails.shared.update(with: payload)
                        DispatchQueue.main.async {
@@ -60,25 +67,37 @@ class AblyService {
            }
         }
         
-        self.channel.presence.enter(nil)
+        self.queueChannel.presence.enter(nil)
     }
     
-    private func leave() {
-        NSLog("Leaving channel \"\(self.channel.name)\" queue.")
-        self.channel.unsubscribe()
-        self.channel.presence.leave(nil)
+    private func _leave() {
+        NSLog("Leaving channel \"\(self.queueChannel.name)\" queue.")
+        self.queueChannel.unsubscribe()
+        self.queueChannel.presence.leave(nil)
     }
     
-    private func game() {
+    private func _enterGame() {
         let channelName = "room:\(GameSessionDetails.shared.roomCode):\(User.shared.username)"
-        let channel = self.client.channels.get(channelName)
+        self.gameChannel = self.client.channels.get(channelName)
         
         NSLog("Entering channel \"\(channelName)\".")
         
-        channel.subscribe(GameSessionDetails.shared.roomCode) { message in
+        self.gameChannel.subscribe(GameSessionDetails.shared.roomCode) { message in
             print(String(describing: message.data))
+            if let data = message.data as? [String: Any] {
+                if let payload = GameConfig.toJSONAndDecode(data: data, type: GameConfig.self) {
+                    print(payload)
+                }
+            }
+            
         }
         
-        channel.presence.enter(nil)
+        self.gameChannel.presence.enter(nil)
+    }
+    
+    private func _leaveGame() {
+        NSLog("Leaving channel \"\(self.gameChannel.name)\".")
+        self.gameChannel.unsubscribe()
+        self.gameChannel.presence.leave(nil)
     }
 }
