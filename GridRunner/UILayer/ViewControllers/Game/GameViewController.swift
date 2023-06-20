@@ -272,22 +272,22 @@ class GameViewController: UIViewController {
         
         let map = Map(with: MapDimensions(GameConfig.shared.grid.height, by: GameConfig.shared.grid.width))
         
-        guard let spawnTile = GameConfig.shared.grid.specialTiles.first(where: {$0.type == "spawn"}) else {
-            print("Cound not get Spawn Tile")
+        guard let startTile = GameConfig.shared.grid.specialTiles.first(where: {$0.toTile().type == .start}) else {
+            print("Cound not get start tile")
             self.presentErrorAlert()
             return
         }
         
-        let spawnCoordinate: Coordinate = Coordinate(x: spawnTile.x, y: spawnTile.y)
+        let startCoordinate: Coordinate = Coordinate(x: startTile.x, y: startTile.y)
         
         var player: AnyPlayer {
             return User.shared.username == GameConfig.shared.runner ?
-            Runner(at: spawnCoordinate) : Seeker(at: spawnCoordinate)
+            Runner(at: startCoordinate) : Seeker(at: startCoordinate)
         }
         
         let history = History(
-            with: GameConfig.shared.turnHistory.convertToTurnType().runnerHistory,
-            and: GameConfig.shared.turnHistory.convertToTurnType().seekerHistory
+            with: GameConfig.shared.turnHistory.toHistory().runnerHistory,
+            and: GameConfig.shared.turnHistory.toHistory().seekerHistory
         )
         
         self.game.createSession(

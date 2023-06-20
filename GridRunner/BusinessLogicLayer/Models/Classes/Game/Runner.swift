@@ -11,6 +11,9 @@ class Runner: Player, AnyPlayer {
 
     override init(at position: Coordinate) {
         super.init(at: position)
+        
+        self.updateNumberOfMoves(to: GameConfig.shared.runnerMovesLeft)
+        self.updateMaximumNumberOfMoves(to: GameConfig.shared.runnerMovesLeft)
     }
     
     func move(from oldTile: Tile? = nil, to newTile: Tile) {

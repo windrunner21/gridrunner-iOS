@@ -20,18 +20,8 @@ class TurnHistory: ResponseParser, Decodable, CustomStringConvertible {
         self.seekerHistory = []
     }
     
-    private init(runnerHistory: [String], seekerHistory: [String]) {
-        self.runnerHistory = runnerHistory
-        self.seekerHistory = seekerHistory
-    }
-    
-    func update(with history: TurnHistory) {
-        self.runnerHistory = history.runnerHistory
-        self.seekerHistory = history.seekerHistory
-    }
-    
     // TODO: implement this method.
-    func convertToTurnType() -> (runnerHistory: [Turn], seekerHistory: [Turn]) {
+    func toHistory() -> (runnerHistory: [Turn], seekerHistory: [Turn]) {
         return ([], [])
     }
 }

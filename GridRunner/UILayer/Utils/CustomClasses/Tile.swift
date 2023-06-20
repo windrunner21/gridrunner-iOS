@@ -80,16 +80,20 @@ class Tile: UIView {
     
     func setupTile(at row: Int, and column: Int, with dimensions: MapDimensions, and history: History) {
         // Handle tile type and color
-        if (row == 0 && column == 0) ||
-            (row == dimensions.getNumberOfRows() - 1 &&
-            column == dimensions.getNumberOfColumns() - 1)  {
-            self.type = .exit
-            self.decorateExit()
-        } else if row == dimensions.getNumberOfRows() / 2 &&
-                  column == dimensions.getNumberOfColumns() / 2 {
-            self.type = .start
-            self.decorateSpawn()
-        } else {
+        for tile in GameConfig.shared.grid.specialTiles {
+            switch tile.toTile().type {
+            case .start where tile.toTile().position == self.position:
+                self.type = .start
+                self.decorateSpawn()
+            case .exit where tile.toTile().position == self.position:
+                self.type = .exit
+                self.decorateExit()
+            default:
+                break
+            }
+        }
+        
+        if self.type == .unknown {
             self.type = .basic
             self.backgroundColor = .systemGray3
         }

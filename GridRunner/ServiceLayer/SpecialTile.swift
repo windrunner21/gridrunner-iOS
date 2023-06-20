@@ -16,21 +16,19 @@ class SpecialTile: ResponseParser, Decodable, CustomStringConvertible {
         "(Special Tile with coordinates at: \(x), \(y). Type: \(type))"
     }
     
-    private override init() {
-        self.type = String()
-        self.x = Int()
-        self.y = Int()
-    }
+    func toTile() -> Tile {
+        let tile = Tile()
+        tile.position = Coordinate(x: self.x, y: self.y)
+        
+        switch self.type {
+        case "spawn":
+            tile.type = .start
+        case "exit":
+            tile.type = .exit
+        default:
+            tile.type = .basic
+        }
     
-    private init(type: String, x: Int, y: Int) {
-        self.type = type
-        self.x = x
-        self.y = y
-    }
-    
-    func update(with tile: SpecialTile) {
-        self.type = tile.type
-        self.x = tile.x
-        self.y = tile.y
+        return tile
     }
 }

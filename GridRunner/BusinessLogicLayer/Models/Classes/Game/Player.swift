@@ -19,8 +19,6 @@ class Player {
     
     init(at position: Coordinate) {
         self.position = position
-        self.updateNumberOfMoves(to: GameConfig.shared.movesLeft)
-        self.updateMaximumNumberOfMoves(to: GameConfig.shared.movesLeft)
     }
     
     // MARK: Class manipulation functions

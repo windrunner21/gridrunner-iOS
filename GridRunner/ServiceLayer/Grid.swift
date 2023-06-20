@@ -22,16 +22,4 @@ class Grid: ResponseParser, Decodable, CustomStringConvertible {
         self.width = Int()
         self.specialTiles = []
     }
-    
-    private init(height: Int, width: Int, specialTiles: [SpecialTile]) {
-        self.height = height
-        self.width = width
-        self.specialTiles = specialTiles
-    }
-    
-    func update(with grid: Grid) {
-        self.height = grid.height
-        self.width = grid.width
-        self.specialTiles = grid.specialTiles
-    }
 }
