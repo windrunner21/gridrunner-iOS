@@ -79,7 +79,7 @@ class Tile: UIView {
     }
     
     func setupTile(at row: Int, and column: Int, with dimensions: MapDimensions, and history: History) {
-        // Handle tile type and color
+        // Handle tile type and color.
         for tile in GameConfig.shared.grid.specialTiles {
             switch tile.toTile().type {
             case .start where tile.toTile().position == self.position:
@@ -93,6 +93,7 @@ class Tile: UIView {
             }
         }
         
+        // If not special tile assign basic type.
         if self.type == .unknown {
             self.type = .basic
             self.backgroundColor = .systemGray3

@@ -17,6 +17,9 @@ class GameViewController: UIViewController {
     @IBOutlet weak var emojiIconLabel: UILabel!
     @IBOutlet weak var versusEmojiIconLabel: UILabel!
     
+    @IBOutlet weak var playerLabel: UILabel!
+    @IBOutlet weak var versusPlayerLabel: UILabel!
+    
     @IBOutlet weak var gameView: UIView!
     @IBOutlet weak var profileView: UIView!
     @IBOutlet weak var emojiIconView: UIView!
@@ -350,6 +353,10 @@ class GameViewController: UIViewController {
         self.emojiIconView.backgroundColor = player.type == .runner ? UIColor(named: "RedAccentColor")?.withAlphaComponent(0.5) : UIColor(named: "FrostBlackColor")?.withAlphaComponent(0.5)
         
         self.emojiIconLabel.text = ProfileIcon().getEmoji()
+        
+        self.playerLabel.text = player.type == .runner ?
+        "@\(GameConfig.shared.runner ?? "username")" :
+        "@\(GameConfig.shared.seeker ?? "username")"
     }
     
     private func setupVersusProfileView() {
@@ -364,6 +371,7 @@ class GameViewController: UIViewController {
         self.versusEmojiIconView.backgroundColor = player.type == .seeker ? UIColor(named: "RedAccentColor")?.withAlphaComponent(0.5) : UIColor(named: "FrostBlackColor")?.withAlphaComponent(0.5)
         
         self.versusEmojiIconLabel.text = ProfileIcon().getEmoji()
+        self.versusPlayerLabel.text = "@\(GameConfig.shared.opponent)"
     }
     
     private func setupUndoButton() {
