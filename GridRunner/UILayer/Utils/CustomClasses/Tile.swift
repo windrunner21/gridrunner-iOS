@@ -80,12 +80,12 @@ class Tile: UIView {
     
     func setupTile(at row: Int, and column: Int, with dimensions: MapDimensions, and history: History) {
         // Handle tile type and color.
-        for tile in GameConfig.shared.grid.specialTiles {
-            switch tile.toTile().type {
-            case .start where tile.toTile().position == self.position:
+        for tile in GameConfig.shared.grid.getTiles() {
+            switch tile.type {
+            case .start where tile.position == self.position:
                 self.type = .start
                 self.decorateSpawn()
-            case .exit where tile.toTile().position == self.position:
+            case .exit where tile.position == self.position:
                 self.type = .exit
                 self.decorateExit()
             default:

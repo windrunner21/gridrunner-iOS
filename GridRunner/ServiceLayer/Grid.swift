@@ -11,7 +11,7 @@ class Grid: ResponseParser, Decodable, CustomStringConvertible {
     
     var height: Int
     var width: Int
-    var specialTiles: [SpecialTile]
+    private var specialTiles: [SpecialTile]
     
     var description: String {
         "Grid is initialized with following dimensions: \(height)x\(width). Special tiles are: \(specialTiles)"
@@ -21,5 +21,9 @@ class Grid: ResponseParser, Decodable, CustomStringConvertible {
         self.height = Int()
         self.width = Int()
         self.specialTiles = []
+    }
+    
+    func getTiles() -> [Tile] {
+        return specialTiles.map { $0.toTile() }
     }
 }

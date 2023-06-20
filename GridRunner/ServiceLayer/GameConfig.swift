@@ -16,7 +16,7 @@ class GameConfig: ResponseParser, Decodable, CustomStringConvertible {
     var opponent: String
     var runnerMovesLeft: Int
     var seekerMovesLeft: Int
-    var turn: String
+    private var turn: String
     var turnHistory: TurnHistory
     var type: String
     
@@ -58,5 +58,13 @@ class GameConfig: ResponseParser, Decodable, CustomStringConvertible {
         self.turn = config.turn
         self.turnHistory = config.turnHistory
         self.type = config.type
+    }
+    
+    func getTurnPlayerType() -> PlayerType {
+        if self.turn == "runner" {
+            return .runner
+        }else {
+            return .seeker
+        }
     }
 }

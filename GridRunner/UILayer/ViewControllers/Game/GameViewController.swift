@@ -275,17 +275,15 @@ class GameViewController: UIViewController {
         
         let map = Map(with: MapDimensions(GameConfig.shared.grid.height, by: GameConfig.shared.grid.width))
         
-        guard let startTile = GameConfig.shared.grid.specialTiles.first(where: {$0.toTile().type == .start}) else {
+        guard let startTile = GameConfig.shared.grid.getTiles().first(where: {$0.type == .start}) else {
             print("Cound not get start tile")
             self.presentErrorAlert()
             return
         }
         
-        let startCoordinate: Coordinate = Coordinate(x: startTile.x, y: startTile.y)
-        
         var player: AnyPlayer {
             return User.shared.username == GameConfig.shared.runner ?
-            Runner(at: startCoordinate) : Seeker(at: startCoordinate)
+            Runner(at: startTile.position) : Seeker(at: startTile.position)
         }
         
         let history = History(
@@ -328,6 +326,7 @@ class GameViewController: UIViewController {
         )
         
         self.updateMovesLabel(with: player.numberOfMoves)
+        self.visualizeTurn(for: player)
     }
     
     private func setupCancelButton() {
@@ -348,7 +347,6 @@ class GameViewController: UIViewController {
         
         self.profileView.transformToCircle()
         self.profileView.addLightBorder()
-        self.profileView.backgroundColor = .systemGreen.withAlphaComponent(0.5)
         self.emojiIconView.transformToCircle()
         self.emojiIconView.backgroundColor = player.type == .runner ? UIColor(named: "RedAccentColor")?.withAlphaComponent(0.5) : UIColor(named: "FrostBlackColor")?.withAlphaComponent(0.5)
         
@@ -382,5 +380,15 @@ class GameViewController: UIViewController {
     private func setupFinishButton() {
         self.finishButton.setup()
         self.finishButton.disable()
+    }
+    
+    private func visualizeTurn(for player: AnyPlayer) {
+        if player.type == GameConfig.shared.getTurnPlayerType() {
+            self.profileView.backgroundColor = .systemGreen.withAlphaComponent(0.5)
+            self.versusProfileView.backgroundColor = .white
+        } else {
+            self.profileView.backgroundColor = .white
+            self.versusProfileView.backgroundColor = .systemGreen.withAlphaComponent(0.5)
+        }
     }
 }
