@@ -80,7 +80,7 @@ class Tile: UIView {
     
     func setupTile(at row: Int, and column: Int, with dimensions: MapDimensions, and history: History) {
         // Handle tile type and color.
-        for tile in GameConfig.shared.grid.getTiles() {
+        for tile in GameConfig.shared.grid.tiles() {
             switch tile.type {
             case .start where tile.position == self.position:
                 self.type = .start
@@ -224,7 +224,7 @@ class Tile: UIView {
         
         guard oldTile?.type != .start else { return }
         oldTile?.setDirectionImage(to: oldDirection)
-        oldTile?.backgroundColor = UIColor(named: "FrostBlackColor")?.withAlphaComponent(0.5)
+        oldTile?.backgroundColor = UIColor(named: "RedAccentColor")?.withAlphaComponent(0.5)
     }
         
     private func setDirectionImage(to direction: ArrowDirection) {

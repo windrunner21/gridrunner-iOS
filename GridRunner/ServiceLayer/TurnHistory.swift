@@ -21,7 +21,7 @@ class TurnHistory: ResponseParser, Decodable, CustomStringConvertible {
     }
     
     // TODO: implement this method.
-    func toHistory() -> (runnerHistory: [Turn], seekerHistory: [Turn]) {
-        return ([], [])
+    func toHistory() -> History {
+        return History(with: [], and: [])
     }
 }

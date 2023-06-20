@@ -23,7 +23,7 @@ class Grid: ResponseParser, Decodable, CustomStringConvertible {
         self.specialTiles = []
     }
     
-    func getTiles() -> [Tile] {
+    func tiles() -> [Tile] {
         return specialTiles.map { $0.toTile() }
     }
 }

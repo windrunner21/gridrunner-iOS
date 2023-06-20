@@ -275,7 +275,7 @@ class GameViewController: UIViewController {
         
         let map = Map(with: MapDimensions(GameConfig.shared.grid.height, by: GameConfig.shared.grid.width))
         
-        guard let startTile = GameConfig.shared.grid.getTiles().first(where: {$0.type == .start}) else {
+        guard let startTile = GameConfig.shared.grid.tiles().first(where: {$0.type == .start}) else {
             print("Cound not get start tile")
             self.presentErrorAlert()
             return
@@ -286,10 +286,7 @@ class GameViewController: UIViewController {
             Runner(at: startTile.position) : Seeker(at: startTile.position)
         }
         
-        let history = History(
-            with: GameConfig.shared.turnHistory.toHistory().runnerHistory,
-            and: GameConfig.shared.turnHistory.toHistory().seekerHistory
-        )
+        let history = GameConfig.shared.getHistory()
         
         self.game.createSession(
             with: map,

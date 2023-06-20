@@ -17,7 +17,7 @@ class GameConfig: ResponseParser, Decodable, CustomStringConvertible {
     var runnerMovesLeft: Int
     var seekerMovesLeft: Int
     private var turn: String
-    var turnHistory: TurnHistory
+    private var turnHistory: TurnHistory
     var type: String
     
     var description: String {
@@ -66,5 +66,9 @@ class GameConfig: ResponseParser, Decodable, CustomStringConvertible {
         }else {
             return .seeker
         }
+    }
+     
+    func getHistory() -> History {
+        return turnHistory.toHistory()
     }
 }
