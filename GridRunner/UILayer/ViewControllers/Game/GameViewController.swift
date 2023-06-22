@@ -150,7 +150,16 @@ class GameViewController: UIViewController {
             verticalStackView.addArrangedSubview(horizontalStackView)
         }
         
-        rootView.addSubview(verticalStackView)
+        // NOTE: GameConfig can be initialized multiple times. Remove and renew view insteaf of pilling them up.
+        if rootView.subviews.isEmpty {
+            rootView.addSubview(verticalStackView)
+        } else {
+            for subview in rootView.subviews {
+                subview.removeFromSuperview()
+            }
+            
+            rootView.addSubview(verticalStackView)
+        }
         
         verticalStackView.translatesAutoresizingMaskIntoConstraints = false
         verticalStackView.topAnchor.constraint(equalTo: rootView.topAnchor, constant: 0).isActive = true

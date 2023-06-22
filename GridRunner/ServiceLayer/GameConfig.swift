@@ -21,7 +21,7 @@ class GameConfig: ResponseParser, Decodable, CustomStringConvertible {
     var type: String
     
     var description: String {
-        "GameConfig is initialized. Current turn is \(turn)'s. Runner is: \(runner ?? "X"). Seeker is: \(seeker ?? "X"). Opponent is: \(opponent) Number of moves left for Runner: \(runnerMovesLeft). Number of moves left for Seeker: \(seekerMovesLeft). Type: \(type). \(grid). \(turnHistory)."
+        "GameConfig is initialized. Current turn is \(turn)'s. Runner is: \(runner ?? "X"). Seeker is: \(seeker ?? "X"). Opponent is: \(opponent). Number of moves left for Runner: \(runnerMovesLeft). Number of moves left for Seeker: \(seekerMovesLeft). Type: \(type). \(grid). \(turnHistory)."
     }
     
     private override init() {
