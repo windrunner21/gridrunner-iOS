@@ -205,7 +205,7 @@ class Tile: UIView {
     }
     
     func decorateRunner() {
-        self.backgroundColor = UIColor(named: "FrostBlackColor")
+        self.backgroundColor = UIColor(named: "RedAccentColor")
         self.imageView.image = UIImage(systemName: "face.smiling.fill")
     }
     

@@ -25,7 +25,7 @@ class AblyService {
         self.queueChannel = client.channels.get(queue)
     }
     
-    // Public methods for rest of the project to interact with: enter, leave queues and start game.
+    // Public methods for rest of the project to interact with: enter, leave queues.
     func enterQueue() {
         client.connection.on(.connected) { stateChange in
             NSLog("Connected to Ably.")
@@ -37,6 +37,7 @@ class AblyService {
         self._leave()
     }
     
+    // Public methods for rest of the project to interact with: enter, leave game.
     func enterGame() {
         self.leaveQueue()
         
@@ -51,6 +52,12 @@ class AblyService {
         self._leaveGame()
     }
     
+    // Public methods for rest of the project to interact with: publish moves.
+    func send(data: Data) {
+        self._sendMove(with: data)
+    }
+  
+    // QUEUES
     private func _enter() {
         NSLog("Entering channel \"\(self.queueChannel.name)\" queue.")
     
@@ -77,6 +84,7 @@ class AblyService {
         self.queueChannel.presence.leave(nil)
     }
     
+    // GAME
     private func _enterGame() {
         let channelName = "room:\(GameSessionDetails.shared.roomCode):\(User.shared.username)"
         self.gameChannel = self.client.channels.get(channelName)
@@ -84,7 +92,7 @@ class AblyService {
         NSLog("Entering channel \"\(channelName)\".")
         
         self.gameChannel.subscribe(GameSessionDetails.shared.roomCode) { message in
-            print(String(describing: message.data))
+            print("Incoming data: \(message.data ?? "could not get")")
             if let data = message.data as? [String: Any] {
                 if let payload = GameConfig.toJSONAndDecode(data: data, type: GameConfig.self) {
                     GameConfig.shared.update(with: payload)
@@ -103,5 +111,16 @@ class AblyService {
         NSLog("Leaving channel \"\(self.gameChannel.name)\".")
         self.gameChannel.unsubscribe()
         self.gameChannel.presence.leave(nil)
+    }
+    
+    // MOVES
+    private func _sendMove(with data: Data) {
+        self.gameChannel.publish(GameSessionDetails.shared.roomCode, data: data) { error in
+          if let error = error {
+            print("Unable to publish message; err = \(error.message)")
+          } else {
+            print("Message successfully sent")
+          }
+        }
     }
 }

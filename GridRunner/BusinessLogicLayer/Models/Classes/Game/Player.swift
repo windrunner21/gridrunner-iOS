@@ -5,6 +5,8 @@
 //  Created by Imran Hajiyev on 23.05.23.
 //
 
+import Foundation
+
 class Player {
     var didWin: Bool = false
     
@@ -75,5 +77,16 @@ class Player {
                 print("Move #\(index + 1): moving from \(move.from) to \(move.to) ")
             }
         }
+    }
+    
+    internal func convertToData(_ dictionary: [String: Any]) -> Data? {
+        do {
+            let data = try JSONSerialization.data(withJSONObject: dictionary, options: [])
+            return data
+        } catch {
+            print("Error creating JSON data: \(error)")
+        }
+        
+        return nil
     }
 }

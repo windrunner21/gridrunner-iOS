@@ -20,6 +20,18 @@ class Runner: Player, AnyPlayer {
         if self.movesExist() {
             // Setup upcoming new move.
             let newMove = Move(from: self.position, to: newTile.position)
+            
+            let message: [String: Any] = [
+                "type": "moveTo",
+                "from": [
+                    "x": self.position.x,
+                    "y": self.position.y
+                    ],
+                "to": [
+                    "x": newTile.position.x,
+                    "y": newTile.position.y
+                ]
+            ]
 
             // Check whether new move can be allowed to be made and direction is correct.
             let allowedMove = newMove.canRunnerMoveBeAllowed()
@@ -41,6 +53,12 @@ class Runner: Player, AnyPlayer {
                     self.createTurn(with: [newMove])
                 } else {
                     self.history.last?.appendMove(newMove)
+                }
+                
+                if let data = self.convertToData(message) {
+                    AblyService.shared.send(data: data)
+                } else {
+                    // TODO: handle error
                 }
                 
                 self.position = newTile.position
