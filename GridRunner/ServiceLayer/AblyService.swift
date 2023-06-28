@@ -92,12 +92,24 @@ class AblyService {
         NSLog("Entering channel \"\(channelName)\".")
         
         self.gameChannel.subscribe(GameSessionDetails.shared.roomCode) { message in
-            print("Incoming data: \(message.data ?? "could not get")")
             if let data = message.data as? [String: Any] {
-                if let payload = GameConfig.toJSONAndDecode(data: data, type: GameConfig.self) {
+                
+                print("Incoming data: \(message.data ?? "subscribe shared code error.")")
+                
+                // Decode as game config if type is inside the response and it equals to config.
+                if let type = data["type"] as? String,
+                    type == "config",
+                    let payload = GameConfig.toJSONAndDecode(data: data, type: GameConfig.self) {
                     GameConfig.shared.update(with: payload)
                     DispatchQueue.main.async {
                         NotificationCenter.default.post(name: NSNotification.Name("Success:GameConfig"), object: nil)
+                    }
+                }
+                
+                if let payload = TurnConfig.toJSONAndDecode(data: data, type: TurnConfig.self) {
+                    TurnConfig.shared.upgrade(with: payload)
+                    DispatchQueue.main.async {
+                        NotificationCenter.default.post(name: NSNotification.Name("Success:TurnConfig"), object: nil)
                     }
                 }
             }

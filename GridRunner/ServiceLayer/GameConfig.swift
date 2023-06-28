@@ -58,14 +58,8 @@ class GameConfig: ResponseParser, Decodable, CustomStringConvertible {
         self.turn = config.turn
         self.turnHistory = config.turnHistory
         self.type = config.type
-    }
-    
-    func getTurnPlayerType() -> PlayerType {
-        if self.turn == "runner" {
-            return .runner
-        }else {
-            return .seeker
-        }
+        
+        TurnConfig.shared.upgrade(with: config.turn)
     }
      
     func getHistory() -> History {

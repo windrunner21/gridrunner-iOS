@@ -41,6 +41,7 @@ class GameViewController: UIViewController {
         AblyService.shared.enterGame()
 
         NotificationCenter.default.addObserver(self, selector: #selector(setupGame), name: NSNotification.Name("Success:GameConfig"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(updateGameTurn), name: NSNotification.Name("Success:TurnConfig"), object: nil)
     }
     
     @objc private func setupGame() {
@@ -54,6 +55,15 @@ class GameViewController: UIViewController {
         
         self.setupProfileView()
         self.setupVersusProfileView()
+    }
+    
+    @objc private func updateGameTurn() {
+        guard let player = game.getPlayer() else {
+            presentErrorAlert()
+            return
+        }
+        
+        self.visualizeTurn(for: player)
     }
     
     @objc private func cancel() {
@@ -101,6 +111,32 @@ class GameViewController: UIViewController {
         
         if let runner = player as? Runner {
             runner.finish(on: latestTile)
+            
+            // Send move data to Ably.
+            var message: [[String: Any]] = []
+            for (index, turn) in runner.history.enumerated() {
+                print("\nTURN #\(index + 1)\n")
+                for move in turn.getMoves() {
+                    message.append([
+                        "type": "moveTo",
+                        "from": [
+                            "x": move.from.x,
+                            "y": move.from.y
+                        ],
+                        "to": [
+                            "x": move.to.x,
+                            "y": move.to.y
+                        ]
+                    ])
+                }
+            }
+            print(message)
+            // TODO: change convert to data
+            if let data = runner.convertToData(message) {
+                AblyService.shared.send(data: data)
+            } else {
+                // TODO: handle error
+            }
         }
         
         if let seeker = player as? Seeker {
@@ -389,7 +425,7 @@ class GameViewController: UIViewController {
     }
     
     private func visualizeTurn(for player: AnyPlayer) {
-        if player.type == GameConfig.shared.getTurnPlayerType() {
+        if player.type == TurnConfig.shared.getTurn() {
             self.profileView.backgroundColor = .systemGreen.withAlphaComponent(0.5)
             self.versusProfileView.backgroundColor = .white
         } else {
