@@ -78,15 +78,4 @@ class Player {
             }
         }
     }
-    
-    internal func convertToData(_ dictionary: [[String: Any]]) -> Data? {
-        do {
-            let data = try JSONSerialization.data(withJSONObject: dictionary)
-            return data
-        } catch {
-            print("Error creating JSON data: \(error)")
-        }
-        
-        return nil
-    }
 }

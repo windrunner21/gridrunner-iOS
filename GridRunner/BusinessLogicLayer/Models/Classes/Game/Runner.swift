@@ -53,7 +53,29 @@ class Runner: Player, AnyPlayer {
         }
     }
     
-    func finish(on tile: Tile) {
+    func finish(on tile: Tile) {        
+        var movesArray: [[String: Any]] = []
+        
+        // Current turn was already incremented (-1). Array start at 0 (-1).
+        for move in self.history[currentTurnNumber - 2].getMoves() {
+            movesArray.append([
+                "type": "moveTo",
+                "from": [
+                    "x": move.from.y,
+                    "y": move.from.x
+                ],
+                "to": [
+                    "x": move.to.y,
+                    "y": move.to.x
+                ]
+            ])
+        }
+        
+        let moves: [String: Any] = ["moves": movesArray]
+        
+        // Send move data to Ably.
+        AblyService.shared.send(moves: moves)
+        
         if tile.type == .exit {
             self.didWin = true
             tile.decorateRunnerWin()

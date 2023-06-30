@@ -111,32 +111,6 @@ class GameViewController: UIViewController {
         
         if let runner = player as? Runner {
             runner.finish(on: latestTile)
-            
-            // Send move data to Ably.
-            var message: [[String: Any]] = []
-            for (index, turn) in runner.history.enumerated() {
-                print("\nTURN #\(index + 1)\n")
-                for move in turn.getMoves() {
-                    message.append([
-                        "type": "moveTo",
-                        "from": [
-                            "x": move.from.x,
-                            "y": move.from.y
-                        ],
-                        "to": [
-                            "x": move.to.x,
-                            "y": move.to.y
-                        ]
-                    ])
-                }
-            }
-            print(message)
-            // TODO: change convert to data
-            if let data = runner.convertToData(message) {
-                AblyService.shared.send(data: data)
-            } else {
-                // TODO: handle error
-            }
         }
         
         if let seeker = player as? Seeker {
@@ -327,7 +301,13 @@ class GameViewController: UIViewController {
         }
         
         var player: AnyPlayer {
-            return User.shared.username == GameConfig.shared.runner ?
+            guard let clientId = AblyService.shared.getClientId() else {
+                print("Cound not get Client Id")
+                self.presentErrorAlert()
+                return Runner(at: startTile.position)
+            }
+            
+            return clientId == GameConfig.shared.runner ?
             Runner(at: startTile.position) : Seeker(at: startTile.position)
         }
         

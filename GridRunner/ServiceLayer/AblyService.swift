@@ -9,20 +9,30 @@ import Ably
 
 class AblyService {
     private var client: ARTRealtime
+    private var options: ARTClientOptions
     private var queueChannel: ARTRealtimeChannel
     private var gameChannel: ARTRealtimeChannel
     
     static let shared = AblyService()
     
     private init() {
-        self.client = ARTRealtime(token: "token")
+        self.options = ARTClientOptions(token: "token")        
+        self.client = ARTRealtime(options: options)
         self.queueChannel = client.channels.get("queuechannelName")
         self.gameChannel = client.channels.get("gameChannelName")
     }
     
     func update(with token: String, and queue: String) {
-        self.client = ARTRealtime(token: token)
+        self.options = ARTClientOptions(token: token)
+        self.options.echoMessages = false
+        
+        self.client = ARTRealtime(options: options)
         self.queueChannel = client.channels.get(queue)
+    }
+    
+    // Return client id of the currently logged in user.
+    func getClientId() -> String? {
+        self.client.auth.clientId
     }
     
     // Public methods for rest of the project to interact with: enter, leave queues.
@@ -53,26 +63,26 @@ class AblyService {
     }
     
     // Public methods for rest of the project to interact with: publish moves.
-    func send(data: Data) {
+    func send(moves data: [String: Any]) {
         self._sendMove(with: data)
     }
   
     // QUEUES
     private func _enter() {
         NSLog("Entering channel \"\(self.queueChannel.name)\" queue.")
-    
-        self.queueChannel.subscribe("game") { message in
+        
+        self.queueChannel.subscribe("game") { [weak self] message in
             if let data = message.data as? [String: Any] {
                 // Make sure that ids and username are the same to match correct accounts.
-               if let payload = GameSessionDetails.toJSONAndDecode(data: data, type: GameSessionDetails.self) {
-                   if payload.runner == User.shared.username || payload.seeker == User.shared.username {
-                       GameSessionDetails.shared.update(with: payload)
-                       DispatchQueue.main.async {
-                           NotificationCenter.default.post(name: NSNotification.Name("Success::Matchmaking"), object: nil)
-                       }
-                   }
-               }
-           }
+                if let payload = GameSessionDetails.toJSONAndDecode(data: data, type: GameSessionDetails.self) {
+                    if payload.runner == self?.client.auth.clientId || payload.seeker == self?.client.auth.clientId {
+                        GameSessionDetails.shared.update(with: payload)
+                        DispatchQueue.main.async {
+                            NotificationCenter.default.post(name: NSNotification.Name("Success::Matchmaking"), object: nil)
+                        }
+                    }
+                }
+            }
         }
         
         self.queueChannel.presence.enter(nil)
@@ -86,7 +96,8 @@ class AblyService {
     
     // GAME
     private func _enterGame() {
-        let channelName = "room:\(GameSessionDetails.shared.roomCode):\(User.shared.username)"
+        guard let clientId = self.client.auth.clientId else { return }
+        let channelName = "room:\(GameSessionDetails.shared.roomCode):\(clientId)"
         self.gameChannel = self.client.channels.get(channelName)
         
         NSLog("Entering channel \"\(channelName)\".")
@@ -120,19 +131,38 @@ class AblyService {
     }
     
     private func _leaveGame() {
-        NSLog("Leaving channel \"\(self.gameChannel.name)\".")
-        self.gameChannel.unsubscribe()
-        self.gameChannel.presence.leave(nil)
+        NSLog("Resigning from the game.")
+        self.gameChannel.publish(GameSessionDetails.shared.roomCode, data: ["resign": true]) { error in
+            if let error = error {
+                print("Unable to publish message. Status code: \(error.statusCode). Error: \(error.message)")
+            } else {
+                NSLog("Leaving channel \"\(self.gameChannel.name)\".")
+                self.gameChannel.unsubscribe()
+                self.gameChannel.presence.leave(nil)
+            }
+        }
     }
     
     // MOVES
-    private func _sendMove(with data: Data) {
+    private func _sendMove(with data: [String: Any]) {
         self.gameChannel.publish(GameSessionDetails.shared.roomCode, data: data) { error in
           if let error = error {
-            print("Unable to publish message; err = \(error.message)")
+              print("Unable to publish message. Status code: \(error.statusCode). Error: \(error.message)")
           } else {
             print("Message successfully sent")
           }
         }
     }
 }
+
+
+//Incoming data: {
+//    moves =     (
+//                {
+//            type = openTile;
+//            x = 6;
+//            y = 8;
+//        }
+//    );
+//    playedBy = seeker;
+//}
