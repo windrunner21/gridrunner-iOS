@@ -29,6 +29,6 @@ class MoveResponse: ResponseParser, Decodable {
     }
     
     func getNextTurn() -> PlayerType {
-        self.playedBy == "seeker" ? .runner : .seeker
+        self.playedBy == "runner" ? .seeker : .runner
     }
 }
