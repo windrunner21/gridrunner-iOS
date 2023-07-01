@@ -8,9 +8,9 @@
 import Foundation
 
 class SpecialTile: ResponseParser, Decodable, CustomStringConvertible {
-    var type: String
-    var x: Int
-    var y: Int
+    private var type: String
+    private var x: Int
+    private var y: Int
     
     var description: String {
         "(Special Tile with coordinates at: \(x), \(y). Type: \(type))"

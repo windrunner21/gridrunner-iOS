@@ -8,8 +8,8 @@
 import Foundation
 
 class TurnHistory: ResponseParser, Decodable, CustomStringConvertible {
-    var runnerHistory: [String]
-    var seekerHistory: [String]
+    var runnerHistory: [SLMove]
+    var seekerHistory: [SLMove]
     
     var description: String {
         "Turn history initialized with runner history as: \(runnerHistory) and seeker history as: \(seekerHistory)"

@@ -30,8 +30,8 @@ class History {
         self.seekerHistory
     }
     
-    func setHistory(of player: AnyPlayer, to history: [Turn]) {
-        if player.type == .runner {
+    func setHistory(of player: PlayerType, to history: [Turn]) {
+        if player == .runner {
             self.setRunnerHistory(to: history)
         } else {
             self.setSeekerHistory(to: history)

@@ -46,7 +46,23 @@ class Seeker: Player, AnyPlayer {
         }
     }
     
-    func finish(on tile: Tile, with runnerHistory: [Turn]) {        
+    func finish(on tile: Tile, with runnerHistory: [Turn]) {
+        var movesArray: [[String: Any]] = []
+        
+        // Current turn was already incremented (-1). Array start at 0 (-1).
+        for move in self.history[currentTurnNumber - 2].getMoves() {
+            movesArray.append([
+                "type": "openTile",
+                "x": move.to.y,
+                "y": move.to.x
+            ])
+        }
+        
+        let moves: [String: Any] = ["moves": movesArray]
+        
+        // Send move data to Ably.
+        AblyService.shared.send(moves: moves)
+        
         // If it is the last one in the Runner's history - Seeker wins.
         if self.position == runnerHistory.last?.getMoves().last?.to {
             print("i have found you - from runner history - last")

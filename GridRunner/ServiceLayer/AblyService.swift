@@ -117,10 +117,11 @@ class AblyService {
                     }
                 }
                 
-                if let payload = TurnConfig.toJSONAndDecode(data: data, type: TurnConfig.self) {
-                    TurnConfig.shared.upgrade(with: payload)
+                if let _ = data["playedBy"] as? String,
+                   let payload = MoveResponse.toJSONAndDecode(data: data, type: MoveResponse.self) {
+                    MoveResponse.shared.update(with: payload)
                     DispatchQueue.main.async {
-                        NotificationCenter.default.post(name: NSNotification.Name("Success:TurnConfig"), object: nil)
+                        NotificationCenter.default.post(name: NSNotification.Name("Success:MoveResponse"), object: nil)
                     }
                 }
             }
@@ -154,15 +155,3 @@ class AblyService {
         }
     }
 }
-
-
-//Incoming data: {
-//    moves =     (
-//                {
-//            type = openTile;
-//            x = 6;
-//            y = 8;
-//        }
-//    );
-//    playedBy = seeker;
-//}

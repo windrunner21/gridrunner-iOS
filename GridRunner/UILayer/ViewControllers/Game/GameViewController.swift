@@ -41,7 +41,7 @@ class GameViewController: UIViewController {
         AblyService.shared.enterGame()
 
         NotificationCenter.default.addObserver(self, selector: #selector(setupGame), name: NSNotification.Name("Success:GameConfig"), object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(updateGameTurn), name: NSNotification.Name("Success:TurnConfig"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(updateGame), name: NSNotification.Name("Success:MoveResponse"), object: nil)
     }
     
     @objc private func setupGame() {
@@ -57,13 +57,16 @@ class GameViewController: UIViewController {
         self.setupVersusProfileView()
     }
     
-    @objc private func updateGameTurn() {
+    @objc private func updateGame() {
         guard let player = game.getPlayer() else {
             presentErrorAlert()
             return
         }
         
-        self.visualizeTurn(for: player)
+//        if player.type == MoveResponse.shared
+//        game.getHistory().setSeekerHistory(to: <#T##[Turn]#>)
+        
+        self.visualizeTurn(for: player, initial: false)
     }
     
     @objc private func cancel() {
@@ -111,6 +114,7 @@ class GameViewController: UIViewController {
         
         if let runner = player as? Runner {
             runner.finish(on: latestTile)
+            self.visualizeTurnForOpponent()
         }
         
         if let seeker = player as? Seeker {
@@ -216,7 +220,7 @@ class GameViewController: UIViewController {
         let previousTile = self.accessTile(with: player.position, in: gameView)
         
         player.move(from: previousTile, to: tile)
-        game.getHistory().setHistory(of: player, to: player.history)
+        game.getHistory().setHistory(of: player.type, to: player.history)
         
         self.updateGameHUD(of: player)
     }
@@ -348,7 +352,7 @@ class GameViewController: UIViewController {
         )
         
         self.updateMovesLabel(with: player.numberOfMoves)
-        self.visualizeTurn(for: player)
+        self.visualizeTurn(for: player, initial: true)
     }
     
     private func setupCancelButton() {
@@ -404,13 +408,20 @@ class GameViewController: UIViewController {
         self.finishButton.disable()
     }
     
-    private func visualizeTurn(for player: AnyPlayer) {
-        if player.type == TurnConfig.shared.getTurn() {
+    private func visualizeTurn(for player: AnyPlayer, initial: Bool) {
+        let compareAgainstType: PlayerType = initial ? GameConfig.shared.getCurrentTurn() : MoveResponse.shared.getNextTurn()
+        
+        if player.type == compareAgainstType {
             self.profileView.backgroundColor = .systemGreen.withAlphaComponent(0.5)
             self.versusProfileView.backgroundColor = .white
         } else {
             self.profileView.backgroundColor = .white
             self.versusProfileView.backgroundColor = .systemGreen.withAlphaComponent(0.5)
         }
+    }
+    
+    private func visualizeTurnForOpponent() {
+        self.profileView.backgroundColor = .white
+        self.versusProfileView.backgroundColor = .systemGreen.withAlphaComponent(0.5)
     }
 }
