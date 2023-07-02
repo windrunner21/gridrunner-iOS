@@ -73,7 +73,7 @@ class AuthService {
     func logout(completion: @escaping(Response) -> Void) {
         self.client.sendRequest(
             path: URLPath.logout.path,
-            method: .GET
+            method: .POST
         ) { data, response, error in
             
             if let error = error {
