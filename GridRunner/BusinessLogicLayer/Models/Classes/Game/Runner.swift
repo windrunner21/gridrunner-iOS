@@ -61,12 +61,12 @@ class Runner: Player, AnyPlayer {
             movesArray.append([
                 "type": "moveTo",
                 "from": [
-                    "x": move.from.y,
-                    "y": move.from.x
+                    "x": move.from.x,
+                    "y": move.from.y
                 ],
                 "to": [
-                    "x": move.to.y,
-                    "y": move.to.x
+                    "x": move.to.x,
+                    "y": move.to.y
                 ]
             ])
         }

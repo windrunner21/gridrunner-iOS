@@ -151,8 +151,8 @@ class GameViewController: UIViewController {
             for column in 0..<columns {
                 let tile = Tile()
 
-                tile.position = Coordinate(x: row, y: column)
-                tile.setIdentifier("\(row)\(column)")
+                tile.position = Coordinate(x: column, y: row)
+                tile.setIdentifier("\(column)\(row)")
                 tile.setupTile(at: row, and: column, with: game.getMap().getDimensions(), and: game.getHistory())
 
                 let tileTap = UITapGestureRecognizer(target: self, action: #selector(tileTapped))
@@ -225,9 +225,9 @@ class GameViewController: UIViewController {
         self.updateGameHUD(of: player)
     }
     
-    private func accessTile(with coordinates: Coordinate, in view: UIView) -> Tile? {
-        let row = coordinates.x
-        let column = coordinates.y
+    private func accessTile(with coordinate: Coordinate, in view: UIView) -> Tile? {
+        let row = coordinate.y
+        let column = coordinate.x
         
         if let view = view.subviews.first as? UIStackView {
             if let row = view.arrangedSubviews[row] as? UIStackView {

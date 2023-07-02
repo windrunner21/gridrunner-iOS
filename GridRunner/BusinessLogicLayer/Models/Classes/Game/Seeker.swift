@@ -53,8 +53,8 @@ class Seeker: Player, AnyPlayer {
         for move in self.history[currentTurnNumber - 2].getMoves() {
             movesArray.append([
                 "type": "openTile",
-                "x": move.to.y,
-                "y": move.to.x
+                "x": move.to.x,
+                "y": move.to.y
             ])
         }
         

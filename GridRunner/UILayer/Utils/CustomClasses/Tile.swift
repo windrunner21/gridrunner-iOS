@@ -123,14 +123,14 @@ class Tile: UIView {
         
         // Handle tile with history
         if !history.getRunnerHistory().isEmpty {
-            let tilePosition = Coordinate(x: row, y: column)
+            let tilePosition = Coordinate(x: column, y: row)
             if history.historyContains(coordinate: tilePosition, of: .runner) {
                 self.openByRunner(explicit: true)
             }
         }
         
         if !history.getSeekerHistory().isEmpty {
-            let tilePosition = Coordinate(x: row, y: column)
+            let tilePosition = Coordinate(x: column, y: row)
             if history.historyContains(coordinate: tilePosition, of: .seeker) {
                 self.openBySeeker(explicit: true)
             }
