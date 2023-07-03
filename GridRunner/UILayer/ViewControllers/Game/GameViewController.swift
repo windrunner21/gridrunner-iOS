@@ -42,6 +42,7 @@ class GameViewController: UIViewController {
 
         NotificationCenter.default.addObserver(self, selector: #selector(setupGame), name: NSNotification.Name("Success:GameConfig"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(updateGame), name: NSNotification.Name("Success:MoveResponse"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(finishGame), name: NSNotification.Name("Success:GameOver"), object: nil)
     }
     
     @objc private func setupGame() {
@@ -63,10 +64,61 @@ class GameViewController: UIViewController {
             return
         }
         
+        if player.type == .runner {
+            // Get coordinates seeker has traveled to.
+            guard let coordinates = MoveResponse.shared.getSeekerCoordinates() else { return }
+     
+            var moves: [Move] = []
+            
+            // Create moves using these coordinates.
+            for coordinate in coordinates {
+                // If seeker history is empty, use initial move from as map center.
+                if game.getHistory().getSeekerHistory().isEmpty {
+                    let move = Move(from: game.getMap().getCenterCoordinates(), to: coordinate)
+                    moves.append(move)
+                } else {
+                    guard let lastToCoordinate = game.getHistory().getSeekerHistory().last?.getMoves().last?.to else {
+                        return
+                    }
+                    
+                    let move = Move(from: lastToCoordinate, to: coordinate)
+                    
+                    moves.append(move)
+                }
+            }
+            
+            // Create turn from moves with coordinates.
+            let turn = Turn(moves: moves)
+            
+            // Set seeker history.
+            game.getHistory().appendSeekerHistory(with: turn)
+            
+            // TODO: update. fix out of range. Open tile by seeker. (-1) for array. (-1) for previous turn.
+            for move in game.getHistory().getSeekerHistory()[player.currentTurnNumber - 2].getMoves() {
+                self.accessTile(with: move.to, in: gameView)?.openBySeeker(explicit: true)
+            }
+            
+        } else {
+            // Get turn runner has completed on random.
+            guard let turn = MoveResponse.shared.getRunnerTurn() else { return }
+            // Set runner history.
+            game.getHistory().appendRunnerHistory(with: turn)
+            
+            // draw on tile
+        }
+        
+        // TODO: to here
 //        if player.type == MoveResponse.shared
 //        game.getHistory().setSeekerHistory(to: <#T##[Turn]#>)
         
         self.visualizeTurn(for: player, initial: false)
+        
+        game.getHistory().outputHistory()
+    }
+    
+    @objc private func finishGame() {
+        NSLog("Game has been concluded.")
+        self.presentWinAlert()
     }
     
     @objc private func cancel() {
@@ -121,17 +173,10 @@ class GameViewController: UIViewController {
             seeker.finish(on: latestTile, with: game.getHistory().getRunnerHistory())
         }
         
-        if player.didWin {
-            NSLog("Game has been concluded.")
-            self.presentWinAlert()
-        } else {
-            self.updateMovesLabel(with: player.numberOfMoves)
-        }
+        self.updateMovesLabel(with: player.numberOfMoves)
         
         self.undoButton.disable()
         self.finishButton.disable()
-        
-        player.outputHistory()
     }
     
     private func createGameGrid(rows: Int, columns: Int, inside rootView: UIView, spacing: CGFloat = 5) {

@@ -58,8 +58,16 @@ class History {
         self.runnerHistory += history
     }
     
+    func appendRunnerHistory(with turn: Turn) {
+        self.runnerHistory.append(turn)
+    }
+    
     func appendSeekerHistory(with history: [Turn]) {
         self.seekerHistory += history
+    }
+    
+    func appendSeekerHistory(with turn: Turn) {
+        self.seekerHistory.append(turn)
     }
     
     func historyContains(coordinate: Coordinate, of playerType: PlayerType) -> Bool {
@@ -82,6 +90,24 @@ class History {
                 }
             }
             return false
+        }
+    }
+    
+    func outputHistory() {
+        print("Runner History:")
+        for (index, turn) in runnerHistory.enumerated() {
+            print("\nTURN #\(index + 1)\n")
+            for (index, move) in turn.getMoves().enumerated() {
+                print("Move #\(index + 1): moving from \(move.from) to \(move.to) ")
+            }
+        }
+        
+        print("\nSeeker History:")
+        for (index, turn) in seekerHistory.enumerated() {
+            print("\nTURN #\(index + 1)\n")
+            for (index, move) in turn.getMoves().enumerated() {
+                print("Move #\(index + 1): moving from \(move.from) to \(move.to) ")
+            }
         }
     }
 }

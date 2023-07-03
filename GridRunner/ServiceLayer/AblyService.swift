@@ -118,10 +118,19 @@ class AblyService {
                 }
                 
                 if let _ = data["playedBy"] as? String,
-                   let payload = MoveResponse.toJSONAndDecode(data: data, type: MoveResponse.self) {
+                    let payload = MoveResponse.toJSONAndDecode(data: data, type: MoveResponse.self) {
                     MoveResponse.shared.update(with: payload)
                     DispatchQueue.main.async {
                         NotificationCenter.default.post(name: NSNotification.Name("Success:MoveResponse"), object: nil)
+                    }
+                }
+                
+                if let type = data["type"] as? String,
+                    type == "game-over",
+                    let payload = GameOver.toJSONAndDecode(data: data, type: GameOver.self) {
+                    GameOver.shared.update(with: payload)
+                    DispatchQueue.main.async {
+                        NotificationCenter.default.post(name: NSNotification.Name("Success:GameOver"), object: nil)
                     }
                 }
             }

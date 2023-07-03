@@ -78,9 +78,11 @@
 		CA852A6B2A40597A00961E65 /* SpecialTile.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA852A6A2A40597A00961E65 /* SpecialTile.swift */; };
 		CA852A6F2A406E9800961E65 /* LoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA852A6E2A406E9800961E65 /* LoadingView.swift */; };
 		CA852A712A406EA400961E65 /* Loading.xib in Resources */ = {isa = PBXBuildFile; fileRef = CA852A702A406EA400961E65 /* Loading.xib */; };
+		CA89AC652A52FBC300265465 /* MoveType.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA89AC642A52FBC300265465 /* MoveType.swift */; };
 		CA8CBF9A2A4F1FFA003CF44B /* AuthenticationError.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA8CBF992A4F1FFA003CF44B /* AuthenticationError.swift */; };
 		CA8CBF9C2A504276003CF44B /* MoveResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA8CBF9B2A504276003CF44B /* MoveResponse.swift */; };
 		CA8CBF9E2A504A82003CF44B /* SLMove.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA8CBF9D2A504A82003CF44B /* SLMove.swift */; };
+		CA8CBFA82A51A9AA003CF44B /* GameOver.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA8CBFA72A51A9AA003CF44B /* GameOver.swift */; };
 		CAB6EAAF2A2A086C00997852 /* ButtonExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAB6EAAE2A2A086C00997852 /* ButtonExtension.swift */; };
 		CAF8EC9F2A2DBD1A00179EF1 /* APIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAF8EC9E2A2DBD1A00179EF1 /* APIClient.swift */; };
 		CAF8ECA22A2DBD5500179EF1 /* AuthService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAF8ECA12A2DBD5500179EF1 /* AuthService.swift */; };
@@ -195,9 +197,11 @@
 		CA852A6A2A40597A00961E65 /* SpecialTile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpecialTile.swift; sourceTree = "<group>"; };
 		CA852A6E2A406E9800961E65 /* LoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingView.swift; sourceTree = "<group>"; };
 		CA852A702A406EA400961E65 /* Loading.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = Loading.xib; sourceTree = "<group>"; };
+		CA89AC642A52FBC300265465 /* MoveType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoveType.swift; sourceTree = "<group>"; };
 		CA8CBF992A4F1FFA003CF44B /* AuthenticationError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationError.swift; sourceTree = "<group>"; };
 		CA8CBF9B2A504276003CF44B /* MoveResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoveResponse.swift; sourceTree = "<group>"; };
 		CA8CBF9D2A504A82003CF44B /* SLMove.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SLMove.swift; sourceTree = "<group>"; };
+		CA8CBFA72A51A9AA003CF44B /* GameOver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameOver.swift; sourceTree = "<group>"; };
 		CAB6EAAE2A2A086C00997852 /* ButtonExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonExtension.swift; sourceTree = "<group>"; };
 		CAF8EC9E2A2DBD1A00179EF1 /* APIClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIClient.swift; sourceTree = "<group>"; };
 		CAF8ECA12A2DBD5500179EF1 /* AuthService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthService.swift; sourceTree = "<group>"; };
@@ -462,6 +466,7 @@
 				CA4E3F652A0BCD3300D36266 /* MapExits.swift */,
 				CA0AAC3C2A121EE2008367FB /* MoveDirection.swift */,
 				CA0AAC3E2A13A2A0008367FB /* ArrowDirection.swift */,
+				CA89AC642A52FBC300265465 /* MoveType.swift */,
 			);
 			path = Game;
 			sourceTree = "<group>";
@@ -516,6 +521,7 @@
 				CA8CBF9B2A504276003CF44B /* MoveResponse.swift */,
 				CA8CBFA42A504E4C003CF44B /* MoveResponse */,
 				CA852A592A3C4E9400961E65 /* GameSessionDetails.swift */,
+				CA8CBFA72A51A9AA003CF44B /* GameOver.swift */,
 			);
 			name = Game;
 			sourceTree = "<group>";
@@ -935,7 +941,9 @@
 				CA4E3F602A0891F300D36266 /* RegisterViewController.swift in Sources */,
 				CAF8ECB72A2E1FDE00179EF1 /* RegisterCredentials.swift in Sources */,
 				CA852A582A39C96D00961E65 /* AblyService.swift in Sources */,
+				CA8CBFA82A51A9AA003CF44B /* GameOver.swift in Sources */,
 				CAF8ECC32A2F78A600179EF1 /* LoginViewController.swift in Sources */,
+				CA89AC652A52FBC300265465 /* MoveType.swift in Sources */,
 				CA852A6B2A40597A00961E65 /* SpecialTile.swift in Sources */,
 				CA0AAC302A0E484F008367FB /* Coordinate.swift in Sources */,
 				CA0AAC5B2A1B7EDF008367FB /* History.swift in Sources */,
