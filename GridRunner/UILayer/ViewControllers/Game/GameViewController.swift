@@ -93,7 +93,7 @@ class GameViewController: UIViewController {
             // Set seeker history.
             game.getHistory().appendSeekerHistory(with: turn)
             
-            // TODO: update. fix out of range. Open tile by seeker. (-1) for array. (-1) for previous turn.
+            // TODO: update fix out of range. Open tile by seeker. (-1) for array. (-1) for previous turn.
             for move in game.getHistory().getSeekerHistory()[player.currentTurnNumber - 2].getMoves() {
                 self.accessTile(with: move.to, in: gameView)?.openBySeeker(explicit: true)
             }
