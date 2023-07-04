@@ -53,7 +53,7 @@ class Runner: Player, AnyPlayer {
         }
     }
     
-    func finish(on tile: Tile) {        
+    func publishTurn() {
         var movesArray: [[String: Any]] = []
         
         // Current turn was already incremented (-1). Array start at 0 (-1).
@@ -75,11 +75,6 @@ class Runner: Player, AnyPlayer {
         
         // Send move data to Ably.
         AblyService.shared.send(moves: moves)
-        
-        if tile.type == .exit {
-            self.didWin = true
-            tile.decorateRunnerWin()
-        }
     }
     
     func undo(previousTile tile: Tile?) {
@@ -94,5 +89,10 @@ class Runner: Player, AnyPlayer {
         } else {
             return self.history.last
         }
+    }
+    
+    func win(on tile: Tile) {
+        self.didWin = true
+        tile.decorateRunnerWin()
     }
 }

@@ -36,6 +36,8 @@ protocol AnyPlayer {
     
     // Self actions
     func move(from oldTile: Tile?, to newTile: Tile)
+    func win(on tile: Tile)
+    func publishTurn()
     
     // Button clicks
     func finish()

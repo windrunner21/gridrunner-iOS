@@ -119,7 +119,16 @@ class GameViewController: UIViewController {
     }
     
     @objc private func finishGame() {
-        NSLog("Game has been concluded.")
+        guard let player = game.getPlayer() else {
+            presentErrorAlert()
+            return
+        }
+        
+        if player.type == GameOver.shared.getWinner() {
+            guard let tile = self.accessTile(with: player.position, in: gameView) else { return }
+            player.win(on: tile)
+        }
+        
         self.presentGameOverAlert()
     }
     
@@ -160,19 +169,11 @@ class GameViewController: UIViewController {
             return
         }
         
-        guard let latestMove = player.history.last?.getMoves().last else { return }
-        // Get clicked tile - the one player is currently standing on.
-        guard let latestTile = self.accessTile(with: latestMove.to, in: gameView) else { return }
-        
         player.finish()
+        player.publishTurn()
         
-        if let runner = player as? Runner {
-            runner.finish(on: latestTile)
+        if let _ = player as? Runner {
             self.visualizeTurnForOpponent()
-        }
-        
-        if let seeker = player as? Seeker {
-            seeker.finish(on: latestTile, with: game.getHistory().getRunnerHistory())
         }
         
         self.updateMovesLabel(with: player.numberOfMoves)
