@@ -245,7 +245,7 @@ class GameViewController: UIViewController {
         case .start:
             self.startTileTapped(tile)
         case .exit:
-            self.exitTileTapped(tile, by: player)
+            self.basicTileTapped(tile, by: player)
         default:
             self.basicTileTapped(tile, by: player)
         }
@@ -254,15 +254,7 @@ class GameViewController: UIViewController {
     
     private func startTileTapped(_ tile: Tile) { }
     
-    private func exitTileTapped(_ tile: Tile, by player: AnyPlayer) {
-        if let runner = player as? Runner {
-            let previousTile = self.accessTile(with: runner.position, in: gameView)
-            runner.move(from: previousTile, to: tile)
-            game.getHistory().setRunnerHistory(to: runner.history)
-        }
-        
-        self.updateGameHUD(of: player)
-    }
+    private func exitTileTapped(_ tile: Tile, by player: AnyPlayer) {}
     
     private func basicTileTapped(_ tile: Tile, by player: AnyPlayer) {
         let previousTile = self.accessTile(with: player.position, in: gameView)
