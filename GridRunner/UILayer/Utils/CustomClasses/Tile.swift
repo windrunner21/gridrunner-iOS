@@ -53,10 +53,16 @@ class Tile: UIView {
         self.identifier = id
     }
     
-    func openByRunner(explicit: Bool) {
+    func openByRunner(explicit: Bool, lastTurn: Turn?, oldTile: Tile?, and direction: MoveDirection ) {
         self.openedByRunner = true
         if explicit {
             self.backgroundColor = UIColor(named: "RedAccentColor")?.withAlphaComponent(0.5)
+            
+            self.updateDirectionImage(
+                to: direction,
+                from: lastTurn?.getMoves().last?.identifyMoveDirection(),
+                oldTile: oldTile
+            )
         }
     }
     
@@ -121,20 +127,20 @@ class Tile: UIView {
             self.layer.maskedCorners = [.layerMaxXMaxYCorner]
         }
         
-        // Handle tile with history
-        if !history.getRunnerHistory().isEmpty {
-            let tilePosition = Coordinate(x: column, y: row)
-            if history.historyContains(coordinate: tilePosition, of: .runner) {
-                self.openByRunner(explicit: true)
-            }
-        }
-        
-        if !history.getSeekerHistory().isEmpty {
-            let tilePosition = Coordinate(x: column, y: row)
-            if history.historyContains(coordinate: tilePosition, of: .seeker) {
-                self.openBySeeker(explicit: true)
-            }
-        }
+        // TODO: Handle tile with history
+//        if !history.getRunnerHistory().isEmpty {
+//            let tilePosition = Coordinate(x: column, y: row)
+//            if history.historyContains(coordinate: tilePosition, of: .runner) {
+//                self.openByRunner(explicit: true)
+//            }
+//        }
+//
+//        if !history.getSeekerHistory().isEmpty {
+//            let tilePosition = Coordinate(x: column, y: row)
+//            if history.historyContains(coordinate: tilePosition, of: .seeker) {
+//                self.openBySeeker(explicit: true)
+//            }
+//        }
     }
     
     /// Updates old and current Tile's direction image for Runner.

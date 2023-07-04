@@ -68,8 +68,7 @@ class GameViewController: UIViewController {
         
         if player.type == .runner && MoveResponse.shared.getPlayedBy() == .seeker {
             game.updateSeekerHistory()
-            print(player.currentTurnNumber)
-            print(game.getHistory().getSeekerHistory())
+            print(game.getHistory().outputSeekerHistory())
             for move in game.getHistory().getSeekerHistory()[player.currentTurnNumber - 2].getMoves() {
                 self.accessTile(with: move.to, in: gameView)?.openBySeeker(explicit: true)
             }
@@ -77,13 +76,15 @@ class GameViewController: UIViewController {
         
         if player.type == .seeker && MoveResponse.shared.getPlayedBy() == .server {
             game.updateRunnerHistory()
-            print(player.currentTurnNumber)
-            print(game.getHistory().getRunnerHistory())
+            print(game.getHistory().outputRunnerHistory())
             for move in game.getHistory().getRunnerHistory()[player.currentTurnNumber - 2].getMoves() {
                 let direction = move.identifyMoveDirection()
-                self.accessTile(with: move.to, in: gameView)?.openByRunner(explicit: true)
-                // TODO: update as on board => change tile at 1st to or 2nd from and use 1st and 2nd directions
-                // TODO: either write new method or reuse one in tile.
+                self.accessTile(with: move.to, in: gameView)?.openByRunner(
+                    explicit: true,
+                    lastTurn: game.getHistory().getRunnerHistory()[player.currentTurnNumber - 2],
+                    oldTile: self.accessTile(with: move.from, in: gameView),
+                    and: direction
+                )
            }
         }
         
@@ -305,9 +306,6 @@ class GameViewController: UIViewController {
     }
     
     private func initializeGame() {
-        // Prepare game class.
-        print(GameConfig.shared)
-        
         let map = Map(with: MapDimensions(GameConfig.shared.grid.height, by: GameConfig.shared.grid.width))
         
         guard let startTile = GameConfig.shared.grid.tiles().first(where: {$0.type == .start}) else {
@@ -334,8 +332,6 @@ class GameViewController: UIViewController {
             for: player,
             with: history
         )
-        
-        NSLog("Game has been instantiated.")
         
         // If player could not have been instatiated return.
         guard let player = game.getPlayer() else {

@@ -95,6 +95,24 @@ class History {
         }
     }
     
+    func outputRunnerHistory() {
+        for (index, turn) in runnerHistory.enumerated() {
+            print("\nTURN #\(index + 1)\n")
+            for (index, move) in turn.getMoves().enumerated() {
+                print("Move #\(index + 1): moving from \(move.from) to \(move.to) ")
+            }
+        }
+    }
+    
+    func outputSeekerHistory() {
+        for (index, turn) in seekerHistory.enumerated() {
+            print("\nTURN #\(index + 1)\n")
+            for (index, move) in turn.getMoves().enumerated() {
+                print("Move #\(index + 1): moving from \(move.from) to \(move.to) ")
+            }
+        }
+    }
+    
     func outputHistory() {
         print("Runner History:")
         for (index, turn) in runnerHistory.enumerated() {

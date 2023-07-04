@@ -5,6 +5,8 @@
 //  Created by Imran Hajiyev on 12.05.23.
 //
 
+import Foundation
+
 class Game {
     private var map: Map
     private var player: AnyPlayer?
@@ -36,6 +38,8 @@ class Game {
         self.map = map
         self.player = player
         self.history = history ?? History()
+        
+        NSLog("Game has been instantiated.")
     }
     
     func updateSeekerHistory() {

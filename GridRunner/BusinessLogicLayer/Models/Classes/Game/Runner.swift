@@ -28,14 +28,9 @@ class Runner: Player, AnyPlayer {
             if allowedMove && direction != .unknown {
                 print("Runner moved to position: \(newTile.position)")
         
-                newTile.openByRunner(explicit: true)
+                newTile.openByRunner(explicit: true, lastTurn: self.getLastTurn(), oldTile: oldTile, and: direction)
                 
                 print("Tile has been opened by Runner: \(newTile.hasBeenOpened().byRunner ).\n Has been opened by Seeker: \(newTile.hasBeenOpened().bySeeker ).")
-                
-                let lastTurn = self.getLastTurn()
-                newTile.updateDirectionImage(to: direction,
-                                             from: lastTurn?.getMoves().last?.identifyMoveDirection(),
-                                             oldTile: oldTile)
                 
                 if self.currentTurnNumber > self.history.count {
                     self.createTurn(with: [newMove])
