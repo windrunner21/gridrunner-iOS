@@ -67,34 +67,7 @@ class GameViewController: UIViewController {
         self.visualizeTurn(for: player, initial: false)
         
         if player.type == .runner && MoveResponse.shared.getPlayedBy() == .seeker {
-            // Get coordinates seeker has traveled to.
-            guard let coordinates = MoveResponse.shared.getSeekerCoordinates() else { return }
-     
-            var moves: [Move] = []
-            
-            // Create moves using these coordinates.
-            for coordinate in coordinates {
-                // If seeker history is empty, use initial move from as map center.
-                if game.getHistory().getSeekerHistory().isEmpty {
-                    let move = Move(from: game.getMap().getCenterCoordinates(), to: coordinate)
-                    moves.append(move)
-                } else {
-                    guard let lastToCoordinate = game.getHistory().getSeekerHistory().last?.getMoves().last?.to else {
-                        return
-                    }
-                    
-                    let move = Move(from: lastToCoordinate, to: coordinate)
-                    
-                    moves.append(move)
-                }
-            }
-            
-            // Create turn from moves with coordinates.
-            let turn = Turn(moves: moves)
-            
-            // Set seeker history.
-            game.getHistory().appendSeekerHistory(with: turn)
-            
+            game.updateSeekerHistory()
             print(player.currentTurnNumber)
             print(game.getHistory().getSeekerHistory())
             for move in game.getHistory().getSeekerHistory()[player.currentTurnNumber - 2].getMoves() {
@@ -103,15 +76,14 @@ class GameViewController: UIViewController {
         }
         
         if player.type == .seeker && MoveResponse.shared.getPlayedBy() == .server {
-            // Get turn runner has completed on random.
-            guard let turn = MoveResponse.shared.getRunnerTurn() else { return }
-            // Set runner history.
-            game.getHistory().appendRunnerHistory(with: turn)
-            
+            game.updateRunnerHistory()
             print(player.currentTurnNumber)
             print(game.getHistory().getRunnerHistory())
             for move in game.getHistory().getRunnerHistory()[player.currentTurnNumber - 2].getMoves() {
-               self.accessTile(with: move.to, in: gameView)?.openByRunner(explicit: true)
+                let direction = move.identifyMoveDirection()
+                self.accessTile(with: move.to, in: gameView)?.openByRunner(explicit: true)
+                // TODO: update as on board => change tile at 1st to or 2nd from and use 1st and 2nd directions
+                // TODO: either write new method or reuse one in tile.
            }
         }
         

@@ -37,4 +37,41 @@ class Game {
         self.player = player
         self.history = history ?? History()
     }
+    
+    func updateSeekerHistory() {
+        // Get coordinates seeker has traveled to.
+        guard let coordinates = MoveResponse.shared.getSeekerCoordinates() else { return }
+ 
+        var moves: [Move] = []
+        
+        // Create moves using these coordinates.
+        for coordinate in coordinates {
+            // If seeker history is empty, use initial move from as map center.
+            if self.getHistory().getSeekerHistory().isEmpty {
+                let move = Move(from: self.getMap().getCenterCoordinates(), to: coordinate)
+                moves.append(move)
+            } else {
+                guard let lastToCoordinate = self.getHistory().getSeekerHistory().last?.getMoves().last?.to else {
+                    return
+                }
+                
+                let move = Move(from: lastToCoordinate, to: coordinate)
+                
+                moves.append(move)
+            }
+        }
+        
+        // Create turn from moves with coordinates.
+        let turn = Turn(moves: moves)
+        
+        // Set seeker history.
+        self.getHistory().appendSeekerHistory(with: turn)
+    }
+    
+    func updateRunnerHistory() {
+        // Get turn runner has completed on random.
+        guard let turn = MoveResponse.shared.getRunnerTurn() else { return }
+        // Set runner history.
+        self.getHistory().appendRunnerHistory(with: turn)
+    }
 }
