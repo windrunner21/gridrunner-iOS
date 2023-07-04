@@ -8,12 +8,22 @@
 import UIKit
 
 class AlertAdapter {
-    func createGameOverAlert(alertActionHandler: @escaping () -> Void) -> UIAlertController {
-        let alert = UIAlertController(title: "Game Over.", message: "Congratulations! You have won.", preferredStyle: .alert)
+    func createGameOverAlert(winner: PlayerType, reason: String? = nil ,alertActionHandler: @escaping () -> Void) -> UIAlertController {
+        
+        let player = winner == .runner ? "Runner" : "Seeker"
+        let opponent = winner == .runner ? "Seeker" : "Runner"
+        
+        var message: String = "Congratulations to \(player)!\n\(player) wins. "
+        
+        if let reason = reason, reason == "resign" {
+            message += "\n\(opponent) has resigned from the game."
+        }
+        
+        let alert = UIAlertController(title: "Game Over", message: message, preferredStyle: .alert)
         
         alert.addAction(
             UIAlertAction(
-                title: NSLocalizedString("Main Menu", comment: "Default action"),
+                title: NSLocalizedString("Return to Menu", comment: "Default action"),
                 style: .default,
                 handler: { _ in
                     alertActionHandler()

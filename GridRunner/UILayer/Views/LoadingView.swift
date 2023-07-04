@@ -9,9 +9,6 @@ import UIKit
 
 class LoadingView: UIView {
     
-
-    private let overlayView = UIView()
-    
     @IBOutlet var contentView: UIView!
 
     override init(frame: CGRect) {
@@ -30,16 +27,9 @@ class LoadingView: UIView {
         
         self.contentView.frame = self.bounds
         self.contentView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-        
-        // Add overlay to disable user interaction and clearly seperate design wise.
-        self.overlayView.backgroundColor = UIColor(named: "FrostBlackColor")?.withAlphaComponent(0.5)
-        self.overlayView.frame = UIScreen.main.bounds
-        self.overlayView.autoresizingMask = [.flexibleHeight, .flexibleWidth]
-        self.addSubview(overlayView)
     }
     
     func remove() {
-        self.overlayView.removeFromSuperview()
         self.removeFromSuperview()
     }
 }

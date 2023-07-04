@@ -33,7 +33,16 @@ class MoveResponse: ResponseParser, Decodable {
     }
     
     func getPlayedBy() -> PlayerType {
-        self.playedBy == "seeker" ? .seeker : .runner
+        switch self.playedBy {
+        case "runner":
+            return .runner
+        case "seeker":
+            return .seeker
+        case "server":
+            return .server
+        default:
+            return .server
+        }
     }
     
     func getSeekerCoordinates() -> [Coordinate]? {

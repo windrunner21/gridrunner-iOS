@@ -90,6 +90,8 @@ class History {
                 }
             }
             return false
+        case .server:
+            return false
         }
     }
     

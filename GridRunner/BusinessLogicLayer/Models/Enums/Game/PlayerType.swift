@@ -8,4 +8,5 @@
 enum PlayerType {
     case runner
     case seeker
+    case server
 }

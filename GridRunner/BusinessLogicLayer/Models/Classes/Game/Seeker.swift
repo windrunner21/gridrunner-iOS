@@ -50,7 +50,7 @@ class Seeker: Player, AnyPlayer {
         var movesArray: [[String: Any]] = []
         
         // Current turn was already incremented (-1). Array start at 0 (-1).
-        for move in self.history[currentTurnNumber - 2].getMoves() {
+        for move in self.history[self.currentTurnNumber - 2].getMoves() {
             movesArray.append([
                 "type": "openTile",
                 "x": move.to.x,

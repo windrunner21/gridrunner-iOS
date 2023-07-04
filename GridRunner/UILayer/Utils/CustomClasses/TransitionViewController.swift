@@ -34,6 +34,8 @@ class TransitionViewController: UIViewController {
         if let currentViewController = self.currentViewController, let oldView = currentViewController.view {
             UIView.transition(with: self.view, duration: 0.5, options: options, animations: {
                 oldView.removeFromSuperview()
+                currentViewController.removeFromParent()
+                
                 self.view.addSubview(newView)
                 viewController.didMove(toParent: self)
                 self.currentViewController = viewController

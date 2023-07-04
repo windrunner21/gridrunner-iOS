@@ -11,8 +11,9 @@ class GameOver: ResponseParser, Decodable, CustomStringConvertible {
     static let shared = GameOver()
     
     private var turnHistory: TurnHistory
-    var winner: String
+    private var winner: String
     var type: String
+    var reason: String?
     
     var description: String {
         "Game is over. Winner is: \(winner). History is: \(turnHistory)"
@@ -22,21 +23,21 @@ class GameOver: ResponseParser, Decodable, CustomStringConvertible {
         self.turnHistory = TurnHistory()
         self.winner = String()
         self.type = String()
-    }
-    
-    private init(turnHistory: TurnHistory, winner: String, type: String) {
-        self.turnHistory = turnHistory
-        self.winner = winner
-        self.type = type
+        self.reason = nil
     }
     
     func update(with gameOver: GameOver) {
         self.turnHistory = gameOver.turnHistory
         self.winner = gameOver.winner
         self.type = gameOver.type
+        self.reason = gameOver.reason
     }
     
     func getHistory() -> History {
-        return turnHistory.toHistory()
+        turnHistory.toHistory()
+    }
+    
+    func getWinner() -> PlayerType {
+        self.winner == "seeker" ? .seeker : .runner
     }
 }

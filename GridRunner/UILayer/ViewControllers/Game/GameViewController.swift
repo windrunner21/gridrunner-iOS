@@ -64,7 +64,9 @@ class GameViewController: UIViewController {
             return
         }
         
-        if player.type == .runner {
+        self.visualizeTurn(for: player, initial: false)
+        
+        if player.type == .runner && MoveResponse.shared.getPlayedBy() == .seeker {
             // Get coordinates seeker has traveled to.
             guard let coordinates = MoveResponse.shared.getSeekerCoordinates() else { return }
      
@@ -93,32 +95,32 @@ class GameViewController: UIViewController {
             // Set seeker history.
             game.getHistory().appendSeekerHistory(with: turn)
             
-            // TODO: update fix out of range. Open tile by seeker. (-1) for array. (-1) for previous turn.
+            print(player.currentTurnNumber)
+            print(game.getHistory().getSeekerHistory())
             for move in game.getHistory().getSeekerHistory()[player.currentTurnNumber - 2].getMoves() {
                 self.accessTile(with: move.to, in: gameView)?.openBySeeker(explicit: true)
             }
-            
-        } else {
+        }
+        
+        if player.type == .seeker && MoveResponse.shared.getPlayedBy() == .server {
             // Get turn runner has completed on random.
             guard let turn = MoveResponse.shared.getRunnerTurn() else { return }
             // Set runner history.
             game.getHistory().appendRunnerHistory(with: turn)
             
-            // draw on tile
+            print(player.currentTurnNumber)
+            print(game.getHistory().getRunnerHistory())
+            for move in game.getHistory().getRunnerHistory()[player.currentTurnNumber - 2].getMoves() {
+               self.accessTile(with: move.to, in: gameView)?.openByRunner(explicit: true)
+           }
         }
-        
-        // TODO: to here
-//        if player.type == MoveResponse.shared
-//        game.getHistory().setSeekerHistory(to: <#T##[Turn]#>)
-        
-        self.visualizeTurn(for: player, initial: false)
         
         game.getHistory().outputHistory()
     }
     
     @objc private func finishGame() {
         NSLog("Game has been concluded.")
-        self.presentWinAlert()
+        self.presentGameOverAlert()
     }
     
     @objc private func cancel() {
@@ -313,8 +315,8 @@ class GameViewController: UIViewController {
         self.enableFinishButton(on: player.numberOfMoves == 0)
     }
     
-    private func presentWinAlert() {
-        let alert = alertAdapter.createGameOverAlert(alertActionHandler: { [weak self] in
+    private func presentGameOverAlert() {
+        let alert = alertAdapter.createGameOverAlert(winner: GameOver.shared.getWinner(), reason: GameOver.shared.reason, alertActionHandler: { [weak self] in
             self?.transitionToMainScreen()
         })
         

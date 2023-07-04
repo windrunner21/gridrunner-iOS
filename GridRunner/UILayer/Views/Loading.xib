@@ -1,11 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="21701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
-    <device id="retina6_12" orientation="landscape" appearance="light"/>
+    <device id="retina6_72" orientation="landscape" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21679"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
-        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <customFonts key="customFonts">
@@ -24,35 +23,49 @@
             <rect key="frame" x="0.0" y="0.0" width="852" height="393"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" animating="YES" style="large" translatesAutoresizingMaskIntoConstraints="NO" id="RKN-Ge-gdk">
-                    <rect key="frame" x="407.66666666666669" y="178" width="37" height="37"/>
-                    <color key="color" name="FrostBlackColor"/>
-                </activityIndicatorView>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Loading game configuration..." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eVg-BN-TUB">
-                    <rect key="frame" x="40" y="235" width="772" height="26"/>
-                    <fontDescription key="fontDescription" name="Kanit-Medium" family="Kanit Medium" pointSize="17"/>
-                    <nil key="textColor"/>
-                    <nil key="highlightedColor"/>
-                </label>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="AJN-84-EUs">
+                    <rect key="frame" x="0.0" y="121.66666666666669" width="852" height="150"/>
+                    <subviews>
+                        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="4bO-aN-A0d">
+                            <rect key="frame" x="347.33333333333331" y="35.999999999999986" width="157.33333333333331" height="78"/>
+                            <subviews>
+                                <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" animating="YES" style="large" translatesAutoresizingMaskIntoConstraints="NO" id="pKD-9g-kBf">
+                                    <rect key="frame" x="60.333333333333371" y="0.0" width="37" height="37"/>
+                                    <color key="color" name="BackgroundColor"/>
+                                </activityIndicatorView>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Entering game" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="weJ-d7-osw">
+                                    <rect key="frame" x="0.0" y="42" width="157.33333333333334" height="36"/>
+                                    <fontDescription key="fontDescription" name="Kanit-Medium" family="Kanit Medium" pointSize="24"/>
+                                    <color key="textColor" name="BackgroundColor"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                            </subviews>
+                        </stackView>
+                    </subviews>
+                    <color key="backgroundColor" name="RedAccentColor"/>
+                    <constraints>
+                        <constraint firstItem="4bO-aN-A0d" firstAttribute="centerY" secondItem="AJN-84-EUs" secondAttribute="centerY" id="UhO-j8-2JQ"/>
+                        <constraint firstItem="4bO-aN-A0d" firstAttribute="centerX" secondItem="AJN-84-EUs" secondAttribute="centerX" id="VZo-9P-7lH"/>
+                        <constraint firstAttribute="height" constant="150" id="VeY-Dg-KVS"/>
+                    </constraints>
+                </view>
             </subviews>
-            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+            <color key="backgroundColor" name="BackgroundColor"/>
             <constraints>
-                <constraint firstItem="eVg-BN-TUB" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="40" id="12m-DB-9FW"/>
-                <constraint firstItem="RKN-Ge-gdk" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="9e1-b2-5Pg"/>
-                <constraint firstItem="RKN-Ge-gdk" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="EJp-nE-KBM"/>
-                <constraint firstAttribute="trailing" secondItem="eVg-BN-TUB" secondAttribute="trailing" constant="40" id="buE-jg-byy"/>
-                <constraint firstItem="eVg-BN-TUB" firstAttribute="top" secondItem="RKN-Ge-gdk" secondAttribute="bottom" constant="20" id="l7n-T2-ak7"/>
+                <constraint firstItem="AJN-84-EUs" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="8DO-4Y-Ft6"/>
+                <constraint firstAttribute="trailing" secondItem="AJN-84-EUs" secondAttribute="trailing" id="sBf-5l-y0e"/>
+                <constraint firstItem="AJN-84-EUs" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="sDd-KK-Pkc"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-            <point key="canvasLocation" x="132" y="-12"/>
+            <point key="canvasLocation" x="130.98591549295776" y="-14.0625"/>
         </view>
     </objects>
     <resources>
-        <namedColor name="FrostBlackColor">
-            <color red="0.097999997437000275" green="0.10999999940395355" blue="0.125" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        <namedColor name="BackgroundColor">
+            <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
-        <systemColor name="systemBackgroundColor">
-            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-        </systemColor>
+        <namedColor name="RedAccentColor">
+            <color red="0.70599997043609619" green="0.19200000166893005" blue="0.21600000560283661" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
     </resources>
 </document>

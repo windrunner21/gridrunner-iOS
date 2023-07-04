@@ -86,12 +86,14 @@ class AblyService {
         }
         
         self.queueChannel.presence.enter(nil)
+
     }
     
     private func _leave() {
         NSLog("Leaving channel \"\(self.queueChannel.name)\" queue.")
         self.queueChannel.unsubscribe()
         self.queueChannel.presence.leave(nil)
+        self.queueChannel.detach()
     }
     
     // GAME
@@ -142,6 +144,7 @@ class AblyService {
     
     private func _leaveGame() {
         NSLog("Resigning from the game.")
+        
         self.gameChannel.publish(GameSessionDetails.shared.roomCode, data: ["resign": true]) { error in
             if let error = error {
                 print("Unable to publish message. Status code: \(error.statusCode). Error: \(error.message)")
@@ -149,6 +152,7 @@ class AblyService {
                 NSLog("Leaving channel \"\(self.gameChannel.name)\".")
                 self.gameChannel.unsubscribe()
                 self.gameChannel.presence.leave(nil)
+                self.gameChannel.detach()
             }
         }
     }
