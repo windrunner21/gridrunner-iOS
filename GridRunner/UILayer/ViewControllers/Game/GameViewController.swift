@@ -77,15 +77,19 @@ class GameViewController: UIViewController {
         if player.type == .seeker && MoveResponse.shared.getPlayedBy() == .server {
             game.updateRunnerHistory()
             print(game.getHistory().outputRunnerHistory())
-            for move in game.getHistory().getRunnerHistory()[player.currentTurnNumber - 2].getMoves() {
-                let direction = move.identifyMoveDirection()
-                self.accessTile(with: move.to, in: gameView)?.openByRunner(
-                    explicit: true,
-                    lastTurn: game.getHistory().getRunnerHistory()[player.currentTurnNumber - 2],
-                    oldTile: self.accessTile(with: move.from, in: gameView),
-                    and: direction
-                )
-           }
+            
+            guard let serverTurn = MoveResponse.shared.getRunnerTurn() else { print("no server turn"); return }
+            guard let firstMove = serverTurn.getMoves().first else { print("no first move"); return }
+            guard let secondMove = serverTurn.getMoves().last else { print("no second move"); return }
+            
+            let secondMoveDirection = secondMove.identifyMoveDirection()
+            
+            self.accessTile(with: firstMove.to, in: gameView)?.openByRunner(
+                explicit: true,
+                lastTurn: serverTurn,
+                oldTile: self.accessTile(with: secondMove.from, in: gameView),
+                and: secondMoveDirection
+            )
         }
         
         game.getHistory().outputHistory()

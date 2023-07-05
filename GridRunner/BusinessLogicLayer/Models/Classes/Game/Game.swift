@@ -74,7 +74,10 @@ class Game {
     
     func updateRunnerHistory() {
         // Get turn runner has completed on random.
-        guard let turn = MoveResponse.shared.getRunnerTurn() else { return }
+        guard let serverTurn = MoveResponse.shared.getRunnerTurn(), let firstMove = serverTurn.getMoves().first else { return }
+        
+        // Get only first move, as server turn always has 2 Moves for 1 Tile.
+        let turn: Turn = Turn(moves: [firstMove])
         // Set runner history.
         self.getHistory().appendRunnerHistory(with: turn)
     }

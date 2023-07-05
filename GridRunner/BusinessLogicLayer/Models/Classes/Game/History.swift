@@ -96,6 +96,7 @@ class History {
     }
     
     func outputRunnerHistory() {
+        print("Runner History ONLY:")
         for (index, turn) in runnerHistory.enumerated() {
             print("\nTURN #\(index + 1)\n")
             for (index, move) in turn.getMoves().enumerated() {
@@ -105,6 +106,7 @@ class History {
     }
     
     func outputSeekerHistory() {
+        print("Seeker History ONLY:")
         for (index, turn) in seekerHistory.enumerated() {
             print("\nTURN #\(index + 1)\n")
             for (index, move) in turn.getMoves().enumerated() {
