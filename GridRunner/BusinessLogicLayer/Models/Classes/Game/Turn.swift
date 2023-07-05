@@ -31,4 +31,8 @@ class Turn {
     func getMoves() -> [Move] {
         self.moves
     }
+    
+    func reverse() {
+        self.moves.reverse()
+    }
 }

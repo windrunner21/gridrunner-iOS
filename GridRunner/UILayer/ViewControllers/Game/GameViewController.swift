@@ -78,11 +78,15 @@ class GameViewController: UIViewController {
             game.updateRunnerHistory()
             print(game.getHistory().outputRunnerHistory())
             
-            guard let serverTurn = MoveResponse.shared.getRunnerTurn() else { print("no server turn"); return }
-            guard let firstMove = serverTurn.getMoves().first else { print("no first move"); return }
-            guard let secondMove = serverTurn.getMoves().last else { print("no second move"); return }
+            guard let serverTurn = MoveResponse.shared.getRunnerTurn() else { return }
+            guard let firstMove = serverTurn.getMoves().first else { return }
+            guard let secondMove = serverTurn.getMoves().last else { return }
             
             let secondMoveDirection = secondMove.identifyMoveDirection()
+            
+            // Need to reverse turn because to construct the move from server turn it uses reverse logic.
+            // Construct move using current and future (not opened) move. Ordinary logic: old and current moves.
+            serverTurn.reverse()
             
             self.accessTile(with: firstMove.to, in: gameView)?.openByRunner(
                 explicit: true,
