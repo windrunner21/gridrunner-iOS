@@ -45,6 +45,7 @@
 		CA0AAC892A25DF8C008367FB /* ProfileIcon.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA0AAC882A25DF8C008367FB /* ProfileIcon.swift */; };
 		CA0AAC8E2A26219B008367FB /* MenuItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA0AAC8D2A26219B008367FB /* MenuItemView.swift */; };
 		CA0AAC942A2621E7008367FB /* MenuItem.xib in Resources */ = {isa = PBXBuildFile; fileRef = CA0AAC932A2621E7008367FB /* MenuItem.xib */; };
+		CA25B1D22A56E9B50063CBA3 /* AblyAuthDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA25B1D12A56E9B50063CBA3 /* AblyAuthDelegate.swift */; };
 		CA35E7B72A28D0B60057BAB6 /* ViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA35E7B62A28D0B60057BAB6 /* ViewExtension.swift */; };
 		CA4E3F542A07A80E00D36266 /* Game.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CA4E3F532A07A80E00D36266 /* Game.storyboard */; };
 		CA4E3F582A07A85900D36266 /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA4E3F572A07A85900D36266 /* GameViewController.swift */; };
@@ -54,6 +55,7 @@
 		CA4E3F642A08DCB400D36266 /* ViewControllerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA4E3F632A08DCB400D36266 /* ViewControllerExtension.swift */; };
 		CA4E3F662A0BCD3300D36266 /* MapExits.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA4E3F652A0BCD3300D36266 /* MapExits.swift */; };
 		CA4E3F692A0CE31200D36266 /* TransitionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA4E3F682A0CE31200D36266 /* TransitionViewController.swift */; };
+		CA7417B32A56ECE900A9683A /* AblyAuthenticationError.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA7417B22A56ECE900A9683A /* AblyAuthenticationError.swift */; };
 		CA852A312A30A20200961E65 /* AlertAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA852A302A30A20200961E65 /* AlertAdapter.swift */; };
 		CA852A332A30ABB700961E65 /* Response.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA852A322A30ABB700961E65 /* Response.swift */; };
 		CA852A392A30B19100961E65 /* UserRole.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA852A382A30B19100961E65 /* UserRole.swift */; };
@@ -165,6 +167,7 @@
 		CA0AAC882A25DF8C008367FB /* ProfileIcon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileIcon.swift; sourceTree = "<group>"; };
 		CA0AAC8D2A26219B008367FB /* MenuItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuItemView.swift; sourceTree = "<group>"; };
 		CA0AAC932A2621E7008367FB /* MenuItem.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MenuItem.xib; sourceTree = "<group>"; };
+		CA25B1D12A56E9B50063CBA3 /* AblyAuthDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AblyAuthDelegate.swift; sourceTree = "<group>"; };
 		CA35E7B62A28D0B60057BAB6 /* ViewExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewExtension.swift; sourceTree = "<group>"; };
 		CA4E3F532A07A80E00D36266 /* Game.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Game.storyboard; sourceTree = "<group>"; };
 		CA4E3F572A07A85900D36266 /* GameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameViewController.swift; sourceTree = "<group>"; };
@@ -174,6 +177,7 @@
 		CA4E3F632A08DCB400D36266 /* ViewControllerExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewControllerExtension.swift; sourceTree = "<group>"; };
 		CA4E3F652A0BCD3300D36266 /* MapExits.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapExits.swift; sourceTree = "<group>"; };
 		CA4E3F682A0CE31200D36266 /* TransitionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransitionViewController.swift; sourceTree = "<group>"; };
+		CA7417B22A56ECE900A9683A /* AblyAuthenticationError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AblyAuthenticationError.swift; sourceTree = "<group>"; };
 		CA852A302A30A20200961E65 /* AlertAdapter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertAdapter.swift; sourceTree = "<group>"; };
 		CA852A322A30ABB700961E65 /* Response.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Response.swift; sourceTree = "<group>"; };
 		CA852A382A30B19100961E65 /* UserRole.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserRole.swift; sourceTree = "<group>"; };
@@ -428,6 +432,15 @@
 			path = CustomClasses;
 			sourceTree = "<group>";
 		};
+		CA7417B12A56ECCF00A9683A /* Errors */ = {
+			isa = PBXGroup;
+			children = (
+				CA8CBF992A4F1FFA003CF44B /* AuthenticationError.swift */,
+				CA7417B22A56ECE900A9683A /* AblyAuthenticationError.swift */,
+			);
+			path = Errors;
+			sourceTree = "<group>";
+		};
 		CA852A2F2A30A1EA00961E65 /* Structs */ = {
 			isa = PBXGroup;
 			children = (
@@ -474,9 +487,9 @@
 		CA852A372A30B17B00961E65 /* System */ = {
 			isa = PBXGroup;
 			children = (
+				CA7417B12A56ECCF00A9683A /* Errors */,
 				CA852A382A30B19100961E65 /* UserRole.swift */,
 				CA852A502A39ABC600961E65 /* GameType.swift */,
-				CA8CBF992A4F1FFA003CF44B /* AuthenticationError.swift */,
 			);
 			path = System;
 			sourceTree = "<group>";
@@ -509,6 +522,7 @@
 			isa = PBXGroup;
 			children = (
 				CA852A572A39C96D00961E65 /* AblyService.swift */,
+				CA25B1D12A56E9B50063CBA3 /* AblyAuthDelegate.swift */,
 			);
 			name = Ably;
 			sourceTree = "<group>";
@@ -900,6 +914,7 @@
 				CA0AAC3D2A121EE2008367FB /* MoveDirection.swift in Sources */,
 				CA0AAC342A0E6395008367FB /* Map.swift in Sources */,
 				CAF8ECAE2A2DC38200179EF1 /* Method.swift in Sources */,
+				CA25B1D22A56E9B50063CBA3 /* AblyAuthDelegate.swift in Sources */,
 				CA852A4B2A38655A00961E65 /* AblyJWTService.swift in Sources */,
 				CAF8ECB52A2E1FCE00179EF1 /* LoginCredentials.swift in Sources */,
 				CA852A392A30B19100961E65 /* UserRole.swift in Sources */,
@@ -949,6 +964,7 @@
 				CA0AAC5B2A1B7EDF008367FB /* History.swift in Sources */,
 				CA8CBF9E2A504A82003CF44B /* SLMove.swift in Sources */,
 				CA852A312A30A20200961E65 /* AlertAdapter.swift in Sources */,
+				CA7417B32A56ECE900A9683A /* AblyAuthenticationError.swift in Sources */,
 				CAFED48D2A02496E00FB4B9B /* AppDelegate.swift in Sources */,
 				CA0AAC282A0E2BF1008367FB /* Runner.swift in Sources */,
 				CA852A5F2A4029A900961E65 /* GameConfig.swift in Sources */,

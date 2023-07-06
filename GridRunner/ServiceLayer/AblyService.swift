@@ -23,8 +23,11 @@ class AblyService {
     }
     
     func update(with token: String, and queue: String) {
+        let ablyAuthCallbackDelegate = AblyAuthCallbackDelegate()
+        
         self.options = ARTClientOptions(token: token)
         self.options.echoMessages = false
+        self.options.authCallback = ablyAuthCallbackDelegate.tokenRequest
         
         self.client = ARTRealtime(options: options)
         self.queueChannel = client.channels.get(queue)
