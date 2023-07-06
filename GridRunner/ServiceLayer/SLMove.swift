@@ -46,39 +46,3 @@ private class SLRunnerCoordinate: ResponseParser, Decodable {
         Coordinate(x: self.x, y: self.y)
     }
 }
-
-// TODO: from here
-// show if im seeker
-//moves =     (
-//            {
-//        from =             {
-//            x = 7;
-//            y = 7;
-//        };
-//        to =             {
-//            x = 8;
-//            y = 7;
-//        };
-//        type = moveTo;
-//    },
-//            {
-//        from =             {
-//            x = 8;
-//            y = 7;
-//        };
-//        to =             {
-//            x = 9;
-//            y = 7;
-//        };
-//        type = moveTo;
-//    }
-//);
-
-// show if im runner
-//moves =     (
-//            {
-//        type = openTile;
-//        x = 8;
-//        y = 6;
-//    }
-//);
