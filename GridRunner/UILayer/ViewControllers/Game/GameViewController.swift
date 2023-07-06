@@ -33,6 +33,7 @@ class GameViewController: UIViewController {
     // Controller properties.
     var game = Game()
     var alertAdapter = AlertAdapter()
+    var isPlayersTurn = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -114,7 +115,6 @@ class GameViewController: UIViewController {
     }
     
     @objc private func cancel() {
-        AblyService.shared.leaveGame()
         self.transitionToMainScreen()
     }
     
@@ -223,12 +223,14 @@ class GameViewController: UIViewController {
         }
 
         switch tile.type {
-        case .start:
+        case .start where self.isPlayersTurn:
             self.startTileTapped(tile)
-        case .exit:
+        case .exit where self.isPlayersTurn:
+            self.basicTileTapped(tile, by: player)
+        case .basic where self.isPlayersTurn:
             self.basicTileTapped(tile, by: player)
         default:
-            self.basicTileTapped(tile, by: player)
+            return
         }
         
     }
@@ -306,6 +308,8 @@ class GameViewController: UIViewController {
     }
     
     private func transitionToMainScreen() {
+        AblyService.shared.leaveGame()
+        
         let mainStoryboard: UIStoryboard = UIStoryboard(name: "Main", bundle: .main)
         let mainViewController: UIViewController = mainStoryboard.instantiateViewController(identifier: "MainScreen") as MainViewController
         
@@ -428,15 +432,18 @@ class GameViewController: UIViewController {
         let compareAgainstType: PlayerType = initial ? GameConfig.shared.getCurrentTurn() : MoveResponse.shared.getNextTurn()
         
         if player.type == compareAgainstType {
+            self.isPlayersTurn = true
             self.profileView.backgroundColor = .systemGreen.withAlphaComponent(0.5)
             self.versusProfileView.backgroundColor = .white
         } else {
+            self.isPlayersTurn = false
             self.profileView.backgroundColor = .white
             self.versusProfileView.backgroundColor = .systemGreen.withAlphaComponent(0.5)
         }
     }
     
     private func visualizeTurnForOpponent() {
+        self.isPlayersTurn = false
         self.profileView.backgroundColor = .white
         self.versusProfileView.backgroundColor = .systemGreen.withAlphaComponent(0.5)
     }
