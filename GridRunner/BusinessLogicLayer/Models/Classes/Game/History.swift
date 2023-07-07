@@ -116,7 +116,8 @@ class History {
     }
     
     func outputHistory() {
-        print("Runner History:")
+        print("Outputting Game's History.")
+        print("\nRunner History:")
         for (index, turn) in runnerHistory.enumerated() {
             print("\nTURN #\(index + 1)\n")
             for (index, move) in turn.getMoves().enumerated() {

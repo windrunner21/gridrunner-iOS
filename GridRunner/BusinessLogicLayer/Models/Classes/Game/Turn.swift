@@ -7,9 +7,11 @@
 
 class Turn {
     private var moves: [Move]
+    var id: Int
     
     init(moves: [Move]) {
         self.moves = moves
+        self.id = Int.random(in: Int.min..<Int.max)
     }
     
     func setMoves(to moves: [Move]) {

@@ -106,6 +106,12 @@ class GameViewController: UIViewController {
             return
         }
         
+        // Construct all moves from total history on map.
+        self.updateGameHistory(isOver: true)
+        self.game.getHistory().outputHistory()
+        self.reconstructRunnerHistory()
+        self.reconstructSeekerHistory()
+        
         if player.type == GameOver.shared.getWinner() {
             guard let tile = self.accessTile(with: player.position, in: gameView) else { return }
             player.win(on: tile)
@@ -371,6 +377,9 @@ class GameViewController: UIViewController {
             inside: gameView
         )
         
+        self.updateGameHistory(isOver: false)
+        self.reconstructRunnerHistory()
+        self.reconstructSeekerHistory()
         self.updateMovesLabel(with: player.numberOfMoves)
         self.visualizeTurn(for: player, initial: true)
     }
@@ -446,5 +455,33 @@ class GameViewController: UIViewController {
         self.isPlayersTurn = false
         self.profileView.backgroundColor = .white
         self.versusProfileView.backgroundColor = .systemGreen.withAlphaComponent(0.5)
+    }
+    
+    private func updateGameHistory(isOver over: Bool) {
+        let runnerHistory = over ? GameOver.shared.getHistory().getRunnerHistory() : GameConfig.shared.getHistory().getRunnerHistory()
+        let seekerHistory = over ? GameOver.shared.getHistory().getSeekerHistory() : GameConfig.shared.getHistory().getSeekerHistory()
+        
+        game.getHistory().setRunnerHistory(to: runnerHistory)
+        game.getHistory().setSeekerHistory(to: seekerHistory)
+    }
+    
+    private func reconstructSeekerHistory() {
+        for turn in game.getHistory().getSeekerHistory() {
+            for move in turn.getMoves() {
+                self.accessTile(with: move.to, in: gameView)?.openBySeeker(explicit: true)
+            }
+        }
+    }
+    
+    private func reconstructRunnerHistory() {
+        for turn in game.getHistory().getRunnerHistory() {
+            for move in turn.getMoves() {
+                self.accessTile(with: move.to, in: gameView)?.openByRunner(
+                    explicit: true,
+                    lastTurn: game.getHistory().getRunnerHistory().prefix(while: {$0.id != turn.id}).last,
+                    oldTile: self.accessTile(with: move.from, in: gameView),
+                    and: move.identifyMoveDirection())
+            }
+        }
     }
 }

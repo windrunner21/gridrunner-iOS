@@ -72,7 +72,7 @@ class AblyService {
   
     // QUEUES
     private func _enter() {
-        NSLog("Entering channel \"\(self.queueChannel.name)\" qloueue.")
+        NSLog("Entering channel \"\(self.queueChannel.name)\" queue.")
         
         print(self.client.auth.clientId!)
         

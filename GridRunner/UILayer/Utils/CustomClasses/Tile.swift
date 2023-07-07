@@ -126,21 +126,6 @@ class Tile: UIView {
             self.layer.cornerRadius = 10
             self.layer.maskedCorners = [.layerMaxXMaxYCorner]
         }
-        
-        // TODO: Handle tile with history
-//        if !history.getRunnerHistory().isEmpty {
-//            let tilePosition = Coordinate(x: column, y: row)
-//            if history.historyContains(coordinate: tilePosition, of: .runner) {
-//                self.openByRunner(explicit: true)
-//            }
-//        }
-//
-//        if !history.getSeekerHistory().isEmpty {
-//            let tilePosition = Coordinate(x: column, y: row)
-//            if history.historyContains(coordinate: tilePosition, of: .seeker) {
-//                self.openBySeeker(explicit: true)
-//            }
-//        }
     }
     
     /// Updates old and current Tile's direction image for Runner.

@@ -71,6 +71,7 @@ class Player {
     }
     
     func outputHistory() {
+        print("Outputting Player's History.")
         for (index, turn) in self.history.enumerated() {
             print("\nTURN #\(index + 1)\n")
             for (index, move) in turn.getMoves().enumerated() {
