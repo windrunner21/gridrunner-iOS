@@ -102,7 +102,7 @@
                                 <rect key="frame" x="726.33333333333337" y="20" width="126.66666666666663" height="369"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="bottom" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="jGj-Ht-1VH" userLabel="Stats View">
-                                        <rect key="frame" x="0.0" y="0.0" width="126.66666666666667" height="113"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="126.66666666666667" height="176"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="L8S-SB-i9h" userLabel="Player HUD">
                                                 <rect key="frame" x="0.0" y="0.0" width="126.66666666666667" height="45"/>
@@ -159,16 +159,28 @@
                                                 </subviews>
                                             </stackView>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="bottom" translatesAutoresizingMaskIntoConstraints="NO" id="9kK-fJ-1BZ" userLabel="Moves HUD">
-                                                <rect key="frame" x="91.666666666666629" y="50" width="35" height="63"/>
+                                                <rect key="frame" x="91.666666666666629" y="50" width="35" height="126"/>
                                                 <subviews>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="right" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JQs-fq-qxl">
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Gv3-zI-kss">
                                                         <rect key="frame" x="15" y="0.0" width="20" height="45"/>
+                                                        <fontDescription key="fontDescription" name="Kanit-SemiBold" family="Kanit SemiBold" pointSize="30"/>
+                                                        <nil key="textColor"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="turn" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Yns-Z8-ehP">
+                                                        <rect key="frame" x="12.333333333333373" y="45" width="22.666666666666671" height="18"/>
+                                                        <fontDescription key="fontDescription" name="Kanit-Regular" family="Kanit" pointSize="12"/>
+                                                        <nil key="textColor"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="right" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JQs-fq-qxl">
+                                                        <rect key="frame" x="15" y="63" width="20" height="45"/>
                                                         <fontDescription key="fontDescription" name="Kanit-SemiBold" family="Kanit SemiBold" pointSize="30"/>
                                                         <color key="textColor" name="FrostBlackColor"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="moves" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="c6O-4G-yK8">
-                                                        <rect key="frame" x="0.0" y="45" width="35" height="18"/>
+                                                        <rect key="frame" x="0.0" y="108" width="35" height="18"/>
                                                         <fontDescription key="fontDescription" name="Kanit-Regular" family="Kanit" pointSize="12"/>
                                                         <color key="textColor" name="FrostBlackColor"/>
                                                         <nil key="highlightedColor"/>
@@ -238,6 +250,7 @@
                         <outlet property="playerLabel" destination="6hL-dm-zUC" id="3fU-5K-LIK"/>
                         <outlet property="playerTypeLabel" destination="flT-7B-FbE" id="xKd-42-kQd"/>
                         <outlet property="profileView" destination="ZZP-st-TeJ" id="Zwl-AY-gX3"/>
+                        <outlet property="turnLabel" destination="Gv3-zI-kss" id="DVu-Em-1gp"/>
                         <outlet property="undoButton" destination="xwH-Zm-e8h" id="Vjw-xK-oCb"/>
                         <outlet property="versusEmojiIconLabel" destination="SfY-nL-U94" id="EMz-iP-GZ5"/>
                         <outlet property="versusEmojiIconView" destination="v3l-4w-YRa" id="vSo-BZ-aDh"/>
@@ -247,7 +260,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="75.352112676056336" y="3.8167938931297707"/>
+            <point key="canvasLocation" x="75.321888412017174" y="2.7906976744186047"/>
         </scene>
     </scenes>
     <resources>

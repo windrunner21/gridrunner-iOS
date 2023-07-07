@@ -13,6 +13,7 @@ class GameViewController: UIViewController {
     
     // Storyboard properties.
     @IBOutlet weak var playerTypeLabel: UILabel!
+    @IBOutlet weak var turnLabel: UILabel!
     @IBOutlet weak var movesLabel: UILabel!
     @IBOutlet weak var emojiIconLabel: UILabel!
     @IBOutlet weak var versusEmojiIconLabel: UILabel!
@@ -164,6 +165,7 @@ class GameViewController: UIViewController {
         }
         
         self.updateMovesLabel(with: player.numberOfMoves)
+        self.updateTurnLabel(with: player.currentTurnNumber)
         
         self.undoButton.disable()
         self.finishButton.disable()
@@ -273,6 +275,10 @@ class GameViewController: UIViewController {
         self.movesLabel.text = "\(value)"
     }
     
+    private func updateTurnLabel(with value: Int) {
+        self.turnLabel.text = "\(value)"
+    }
+    
     private func enableUndoButton(on condition: Bool? = nil) {
         if let condition = condition, !condition {
             self.undoButton.disable()
@@ -291,6 +297,7 @@ class GameViewController: UIViewController {
     
     private func updateGameHUD(of player: AnyPlayer) {
         self.updateMovesLabel(with: player.numberOfMoves)
+        self.updateTurnLabel(with: player.currentTurnNumber)
         
         // Handle enabling finish and undo buttons.
         self.enableUndoButton(on: player.numberOfMoves < player.maximumNumberOfMoves)
@@ -381,6 +388,7 @@ class GameViewController: UIViewController {
         self.reconstructRunnerHistory()
         self.reconstructSeekerHistory()
         self.updateMovesLabel(with: player.numberOfMoves)
+        self.updateTurnLabel(with: player.currentTurnNumber)
         self.visualizeTurn(for: player, initial: true)
     }
     
