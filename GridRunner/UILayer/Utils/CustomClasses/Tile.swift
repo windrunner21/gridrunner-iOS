@@ -14,6 +14,7 @@ class Tile: UIView {
     
     private var identifier: String = String()
     private var imageView: UIImageView
+    private var previousImageView: UIImageView?
     
     private var openedByRunner: Bool = false
     private var openedBySeeker: Bool = false
@@ -26,6 +27,7 @@ class Tile: UIView {
     override init(frame: CGRect) {
         self.position = Coordinate(x: 0, y: 0)
         self.imageView = UIImageView()
+        self.previousImageView = nil
         
         super.init(frame: frame)
     }
@@ -33,6 +35,7 @@ class Tile: UIView {
     required init?(coder: NSCoder) {
         self.position = Coordinate(x: 0, y: 0)
         self.imageView = UIImageView()
+        self.previousImageView = nil
         
         super.init(coder: coder)
     }
@@ -54,6 +57,10 @@ class Tile: UIView {
     }
     
     func openByRunner(explicit: Bool, lastTurn: Turn?, oldTile: Tile?, and direction: MoveDirection ) {
+        if self.openedByRunner {
+            self.previousImageView = self.imageView
+        }
+        
         self.openedByRunner = true
         if explicit {
             self.backgroundColor = UIColor(named: "RedAccentColor")?.withAlphaComponent(0.5)
@@ -67,6 +74,10 @@ class Tile: UIView {
     }
     
     func openBySeeker(explicit: Bool) {
+        if self.openedByRunner || self.openedBySeeker {
+            self.previousImageView = self.imageView
+        }
+        
         self.openedBySeeker = true
         if explicit {
             self.backgroundColor = UIColor(named: "FrostBlackColor")?.withAlphaComponent(0.5)
@@ -81,7 +92,7 @@ class Tile: UIView {
         }
         
         self.backgroundColor = .systemGray3
-        self.imageView.image = nil
+        self.imageView.image = self.previousImageView?.image ?? nil
     }
     
     func setupTile(at row: Int, and column: Int, with dimensions: MapDimensions, and history: History) {
@@ -129,7 +140,7 @@ class Tile: UIView {
     }
     
     /// Updates old and current Tile's direction image for Runner.
-    func updateDirectionImage(to currentDirection: MoveDirection, from oldDirection: MoveDirection? = nil, oldTile: Tile? = nil) {
+    private func updateDirectionImage(to currentDirection: MoveDirection, from oldDirection: MoveDirection? = nil, oldTile: Tile? = nil) {
         switch (oldDirection, currentDirection) {
         case (.up, .left):
             self.setDirectionImages(newDirection: .left, oldDirection: .upLeft, for: oldTile)
@@ -157,7 +168,7 @@ class Tile: UIView {
     }
     
     /// Updates current and new Tile's direction image for Seeker.
-    func updateDirectionImage(from currentDirection: MoveDirection, oldTile: Tile? = nil, to newDirection: MoveDirection? = nil, newTile: Tile? = nil) {
+    private func updateDirectionImage(from currentDirection: MoveDirection, oldTile: Tile? = nil, to newDirection: MoveDirection? = nil, newTile: Tile? = nil) {
         if let oldX = oldTile?.position.x, let newX = newTile?.position.x,
            let oldY = oldTile?.position.y, let newY = newTile?.position.y {
             switch (currentDirection, newDirection) {
@@ -260,5 +271,15 @@ class Tile: UIView {
         ])
 
         self.imageView.tintColor = .white
+    }
+    
+    
+    func compareImages(_ image1: UIImage?, _ image2: UIImage) -> Bool {
+        guard let image1 = image1 else { return false }
+        guard let data1 = image1.jpegData(compressionQuality: 1.0),
+            let data2 = image2.jpegData(compressionQuality: 1.0) else {
+            return false
+        }
+        return data1 != data2
     }
 }

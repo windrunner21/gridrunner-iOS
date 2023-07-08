@@ -74,12 +74,7 @@ class AblyService {
     private func _enter() {
         NSLog("Entering channel \"\(self.queueChannel.name)\" queue.")
         
-        print(self.client.auth.clientId!)
-        
         self.queueChannel.subscribe("game") { [weak self] message in
-            
-            print("Incoming queue data.")
-            
             if let data = message.data as? [String: Any] {
                 // Make sure that ids and username are the same to match correct accounts.
                 if let payload = GameSessionDetails.toJSONAndDecode(data: data, type: GameSessionDetails.self) {
@@ -94,7 +89,6 @@ class AblyService {
         }
         
         self.queueChannel.presence.enter(nil)
-
     }
     
     private func _leave() {
