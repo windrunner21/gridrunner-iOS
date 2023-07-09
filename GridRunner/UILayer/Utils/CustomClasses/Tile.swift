@@ -58,13 +58,12 @@ class Tile: UIView {
     
     func openByRunner(explicit: Bool, lastTurn: Turn?, oldTile: Tile?, and direction: MoveDirection ) {
         if self.openedByRunner {
-            self.previousImageView = self.imageView
+            self.previousImageView = UIImageView(image: self.imageView.image)
         }
         
         self.openedByRunner = true
         if explicit {
             self.backgroundColor = UIColor(named: "RedAccentColor")?.withAlphaComponent(0.5)
-            
             self.updateDirectionImage(
                 to: direction,
                 from: lastTurn?.getMoves().last?.identifyMoveDirection(),
@@ -75,7 +74,7 @@ class Tile: UIView {
     
     func openBySeeker(explicit: Bool) {
         if self.openedByRunner || self.openedBySeeker {
-            self.previousImageView = self.imageView
+            self.previousImageView = UIImageView(image: self.imageView.image)
         }
         
         self.openedBySeeker = true
@@ -85,14 +84,15 @@ class Tile: UIView {
     }
     
     func closeBy(_ player: AnyPlayer) {
-        if player.type == .runner {
+        if player.type == .runner && self.previousImageView == nil {
             self.openedByRunner = false
-        } else {
+        } else if player.type == .seeker && self.previousImageView == nil {
             self.openedBySeeker = false
         }
         
-        self.backgroundColor = .systemGray3
-        self.imageView.image = self.previousImageView?.image ?? nil
+        self.backgroundColor = self.previousImageView == nil ? .systemGray3 : UIColor(named: "RedAccentColor")?.withAlphaComponent(0.5)
+        
+        self.imageView.image = self.previousImageView?.image
     }
     
     func setupTile(at row: Int, and column: Int, with dimensions: MapDimensions, and history: History) {
@@ -271,15 +271,5 @@ class Tile: UIView {
         ])
 
         self.imageView.tintColor = .white
-    }
-    
-    
-    func compareImages(_ image1: UIImage?, _ image2: UIImage) -> Bool {
-        guard let image1 = image1 else { return false }
-        guard let data1 = image1.jpegData(compressionQuality: 1.0),
-            let data2 = image2.jpegData(compressionQuality: 1.0) else {
-            return false
-        }
-        return data1 != data2
     }
 }
