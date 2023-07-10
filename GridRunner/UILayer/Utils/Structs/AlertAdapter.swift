@@ -103,7 +103,7 @@ class AlertAdapter {
         
         actionSheet.addAction(
             UIAlertAction(
-                title: "OK",
+                title: NSLocalizedString("OK", comment: "Default action"),
                 style: .default,
                 handler: { _ in
                     actionSheet.dismiss(animated: true)
@@ -112,5 +112,21 @@ class AlertAdapter {
         )
         
         return actionSheet
+    }
+    
+    func createCheckEmailAlert() -> UIAlertController {
+        let alert = UIAlertController(title: "Email sent!", message: "Password reset link has been successfully sent to the email address you provided.", preferredStyle: .alert)
+        
+        alert.addAction(
+            UIAlertAction(
+                title: NSLocalizedString("OK", comment: "Default action"),
+                style: .default,
+                handler: { _ in
+                    alert.dismiss(animated: true)
+                }
+            )
+        )
+                        
+       return alert
     }
 }

@@ -116,6 +116,16 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         self.dismiss(animated: true)
     }
     
+    @IBAction func onForgotPassword(_ sender: Any) {
+        let passwordStoryboard: UIStoryboard = UIStoryboard(name: "Password", bundle: .main)
+        let passwordViewController: PasswordViewController = passwordStoryboard.instantiateViewController(identifier: "PasswordScreen")
+        
+        passwordViewController.mainViewController = self.mainViewController
+        
+        self.present(passwordViewController, animated: true)
+    }
+    
+    
     private func sendLoginRequest() {
         self.signInButton.disable()
         
@@ -126,7 +136,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         
         let credentials = LoginCredentials(username: username, password: password)
         
-        AuthService.shared.login(with: credentials) { response in
+        AuthService().login(with: credentials) { response in
             DispatchQueue.main.async {
                 self.signInButton.enable()
                 

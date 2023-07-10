@@ -7,9 +7,7 @@
 
 import Foundation
 
-class UserService {
-    static let shared = UserService()
-    
+class UserService {    
     private let client = APIClient(baseURL: .serverless)
     private let userURL = URL(string: BaseURL.serverless.url + URLPath.user.path)!
     

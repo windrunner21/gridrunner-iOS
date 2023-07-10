@@ -229,7 +229,7 @@ extension MainViewController: UIContextMenuInteractionDelegate {
     
             // Here we specify the "destructive" attribute to show that it’s destructive in nature.
             let logout = UIAction(title: "Log out", image: UIImage(systemName: "door.right.hand.closed"), attributes: .destructive) { _ in
-                AuthService.shared.logout { response in
+                AuthService().logout { response in
                     DispatchQueue.main.async {
                         switch response {
                         case .success:

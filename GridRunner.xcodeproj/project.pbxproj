@@ -86,6 +86,9 @@
 		CA8CBF9E2A504A82003CF44B /* SLMove.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA8CBF9D2A504A82003CF44B /* SLMove.swift */; };
 		CA8CBFA82A51A9AA003CF44B /* GameOver.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA8CBFA72A51A9AA003CF44B /* GameOver.swift */; };
 		CAB6EAAF2A2A086C00997852 /* ButtonExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAB6EAAE2A2A086C00997852 /* ButtonExtension.swift */; };
+		CAC833652A5BEDD500EED95B /* Password.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CAC833642A5BEDD500EED95B /* Password.storyboard */; };
+		CAC833672A5BEE3B00EED95B /* PasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAC833662A5BEE3B00EED95B /* PasswordViewController.swift */; };
+		CAC833692A5C008400EED95B /* PasswordService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAC833682A5C008400EED95B /* PasswordService.swift */; };
 		CAF8EC9F2A2DBD1A00179EF1 /* APIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAF8EC9E2A2DBD1A00179EF1 /* APIClient.swift */; };
 		CAF8ECA22A2DBD5500179EF1 /* AuthService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAF8ECA12A2DBD5500179EF1 /* AuthService.swift */; };
 		CAF8ECA42A2DBD6700179EF1 /* GameService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAF8ECA32A2DBD6700179EF1 /* GameService.swift */; };
@@ -207,6 +210,9 @@
 		CA8CBF9D2A504A82003CF44B /* SLMove.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SLMove.swift; sourceTree = "<group>"; };
 		CA8CBFA72A51A9AA003CF44B /* GameOver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameOver.swift; sourceTree = "<group>"; };
 		CAB6EAAE2A2A086C00997852 /* ButtonExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonExtension.swift; sourceTree = "<group>"; };
+		CAC833642A5BEDD500EED95B /* Password.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Password.storyboard; sourceTree = "<group>"; };
+		CAC833662A5BEE3B00EED95B /* PasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordViewController.swift; sourceTree = "<group>"; };
+		CAC833682A5C008400EED95B /* PasswordService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordService.swift; sourceTree = "<group>"; };
 		CAF8EC9E2A2DBD1A00179EF1 /* APIClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIClient.swift; sourceTree = "<group>"; };
 		CAF8ECA12A2DBD5500179EF1 /* AuthService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthService.swift; sourceTree = "<group>"; };
 		CAF8ECA32A2DBD6700179EF1 /* GameService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameService.swift; sourceTree = "<group>"; };
@@ -349,9 +355,9 @@
 		CA4E3F502A07A75800D36266 /* Authentication */ = {
 			isa = PBXGroup;
 			children = (
-				CAFED4922A02496E00FB4B9B /* Main.storyboard */,
 				CA4E3F5D2A0891D800D36266 /* Register.storyboard */,
 				CAF8ECC02A2F767600179EF1 /* Login.storyboard */,
+				CAC833642A5BEDD500EED95B /* Password.storyboard */,
 			);
 			path = Authentication;
 			sourceTree = "<group>";
@@ -367,9 +373,9 @@
 		CA4E3F552A07A84400D36266 /* Authentication */ = {
 			isa = PBXGroup;
 			children = (
-				CAFED4902A02496E00FB4B9B /* MainViewController.swift */,
 				CA4E3F5F2A0891F300D36266 /* RegisterViewController.swift */,
 				CAF8ECC22A2F78A600179EF1 /* LoginViewController.swift */,
+				CAC833662A5BEE3B00EED95B /* PasswordViewController.swift */,
 			);
 			path = Authentication;
 			sourceTree = "<group>";
@@ -575,6 +581,39 @@
 			name = MoveResponse;
 			sourceTree = "<group>";
 		};
+		CAC833602A5BED8300EED95B /* Menu */ = {
+			isa = PBXGroup;
+			children = (
+				CAFED4922A02496E00FB4B9B /* Main.storyboard */,
+			);
+			path = Menu;
+			sourceTree = "<group>";
+		};
+		CAC833612A5BED8C00EED95B /* Menu */ = {
+			isa = PBXGroup;
+			children = (
+				CAFED4902A02496E00FB4B9B /* MainViewController.swift */,
+			);
+			path = Menu;
+			sourceTree = "<group>";
+		};
+		CAC833622A5BED9300EED95B /* Launch */ = {
+			isa = PBXGroup;
+			children = (
+				CA852A3C2A370A2100961E65 /* LaunchViewController.swift */,
+			);
+			path = Launch;
+			sourceTree = "<group>";
+		};
+		CAC833632A5BED9800EED95B /* Launch */ = {
+			isa = PBXGroup;
+			children = (
+				CAFED4972A02497000FB4B9B /* LaunchScreen.storyboard */,
+				CA852A3E2A370A9400961E65 /* Launch.storyboard */,
+			);
+			path = Launch;
+			sourceTree = "<group>";
+		};
 		CAF8ECA02A2DBD2900179EF1 /* Service */ = {
 			isa = PBXGroup;
 			children = (
@@ -582,6 +621,7 @@
 				CAF8ECA32A2DBD6700179EF1 /* GameService.swift */,
 				CA852A3A2A331B8300961E65 /* UserService.swift */,
 				CA852A4A2A38655A00961E65 /* AblyJWTService.swift */,
+				CAC833682A5C008400EED95B /* PasswordService.swift */,
 			);
 			name = Service;
 			sourceTree = "<group>";
@@ -721,11 +761,11 @@
 		CAFED4C02A0249D700FB4B9B /* Storyboards */ = {
 			isa = PBXGroup;
 			children = (
+				CAC833632A5BED9800EED95B /* Launch */,
+				CAC833602A5BED8300EED95B /* Menu */,
 				CA852A402A3742AA00961E65 /* Profile */,
 				CA4E3F512A07A7FB00D36266 /* Game */,
 				CA4E3F502A07A75800D36266 /* Authentication */,
-				CAFED4972A02497000FB4B9B /* LaunchScreen.storyboard */,
-				CA852A3E2A370A9400961E65 /* Launch.storyboard */,
 			);
 			path = Storyboards;
 			sourceTree = "<group>";
@@ -733,10 +773,11 @@
 		CAFED4C12A0249DC00FB4B9B /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				CAC833622A5BED9300EED95B /* Launch */,
+				CAC833612A5BED8C00EED95B /* Menu */,
 				CA852A432A3742BF00961E65 /* Profile */,
 				CA4E3F562A07A84800D36266 /* Game */,
 				CA4E3F552A07A84400D36266 /* Authentication */,
-				CA852A3C2A370A2100961E65 /* LaunchViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -868,6 +909,7 @@
 				CA0AAC852A25D6D3008367FB /* Kanit-ExtraLightItalic.ttf in Resources */,
 				CA0AAC7F2A25D6D3008367FB /* Kanit-Light.ttf in Resources */,
 				CA0AAC812A25D6D3008367FB /* Kanit-BoldItalic.ttf in Resources */,
+				CAC833652A5BEDD500EED95B /* Password.storyboard in Resources */,
 				CAFED4942A02496E00FB4B9B /* Main.storyboard in Resources */,
 				CA0AAC762A25D6D3008367FB /* Kanit-MediumItalic.ttf in Resources */,
 				CA0AAC822A25D6D3008367FB /* Kanit-ThinItalic.ttf in Resources */,
@@ -935,10 +977,12 @@
 				CA0AAC3F2A13A2A0008367FB /* ArrowDirection.swift in Sources */,
 				CA0AAC2B2A0E2C17008367FB /* AnyPlayer.swift in Sources */,
 				CA0AAC362A0E6428008367FB /* MapDimensions.swift in Sources */,
+				CAC833672A5BEE3B00EED95B /* PasswordViewController.swift in Sources */,
 				CA852A6F2A406E9800961E65 /* LoadingView.swift in Sources */,
 				CA0AAC2E2A0E2F0F008367FB /* Tile.swift in Sources */,
 				CA852A3B2A331B8300961E65 /* UserService.swift in Sources */,
 				CAFED4912A02496E00FB4B9B /* MainViewController.swift in Sources */,
+				CAC833692A5C008400EED95B /* PasswordService.swift in Sources */,
 				CAF8ECA22A2DBD5500179EF1 /* AuthService.swift in Sources */,
 				CA4E3F662A0BCD3300D36266 /* MapExits.swift in Sources */,
 				CA852A512A39ABC600961E65 /* GameType.swift in Sources */,

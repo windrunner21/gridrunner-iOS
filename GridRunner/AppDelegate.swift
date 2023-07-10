@@ -37,7 +37,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func performNetworkRequest(completion: @escaping (Response) -> Void) {
         let session = UserDefaults.standard.value(forKey: "session")
         if let session = session {
-            UserService.shared.getUser() { response in
+            UserService().getUser() { response in
                 DispatchQueue.main.async {
                     if response == .success {
                         NSLog("User retrieval completed successfully. Session: \(session)")

@@ -8,8 +8,6 @@
 import Foundation
 
 class AuthService {
-    static let shared = AuthService()
-    
     private let client = APIClient(baseURL: .serverless)
     private let loginURL = URL(string: BaseURL.serverless.url + URLPath.login.path)!
     private let registerURL = URL(string: BaseURL.serverless.url + URLPath.register.path)!
@@ -18,7 +16,7 @@ class AuthService {
         self.client.sendRequest(
             path: URLPath.login.path,
             method: .POST,
-            parameters: credentials.encode()
+            body: credentials.encode()
         ) { data, response, error in
             
             if let error = error {
@@ -46,7 +44,7 @@ class AuthService {
         self.client.sendRequest(
             path: URLPath.register.path,
             method: .POST,
-            parameters: credentials.encode()
+            body: credentials.encode()
         ) { data, response, error in
             
             if let error = error {

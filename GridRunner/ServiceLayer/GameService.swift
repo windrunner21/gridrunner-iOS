@@ -8,8 +8,6 @@
 import Foundation
 
 class GameService {
-    static let shared = GameService()
-    
     private let client = APIClient(baseURL: .gameServer)
     
     func createRoom(as role: String, withId clientId: String, completion: @escaping (Response) -> Void) {

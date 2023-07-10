@@ -113,10 +113,10 @@
                                 <rect key="frame" x="329" y="40" width="199" height="163"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vtf-aV-q1I">
-                                        <rect key="frame" x="0.0" y="0.0" width="199" height="144"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="199" height="182"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="ZSA-4e-Sp0">
-                                                <rect key="frame" x="0.0" y="0.0" width="199" height="144"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="199" height="182"/>
                                                 <subviews>
                                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="Lv8-Pl-2Oh" userLabel="username ">
                                                         <rect key="frame" x="0.0" y="0.0" width="199" height="62"/>
@@ -150,6 +150,18 @@
                                                             </textField>
                                                         </subviews>
                                                     </stackView>
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="trailing" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FTg-3K-Fve">
+                                                        <rect key="frame" x="0.0" y="164" width="199" height="18"/>
+                                                        <color key="tintColor" name="RedAccentColor"/>
+                                                        <state key="normal" title="Button"/>
+                                                        <buttonConfiguration key="configuration" style="plain" title="Forgot password?">
+                                                            <fontDescription key="titleFontDescription" name="Kanit-Medium" family="Kanit Medium" pointSize="12"/>
+                                                            <directionalEdgeInsets key="contentInsets" top="0.0" leading="0.0" bottom="0.0" trailing="0.0"/>
+                                                        </buttonConfiguration>
+                                                        <connections>
+                                                            <action selector="onForgotPassword:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="nS7-vs-cte"/>
+                                                        </connections>
+                                                    </button>
                                                 </subviews>
                                             </stackView>
                                         </subviews>

@@ -23,12 +23,22 @@ class APIClient {
     func sendRequest(
         path: String,
         method: HTTPMethod,
-        parameters: Data? = nil,
+        body: Data? = nil,
         headers: [String: String]? = nil,
+        parameters: [URLQueryItem]? = nil,
         cookies: (name: String, value: String?)? = nil,
         customInterceptor: RequestInterceptor? = nil,
         completion: @escaping(Data?, URLResponse?, Error?) -> Void) {
-            let url = URL(string: baseURL.url + path)!
+            var url = URL(string: baseURL.url + path)!
+            
+            // Handle url parameters.
+            if let parameters = parameters {
+                var urlComponents = URLComponents(string: url.absoluteString)
+                urlComponents?.queryItems = parameters
+                if let updatedUrl = urlComponents?.url {
+                    url = updatedUrl
+                }
+            }
             
             var request = URLRequest(url: url)
             
@@ -47,7 +57,7 @@ class APIClient {
             }
             
             // Handle body.
-            request.httpBody = parameters
+            request.httpBody = body
             
             // Handle custom interceptors.
             if let customInterceptor = customInterceptor {
