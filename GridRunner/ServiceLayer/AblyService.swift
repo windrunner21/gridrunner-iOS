@@ -40,7 +40,7 @@ class AblyService {
     
     // Public methods for rest of the project to interact with: enter, leave queues.
     func enterQueue() {
-        client.connection.on(.connected) { stateChange in
+        client.connection.once(.connected) { stateChange in
             NSLog("Connected to Ably.")
             self._enter()
         }

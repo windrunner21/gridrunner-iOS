@@ -55,12 +55,14 @@ class Game {
                 let move = Move(from: self.getMap().getCenterCoordinates(), to: coordinate)
                 moves.append(move)
             } else {
-                guard let lastToCoordinate = self.getHistory().getSeekerHistory().last?.getMoves().last?.to else {
-                    return
+                var move: Move
+                if let lastToCoordinate = self.getHistory().getSeekerHistory().last?.getMoves().last?.to {
+                    move = Move(from: lastToCoordinate, to: coordinate)
+                } else {
+                    // Set from coordinate as map center if previous move was empty by the Seeker.
+                    move = Move(from: self.getMap().getCenterCoordinates(), to: coordinate)
                 }
-                
-                let move = Move(from: lastToCoordinate, to: coordinate)
-                
+             
                 moves.append(move)
             }
         }
