@@ -29,9 +29,6 @@ class MainViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        // Check if the user is authenticated.
-        self.checkUserAuthentication()
-        
         self.rankView.transformToCircle()
         self.trophyIconView.transformToCircle()
         self.profileView.transformToCircle()
@@ -52,6 +49,9 @@ class MainViewController: UIViewController {
     
         // Decorate and set up visually menu items.
         self.setUpMenuItems()
+        
+        // Check if the user is authenticated.
+        self.checkUserAuthentication()
         
         NotificationCenter.default.addObserver(self, selector: #selector(openGameScreen), name: NSNotification.Name("Success::Matchmaking"), object: nil)
 
@@ -152,10 +152,12 @@ class MainViewController: UIViewController {
         self.rankLabel.text = "\(User.shared.runnerElo) GR"
         self.usernameLabel.text = "@\(User.shared.username)"
         
+        // MARK: when ranked will be implemented swap false to User.shared.isLoggedIn
+        // change else parameters to: (icon: "🔒", description: "create or login into account to start playing ranked")
         self.rankedPlayView.shouldBeEnabled(
-            if: User.shared.isLoggedIn,
+            if: false,
             iconAndDescription: (icon: "🥇", description: "play for rank and move up the \"best\" ladder"),
-            else: (icon: "🔒", description: "create or login into account to start playing ranked")
+            else: (icon: "🔜", description: "coming soon! stay tuned for announcements")
         )
     }
     
