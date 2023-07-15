@@ -37,6 +37,7 @@
                     <subviews>
                         <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" animating="YES" style="large" translatesAutoresizingMaskIntoConstraints="NO" id="alq-Lx-BKy">
                             <rect key="frame" x="0.0" y="21.666666666666664" width="37" height="37"/>
+                            <color key="color" name="FrostBlackColor"/>
                         </activityIndicatorView>
                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" translatesAutoresizingMaskIntoConstraints="NO" id="MUK-LV-5F0" userLabel="Text">
                             <rect key="frame" x="57" y="14.666666666666664" width="49.666666666666657" height="50.999999999999993"/>

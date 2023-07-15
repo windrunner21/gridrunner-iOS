@@ -32,6 +32,7 @@ class PasswordViewController: UIViewController, UITextFieldDelegate {
         
         // Manage delegate to override UITextField methods.
         self.emailTextField.delegate = self
+        self.emailTextField.setup(with: "Enter your email")
         
         let cancelViewTap = UITapGestureRecognizer(target: self, action: #selector(closeView))
         
@@ -61,7 +62,7 @@ class PasswordViewController: UIViewController, UITextFieldDelegate {
     }
     
     func textFieldDidEndEditing(_ textField: UITextField) {
-        textField.layer.borderWidth = 0
+        textField.layer.borderColor = UIColor(named: "SecondaryColor")?.withAlphaComponent(0.25).cgColor
     }
     
     @objc func closeView() {

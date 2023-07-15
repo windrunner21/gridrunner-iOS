@@ -90,7 +90,7 @@ class Tile: UIView {
             self.openedBySeeker = false
         }
         
-        self.backgroundColor = self.previousImageView == nil ? .systemGray3 : UIColor(named: "RedAccentColor")?.withAlphaComponent(0.5)
+        self.backgroundColor = self.previousImageView == nil ? UIColor(named: "SecondaryColor")?.withAlphaComponent(0.25) : UIColor(named: "RedAccentColor")?.withAlphaComponent(0.5)
         
         self.imageView.image = self.previousImageView?.image
     }
@@ -113,7 +113,8 @@ class Tile: UIView {
         // If not special tile assign basic type.
         if self.type == .unknown {
             self.type = .basic
-            self.backgroundColor = .systemGray3
+            self.backgroundColor = UIColor(named: "SecondaryColor")?.withAlphaComponent(0.25)
+
         }
         
         if row == 0 && column == 0 {

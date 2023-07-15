@@ -105,13 +105,13 @@
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Runner GR" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UHN-Fh-bEa">
                                                 <rect key="frame" x="0.0" y="0.0" width="66" height="30"/>
                                                 <fontDescription key="fontDescription" name="Kanit-Regular" family="Kanit" pointSize="14"/>
-                                                <nil key="textColor"/>
+                                                <color key="textColor" name="FrostBlackColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="khm-94-5Gf">
                                                 <rect key="frame" x="217" y="0.0" width="9.5" height="30"/>
                                                 <fontDescription key="fontDescription" name="Kanit-Medium" family="Kanit Medium" pointSize="14"/>
-                                                <nil key="textColor"/>
+                                                <color key="textColor" name="FrostBlackColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                         </subviews>
@@ -135,13 +135,13 @@
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Seeker GR" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BKQ-Bx-Ixz">
                                                 <rect key="frame" x="0.0" y="0.0" width="63" height="30"/>
                                                 <fontDescription key="fontDescription" name="Kanit-Regular" family="Kanit" pointSize="14"/>
-                                                <nil key="textColor"/>
+                                                <color key="textColor" name="FrostBlackColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Mqj-zL-Ah0">
                                                 <rect key="frame" x="217" y="0.0" width="9.5" height="30"/>
                                                 <fontDescription key="fontDescription" name="Kanit-Medium" family="Kanit Medium" pointSize="14"/>
-                                                <nil key="textColor"/>
+                                                <color key="textColor" name="FrostBlackColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                         </subviews>
@@ -174,7 +174,7 @@
                             </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <color key="backgroundColor" name="BackgroundColor"/>
                         <constraints>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="z8q-Nn-Sg4" secondAttribute="trailing" constant="40" id="03a-kp-PjD"/>
                             <constraint firstItem="End-6j-o9N" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="40" id="16q-Cy-kFI"/>
@@ -218,6 +218,9 @@
     </scenes>
     <resources>
         <image name="Gamepad" width="200" height="158.5"/>
+        <namedColor name="BackgroundColor">
+            <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
         <namedColor name="FrostBlackColor">
             <color red="0.097999997437000275" green="0.10999999940395355" blue="0.125" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
@@ -227,9 +230,6 @@
         <namedColor name="SecondaryColor">
             <color red="0.50196078431372548" green="0.50196078431372548" blue="0.50196078431372548" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
-        <systemColor name="systemBackgroundColor">
-            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-        </systemColor>
         <systemColor name="systemGray6Color">
             <color red="0.94901960784313721" green="0.94901960784313721" blue="0.96862745098039216" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>

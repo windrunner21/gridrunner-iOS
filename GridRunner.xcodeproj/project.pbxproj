@@ -89,6 +89,7 @@
 		CAC833652A5BEDD500EED95B /* Password.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CAC833642A5BEDD500EED95B /* Password.storyboard */; };
 		CAC833672A5BEE3B00EED95B /* PasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAC833662A5BEE3B00EED95B /* PasswordViewController.swift */; };
 		CAC833692A5C008400EED95B /* PasswordService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAC833682A5C008400EED95B /* PasswordService.swift */; };
+		CAE031E22A6323EA0089E839 /* TextFieldExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAE031E12A6323EA0089E839 /* TextFieldExtension.swift */; };
 		CAF8EC9F2A2DBD1A00179EF1 /* APIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAF8EC9E2A2DBD1A00179EF1 /* APIClient.swift */; };
 		CAF8ECA22A2DBD5500179EF1 /* AuthService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAF8ECA12A2DBD5500179EF1 /* AuthService.swift */; };
 		CAF8ECA42A2DBD6700179EF1 /* GameService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAF8ECA32A2DBD6700179EF1 /* GameService.swift */; };
@@ -213,6 +214,7 @@
 		CAC833642A5BEDD500EED95B /* Password.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Password.storyboard; sourceTree = "<group>"; };
 		CAC833662A5BEE3B00EED95B /* PasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordViewController.swift; sourceTree = "<group>"; };
 		CAC833682A5C008400EED95B /* PasswordService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordService.swift; sourceTree = "<group>"; };
+		CAE031E12A6323EA0089E839 /* TextFieldExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldExtension.swift; sourceTree = "<group>"; };
 		CAF8EC9E2A2DBD1A00179EF1 /* APIClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIClient.swift; sourceTree = "<group>"; };
 		CAF8ECA12A2DBD5500179EF1 /* AuthService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthService.swift; sourceTree = "<group>"; };
 		CAF8ECA32A2DBD6700179EF1 /* GameService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameService.swift; sourceTree = "<group>"; };
@@ -425,6 +427,7 @@
 				CA35E7B62A28D0B60057BAB6 /* ViewExtension.swift */,
 				CAB6EAAE2A2A086C00997852 /* ButtonExtension.swift */,
 				CAF8ECBC2A2F6CFC00179EF1 /* ActivityIndicatorExtension.swift */,
+				CAE031E12A6323EA0089E839 /* TextFieldExtension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -955,6 +958,7 @@
 				CA0AAC322A0E637E008367FB /* Game.swift in Sources */,
 				CA0AAC3D2A121EE2008367FB /* MoveDirection.swift in Sources */,
 				CA0AAC342A0E6395008367FB /* Map.swift in Sources */,
+				CAE031E22A6323EA0089E839 /* TextFieldExtension.swift in Sources */,
 				CAF8ECAE2A2DC38200179EF1 /* Method.swift in Sources */,
 				CA25B1D22A56E9B50063CBA3 /* AblyAuthDelegate.swift in Sources */,
 				CA852A4B2A38655A00961E65 /* AblyJWTService.swift in Sources */,

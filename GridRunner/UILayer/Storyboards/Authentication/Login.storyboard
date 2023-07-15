@@ -34,7 +34,7 @@
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Hey, welcome back 👋" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ypS-bS-os2">
                                         <rect key="frame" x="0.0" y="0.0" width="201.5" height="30"/>
                                         <fontDescription key="fontDescription" name="Kanit-SemiBold" family="Kanit SemiBold" pointSize="20"/>
-                                        <nil key="textColor"/>
+                                        <color key="textColor" name="FrostBlackColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Hello again, old friend. You have been missed! Jump right in and continue from where you have left" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YQN-Iz-yUG">
@@ -124,11 +124,13 @@
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Username" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Iui-X0-gVK">
                                                                 <rect key="frame" x="0.0" y="0.0" width="199" height="18"/>
                                                                 <fontDescription key="fontDescription" name="Kanit-Regular" family="Kanit" pointSize="12"/>
-                                                                <nil key="textColor"/>
+                                                                <color key="textColor" name="FrostBlackColor"/>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
                                                             <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Enter your username" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="uUj-g8-8Cm">
                                                                 <rect key="frame" x="0.0" y="28" width="199" height="34"/>
+                                                                <color key="backgroundColor" name="BackgroundColor"/>
+                                                                <color key="textColor" name="FrostBlackColor"/>
                                                                 <fontDescription key="fontDescription" name="Kanit-Regular" family="Kanit" pointSize="12"/>
                                                                 <textInputTraits key="textInputTraits" keyboardType="namePhonePad" returnKeyType="continue" textContentType="username"/>
                                                             </textField>
@@ -140,11 +142,13 @@
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Password" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zaf-9R-SpE">
                                                                 <rect key="frame" x="0.0" y="0.0" width="199" height="18"/>
                                                                 <fontDescription key="fontDescription" name="Kanit-Regular" family="Kanit" pointSize="12"/>
-                                                                <nil key="textColor"/>
+                                                                <color key="textColor" name="FrostBlackColor"/>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
                                                             <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Enter your password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="UdM-FI-B5E">
                                                                 <rect key="frame" x="0.0" y="28" width="199" height="34"/>
+                                                                <color key="backgroundColor" name="BackgroundColor"/>
+                                                                <color key="textColor" name="FrostBlackColor"/>
                                                                 <fontDescription key="fontDescription" name="Kanit-Regular" family="Kanit" pointSize="12"/>
                                                                 <textInputTraits key="textInputTraits" returnKeyType="done" secureTextEntry="YES" textContentType="password"/>
                                                             </textField>
@@ -222,6 +226,9 @@
     <resources>
         <namedColor name="BackgroundColor">
             <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="FrostBlackColor">
+            <color red="0.097999997437000275" green="0.10999999940395355" blue="0.125" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="RedAccentColor">
             <color red="0.70599997043609619" green="0.19200000166893005" blue="0.21600000560283661" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

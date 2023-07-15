@@ -33,7 +33,9 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         
         // Manage delegate to override UITextField methods.
         self.usernameTextField.delegate = self
+        self.usernameTextField.setup(with: "Enter your username")
         self.passwordTextField.delegate = self
+        self.passwordTextField.setup(with: "Enter your password")
         
         // Close current view, dismiss with animation, on cancel view tap.
         let cancelViewTap = UITapGestureRecognizer(target: self, action: #selector(closeView))
@@ -65,7 +67,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     }
     
     func textFieldDidEndEditing(_ textField: UITextField) {
-        textField.layer.borderWidth = 0
+        textField.layer.borderColor = UIColor(named: "SecondaryColor")?.withAlphaComponent(0.25).cgColor
     }
     
     @objc func closeView() {

@@ -34,8 +34,11 @@ class RegisterViewController: UIViewController, UITextFieldDelegate {
 
         // Manage delegate to override UITextField methods.
         self.usernameTextField.delegate = self
+        self.usernameTextField.setup(with: "Creare your username")
         self.emailTextField.delegate = self
+        self.emailTextField.setup(with: "Enter your email")
         self.passwordTextField.delegate = self
+        self.passwordTextField.setup(with: "Setup your password")
         
         // Close current view, dismiss with animation, on cancel view tap.
         let cancelViewTap = UITapGestureRecognizer(target: self, action: #selector(closeView))
@@ -70,7 +73,7 @@ class RegisterViewController: UIViewController, UITextFieldDelegate {
     }
     
     func textFieldDidEndEditing(_ textField: UITextField) {
-        textField.layer.borderWidth = 0
+        textField.layer.borderColor = UIColor(named: "SecondaryColor")?.withAlphaComponent(0.25).cgColor
     }
     
     @objc func closeView() {

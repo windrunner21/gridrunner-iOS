@@ -45,7 +45,9 @@ class ProfileViewController: UIViewController {
         self.profileView.addLightBorder()
         
         self.runnerRankView.layer.cornerRadius = 10
+        self.runnerRankView.backgroundColor = UIColor(named: "SecondaryColor")?.withAlphaComponent(0.25)
         self.seekerRankView.layer.cornerRadius = 10
+        self.seekerRankView.backgroundColor = UIColor(named: "SecondaryColor")?.withAlphaComponent(0.25)
         
         // Set random emoji from profile icon to emoji label.
         self.emojiLabel.text = ProfileIcon().getEmoji()
