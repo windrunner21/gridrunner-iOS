@@ -1200,7 +1200,7 @@
 				DEVELOPMENT_TEAM = 9258H7N9X2;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = GridRunner/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = "Grid Runner";
+				INFOPLIST_KEY_CFBundleDisplayName = "Grid Run";
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.strategy-games";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen.storyboard;
@@ -1235,7 +1235,7 @@
 				DEVELOPMENT_TEAM = 9258H7N9X2;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = GridRunner/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = "Grid Runner";
+				INFOPLIST_KEY_CFBundleDisplayName = "Grid Run";
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.strategy-games";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen.storyboard;
