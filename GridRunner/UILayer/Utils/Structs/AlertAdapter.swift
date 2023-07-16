@@ -8,6 +8,26 @@
 import UIKit
 
 class AlertAdapter {
+    
+    func createInfoAlert() -> UIAlertController {
+        
+        let info: String = "Gridrun is a turn based strategy game played on a random sized grid. Player can be assigned one of the two roles: Runner or Seeker.\n\nRunner: The goal of the Runner is to reach the exit tile before the Seeker finds them. Runner can move only LEFT, UP, RIGHT, DOWN.\n\nSeeker: The goal fo the Seeker is to find the Runner before they can escape. Seeker can move anywhere."
+        
+        let alert = UIAlertController(title: "Game Info", message: info, preferredStyle: .alert)
+        
+        alert.addAction(
+            UIAlertAction(
+                title: "OK",
+                style: .default,
+                handler: { _ in
+                    alert.dismiss(animated: true)
+                }
+            )
+        )
+        
+        return alert
+    }
+    
     func createGameOverAlert(winner: PlayerType, reason: String? = nil ,alertActionHandler: @escaping () -> Void) -> UIAlertController {
         
         let player = winner == .runner ? "Runner" : "Seeker"

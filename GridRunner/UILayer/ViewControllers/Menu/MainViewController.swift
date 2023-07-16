@@ -20,6 +20,9 @@ class MainViewController: UIViewController {
     @IBOutlet weak var profileView: UIView!
     @IBOutlet weak var emojiIconView: UIView!
     @IBOutlet weak var emojiLabel: UILabel!
+    
+    @IBOutlet weak var infoView: UIView!
+    
     @IBOutlet weak var rankLabel: UILabel!
     @IBOutlet weak var usernameLabel: UILabel!
     
@@ -34,9 +37,11 @@ class MainViewController: UIViewController {
         self.trophyIconView.transformToCircle()
         self.profileView.transformToCircle()
         self.emojiIconView.transformToCircle()
+        self.infoView.transformToCircle()
         
         // Adding elevation/shadow to cancel view
         self.profileView.addButtonElevation()
+        self.infoView.addButtonElevation()
         
         // Set random emoji from profile icon to emoji label.
         self.emojiLabel.text = profileIcon.getIcon()
@@ -44,6 +49,10 @@ class MainViewController: UIViewController {
         // Open user profile menu on profile view tap.
         let openProfileMenuTap = UITapGestureRecognizer(target: self, action: #selector(openProfileMenu))
         self.profileView.addGestureRecognizer(openProfileMenuTap)
+        
+        // Open information pop up on info view tap
+        let openInfoMenuTap = UITapGestureRecognizer(target: self, action: #selector(openInfoMenu))
+        self.infoView.addGestureRecognizer(openInfoMenuTap)
         
         let interaction = UIContextMenuInteraction(delegate: self)
         self.profileView.addInteraction(interaction)
@@ -64,6 +73,11 @@ class MainViewController: UIViewController {
     
     @objc func openProfileMenu(_ gesture: UITapGestureRecognizer) {
         User.shared.isLoggedIn ? self.openAccountScreen() : self.openRegisterScreen()
+    }
+    
+    @objc func openInfoMenu(_ gesture: UITapGestureRecognizer) {
+        let alert = self.alertAdapter.createInfoAlert()
+        self.present(alert, animated: true)
     }
     
     private func searchGame(by gameType: GameType) {
