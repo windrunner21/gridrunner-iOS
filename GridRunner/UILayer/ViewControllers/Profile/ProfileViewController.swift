@@ -11,6 +11,7 @@ class ProfileViewController: UIViewController {
     
     var mainViewController: MainViewController!
     var alertAdapter: AlertAdapter = AlertAdapter()
+    var profileIcon: ProfileIcon!
     
     // Storyboard related properties.
     @IBOutlet weak var cancelView: UIView!
@@ -50,7 +51,7 @@ class ProfileViewController: UIViewController {
         self.seekerRankView.backgroundColor = UIColor(named: "SecondaryColor")?.withAlphaComponent(0.25)
         
         // Set random emoji from profile icon to emoji label.
-        self.emojiLabel.text = ProfileIcon().getEmoji()
+        self.emojiLabel.text = profileIcon.getIcon()
         
         self.usernameLabel.text = User.shared.username
         self.emailLabel.text = User.shared.email

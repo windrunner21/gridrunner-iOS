@@ -5,18 +5,23 @@
 //  Created by Imran Hajiyev on 30.05.23.
 //
 
-struct ProfileIcon {
-    private var emoji: String {
-        randomEmoji() ?? "🧶"
+class ProfileIcon {
+    private var icon: String
+    private static let emojiList = ["🤣", "🤪", "🤭", "🤡", "🤙", "👋", "👅", "👀", "👾", "😼", "🐣", "🦁", "🐷", "🐺", "🌰", "🏃", "🏃‍♀️", "🥐", "💭"]
+    
+    convenience init() {
+        self.init(icon: Self.randomEmoji())
     }
     
-    private let emojiList = ["🤣", "🤪", "🤭", "🤡", "🤙", "👋", "👅", "👀", "👾", "😼", "🐣", "🦁", "🐷", "🐺", "🌰", "🏃", "🏃‍♀️", "🥐", "💭"]
+    private init(icon: String?) {
+        self.icon = icon ?? ""
+    }
     
-    private func randomEmoji() -> String? {
+    private static func randomEmoji() -> String? {
         self.emojiList.randomElement()
     }
     
-    func getEmoji() -> String {
-        self.emoji
+    func getIcon() -> String {
+        self.icon
     }
 }

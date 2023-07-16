@@ -11,6 +11,7 @@ class MainViewController: UIViewController {
     
     let alertAdapter = AlertAdapter()
     let gameSearchView = GameSearchView(frame: CGRect(x: UIScreen.main.bounds.width / 2 - 150, y: 0, width: 300, height: 150))
+    let profileIcon = ProfileIcon()
     
     // Storyboard properties.
     @IBOutlet weak var rankView: UIView!
@@ -38,7 +39,7 @@ class MainViewController: UIViewController {
         self.profileView.addButtonElevation()
         
         // Set random emoji from profile icon to emoji label.
-        self.emojiLabel.text = ProfileIcon().getEmoji()
+        self.emojiLabel.text = profileIcon.getIcon()
         
         // Open user profile menu on profile view tap.
         let openProfileMenuTap = UITapGestureRecognizer(target: self, action: #selector(openProfileMenu))
@@ -113,7 +114,9 @@ class MainViewController: UIViewController {
     
     private func startGame() {
         let gameStoryboard: UIStoryboard = UIStoryboard(name: "Game", bundle: .main)
-        let gameViewController: UIViewController = gameStoryboard.instantiateViewController(identifier: "GameScreen") as GameViewController
+        let gameViewController: GameViewController = gameStoryboard.instantiateViewController(identifier: "GameScreen")
+        
+        gameViewController.profileIcon = self.profileIcon
         
         let sceneDelegate = UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate
         sceneDelegate?.transitionViewController.transition(to: gameViewController, with: [.transitionCurlUp])
@@ -142,6 +145,7 @@ class MainViewController: UIViewController {
         let profileViewController: ProfileViewController = profileStoryboard.instantiateViewController(identifier: "ProfileScreen")
         
         profileViewController.mainViewController = self
+        profileViewController.profileIcon = self.profileIcon
         
         self.present(profileViewController, animated: true)
     }

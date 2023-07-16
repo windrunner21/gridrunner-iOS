@@ -10,6 +10,7 @@ import UIKit
 class GameViewController: UIViewController {
     
     let loadingView = LoadingView(frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height))
+    var profileIcon: ProfileIcon!
     
     // Storyboard properties.
     @IBOutlet weak var playerTypeLabel: UILabel!
@@ -413,7 +414,7 @@ class GameViewController: UIViewController {
         self.emojiIconView.transformToCircle()
         self.emojiIconView.backgroundColor = player.type == .runner ? UIColor(named: "RedAccentColor")?.withAlphaComponent(0.5) : UIColor(named: "FrostBlackColor")?.withAlphaComponent(0.5)
         
-        self.emojiIconLabel.text = ProfileIcon().getEmoji()
+        self.emojiIconLabel.text = profileIcon.getIcon()
         
         self.playerLabel.text = player.type == .runner ?
         "@\(GameConfig.shared.runner ?? "username")" :
@@ -431,7 +432,7 @@ class GameViewController: UIViewController {
         self.versusEmojiIconView.transformToCircle()
         self.versusEmojiIconView.backgroundColor = player.type == .seeker ? UIColor(named: "RedAccentColor")?.withAlphaComponent(0.5) : UIColor(named: "FrostBlackColor")?.withAlphaComponent(0.5)
         
-        self.versusEmojiIconLabel.text = ProfileIcon().getEmoji()
+        self.versusEmojiIconLabel.text = ProfileIcon().getIcon()
         self.versusPlayerLabel.text = "@\(GameConfig.shared.opponent)"
     }
     
