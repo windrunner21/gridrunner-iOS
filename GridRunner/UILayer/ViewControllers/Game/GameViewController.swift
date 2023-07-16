@@ -234,6 +234,10 @@ class GameViewController: UIViewController {
         switch tile.type {
         case .start where self.isPlayersTurn:
             self.startTileTapped(tile)
+        case .closed where self.isPlayersTurn:
+            self.closedTileTapped(tile)
+        case .outer where self.isPlayersTurn:
+            self.outerTileTapped(tile)
         case .exit where self.isPlayersTurn:
             self.basicTileTapped(tile, by: player)
         case .basic where self.isPlayersTurn:
@@ -245,6 +249,10 @@ class GameViewController: UIViewController {
     }
     
     private func startTileTapped(_ tile: Tile) { }
+    
+    private func closedTileTapped(_ tile: Tile) { }
+    
+    private func outerTileTapped(_ tile: Tile) { }
     
     private func exitTileTapped(_ tile: Tile, by player: AnyPlayer) {}
     

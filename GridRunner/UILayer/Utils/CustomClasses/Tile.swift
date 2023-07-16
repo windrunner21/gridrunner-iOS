@@ -105,6 +105,12 @@ class Tile: UIView {
             case .exit where tile.position == self.position:
                 self.type = .exit
                 self.decorateExit()
+            case .closed where tile.position == self.position:
+                self.type = .closed
+                self.decorateClosed()
+            case .outer where tile.position == self.position:
+                self.type = .outer
+                self.decorateOuter()
             default:
                 break
             }
@@ -197,9 +203,18 @@ class Tile: UIView {
         }
     }
     
+    func decorateOuter() {
+        self.backgroundColor = .clear
+    }
+    
     func decorateExit() {
         self.backgroundColor = UIColor(named: "FrostBlackColor")
         self.imageView.image = UIImage(systemName: "flag.checkered")
+    }
+    
+    func decorateClosed() {
+        self.backgroundColor = UIColor(named: "SecondaryColor")
+        self.imageView.image = UIImage(systemName: "minus.circle.fill")
     }
     
     func decorateSpawn() {

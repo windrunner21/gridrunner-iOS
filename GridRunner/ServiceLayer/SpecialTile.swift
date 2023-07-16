@@ -25,6 +25,10 @@ class SpecialTile: ResponseParser, Decodable, CustomStringConvertible {
             tile.type = .start
         case "exit":
             tile.type = .exit
+        case "wall":
+            tile.type = .closed
+        case "empty":
+            tile.type = .outer
         default:
             tile.type = .basic
         }
