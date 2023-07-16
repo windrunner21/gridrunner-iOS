@@ -14,7 +14,7 @@ class GameService {
         client.sendRequest(
             path: URLPath.createRoom.path,
             method: .GET,
-            headers: ["as": role, "clientId": clientId]
+            parameters: [URLQueryItem(name: "as", value: role), URLQueryItem(name: "clientId", value: clientId)]
         ) { data, response, error in
             
             if let error = error {
@@ -34,7 +34,7 @@ class GameService {
         client.sendRequest(
             path: URLPath.joinRoom.path,
             method: .GET,
-            headers: ["room": code]
+            parameters: [URLQueryItem(name: "room", value: code)]
         ) { data, response, error in
             
             if let error = error {

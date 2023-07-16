@@ -10,7 +10,22 @@ import UIKit
 class MainViewController: UIViewController {
     
     let alertAdapter = AlertAdapter()
-    let gameSearchView = GameSearchView(frame: CGRect(x: UIScreen.main.bounds.width / 2 - 150, y: 0, width: 300, height: 150))
+    let gameSearchView = GameSearchView(
+        frame: CGRect(
+            x: UIScreen.main.bounds.width / 2 - 150,
+            y: 0,
+            width: 300,
+            height: 150
+        )
+    )
+    let friendlyView = FriendlyView(
+        frame: CGRect(
+            x: UIScreen.main.bounds.width / 2 - UIScreen.main.bounds.width / 1.5 / 2,
+            y: 0,
+            width: UIScreen.main.bounds.width / 1.5,
+            height: UIScreen.main.bounds.height - 40
+        )
+    )
     let profileIcon = ProfileIcon()
     
     // Storyboard properties.
@@ -212,9 +227,8 @@ class MainViewController: UIViewController {
         )
         
         self.roomPlayView.playNowButtonAction = { [weak self] in
-            let actionSheet = self?.alertAdapter.createEnterRoomAlert()
-            self?.present(actionSheet!, animated: true)
-            //self?.startGame()
+            self?.view.addSubview(self!.friendlyView)
+            self?.friendlyView.slideIn()
         }
         
         self.transformWhite(view: self.roomPlayView, angle: -1.5)

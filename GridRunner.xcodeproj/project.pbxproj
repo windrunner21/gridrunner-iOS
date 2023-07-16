@@ -104,6 +104,8 @@
 		CAF8ECBF2A2F741900179EF1 /* URLPath.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAF8ECBE2A2F741900179EF1 /* URLPath.swift */; };
 		CAF8ECC12A2F767600179EF1 /* Login.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CAF8ECC02A2F767600179EF1 /* Login.storyboard */; };
 		CAF8ECC32A2F78A600179EF1 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAF8ECC22A2F78A600179EF1 /* LoginViewController.swift */; };
+		CAFCA5EB2A640D470094178F /* FriendlyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAFCA5EA2A640D470094178F /* FriendlyView.swift */; };
+		CAFCA5ED2A640D500094178F /* Friendly.xib in Resources */ = {isa = PBXBuildFile; fileRef = CAFCA5EC2A640D500094178F /* Friendly.xib */; };
 		CAFED48D2A02496E00FB4B9B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAFED48C2A02496E00FB4B9B /* AppDelegate.swift */; };
 		CAFED48F2A02496E00FB4B9B /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAFED48E2A02496E00FB4B9B /* SceneDelegate.swift */; };
 		CAFED4912A02496E00FB4B9B /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAFED4902A02496E00FB4B9B /* MainViewController.swift */; };
@@ -229,6 +231,8 @@
 		CAF8ECBE2A2F741900179EF1 /* URLPath.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLPath.swift; sourceTree = "<group>"; };
 		CAF8ECC02A2F767600179EF1 /* Login.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Login.storyboard; sourceTree = "<group>"; };
 		CAF8ECC22A2F78A600179EF1 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		CAFCA5EA2A640D470094178F /* FriendlyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendlyView.swift; sourceTree = "<group>"; };
+		CAFCA5EC2A640D500094178F /* Friendly.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = Friendly.xib; sourceTree = "<group>"; };
 		CAFED4892A02496E00FB4B9B /* GridRunner.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GridRunner.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CAFED48C2A02496E00FB4B9B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		CAFED48E2A02496E00FB4B9B /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -340,6 +344,8 @@
 				CA852A4E2A387D6F00961E65 /* GameSearch.xib */,
 				CA852A6E2A406E9800961E65 /* LoadingView.swift */,
 				CA852A702A406EA400961E65 /* Loading.xib */,
+				CAFCA5EA2A640D470094178F /* FriendlyView.swift */,
+				CAFCA5EC2A640D500094178F /* Friendly.xib */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -906,6 +912,7 @@
 				CA852A422A3742B200961E65 /* Profile.storyboard in Resources */,
 				CA0AAC792A25D6D3008367FB /* Kanit-LightItalic.ttf in Resources */,
 				CAFED4962A02497000FB4B9B /* Assets.xcassets in Resources */,
+				CAFCA5ED2A640D500094178F /* Friendly.xib in Resources */,
 				CAF8ECC12A2F767600179EF1 /* Login.storyboard in Resources */,
 				CA0AAC7E2A25D6D3008367FB /* Kanit-Regular.ttf in Resources */,
 				CA0AAC7A2A25D6D3008367FB /* Kanit-Thin.ttf in Resources */,
@@ -950,6 +957,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				CAF8ECA42A2DBD6700179EF1 /* GameService.swift in Sources */,
+				CAFCA5EB2A640D470094178F /* FriendlyView.swift in Sources */,
 				CA4E3F692A0CE31200D36266 /* TransitionViewController.swift in Sources */,
 				CA852A5A2A3C4E9400961E65 /* GameSessionDetails.swift in Sources */,
 				CAF8ECBF2A2F741900179EF1 /* URLPath.swift in Sources */,
