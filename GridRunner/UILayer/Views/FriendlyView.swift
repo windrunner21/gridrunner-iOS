@@ -14,6 +14,9 @@ class FriendlyView: UIView, UITextFieldDelegate {
     // Main view to display inside parent UIViewController.
     @IBOutlet var contentView: UIView!
     
+    @IBOutlet weak var createRoomStackView: UIStackView!
+    @IBOutlet weak var joinRoomStackView: UIStackView!
+    
     @IBOutlet weak var rolePopUpButton: UIButton!
     @IBOutlet weak var roomCodeTextField: UITextField!
     
@@ -87,19 +90,19 @@ class FriendlyView: UIView, UITextFieldDelegate {
             children: [
                 UIAction(
                     title: "Runner", handler: { _ in
-                        self.hintLabel.text = "⚠️ You are now joining room"
+                        self.hintLabel.text = "⚠️ You are now creating new room"
                         self.doneButton.setTitle("Create room", for: .normal)
                     }
                 ),
                 UIAction(
                     title: "Seeker", handler: { _ in
-                        self.hintLabel.text = "⚠️ You are now joining room"
+                        self.hintLabel.text = "⚠️ You are now creating new room"
                         self.doneButton.setTitle("Create room", for: .normal)
                     }
                 ),
                 UIAction(
                     title: "Random", handler: { _ in
-                        self.hintLabel.text = "⚠️ You are now joining room"
+                        self.hintLabel.text = "⚠️ You are now creating new room"
                         self.doneButton.setTitle("Create room", for: .normal)
                     }
                 )
@@ -135,5 +138,8 @@ class FriendlyView: UIView, UITextFieldDelegate {
     
     func textFieldDidEndEditing(_ textField: UITextField) {
         textField.layer.borderColor = UIColor(named: "SecondaryColor")?.withAlphaComponent(0.25).cgColor
+        
+        self.hintLabel.text = "⚠️ You are now joining room"
+        self.doneButton.setTitle("Join room", for: .normal)
     }
 }
