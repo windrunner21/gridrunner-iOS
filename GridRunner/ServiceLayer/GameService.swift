@@ -22,7 +22,15 @@ class GameService {
                 completion(.networkError)
             } else if let response = response as? HTTPURLResponse, response.statusCode == 200, let data = data {
                 print(String(data: data, encoding: .utf8)!)
-                completion(.success)
+                let friendly = Friendly.decode(data: data, type: Friendly.self)
+                
+                if let friendly = friendly {
+                    Friendly.shared.setRoomCode(friendly.roomCode)
+                    completion(.success)
+                } else {
+                    NSLog("Error occured in GameService().createRoom(): Cannot decode JSON to Friendly class.")
+                    completion(.decoderError)
+                }
             } else {
                 NSLog("Error occured in GameService().createRoom(): Incorrect request.")
                 completion(.requestError)
@@ -42,7 +50,16 @@ class GameService {
                 completion(.networkError)
             } else if let response = response as? HTTPURLResponse, response.statusCode == 200, let data = data {
                 print(String(data: data, encoding: .utf8)!)
-                completion(.success)
+                
+                let friendly = Friendly.decode(data: data, type: Friendly.self)
+                
+                if let friendly = friendly {
+                    Friendly.shared.setHost(friendly.host)
+                    completion(.success)
+                } else {
+                    NSLog("Error occured in GameService().createRoom(): Cannot decode JSON to Friendly class.")
+                    completion(.decoderError)
+                }
             } else {
                 NSLog("Error occured in GameService().joinRoom(): Incorrect request.")
                 completion(.requestError)

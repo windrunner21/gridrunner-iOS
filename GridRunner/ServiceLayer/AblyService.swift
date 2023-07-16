@@ -22,6 +22,16 @@ class AblyService {
         self.gameChannel = client.channels.get("gameChannelName")
     }
     
+    func update(with token: String) {
+        let ablyAuthCallbackDelegate = AblyAuthCallbackDelegate()
+        
+        self.options = ARTClientOptions(token: token)
+        self.options.echoMessages = false
+        self.options.authCallback = ablyAuthCallbackDelegate.tokenRequest
+        
+        self.client = ARTRealtime(options: options)
+    }
+    
     func update(with token: String, and queue: String) {
         let ablyAuthCallbackDelegate = AblyAuthCallbackDelegate()
         

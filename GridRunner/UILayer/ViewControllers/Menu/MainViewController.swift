@@ -18,14 +18,6 @@ class MainViewController: UIViewController {
             height: 150
         )
     )
-    let friendlyView = FriendlyView(
-        frame: CGRect(
-            x: UIScreen.main.bounds.width / 2 - UIScreen.main.bounds.width / 1.5 / 2,
-            y: 0,
-            width: UIScreen.main.bounds.width / 1.5,
-            height: UIScreen.main.bounds.height - 40
-        )
-    )
     let profileIcon = ProfileIcon()
     
     // Storyboard properties.
@@ -179,6 +171,15 @@ class MainViewController: UIViewController {
         self.present(profileViewController, animated: true)
     }
     
+    private func openFriendlyScreen() {
+        let friendlyStoryboard: UIStoryboard = UIStoryboard(name: "Friendly", bundle: .main)
+        let friendlyViewController: FriendlyViewController = friendlyStoryboard.instantiateViewController(identifier: "FriendlyScreen")
+        
+        friendlyViewController.mainViewController = self
+        
+        self.present(friendlyViewController, animated: true)
+    }
+    
     func checkUserAuthentication() {
         // Check if the user is authenticated.
         self.rankView.isHidden = !User.shared.isLoggedIn
@@ -227,8 +228,7 @@ class MainViewController: UIViewController {
         )
         
         self.roomPlayView.playNowButtonAction = { [weak self] in
-            self?.view.addSubview(self!.friendlyView)
-            self?.friendlyView.slideIn()
+            self?.openFriendlyScreen()
         }
         
         self.transformWhite(view: self.roomPlayView, angle: -1.5)

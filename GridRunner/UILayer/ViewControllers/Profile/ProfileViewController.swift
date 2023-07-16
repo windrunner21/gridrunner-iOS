@@ -67,7 +67,6 @@ class ProfileViewController: UIViewController {
         self.mainViewController.dismiss(animated: true)
     }
     
-    
     @IBAction func onLogoutTouchDown(_ sender: Any) {
         self.logoutButton.onTouchDown()
     }

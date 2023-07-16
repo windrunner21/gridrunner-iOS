@@ -86,6 +86,11 @@
 		CA8CBF9E2A504A82003CF44B /* SLMove.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA8CBF9D2A504A82003CF44B /* SLMove.swift */; };
 		CA8CBFA82A51A9AA003CF44B /* GameOver.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA8CBFA72A51A9AA003CF44B /* GameOver.swift */; };
 		CAB6EAAF2A2A086C00997852 /* ButtonExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAB6EAAE2A2A086C00997852 /* ButtonExtension.swift */; };
+		CAB728FD2A648EBB00BB4908 /* FriendlyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAB728FC2A648EBB00BB4908 /* FriendlyViewController.swift */; };
+		CAB728FF2A648EF200BB4908 /* Friendly.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CAB728FE2A648EF200BB4908 /* Friendly.storyboard */; };
+		CAB729012A64A22200BB4908 /* RoleType.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAB729002A64A22200BB4908 /* RoleType.swift */; };
+		CAB729032A64A28F00BB4908 /* RoleTypeExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAB729022A64A28F00BB4908 /* RoleTypeExtension.swift */; };
+		CAB729062A64A5E400BB4908 /* Friendly.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAB729052A64A5E400BB4908 /* Friendly.swift */; };
 		CAC833652A5BEDD500EED95B /* Password.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CAC833642A5BEDD500EED95B /* Password.storyboard */; };
 		CAC833672A5BEE3B00EED95B /* PasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAC833662A5BEE3B00EED95B /* PasswordViewController.swift */; };
 		CAC833692A5C008400EED95B /* PasswordService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAC833682A5C008400EED95B /* PasswordService.swift */; };
@@ -104,8 +109,6 @@
 		CAF8ECBF2A2F741900179EF1 /* URLPath.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAF8ECBE2A2F741900179EF1 /* URLPath.swift */; };
 		CAF8ECC12A2F767600179EF1 /* Login.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CAF8ECC02A2F767600179EF1 /* Login.storyboard */; };
 		CAF8ECC32A2F78A600179EF1 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAF8ECC22A2F78A600179EF1 /* LoginViewController.swift */; };
-		CAFCA5EB2A640D470094178F /* FriendlyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAFCA5EA2A640D470094178F /* FriendlyView.swift */; };
-		CAFCA5ED2A640D500094178F /* Friendly.xib in Resources */ = {isa = PBXBuildFile; fileRef = CAFCA5EC2A640D500094178F /* Friendly.xib */; };
 		CAFED48D2A02496E00FB4B9B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAFED48C2A02496E00FB4B9B /* AppDelegate.swift */; };
 		CAFED48F2A02496E00FB4B9B /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAFED48E2A02496E00FB4B9B /* SceneDelegate.swift */; };
 		CAFED4912A02496E00FB4B9B /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAFED4902A02496E00FB4B9B /* MainViewController.swift */; };
@@ -213,6 +216,11 @@
 		CA8CBF9D2A504A82003CF44B /* SLMove.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SLMove.swift; sourceTree = "<group>"; };
 		CA8CBFA72A51A9AA003CF44B /* GameOver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameOver.swift; sourceTree = "<group>"; };
 		CAB6EAAE2A2A086C00997852 /* ButtonExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonExtension.swift; sourceTree = "<group>"; };
+		CAB728FC2A648EBB00BB4908 /* FriendlyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendlyViewController.swift; sourceTree = "<group>"; };
+		CAB728FE2A648EF200BB4908 /* Friendly.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Friendly.storyboard; sourceTree = "<group>"; };
+		CAB729002A64A22200BB4908 /* RoleType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoleType.swift; sourceTree = "<group>"; };
+		CAB729022A64A28F00BB4908 /* RoleTypeExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoleTypeExtension.swift; sourceTree = "<group>"; };
+		CAB729052A64A5E400BB4908 /* Friendly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Friendly.swift; sourceTree = "<group>"; };
 		CAC833642A5BEDD500EED95B /* Password.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Password.storyboard; sourceTree = "<group>"; };
 		CAC833662A5BEE3B00EED95B /* PasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordViewController.swift; sourceTree = "<group>"; };
 		CAC833682A5C008400EED95B /* PasswordService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordService.swift; sourceTree = "<group>"; };
@@ -231,8 +239,6 @@
 		CAF8ECBE2A2F741900179EF1 /* URLPath.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLPath.swift; sourceTree = "<group>"; };
 		CAF8ECC02A2F767600179EF1 /* Login.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Login.storyboard; sourceTree = "<group>"; };
 		CAF8ECC22A2F78A600179EF1 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
-		CAFCA5EA2A640D470094178F /* FriendlyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendlyView.swift; sourceTree = "<group>"; };
-		CAFCA5EC2A640D500094178F /* Friendly.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = Friendly.xib; sourceTree = "<group>"; };
 		CAFED4892A02496E00FB4B9B /* GridRunner.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GridRunner.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CAFED48C2A02496E00FB4B9B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		CAFED48E2A02496E00FB4B9B /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -344,8 +350,6 @@
 				CA852A4E2A387D6F00961E65 /* GameSearch.xib */,
 				CA852A6E2A406E9800961E65 /* LoadingView.swift */,
 				CA852A702A406EA400961E65 /* Loading.xib */,
-				CAFCA5EA2A640D470094178F /* FriendlyView.swift */,
-				CAFCA5EC2A640D500094178F /* Friendly.xib */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -505,6 +509,7 @@
 				CA7417B12A56ECCF00A9683A /* Errors */,
 				CA852A382A30B19100961E65 /* UserRole.swift */,
 				CA852A502A39ABC600961E65 /* GameType.swift */,
+				CAB729002A64A22200BB4908 /* RoleType.swift */,
 			);
 			path = System;
 			sourceTree = "<group>";
@@ -529,6 +534,7 @@
 			isa = PBXGroup;
 			children = (
 				CA852A532A39ABF900961E65 /* GameTypeExtension.swift */,
+				CAB729022A64A28F00BB4908 /* RoleTypeExtension.swift */,
 			);
 			name = Extensions;
 			sourceTree = "<group>";
@@ -558,6 +564,7 @@
 		CA8CBF9F2A504D9A003CF44B /* System */ = {
 			isa = PBXGroup;
 			children = (
+				CAB729042A64A5BD00BB4908 /* Friendly */,
 				CA8CBFA12A504DB1003CF44B /* Authentication */,
 				CA8CBFA02A504DAB003CF44B /* User */,
 				CA852A622A4042D900961E65 /* ResponseParser.swift */,
@@ -590,10 +597,19 @@
 			name = MoveResponse;
 			sourceTree = "<group>";
 		};
+		CAB729042A64A5BD00BB4908 /* Friendly */ = {
+			isa = PBXGroup;
+			children = (
+				CAB729052A64A5E400BB4908 /* Friendly.swift */,
+			);
+			name = Friendly;
+			sourceTree = "<group>";
+		};
 		CAC833602A5BED8300EED95B /* Menu */ = {
 			isa = PBXGroup;
 			children = (
 				CAFED4922A02496E00FB4B9B /* Main.storyboard */,
+				CAB728FE2A648EF200BB4908 /* Friendly.storyboard */,
 			);
 			path = Menu;
 			sourceTree = "<group>";
@@ -602,6 +618,7 @@
 			isa = PBXGroup;
 			children = (
 				CAFED4902A02496E00FB4B9B /* MainViewController.swift */,
+				CAB728FC2A648EBB00BB4908 /* FriendlyViewController.swift */,
 			);
 			path = Menu;
 			sourceTree = "<group>";
@@ -901,6 +918,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CAB728FF2A648EF200BB4908 /* Friendly.storyboard in Resources */,
 				CA0AAC802A25D6D3008367FB /* Kanit-ExtraLight.ttf in Resources */,
 				CA0AAC942A2621E7008367FB /* MenuItem.xib in Resources */,
 				CA852A4F2A387D6F00961E65 /* GameSearch.xib in Resources */,
@@ -912,7 +930,6 @@
 				CA852A422A3742B200961E65 /* Profile.storyboard in Resources */,
 				CA0AAC792A25D6D3008367FB /* Kanit-LightItalic.ttf in Resources */,
 				CAFED4962A02497000FB4B9B /* Assets.xcassets in Resources */,
-				CAFCA5ED2A640D500094178F /* Friendly.xib in Resources */,
 				CAF8ECC12A2F767600179EF1 /* Login.storyboard in Resources */,
 				CA0AAC7E2A25D6D3008367FB /* Kanit-Regular.ttf in Resources */,
 				CA0AAC7A2A25D6D3008367FB /* Kanit-Thin.ttf in Resources */,
@@ -957,7 +974,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				CAF8ECA42A2DBD6700179EF1 /* GameService.swift in Sources */,
-				CAFCA5EB2A640D470094178F /* FriendlyView.swift in Sources */,
 				CA4E3F692A0CE31200D36266 /* TransitionViewController.swift in Sources */,
 				CA852A5A2A3C4E9400961E65 /* GameSessionDetails.swift in Sources */,
 				CAF8ECBF2A2F741900179EF1 /* URLPath.swift in Sources */,
@@ -971,7 +987,9 @@
 				CA25B1D22A56E9B50063CBA3 /* AblyAuthDelegate.swift in Sources */,
 				CA852A4B2A38655A00961E65 /* AblyJWTService.swift in Sources */,
 				CAF8ECB52A2E1FCE00179EF1 /* LoginCredentials.swift in Sources */,
+				CAB729062A64A5E400BB4908 /* Friendly.swift in Sources */,
 				CA852A392A30B19100961E65 /* UserRole.swift in Sources */,
+				CAB729012A64A22200BB4908 /* RoleType.swift in Sources */,
 				CA0AAC8E2A26219B008367FB /* MenuItemView.swift in Sources */,
 				CAF8ECBD2A2F6CFC00179EF1 /* ActivityIndicatorExtension.swift in Sources */,
 				CA852A4D2A387D6200961E65 /* GameSearchView.swift in Sources */,
@@ -980,6 +998,7 @@
 				CA4E3F582A07A85900D36266 /* GameViewController.swift in Sources */,
 				CA8CBF9C2A504276003CF44B /* MoveResponse.swift in Sources */,
 				CA852A632A4042D900961E65 /* ResponseParser.swift in Sources */,
+				CAB728FD2A648EBB00BB4908 /* FriendlyViewController.swift in Sources */,
 				CAF8ECB32A2DD23600179EF1 /* BaseURL.swift in Sources */,
 				CA4E3F642A08DCB400D36266 /* ViewControllerExtension.swift in Sources */,
 				CA0AAC892A25DF8C008367FB /* ProfileIcon.swift in Sources */,
@@ -993,6 +1012,7 @@
 				CA852A6F2A406E9800961E65 /* LoadingView.swift in Sources */,
 				CA0AAC2E2A0E2F0F008367FB /* Tile.swift in Sources */,
 				CA852A3B2A331B8300961E65 /* UserService.swift in Sources */,
+				CAB729032A64A28F00BB4908 /* RoleTypeExtension.swift in Sources */,
 				CAFED4912A02496E00FB4B9B /* MainViewController.swift in Sources */,
 				CAC833692A5C008400EED95B /* PasswordService.swift in Sources */,
 				CAF8ECA22A2DBD5500179EF1 /* AuthService.swift in Sources */,
