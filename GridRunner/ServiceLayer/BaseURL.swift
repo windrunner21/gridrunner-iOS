@@ -17,7 +17,7 @@ extension BaseURL {
         case .serverless:
             return "https://gridrun.live/api"
         case .gameServer:
-            return "https://api.gridrun.live"
+            return "https://game.gridrun.live"
         }
     }
 }
