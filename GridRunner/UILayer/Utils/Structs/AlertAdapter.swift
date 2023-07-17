@@ -30,13 +30,31 @@ class AlertAdapter {
     
     func createGameOverAlert(winner: PlayerType, reason: String? = nil ,alertActionHandler: @escaping () -> Void) -> UIAlertController {
         
-        let player = winner == .runner ? "Runner" : "Seeker"
-        let opponent = winner == .runner ? "Seeker" : "Runner"
+        var player: String = String()
+        var opponent: String = String()
+        var message: String = String()
         
-        var message: String = "Congratulations to \(player)!\n\(player) wins. "
+        switch winner {
+        case .runner:
+            player = "Runner"
+            opponent = "Seeker"
+            message = "Congratulations to \(player)!\n\(player) wins. "
+        case .seeker:
+            player = "Seeker"
+            opponent = "Runner"
+            message = "Congratulations to \(player)!\n\(player) wins. "
+        case .server:
+            player = "No one"
+            opponent = "No one"
+            message = "Game closed. "
+        }
         
         if let reason = reason, reason == "resign" {
-            message += "\n\(opponent) has resigned from the game."
+            message += "\n\(opponent) has resigned from the game. "
+        }
+        
+        if let reason = reason, reason == "timeout" {
+            message += " Due to reaching timeout limit."
         }
         
         let alert = UIAlertController(title: "Game Over", message: message, preferredStyle: .alert)

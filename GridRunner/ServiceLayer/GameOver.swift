@@ -11,12 +11,12 @@ class GameOver: ResponseParser, Decodable, CustomStringConvertible {
     static let shared = GameOver()
     
     private var turnHistory: TurnHistory
-    private var winner: String
+    private var winner: String?
     var type: String
     var reason: String?
     
     var description: String {
-        "Game is over. Winner is: \(winner). History is: \(turnHistory)"
+        "Game is over. Winner is: \(winner ?? "none"). History is: \(turnHistory)"
     }
     
     private override init() {
@@ -38,6 +38,13 @@ class GameOver: ResponseParser, Decodable, CustomStringConvertible {
     }
     
     func getWinner() -> PlayerType {
-        self.winner == "seeker" ? .seeker : .runner
+        switch self.winner {
+        case "runner":
+            return .runner
+        case "seeker":
+            return .seeker
+        default:
+            return .server
+        }
     }
 }
