@@ -25,7 +25,7 @@ class GameService {
                 let friendly = Friendly.decode(data: data, type: Friendly.self)
                 
                 if let friendly = friendly {
-                    Friendly.shared.setRoomCode(friendly.roomCode)
+                    Friendly.shared.setRoomCode(friendly.getRoomCode())
                     completion(.success)
                 } else {
                     NSLog("Error occured in GameService().createRoom(): Cannot decode JSON to Friendly class.")
@@ -50,14 +50,13 @@ class GameService {
                 completion(.networkError)
             } else if let response = response as? HTTPURLResponse, response.statusCode == 200, let data = data {
                 print(String(data: data, encoding: .utf8)!)
-                
                 let friendly = Friendly.decode(data: data, type: Friendly.self)
                 
                 if let friendly = friendly {
-                    Friendly.shared.setHost(friendly.host)
+                    Friendly.shared.setHost(friendly.getHost())
                     completion(.success)
                 } else {
-                    NSLog("Error occured in GameService().createRoom(): Cannot decode JSON to Friendly class.")
+                    NSLog("Error occured in GameService().joinRoom(): Cannot decode JSON to Friendly class.")
                     completion(.decoderError)
                 }
             } else {

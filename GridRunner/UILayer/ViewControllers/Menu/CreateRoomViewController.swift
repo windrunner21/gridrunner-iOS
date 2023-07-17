@@ -77,31 +77,35 @@ class CreateRoomViewController: UIViewController {
                     }
                     return
                 }
-                
-                
-                AblyService.shared.update(with: token)
-                
-                print(token)
-                guard let clientId = AblyService.shared.getClientId() else {
-                    DispatchQueue.main.async {
-                        let alert = self.alertAdapter.createNetworkErrorAlert()
-                        self.present(alert, animated: true)
-                    }
-                    return
-                }
-                print(clientId)
-                GameService().createRoom(as: self.currentRole.value, withId: clientId) { response in
+            
+                AblyService.shared.update(with: token) { response, clientId in
                     switch response {
                     case .success:
-                        print("success")
-                    case .networkError:
+                        guard let clientId = clientId else {
+                            DispatchQueue.main.async {
+                                let alert = self.alertAdapter.createNetworkErrorAlert()
+                                self.present(alert, animated: true)
+                            }
+                            return
+                        }
+                        
+                        GameService().createRoom(as: self.currentRole.value, withId: clientId) { response in
+                            switch response {
+                            case .success:
+                                print(Friendly.shared.getRoomCode())
+                            case .networkError:
+                                let alert = self.alertAdapter.createNetworkErrorAlert()
+                                self.present(alert, animated: true)
+                            case .requestError:
+                                let alert = self.alertAdapter.createServiceRequestErrorAlert()
+                                self.present(alert, animated: true)
+                            case .decoderError:
+                                let alert = self.alertAdapter.createDecoderErrorAlert()
+                                self.present(alert, animated: true)
+                            }
+                        }
+                    default:
                         let alert = self.alertAdapter.createNetworkErrorAlert()
-                        self.present(alert, animated: true)
-                    case .requestError:
-                        let alert = self.alertAdapter.createServiceRequestErrorAlert()
-                        self.present(alert, animated: true)
-                    case .decoderError:
-                        let alert = self.alertAdapter.createDecoderErrorAlert()
                         self.present(alert, animated: true)
                     }
                 }

@@ -22,7 +22,7 @@ class AblyService {
         self.gameChannel = client.channels.get("gameChannelName")
     }
     
-    func update(with token: String) {
+    func update(with token: String, completion: @escaping((Response, String?)->Void)) {
         let ablyAuthCallbackDelegate = AblyAuthCallbackDelegate()
         
         self.options = ARTClientOptions(token: token)
@@ -30,6 +30,14 @@ class AblyService {
         self.options.authCallback = ablyAuthCallbackDelegate.tokenRequest
         
         self.client = ARTRealtime(options: options)
+        
+        self.client.connection.once(.connected) { stateChange in
+            if let clientId = self.client.auth.clientId {
+                completion(.success, clientId)
+            } else {
+                completion(.networkError, nil)
+            }
+        }
     }
     
     func update(with token: String, and queue: String) {
@@ -50,7 +58,7 @@ class AblyService {
     
     // Public methods for rest of the project to interact with: enter, leave queues.
     func enterQueue() {
-        client.connection.once(.connected) { stateChange in
+        self.client.connection.once(.connected) { stateChange in
             NSLog("Connected to Ably.")
             self._enter()
         }

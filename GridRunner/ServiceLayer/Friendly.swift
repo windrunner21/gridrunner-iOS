@@ -10,8 +10,8 @@ import Foundation
 class Friendly: ResponseParser, Decodable {
     static let shared = Friendly()
     
-    var roomCode: String?
-    var host: String?
+    private var roomCode: String?
+    private var host: String?
     
     private override init() {
         self.roomCode = String()
@@ -24,5 +24,13 @@ class Friendly: ResponseParser, Decodable {
     
     func setHost(_ host: String?) {
         self.host = host
+    }
+    
+    func getRoomCode() -> String? {
+        self.roomCode
+    }
+    
+    func getHost() -> String? {
+        self.host
     }
 }
