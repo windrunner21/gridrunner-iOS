@@ -94,6 +94,8 @@ class AblyService {
         
         self.queueChannel.subscribe("game") { [weak self] message in
             if let data = message.data as? [String: Any] {
+                print("Incoming data: \(message.data ?? "error.")")
+                
                 // Make sure that ids and username are the same to match correct accounts.
                 if let payload = GameSessionDetails.toJSONAndDecode(data: data, type: GameSessionDetails.self) {
                     if payload.runner == self?.client.auth.clientId || payload.seeker == self?.client.auth.clientId {

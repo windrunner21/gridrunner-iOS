@@ -97,7 +97,18 @@ class JoinRoomViewController: UIViewController, UITextFieldDelegate {
         self.dismiss(animated: true)
     }
     
+    @IBAction func onJoinRoomTouchDown(_ sender: Any) {
+        self.joinRoomButton.onTouchDown()
+    }
+    
+    
+    @IBAction func onJoinRoomTouchUpOutside(_ sender: Any) {
+        self.joinRoomButton.onTouchUpOutside()
+    }
+    
     @IBAction func onJoinRoom(_ sender: Any) {
+        self.joinRoomButton.disable()
+        
         guard let roomCode = roomCodeTextField.text else {
             DispatchQueue.main.async {
                 let alert = self.alertAdapter.createNetworkErrorAlert()
@@ -106,19 +117,73 @@ class JoinRoomViewController: UIViewController, UITextFieldDelegate {
             return
         }
         
-        GameService().joinRoom(withCode: roomCode) { response in
+        GameSessionDetails.shared.setRoomCode(to: roomCode)
+        
+        AblyJWTService().getJWT() { response, token in
             switch response {
             case .success:
-                print("success 2")
-            case .networkError:
-                let alert = self.alertAdapter.createNetworkErrorAlert()
-                self.present(alert, animated: true)
+                guard let token = token else {
+                    DispatchQueue.main.async {
+                        let alert = self.alertAdapter.createNetworkErrorAlert()
+                        self.present(alert, animated: true)
+                    }
+                    return
+                }
+            
+                AblyService.shared.update(with: token) { response, clientId in
+                    switch response {
+                    case .success:
+                        guard let _ = clientId else {
+                            DispatchQueue.main.async {
+                                let alert = self.alertAdapter.createNetworkErrorAlert()
+                                self.present(alert, animated: true)
+                            }
+                            return
+                        }
+                    
+                        GameService().joinRoom(withCode: roomCode) { response in
+                            switch response {
+                            case .success:
+                                DispatchQueue.main.async {
+                                    self.joinRoomButton.enable()
+                                    self.mainViewController.dismiss(animated: true) {
+                                        NotificationCenter.default.post(name: NSNotification.Name("Success::Matchmaking"), object: nil)
+                                    }
+                                }
+                            case .networkError:
+                                DispatchQueue.main.async {
+                                    let alert = self.alertAdapter.createNetworkErrorAlert()
+                                    self.present(alert, animated: true)
+                                }
+                            case .requestError:
+                                DispatchQueue.main.async {
+                                    let alert = self.alertAdapter.createServiceRequestErrorAlert()
+                                    self.present(alert, animated: true)
+                                }
+                            case .decoderError:
+                                DispatchQueue.main.async {
+                                    let alert = self.alertAdapter.createDecoderErrorAlert()
+                                    self.present(alert, animated: true)
+                                }
+                            }
+                        }
+                    default:
+                        DispatchQueue.main.async {
+                            let alert = self.alertAdapter.createNetworkErrorAlert()
+                            self.present(alert, animated: true)
+                        }
+                    }
+                }
             case .requestError:
-                let alert = self.alertAdapter.createServiceRequestErrorAlert()
-                self.present(alert, animated: true)
-            case .decoderError:
-                let alert = self.alertAdapter.createDecoderErrorAlert()
-                self.present(alert, animated: true)
+                DispatchQueue.main.async {
+                    let alert = self.alertAdapter.createServiceRequestErrorAlert()
+                    self.present(alert, animated: true)
+                }
+            default:
+                DispatchQueue.main.async {
+                    let alert = self.alertAdapter.createNetworkErrorAlert()
+                    self.present(alert, animated: true)
+                }
             }
         }
     }

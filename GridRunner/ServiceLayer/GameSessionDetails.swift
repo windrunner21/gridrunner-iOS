@@ -36,4 +36,16 @@ class GameSessionDetails: ResponseParser, Decodable, CustomStringConvertible {
         self.runner = details.runner
         self.seeker = details.seeker
     }
+    
+    func setRoomCode(to roomCode: String) {
+        self.roomCode = roomCode
+    }
+    
+    func setRunner(to runner: String) {
+        self.runner = runner
+    }
+    
+    func setSeeker(to seeker: String) {
+        self.seeker = seeker
+    }
 }

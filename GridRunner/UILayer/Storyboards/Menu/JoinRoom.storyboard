@@ -87,6 +87,8 @@
                                 <state key="normal" title="Join game"/>
                                 <connections>
                                     <action selector="onJoinRoom:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="nZx-AH-RBF"/>
+                                    <action selector="onJoinRoomTouchDown:" destination="Y6W-OH-hqX" eventType="touchDown" id="M0d-eB-jmt"/>
+                                    <action selector="onJoinRoomTouchUpOutside:" destination="Y6W-OH-hqX" eventType="touchUpOutside" id="thV-ea-Wq2"/>
                                 </connections>
                             </button>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Mkz-Cf-fwX" userLabel="Cancel">

@@ -88,6 +88,8 @@
                                 <state key="normal" title="Create game"/>
                                 <connections>
                                     <action selector="onCreateRoom:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="hAP-qb-hjs"/>
+                                    <action selector="onCreateRoomTouchDown:" destination="Y6W-OH-hqX" eventType="touchDown" id="P0T-K7-dfv"/>
+                                    <action selector="onCreateRoomTouchUpOutside:" destination="Y6W-OH-hqX" eventType="touchUpOutside" id="vV2-V5-yHa"/>
                                 </connections>
                             </button>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qJi-g0-ILt" userLabel="Cancel">
