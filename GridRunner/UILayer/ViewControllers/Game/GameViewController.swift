@@ -25,6 +25,7 @@ class GameViewController: UIViewController {
     )
     var profileIcon: ProfileIcon!
     var ordinaryLoading: Bool!
+    var fromJoiningRoom: Bool!
     
     // Storyboard properties.
     @IBOutlet weak var playerTypeLabel: UILabel!
@@ -55,7 +56,7 @@ class GameViewController: UIViewController {
         super.viewDidLoad()
         self.view.addSubview(ordinaryLoading ? self.loadingView : self.roomLoadingView)
         
-        AblyService.shared.enterGame()
+        AblyService.shared.enterGame(joining: fromJoiningRoom)
 
         NotificationCenter.default.addObserver(self, selector: #selector(setupGame), name: NSNotification.Name("Success:GameConfig"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(updateGame), name: NSNotification.Name("Success:MoveResponse"), object: nil)

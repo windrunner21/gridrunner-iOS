@@ -147,7 +147,7 @@ class JoinRoomViewController: UIViewController, UITextFieldDelegate {
                                 DispatchQueue.main.async {
                                     self.joinRoomButton.enable()
                                     self.mainViewController.dismiss(animated: true) {
-                                        NotificationCenter.default.post(name: NSNotification.Name("Success::Matchmaking"), object: nil)
+                                        NotificationCenter.default.post(name: NSNotification.Name("Success::Matchmaking::Custom::Join"), object: nil)
                                     }
                                 }
                             case .networkError:

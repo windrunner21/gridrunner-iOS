@@ -73,14 +73,20 @@ class MainViewController: UIViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(openGameScreen), name: NSNotification.Name("Success::Matchmaking"), object: nil)
 
         NotificationCenter.default.addObserver(self, selector: #selector(openCustomGameScreen), name: NSNotification.Name("Success::Matchmaking::Custom"), object: nil)
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(joinCustomGameScreen), name: NSNotification.Name("Success::Matchmaking::Custom::Join"), object: nil)
     }
     
     @objc func openGameScreen(_ notification: Notification) {
-        self.startGame(custom: false)
+        self.startGame(custom: false, isJoining: false)
     }
     
     @objc func openCustomGameScreen(_ notification: Notification) {
-        self.startGame(custom: true)
+        self.startGame(custom: true, isJoining: false)
+    }
+    
+    @objc func joinCustomGameScreen(_ notification: Notification) {
+        self.startGame(custom: false, isJoining: true)
     }
     
     @objc func openProfileMenu(_ gesture: UITapGestureRecognizer) {
@@ -138,12 +144,13 @@ class MainViewController: UIViewController {
         }
     }
     
-    private func startGame(custom: Bool) {
+    private func startGame(custom: Bool, isJoining: Bool) {
         let gameStoryboard: UIStoryboard = UIStoryboard(name: "Game", bundle: .main)
         let gameViewController: GameViewController = gameStoryboard.instantiateViewController(identifier: "GameScreen")
         
         gameViewController.profileIcon = self.profileIcon
         gameViewController.ordinaryLoading = !custom
+        gameViewController.fromJoiningRoom = isJoining
         
         let sceneDelegate = UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate
         sceneDelegate?.transitionViewController.transition(to: gameViewController, with: [.transitionCurlUp])

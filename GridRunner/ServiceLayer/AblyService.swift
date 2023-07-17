@@ -69,11 +69,11 @@ class AblyService {
     }
     
     // Public methods for rest of the project to interact with: enter, leave game.
-    func enterGame() {
+    func enterGame(joining: Bool) {
         self.leaveQueue()
         
         if client.connection.state == .connected {
-            self._enterGame()
+            self._enterGame(isJoining: joining)
         } else {
             NSLog("Could not enter game")
         }
@@ -119,9 +119,11 @@ class AblyService {
     }
     
     // GAME
-    private func _enterGame() {
+    private func _enterGame(isJoining: Bool) {
         guard let clientId = self.client.auth.clientId else { return }
-        let channelName = "room:\(GameSessionDetails.shared.roomCode):\(clientId)"
+        let channelName = isJoining ?
+        "room:\(GameSessionDetails.shared.roomCode):" :
+        "room:\(GameSessionDetails.shared.roomCode):\(clientId)"
         self.gameChannel = self.client.channels.get(channelName)
         
         NSLog("Entering channel \"\(channelName)\".")
