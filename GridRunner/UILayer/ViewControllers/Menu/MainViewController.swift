@@ -171,13 +171,13 @@ class MainViewController: UIViewController {
         self.present(profileViewController, animated: true)
     }
     
-    private func openFriendlyScreen() {
-        let friendlyStoryboard: UIStoryboard = UIStoryboard(name: "Friendly", bundle: .main)
-        let friendlyViewController: FriendlyViewController = friendlyStoryboard.instantiateViewController(identifier: "FriendlyScreen")
+    private func openCreateRoomScreen() {
+        let createRoomStoryboard: UIStoryboard = UIStoryboard(name: "CreateRoom", bundle: .main)
+        let createRoomViewController: CreateRoomViewController = createRoomStoryboard.instantiateViewController(identifier: "CreateRoomScreen")
         
-        friendlyViewController.mainViewController = self
+        createRoomViewController.mainViewController = self
         
-        self.present(friendlyViewController, animated: true)
+        self.present(createRoomViewController, animated: true)
     }
     
     func checkUserAuthentication() {
@@ -228,7 +228,7 @@ class MainViewController: UIViewController {
         )
         
         self.roomPlayView.playNowButtonAction = { [weak self] in
-            self?.openFriendlyScreen()
+            self?.openCreateRoomScreen()
         }
         
         self.transformWhite(view: self.roomPlayView, angle: -1.5)

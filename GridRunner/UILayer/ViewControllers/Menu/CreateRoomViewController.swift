@@ -7,7 +7,7 @@
 
 import UIKit
 
-class FriendlyViewController: UIViewController, UITextFieldDelegate {
+class CreateRoomViewController: UIViewController {
     
     var mainViewController: MainViewController!
     private let alertAdapter: AlertAdapter = AlertAdapter()
@@ -16,7 +16,6 @@ class FriendlyViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var cancelView: UIView!
     
     @IBOutlet weak var rolePopUpButton: UIButton!
-    @IBOutlet weak var roomCodeTextField: UITextField!
     
     @IBOutlet weak var createRoomButton: UIButton!
     @IBOutlet weak var joinRoomButton: UIButton!
@@ -24,15 +23,10 @@ class FriendlyViewController: UIViewController, UITextFieldDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        self.cancelView.transformToCircle()
         self.createRoomButton.setup()
-        self.joinRoomButton.setup()
         
         self.setupRolePopUp()
-        
-        self.roomCodeTextField.delegate = self
-        self.roomCodeTextField.setup(with: "Enter your room code")
-
-        self.cancelView.transformToCircle()
         
         // Adding elevation/shadow to cancel view
         self.cancelView.addButtonElevation()
@@ -42,33 +36,11 @@ class FriendlyViewController: UIViewController, UITextFieldDelegate {
         self.cancelView.addGestureRecognizer(cancelViewTap)
     }
     
-    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        switch textField {
-        case roomCodeTextField:
-            roomCodeTextField.resignFirstResponder()
-        default:
-            textField.resignFirstResponder()
-        }
-        
-        return true
-    }
-    
-    func textFieldDidBeginEditing(_ textField: UITextField) {
-        textField.layer.cornerRadius = 6
-        textField.layer.borderWidth = 1
-        textField.layer.borderColor = UIColor(named: "RedAccentColor")?.cgColor
-    }
-    
-    func textFieldDidEndEditing(_ textField: UITextField) {
-        textField.layer.borderColor = UIColor(named: "SecondaryColor")?.withAlphaComponent(0.25).cgColor
-    }
-    
     @objc func closeView() {
         self.mainViewController.dismiss(animated: true)
     }
     
     private func setupRolePopUp() {
-        
         self.currentRole = .runner
         
         self.rolePopUpButton.menu = UIMenu(children: [
@@ -82,6 +54,16 @@ class FriendlyViewController: UIViewController, UITextFieldDelegate {
                 self.currentRole = .random
             })
         ])
+    }
+    
+    
+    @IBAction func onJoinRoom(_ sender: Any) {
+        let joinRoomStoryboard: UIStoryboard = UIStoryboard(name: "JoinRoom", bundle: .main)
+        let joinRoomViewController: JoinRoomViewController = joinRoomStoryboard.instantiateViewController(identifier: "JoinRoomScreen")
+        
+        joinRoomViewController.mainViewController = self.mainViewController
+        
+        self.present(joinRoomViewController, animated: true)
     }
     
     @IBAction func onCreateRoom(_ sender: Any) {
@@ -136,31 +118,4 @@ class FriendlyViewController: UIViewController, UITextFieldDelegate {
             }
         }
     }
-    
-    @IBAction func onJoinRoom(_ sender: Any) {
-        guard let roomCode = roomCodeTextField.text else {
-            DispatchQueue.main.async {
-                let alert = self.alertAdapter.createNetworkErrorAlert()
-                self.present(alert, animated: true)
-            }
-            return
-        }
-        
-        GameService().joinRoom(withCode: roomCode) { response in
-            switch response {
-            case .success:
-                print("success 2")
-            case .networkError:
-                let alert = self.alertAdapter.createNetworkErrorAlert()
-                self.present(alert, animated: true)
-            case .requestError:
-                let alert = self.alertAdapter.createServiceRequestErrorAlert()
-                self.present(alert, animated: true)
-            case .decoderError:
-                let alert = self.alertAdapter.createDecoderErrorAlert()
-                self.present(alert, animated: true)
-            }
-        }
-    }
-    
 }
