@@ -107,8 +107,10 @@ class CreateRoomViewController: UIViewController {
                             let randomInt = Int.random(in: 0...100)
                             if randomInt > 50 {
                                 GameSessionDetails.shared.setRunner(to: clientId)
+                                self.currentRole = .runner
                             } else {
                                 GameSessionDetails.shared.setSeeker(to: clientId)
+                                self.currentRole = .seeker
                             }
                         case .none:
                             break
