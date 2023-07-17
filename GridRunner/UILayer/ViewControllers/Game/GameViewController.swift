@@ -9,8 +9,22 @@ import UIKit
 
 class GameViewController: UIViewController {
     
-    let loadingView = LoadingView(frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height))
+    let loadingView = LoadingView(
+        frame: CGRect(
+            x: 0,
+            y: 0,
+            width: UIScreen.main.bounds.width,
+            height: UIScreen.main.bounds.height)
+    )
+    let roomLoadingView = RoomLoadingView(
+        frame: CGRect(
+            x: 0,
+            y: 0,
+            width: UIScreen.main.bounds.width,
+            height: UIScreen.main.bounds.height)
+    )
     var profileIcon: ProfileIcon!
+    var ordinaryLoading: Bool!
     
     // Storyboard properties.
     @IBOutlet weak var playerTypeLabel: UILabel!
@@ -39,7 +53,7 @@ class GameViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.view.addSubview(self.loadingView)
+        self.view.addSubview(ordinaryLoading ? self.loadingView : self.roomLoadingView)
         
         AblyService.shared.enterGame()
 
@@ -54,6 +68,7 @@ class GameViewController: UIViewController {
         self.setupFinishButton()
         
         self.loadingView.remove()
+        self.roomLoadingView.remove()
         
         self.initializeGame()
         

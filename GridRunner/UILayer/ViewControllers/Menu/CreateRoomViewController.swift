@@ -131,7 +131,7 @@ class CreateRoomViewController: UIViewController {
                                 DispatchQueue.main.async {
                                     self.createRoomButton.enable()
                                     self.mainViewController.dismiss(animated: true) {
-                                        NotificationCenter.default.post(name: NSNotification.Name("Success::Matchmaking"), object: nil)
+                                        NotificationCenter.default.post(name: NSNotification.Name("Success::Matchmaking::Custom"), object: nil)
                                     }
                                 }
                                 

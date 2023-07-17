@@ -72,10 +72,15 @@ class MainViewController: UIViewController {
         
         NotificationCenter.default.addObserver(self, selector: #selector(openGameScreen), name: NSNotification.Name("Success::Matchmaking"), object: nil)
 
+        NotificationCenter.default.addObserver(self, selector: #selector(openCustomGameScreen), name: NSNotification.Name("Success::Matchmaking::Custom"), object: nil)
     }
     
     @objc func openGameScreen(_ notification: Notification) {
-        self.startGame()
+        self.startGame(custom: false)
+    }
+    
+    @objc func openCustomGameScreen(_ notification: Notification) {
+        self.startGame(custom: true)
     }
     
     @objc func openProfileMenu(_ gesture: UITapGestureRecognizer) {
@@ -133,11 +138,12 @@ class MainViewController: UIViewController {
         }
     }
     
-    private func startGame() {
+    private func startGame(custom: Bool) {
         let gameStoryboard: UIStoryboard = UIStoryboard(name: "Game", bundle: .main)
         let gameViewController: GameViewController = gameStoryboard.instantiateViewController(identifier: "GameScreen")
         
         gameViewController.profileIcon = self.profileIcon
+        gameViewController.ordinaryLoading = !custom
         
         let sceneDelegate = UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate
         sceneDelegate?.transitionViewController.transition(to: gameViewController, with: [.transitionCurlUp])

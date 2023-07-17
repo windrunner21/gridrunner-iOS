@@ -93,6 +93,8 @@
 		CAB729062A64A5E400BB4908 /* Friendly.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAB729052A64A5E400BB4908 /* Friendly.swift */; };
 		CAB729082A6554D300BB4908 /* JoinRoom.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CAB729072A6554D300BB4908 /* JoinRoom.storyboard */; };
 		CAB7290A2A6554FC00BB4908 /* JoinRoomViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAB729092A6554FC00BB4908 /* JoinRoomViewController.swift */; };
+		CAB7290C2A65CDD900BB4908 /* RoomLoading.xib in Resources */ = {isa = PBXBuildFile; fileRef = CAB7290B2A65CDD900BB4908 /* RoomLoading.xib */; };
+		CAB7290E2A65CE5800BB4908 /* RoomLoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAB7290D2A65CE5800BB4908 /* RoomLoadingView.swift */; };
 		CAC833652A5BEDD500EED95B /* Password.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CAC833642A5BEDD500EED95B /* Password.storyboard */; };
 		CAC833672A5BEE3B00EED95B /* PasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAC833662A5BEE3B00EED95B /* PasswordViewController.swift */; };
 		CAC833692A5C008400EED95B /* PasswordService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAC833682A5C008400EED95B /* PasswordService.swift */; };
@@ -225,6 +227,8 @@
 		CAB729052A64A5E400BB4908 /* Friendly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Friendly.swift; sourceTree = "<group>"; };
 		CAB729072A6554D300BB4908 /* JoinRoom.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = JoinRoom.storyboard; sourceTree = "<group>"; };
 		CAB729092A6554FC00BB4908 /* JoinRoomViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JoinRoomViewController.swift; sourceTree = "<group>"; };
+		CAB7290B2A65CDD900BB4908 /* RoomLoading.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RoomLoading.xib; sourceTree = "<group>"; };
+		CAB7290D2A65CE5800BB4908 /* RoomLoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoomLoadingView.swift; sourceTree = "<group>"; };
 		CAC833642A5BEDD500EED95B /* Password.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Password.storyboard; sourceTree = "<group>"; };
 		CAC833662A5BEE3B00EED95B /* PasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordViewController.swift; sourceTree = "<group>"; };
 		CAC833682A5C008400EED95B /* PasswordService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordService.swift; sourceTree = "<group>"; };
@@ -354,6 +358,8 @@
 				CA852A4E2A387D6F00961E65 /* GameSearch.xib */,
 				CA852A6E2A406E9800961E65 /* LoadingView.swift */,
 				CA852A702A406EA400961E65 /* Loading.xib */,
+				CAB7290D2A65CE5800BB4908 /* RoomLoadingView.swift */,
+				CAB7290B2A65CDD900BB4908 /* RoomLoading.xib */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -949,6 +955,7 @@
 				CA0AAC7B2A25D6D3008367FB /* Kanit-BlackItalic.ttf in Resources */,
 				CAB729082A6554D300BB4908 /* JoinRoom.storyboard in Resources */,
 				CA0AAC7C2A25D6D3008367FB /* Kanit-SemiBold.ttf in Resources */,
+				CAB7290C2A65CDD900BB4908 /* RoomLoading.xib in Resources */,
 				CA0AAC842A25D6D3008367FB /* Kanit-Bold.ttf in Resources */,
 				CA0AAC772A25D6D3008367FB /* Kanit-Italic.ttf in Resources */,
 				CA852A3F2A370A9400961E65 /* Launch.storyboard in Resources */,
@@ -1046,6 +1053,7 @@
 				CA852A6B2A40597A00961E65 /* SpecialTile.swift in Sources */,
 				CA0AAC302A0E484F008367FB /* Coordinate.swift in Sources */,
 				CA0AAC5B2A1B7EDF008367FB /* History.swift in Sources */,
+				CAB7290E2A65CE5800BB4908 /* RoomLoadingView.swift in Sources */,
 				CA8CBF9E2A504A82003CF44B /* SLMove.swift in Sources */,
 				CA852A312A30A20200961E65 /* AlertAdapter.swift in Sources */,
 				CA7417B32A56ECE900A9683A /* AblyAuthenticationError.swift in Sources */,

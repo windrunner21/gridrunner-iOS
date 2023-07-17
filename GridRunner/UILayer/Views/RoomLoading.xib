@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="21701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_0" orientation="landscape" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21679"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <array key="Kanit-Medium.ttf">
+            <string>Kanit-Medium</string>
+        </array>
+        <array key="Kanit-SemiBold.ttf">
+            <string>Kanit-SemiBold</string>
+        </array>
+    </customFonts>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="RoomLoadingView" customModule="GridRunner" customModuleProvider="target">
+            <connections>
+                <outlet property="cancelView" destination="19X-iO-US4" id="X7D-6G-4Gd"/>
+                <outlet property="contentView" destination="lvl-0S-jPW" id="Nvw-4f-AGQ"/>
+                <outlet property="copyButton" destination="HXU-B5-FHR" id="M1d-j2-llw"/>
+                <outlet property="roomCodeTextField" destination="tLV-Tf-8ER" id="ohr-EY-WSS"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="lvl-0S-jPW">
+            <rect key="frame" x="0.0" y="0.0" width="852" height="393"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="1hu-0s-2Ds">
+                    <rect key="frame" x="200" y="124.5" width="452" height="144"/>
+                    <subviews>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Waiting for a 2nd Player to join..." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CcP-mG-uHR">
+                            <rect key="frame" x="0.0" y="0.0" width="452" height="30"/>
+                            <fontDescription key="fontDescription" name="Kanit-SemiBold" family="Kanit SemiBold" pointSize="20"/>
+                            <color key="textColor" name="FrostBlackColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" animating="YES" style="large" translatesAutoresizingMaskIntoConstraints="NO" id="Ayq-5R-186">
+                            <rect key="frame" x="0.0" y="50" width="452" height="37"/>
+                            <color key="color" name="FrostBlackColor"/>
+                        </activityIndicatorView>
+                        <stackView opaque="NO" contentMode="scaleToFill" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="1cr-ah-tz6">
+                            <rect key="frame" x="0.0" y="107" width="452" height="37"/>
+                            <subviews>
+                                <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="room code" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="tLV-Tf-8ER">
+                                    <rect key="frame" x="0.0" y="0.0" width="293" height="37"/>
+                                    <color key="backgroundColor" name="BackgroundColor"/>
+                                    <color key="textColor" name="FrostBlackColor"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                    <textInputTraits key="textInputTraits"/>
+                                </textField>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" pointerInteraction="YES" changesSelectionAsPrimaryAction="YES" translatesAutoresizingMaskIntoConstraints="NO" id="HXU-B5-FHR">
+                                    <rect key="frame" x="308" y="0.0" width="144" height="37"/>
+                                    <color key="backgroundColor" name="RedAccentColor"/>
+                                    <fontDescription key="fontDescription" name="Kanit-Medium" family="Kanit Medium" pointSize="14"/>
+                                    <inset key="contentEdgeInsets" minX="20" minY="8" maxX="20" maxY="8"/>
+                                    <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                    <state key="normal" title="Copy room code"/>
+                                    <connections>
+                                        <action selector="onCopy:" destination="-1" eventType="touchUpInside" id="FLb-eh-PdZ"/>
+                                        <action selector="onCopyTouchDown:" destination="-1" eventType="touchDown" id="dem-yJ-pQn"/>
+                                        <action selector="onCopyTouchUpOutside:" destination="-1" eventType="touchUpOutside" id="OjY-qW-kgS"/>
+                                    </connections>
+                                </button>
+                            </subviews>
+                        </stackView>
+                    </subviews>
+                </stackView>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="19X-iO-US4" userLabel="Cancel">
+                    <rect key="frame" x="60" y="40" width="35" height="35"/>
+                    <subviews>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="❌" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="M1v-zO-Nd3">
+                            <rect key="frame" x="9" y="10.5" width="17" height="14.5"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                            <nil key="textColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                    </subviews>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <constraints>
+                        <constraint firstItem="M1v-zO-Nd3" firstAttribute="centerX" secondItem="19X-iO-US4" secondAttribute="centerX" id="KdJ-He-XYz"/>
+                        <constraint firstItem="M1v-zO-Nd3" firstAttribute="centerY" secondItem="19X-iO-US4" secondAttribute="centerY" id="QUi-Vq-8Ef"/>
+                        <constraint firstAttribute="width" constant="35" id="fxq-NB-Lai"/>
+                        <constraint firstAttribute="height" constant="35" id="mdA-CY-Ntg"/>
+                    </constraints>
+                </view>
+            </subviews>
+            <color key="backgroundColor" name="BackgroundColor"/>
+            <constraints>
+                <constraint firstItem="1hu-0s-2Ds" firstAttribute="leading" secondItem="lvl-0S-jPW" secondAttribute="leading" constant="200" id="C1f-Hm-Aij"/>
+                <constraint firstItem="19X-iO-US4" firstAttribute="leading" secondItem="lvl-0S-jPW" secondAttribute="leading" constant="60" id="GRW-DM-W0A"/>
+                <constraint firstItem="19X-iO-US4" firstAttribute="top" secondItem="lvl-0S-jPW" secondAttribute="top" constant="40" id="P0n-uU-4TT"/>
+                <constraint firstAttribute="trailing" secondItem="1hu-0s-2Ds" secondAttribute="trailing" constant="200" id="Vfd-Km-lkj"/>
+                <constraint firstItem="1hu-0s-2Ds" firstAttribute="centerY" secondItem="lvl-0S-jPW" secondAttribute="centerY" id="acP-T2-Q81"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <point key="canvasLocation" x="130.98591549295776" y="-14.0625"/>
+        </view>
+    </objects>
+    <resources>
+        <namedColor name="BackgroundColor">
+            <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="FrostBlackColor">
+            <color red="0.097999997437000275" green="0.10999999940395355" blue="0.125" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="RedAccentColor">
+            <color red="0.70599997043609619" green="0.19200000166893005" blue="0.21600000560283661" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+    </resources>
+</document>
