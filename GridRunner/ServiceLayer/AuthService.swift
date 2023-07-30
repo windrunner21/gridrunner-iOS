@@ -98,7 +98,7 @@ class AuthService {
     func deleteAccount(completion: @escaping(Response) -> Void) {
         self.client.sendRequest(
             path: URLPath.delete.path,
-            method: .DELETE,
+            method: .POST,
             cookies: (name: "gridrun-session", value: UserDefaults.standard.value(forKey: "session") as? String)
         ) { data, response, error in
             if let error = error {
