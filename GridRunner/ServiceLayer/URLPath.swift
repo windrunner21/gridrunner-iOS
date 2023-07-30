@@ -9,6 +9,7 @@ enum URLPath {
     case login
     case register
     case logout
+    case delete
     
     case resetPassword
     
@@ -27,6 +28,8 @@ extension URLPath {
            return "/signup"
         case .logout:
             return "/logout"
+        case .delete:
+            return "/deleteAccount"
         case .resetPassword:
             return "/sendResetPasswordLink"
         case .user:

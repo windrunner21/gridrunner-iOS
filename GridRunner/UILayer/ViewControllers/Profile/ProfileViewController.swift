@@ -29,12 +29,13 @@ class ProfileViewController: UIViewController {
     @IBOutlet weak var seekerGR: UILabel!
     
     @IBOutlet weak var logoutButton: UIButton!
-    
+    @IBOutlet weak var deleteAccountButton: UIButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         self.logoutButton.setup()
+        self.deleteAccountButton.setup()
         
         self.cancelView.transformToCircle()
         self.emojiIconView.transformToCircle()
@@ -71,9 +72,16 @@ class ProfileViewController: UIViewController {
         self.logoutButton.onTouchDown()
     }
     
+    @IBAction func onDeleteAccountTouchDown(_ sender: Any) {
+        self.deleteAccountButton.onTouchDown()
+    }
     
     @IBAction func onLogoutTouchUpOutside(_ sender: Any) {
         self.logoutButton.onTouchUpOutside()
+    }
+    
+    @IBAction func onDeleteAccountTouchUpOutside(_ sender: Any) {
+        self.deleteAccountButton.onTouchUpOutside()
     }
     
     @IBAction func onLogout(_ sender: Any) {
@@ -81,6 +89,31 @@ class ProfileViewController: UIViewController {
         AuthService().logout { response in
             DispatchQueue.main.async {
                 self.logoutButton.enable()
+                
+                switch response {
+                case .success:
+                    self.mainViewController.checkUserAuthentication()
+                    self.mainViewController.dismiss(animated: true)
+                case .networkError:
+                    let alert = self.alertAdapter.createNetworkErrorAlert()
+                    self.present(alert, animated: true)
+                case .requestError:
+                    let alert = self.alertAdapter.createServiceRequestErrorAlert()
+                    self.present(alert, animated: true)
+                case .decoderError:
+                    let alert = self.alertAdapter.createDecoderErrorAlert()
+                    self.present(alert, animated: true)
+                }
+            }
+        }
+    }
+    
+    @IBAction func onDeleteAccount(_ sender: Any) {
+        self.deleteAccountButton.disable()
+        
+        AuthService().deleteAccount { response in
+            DispatchQueue.main.async {
+                self.deleteAccountButton.enable()
                 
                 switch response {
                 case .success:

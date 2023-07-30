@@ -94,4 +94,31 @@ class AuthService {
             }
         }
     }
+    
+    func deleteAccount(completion: @escaping(Response) -> Void) {
+        self.client.sendRequest(
+            path: URLPath.delete.path,
+            method: .DELETE,
+            cookies: (name: "gridrun-session", value: UserDefaults.standard.value(forKey: "session") as? String)
+        ) { data, response, error in
+            if let error = error {
+                NSLog("Error occured in AuthService().deleteAccount(): \(error)")
+                completion(.networkError)
+            } else if let response = response as? HTTPURLResponse, response.statusCode == 200, let data = data {
+                let user = User.decode(data: data, type: User.self)
+                
+                if let user = user {
+                    User.shared.update(with: user)
+                    self.client.removeCookie()
+                    completion(.success)
+                } else {
+                    NSLog("Error occured in AuthService().deleteAccount(): Cannot decode JSON to User class.")
+                    completion(.decoderError)
+                }
+            } else {
+                NSLog("Error occured in AuthService().deleteAccount(): Incorrect request.")
+                completion(.requestError)
+            }
+        }
+    }
 }
