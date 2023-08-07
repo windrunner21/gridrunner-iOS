@@ -12,7 +12,6 @@ class User: ResponseParser, Decodable, CustomStringConvertible {
     static let shared = User()
     
     var id: Int
-    var uuid: String
     var email: String
     var username: String
     var role: UserRole
@@ -21,12 +20,11 @@ class User: ResponseParser, Decodable, CustomStringConvertible {
     var isLoggedIn: Bool
     
     var description: String {
-        "User (id: \(id), uuid: \(uuid)) with email: \(email) and username: \(username). Has runner elo of \(runnerElo) and seeker elo of \(seekerElo). Role: \(role). Logged in: \(isLoggedIn)."
+        "User (id: \(id)) with email: \(email) and username: \(username). Has runner elo of \(runnerElo) and seeker elo of \(seekerElo). Role: \(role). Logged in: \(isLoggedIn)."
     }
     
     enum CodingKeys: String, CodingKey {
         case id
-        case uuid
         case email
         case username
         case role
@@ -37,7 +35,6 @@ class User: ResponseParser, Decodable, CustomStringConvertible {
     
     private override init() {
         self.id = -1
-        self.uuid = String()
         self.email = String()
         self.username = String()
         self.role = .UNKNOWN
@@ -48,7 +45,6 @@ class User: ResponseParser, Decodable, CustomStringConvertible {
     
     func update(with decodedUser: User) {
         self.id = decodedUser.id
-        self.uuid = decodedUser.uuid
         self.email = decodedUser.email
         self.username = decodedUser.username
         self.role = decodedUser.role

@@ -199,12 +199,10 @@ class MainViewController: UIViewController {
         self.rankLabel.text = "\(User.shared.runnerElo) GR"
         self.usernameLabel.text = "@\(User.shared.username)"
         
-        // MARK: when ranked will be implemented swap false to User.shared.isLoggedIn
-        // change else parameters to: (icon: "🔒", description: "create or login into account to start playing ranked")
         self.rankedPlayView.shouldBeEnabled(
-            if: false,
+            if: User.shared.isLoggedIn,
             iconAndDescription: (icon: "🥇", description: "play for rank and move up the \"best\" ladder"),
-            else: (icon: "🔜", description: "coming soon! stay tuned for announcements")
+            else: (icon: "🔒", description: "create or login into account to start playing ranked")
         )
     }
     
