@@ -41,6 +41,10 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         let cancelViewTap = UITapGestureRecognizer(target: self, action: #selector(closeView))
         self.cancelView.addGestureRecognizer(cancelViewTap)
         
+        // Close keyboard on external tap.
+        let externalKeyboardTap = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
+        self.view.addGestureRecognizer(externalKeyboardTap)
+        
         // On keyboard show and hide notification move UI elements.
         self.configureKeyboardNotifications()
     }
@@ -72,6 +76,10 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     
     @objc func closeView() {
         self.mainViewController.dismiss(animated: true)
+    }
+    
+    @objc func dismissKeyboard() {
+        self.view.endEditing(true)
     }
     
     private func configureKeyboardNotifications() {
