@@ -167,4 +167,22 @@ class AlertAdapter {
                         
        return alert
     }
+    
+    func createForceUpgradeAlert(completion: @escaping () -> Void) -> UIAlertController {
+        let alert = UIAlertController(title: "Breaking API Changes", message: "Our new API contains major changes. Please update your application to avoid any unexpected errors.", preferredStyle: .alert)
+        
+        alert.addAction(
+            UIAlertAction(
+                title: NSLocalizedString("OK", comment: "Default action"),
+                style: .default,
+                handler: { _ in
+                    alert.dismiss(animated: true) {
+                        completion()
+                    }
+                }
+            )
+        )
+        
+        return alert
+    }
 }
