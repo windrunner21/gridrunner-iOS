@@ -88,6 +88,7 @@ class Tile: UIView {
             self.openedByRunner = false
         } else if player.type == .seeker && self.previousImageView == nil {
             self.openedBySeeker = false
+            self.removeHighlight()
         }
         
         self.backgroundColor = self.previousImageView == nil ? UIColor(named: "SecondaryColor")?.withAlphaComponent(0.25) : UIColor(named: "RedAccentColor")?.withAlphaComponent(0.5)
@@ -208,11 +209,16 @@ class Tile: UIView {
         self.layer.borderWidth = 0
     }
     
-    func decorateHighlight() {
+    func decorateRunnerHighlight() {
         if self.type == .basic {
             self.layer.borderWidth = 2
             self.layer.borderColor = UIColor(named: "RedAccentColor")?.withAlphaComponent(0.3).cgColor
         }
+    }
+    
+    func decorateSeekerHighlight() {
+        self.layer.borderWidth = 2
+        self.layer.borderColor = UIColor.systemGreen.withAlphaComponent(0.3).cgColor
     }
     
     func decorateOuter() {

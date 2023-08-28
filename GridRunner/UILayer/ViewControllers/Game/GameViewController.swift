@@ -322,6 +322,7 @@ class GameViewController: UIViewController {
     
     private func updateGameHUD(of player: AnyPlayer) {
         self.highlightRunnerMoves()
+        self.highlightSeekerMove()
         
         self.updateMovesLabel(with: player.numberOfMoves)
         self.updateTurnLabel(with: player.currentTurnNumber)
@@ -373,7 +374,29 @@ class GameViewController: UIViewController {
         
         for coordinate in possibleMoveCoordinates {
             let tile = self.accessTile(with: coordinate, in: self.gameView)
-            tile?.decorateHighlight()
+            tile?.decorateRunnerHighlight()
+        }
+    }
+    
+    func highlightSeekerMove() {
+        guard let seeker = self.game.getPlayer() as? Seeker else { return }
+        
+        // Access previous to last element from Seeker history.
+        if let previousToLastToCoordinate = seeker.history.dropLast(1).last?.getMoves().last?.to {
+            let tile = self.accessTile(with: previousToLastToCoordinate, in: self.gameView)
+            tile?.decorateSeekerHighlight()
+        }
+        
+        // Access last element from Seeker history.
+        if let lastFromCoordinate = seeker.history.last?.getMoves().last?.from {
+            let tile = self.accessTile(with: lastFromCoordinate, in: self.gameView)
+            tile?.removeHighlight()
+        }
+        
+        // Access last element from Seeker history.
+        if let lastToCoordinate = seeker.history.last?.getMoves().last?.to {
+            let tile = self.accessTile(with: lastToCoordinate, in: self.gameView)
+            tile?.decorateSeekerHighlight()
         }
     }
     
