@@ -137,6 +137,9 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     
     
     private func sendLoginRequest() {
+        // Hide keyboard if open.
+        self.view.endEditing(true)
+        
         self.signInButton.disable()
         
         guard let username = usernameTextField.text, let password = passwordTextField.text else {

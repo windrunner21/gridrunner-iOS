@@ -137,6 +137,9 @@ class RegisterViewController: UIViewController, UITextFieldDelegate {
     }
     
     private func sendRegisterRequest() {
+        // Hide keyboard if open.
+        self.view.endEditing(true)
+        
         self.signUpButton.disable()
         
         guard let username = usernameTextField.text, let password = passwordTextField.text, let email = emailTextField.text else {

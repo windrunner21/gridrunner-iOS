@@ -121,6 +121,9 @@ class PasswordViewController: UIViewController, UITextFieldDelegate {
     }
     
     private func sendResetPasswordRequest() {
+        // Hide keyboard if open.
+        self.view.endEditing(true)
+        
         self.resetPasswordButton.disable()
         
         guard let email = emailTextField.text else {
