@@ -8,12 +8,35 @@
 
 class Runner: Player, AnyPlayer {
     var type: PlayerType = .runner
+    var highlightedCoordinates: Set<Coordinate> = Set()
 
     override init(at position: Coordinate) {
         super.init(at: position)
         
         self.updateNumberOfMoves(to: GameConfig.shared.runnerMovesLeft)
         self.updateMaximumNumberOfMoves(to: GameConfig.shared.runnerMovesLeft)
+    }
+    
+    func getPossibleMoveCoordinates() -> Set<Coordinate> {
+        highlightedCoordinates.removeAll()
+        
+        if self.numberOfMoves > 0 {
+            let left = Coordinate(x: self.position.x - 1, y: self.position.y)
+            let up = Coordinate(x: self.position.x, y: self.position.y + 1)
+            let right = Coordinate(x: self.position.x + 1, y: self.position.y)
+            let down = Coordinate(x: self.position.x, y: self.position.y - 1)
+            
+            highlightedCoordinates.insert(left)
+            highlightedCoordinates.insert(up)
+            highlightedCoordinates.insert(right)
+            highlightedCoordinates.insert(down)
+        }
+        
+        return highlightedCoordinates
+    }
+    
+    func getNoLongerPossibleMoveCoordinates() -> Set<Coordinate> {
+        return highlightedCoordinates
     }
     
     func move(from oldTile: Tile? = nil, to newTile: Tile) {

@@ -321,6 +321,8 @@ class GameViewController: UIViewController {
     }
     
     private func updateGameHUD(of player: AnyPlayer) {
+        self.highlightRunnerMoves()
+        
         self.updateMovesLabel(with: player.numberOfMoves)
         self.updateTurnLabel(with: player.currentTurnNumber)
         
@@ -353,6 +355,26 @@ class GameViewController: UIViewController {
         
         let sceneDelegate = UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate
         sceneDelegate?.transitionViewController.transition(to: mainViewController, with: [.transitionCurlDown])
+    }
+    
+    func highlightRunnerMoves() {
+        guard let runner = self.game.getPlayer() as? Runner else { return }
+        
+        // Remove not needed highlights.
+        let noLongerPossibleMoveCoordinates = runner.getNoLongerPossibleMoveCoordinates()
+        
+        for coordinate in noLongerPossibleMoveCoordinates {
+            let tile = self.accessTile(with: coordinate, in: self.gameView)
+            tile?.removeHighlight()
+        }
+        
+        // Add new highlights.
+        let possibleMoveCoordinates = runner.getPossibleMoveCoordinates()
+        
+        for coordinate in possibleMoveCoordinates {
+            let tile = self.accessTile(with: coordinate, in: self.gameView)
+            tile?.decorateHighlight()
+        }
     }
     
     private func initializeGame() {
@@ -415,6 +437,9 @@ class GameViewController: UIViewController {
         self.updateMovesLabel(with: player.numberOfMoves)
         self.updateTurnLabel(with: player.currentTurnNumber)
         self.visualizeTurn(for: player, initial: true)
+        
+        // Checks if player is Runner. If Runner highlights possible move coordinates.
+        self.highlightRunnerMoves()
     }
     
     private func setupCancelButton() {
@@ -477,6 +502,9 @@ class GameViewController: UIViewController {
             self.isPlayersTurn = true
             self.profileView.backgroundColor = .systemGreen.withAlphaComponent(0.5)
             self.versusProfileView.backgroundColor = .white
+            
+            // Highlight when turn comes back to Runner.
+            self.highlightRunnerMoves()
         } else {
             self.isPlayersTurn = false
             self.profileView.backgroundColor = .white

@@ -203,6 +203,18 @@ class Tile: UIView {
         }
     }
     
+    func removeHighlight() {
+        self.layer.borderColor = UIColor.clear.cgColor
+        self.layer.borderWidth = 0
+    }
+    
+    func decorateHighlight() {
+        if self.type == .basic {
+            self.layer.borderWidth = 2
+            self.layer.borderColor = UIColor(named: "RedAccentColor")?.withAlphaComponent(0.3).cgColor
+        }
+    }
+    
     func decorateOuter() {
         self.backgroundColor = .clear
     }
