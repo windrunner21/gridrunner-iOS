@@ -18,54 +18,52 @@ class MainViewController: UIViewController {
             height: 150
         )
     )
-    let profileIcon = ProfileIcon()
     
-    // Storyboard properties.
-    @IBOutlet weak var rankView: UIView!
-    @IBOutlet weak var trophyIconView: UIView!
+    // Programmable UI properties.
+    let gridRunLabel: GridRunLabel = GridRunLabel()
+    let versionLabel: VersionLabel = VersionLabel()
+    let profileView: ProfileView = ProfileView()
     
-    @IBOutlet weak var profileView: UIView!
-    @IBOutlet weak var emojiIconView: UIView!
-    @IBOutlet weak var emojiLabel: UILabel!
+    let joinRoomButton: MenuButton = MenuButton()
+    let createRoomButton: MenuButton = MenuButton()
     
-    @IBOutlet weak var infoView: UIView!
+    let scrollView: UIScrollView = {
+        let scrollView = UIScrollView()
+        scrollView.translatesAutoresizingMaskIntoConstraints = false
+        return scrollView
+    }()
     
-    @IBOutlet weak var rankLabel: UILabel!
-    @IBOutlet weak var usernameLabel: UILabel!
+    let stackView: UIStackView = {
+        let stackView = UIStackView()
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        stackView.axis = .vertical
+        stackView.alignment = .fill
+        stackView.distribution = .fill
+        stackView.spacing = Dimensions.verticalSpacing20
+        return stackView
+    }()
     
-    @IBOutlet weak var quickPlayView: MenuItemView!
-    @IBOutlet weak var rankedPlayView: MenuItemView!
-    @IBOutlet weak var roomPlayView: MenuItemView!
+    let quickPlayView: MenuItemView = MenuItemView()
+    let rankedPlayView: MenuItemView = MenuItemView()
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        print(UIScreen.main.bounds.width)
+        // Setup programmable UIs.
+        self.setupGridRunLabel()
+        self.setupVersionLabel()
         
-        self.rankView.transformToCircle()
-        self.trophyIconView.transformToCircle()
-        self.profileView.transformToCircle()
-        self.emojiIconView.transformToCircle()
-        self.infoView.transformToCircle()
+        self.setupProfileView()
+        self.setupMenuButtons()
         
-        // Adding elevation/shadow to cancel view
-        self.profileView.addButtonElevation()
-        self.infoView.addButtonElevation()
-        
-        // Set random emoji from profile icon to emoji label.
-        self.emojiLabel.text = profileIcon.getIcon()
+        self.setupScrollView()
         
         // Open user profile menu on profile view tap.
         let openProfileMenuTap = UITapGestureRecognizer(target: self, action: #selector(openProfileMenu))
         self.profileView.addGestureRecognizer(openProfileMenuTap)
         
-        // Open information pop up on info view tap
-        let openInfoMenuTap = UITapGestureRecognizer(target: self, action: #selector(openInfoMenu))
-        self.infoView.addGestureRecognizer(openInfoMenuTap)
-        
-        let interaction = UIContextMenuInteraction(delegate: self)
-        self.profileView.addInteraction(interaction)
-    
         // Decorate and set up visually menu items.
-        self.setUpMenuItems()
+       self.setUpMenuItems()
         
         // Check if the user is authenticated.
         self.checkUserAuthentication()
@@ -91,11 +89,6 @@ class MainViewController: UIViewController {
     
     @objc func openProfileMenu(_ gesture: UITapGestureRecognizer) {
         User.shared.isLoggedIn ? self.openAccountScreen() : self.openRegisterScreen()
-    }
-    
-    @objc func openInfoMenu(_ gesture: UITapGestureRecognizer) {
-        let alert = self.alertAdapter.createInfoAlert()
-        self.present(alert, animated: true)
     }
     
     private func searchGame(by gameType: GameType) {
@@ -148,7 +141,6 @@ class MainViewController: UIViewController {
         let gameStoryboard: UIStoryboard = UIStoryboard(name: "Game", bundle: .main)
         let gameViewController: GameViewController = gameStoryboard.instantiateViewController(identifier: "GameScreen")
         
-        gameViewController.profileIcon = self.profileIcon
         gameViewController.ordinaryLoading = !custom
         gameViewController.fromJoiningRoom = isJoining
         
@@ -179,7 +171,6 @@ class MainViewController: UIViewController {
         let profileViewController: ProfileViewController = profileStoryboard.instantiateViewController(identifier: "ProfileScreen")
         
         profileViewController.mainViewController = self
-        profileViewController.profileIcon = self.profileIcon
         
         self.present(profileViewController, animated: true)
     }
@@ -193,118 +184,121 @@ class MainViewController: UIViewController {
         self.present(createRoomViewController, animated: true)
     }
     
-    func checkUserAuthentication() {
-        // Check if the user is authenticated.
-        self.rankView.isHidden = !User.shared.isLoggedIn
-        self.rankLabel.text = "\(User.shared.runnerElo) GR"
-        self.usernameLabel.text = "@\(User.shared.username)"
+    private func openJoinRoomScreen() {
+        let joinRoomStoryboard: UIStoryboard = UIStoryboard(name: "JoinRoom", bundle: .main)
+        let joinRoomViewController: JoinRoomViewController = joinRoomStoryboard.instantiateViewController(identifier: "JoinRoomScreen")
         
+        joinRoomViewController.mainViewController = self
+        
+        self.present(joinRoomViewController, animated: true)
+    }
+    
+    func checkUserAuthentication() {
         self.rankedPlayView.shouldBeEnabled(
             if: User.shared.isLoggedIn,
-            iconAndDescription: (icon: "🥇", description: "play for rank and move up the \"best\" ladder"),
-            else: (icon: "🔒", description: "create or login into account to start playing ranked")
+            iconAndDescription: (icon: "🏆", description: "play for rank and become the best"),
+            else: (icon: "🔒", description: "login into account to play ranked")
         )
     }
     
     private func setUpMenuItems() {
+        self.quickPlayView.color = .systemGray6
         self.quickPlayView.decorateMenuItem(
             icon: "🎲",
-            title: "Quick Play with Randoms",
+            title: "Unranked",
             description: "find your opponent around the world",
             image: "MapIcon"
         )
-        
-        self.transformWhite(view: self.quickPlayView, angle: 1.5)
         
         self.quickPlayView.playNowButtonAction = { [weak self] in
             self?.searchGame(by: .quickplay)
         }
         
+        self.rankedPlayView.color = .systemGray6
         self.rankedPlayView.decorateMenuItem(
-            icon: "🥇",
-            title: "Competitive Play",
-            description: "play for rank and move up the \"best\" ladder",
+            icon: "🏆",
+            title: "Competitive",
+            description: "play for rank and become the best",
             image: "WorldIcon"
         )
         
         self.rankedPlayView.playNowButtonAction = { [weak self] in
             self?.searchGame(by: .rankedplay)
         }
+    }
+    
+    private func setupGridRunLabel() {
+        self.gridRunLabel.setup(in: self.view)
         
-        self.roomPlayView.decorateMenuItem(
-            icon: "🤝",
-            title: "Play with a Friend",
-            description: "enter room code and jump into the game",
-            image: "FriendsIcon"
-        )
+        NSLayoutConstraint.activate([
+            self.gridRunLabel.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor, constant: 10),
+            self.gridRunLabel.leadingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leadingAnchor, constant: 20)
+        ])
+    }
+    
+    private func setupProfileView() {
+        self.profileView.setup(in: self.view, asButton: true)
         
-        self.roomPlayView.playNowButtonAction = { [weak self] in
+        NSLayoutConstraint.activate([
+            self.profileView.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor, constant: 10),
+            self.profileView.trailingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.trailingAnchor, constant: -20)
+        ])
+    }
+    
+    private func setupMenuButtons() {
+        joinRoomButton.icon = "➡️"
+        joinRoomButton.text = "Join Room"
+        joinRoomButton.menuAction = { [weak self] in
+            self?.openJoinRoomScreen()
+        }
+        
+        createRoomButton.icon = "➕"
+        createRoomButton.text = "Create Room"
+        createRoomButton.menuAction = { [weak self] in
             self?.openCreateRoomScreen()
         }
         
-        self.transformWhite(view: self.roomPlayView, angle: -1.5)
+        self.view.addSubview(joinRoomButton)
+        self.view.addSubview(createRoomButton)
+        
+        NSLayoutConstraint.activate([
+            self.joinRoomButton.topAnchor.constraint(equalTo: self.gridRunLabel.bottomAnchor, constant: Dimensions.verticalSpacing20 * 1.5),
+            self.joinRoomButton.leadingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leadingAnchor, constant: 20),
+            
+            self.createRoomButton.topAnchor.constraint(equalTo: self.gridRunLabel.bottomAnchor, constant: Dimensions.verticalSpacing20 * 1.5),
+            self.createRoomButton.leadingAnchor.constraint(equalTo: self.joinRoomButton.trailingAnchor, constant: 20)
+        ])
     }
     
-    // Decorate menu item view with specified color and angle.
-    private func transformWhite(view: MenuItemView, angle: CGFloat?) {
-        let radians = (angle ?? 0) * Double.pi / 180
-        view.contentView.backgroundColor = .white
-        view.playModeLabel.textColor = UIColor(named: "FrostBlackColor")
-        view.transform = CGAffineTransform(rotationAngle: radians)
+    private func setupScrollView() {
+        self.view.addSubview(scrollView)
+        
+        NSLayoutConstraint.activate([
+            self.scrollView.topAnchor.constraint(equalTo: self.joinRoomButton.bottomAnchor, constant: Dimensions.verticalSpacing20 * 1.5),
+            self.scrollView.leadingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leadingAnchor),
+            self.scrollView.trailingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.trailingAnchor),
+            self.scrollView.bottomAnchor.constraint(equalTo: self.versionLabel.topAnchor, constant: -Dimensions.verticalSpacing20)
+        ])
+        
+        self.scrollView.addSubview(stackView)
+        
+        NSLayoutConstraint.activate([
+            self.stackView.topAnchor.constraint(equalTo: self.scrollView.topAnchor, constant: Dimensions.verticalSpacing20),
+            self.stackView.leadingAnchor.constraint(equalTo: self.scrollView.leadingAnchor, constant: 20),
+            self.stackView.trailingAnchor.constraint(equalTo: self.scrollView.trailingAnchor, constant: 20),
+            self.stackView.bottomAnchor.constraint(equalTo: self.scrollView.bottomAnchor, constant: -Dimensions.verticalSpacing20)
+        ])
+        
+        self.stackView.addArrangedSubview(quickPlayView)
+        self.stackView.addArrangedSubview(rankedPlayView)
     }
-}
-
-extension MainViewController: UIContextMenuInteractionDelegate {
-      func contextMenuInteraction(_ interaction: UIContextMenuInteraction, configurationForMenuAtLocation location: CGPoint) -> UIContextMenuConfiguration? {
-        return UIContextMenuConfiguration(identifier: nil, previewProvider: nil) { suggestedActions in
-            
-            // Create an action for signing in.
-            let login = UIAction(title: "Login", image: UIImage(systemName: "door.right.hand.open")) { action in
-                self.openLoginScreen()
-            }
-            
-            // Create an action for signing in.
-            let register = UIAction(title: "Register", image: UIImage(systemName: "door.right.hand.open")) { action in
-                self.openRegisterScreen()
-            }
-            
-            let account = UIAction(title: "Account", image: UIImage(systemName: "person.circle.fill")) { action in
-                self.openAccountScreen()
-            }
     
-            // Here we specify the "destructive" attribute to show that it’s destructive in nature.
-            let logout = UIAction(title: "Log out", image: UIImage(systemName: "door.right.hand.closed"), attributes: .destructive) { _ in
-                AuthService().logout { response in
-                    DispatchQueue.main.async {
-                        switch response {
-                        case .success:
-                            self.checkUserAuthentication()
-                        case .networkError:
-                            let alert = self.alertAdapter.createNetworkErrorAlert()
-                            self.present(alert, animated: true)
-                        case .requestError:
-                            let alert = self.alertAdapter.createServiceRequestErrorAlert()
-                            self.present(alert, animated: true)
-                        case .decoderError:
-                            let alert = self.alertAdapter.createDecoderErrorAlert()
-                            self.present(alert, animated: true)
-                        }
-
-                    }
-                }
-            }
-    
-            // Create and return a UIMenu with all of the actions as children
-            var children: [UIMenuElement] {
-                if User.shared.isLoggedIn {
-                    return [account, logout]
-                } else {
-                    return [login, register]
-                }
-            }
-            
-            return UIMenu(title: "", children: children)
-        }
+    private func setupVersionLabel() {
+        self.versionLabel.setup(in: self.view)
+        
+        NSLayoutConstraint.activate([
+            self.versionLabel.bottomAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.bottomAnchor, constant: -10),
+            self.versionLabel.centerXAnchor.constraint(equalTo: self.view.centerXAnchor)
+        ])
     }
 }
-

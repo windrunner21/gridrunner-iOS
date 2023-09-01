@@ -25,9 +25,6 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        self.cancelView.transformToCircle()
-        self.cancelView.addButtonElevation()
         
         self.signInButton.setup()
         
@@ -67,11 +64,11 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     func textFieldDidBeginEditing(_ textField: UITextField) {
         textField.layer.cornerRadius = 6
         textField.layer.borderWidth = 1
-        textField.layer.borderColor = UIColor(named: "RedAccentColor")?.cgColor
+        textField.layer.borderColor = UIColor(named: "Red")?.cgColor
     }
     
     func textFieldDidEndEditing(_ textField: UITextField) {
-        textField.layer.borderColor = UIColor(named: "SecondaryColor")?.withAlphaComponent(0.25).cgColor
+        textField.layer.borderColor = UIColor(named: "Gray")?.withAlphaComponent(0.25).cgColor
     }
     
     @objc func closeView() {

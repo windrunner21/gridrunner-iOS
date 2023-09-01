@@ -22,10 +22,6 @@ extension UIView {
         self.layer.shadowRadius = 4
     }
     
-    func transformToCircle() {
-        self.layer.cornerRadius = self.bounds.size.height / 2
-    }
-    
     func addLightBorder() {
         self.layer.borderWidth = 0.75
         self.layer.borderColor = UIColor.systemGray5.cgColor

@@ -23,13 +23,11 @@ extension UIButton {
     func disable() {
         self.alpha = 0.5
         self.isEnabled = false
-        self.backgroundColor = UIColor(named: "SecondaryColor")
     }
     
     func enable() {
         self.alpha = 1
         self.isEnabled = true
-        self.backgroundColor = UIColor(named: "RedAccentColor")
     }
     
     func shouldBeEnabled(if enabled: Bool) {

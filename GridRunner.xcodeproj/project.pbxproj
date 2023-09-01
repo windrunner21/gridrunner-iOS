@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		CA045EA82AA2282F00BFF03E /* VersionLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA045EA72AA2282F00BFF03E /* VersionLabel.swift */; };
+		CA045EAA2AA22D5300BFF03E /* Dimensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA045EA92AA22D5300BFF03E /* Dimensions.swift */; };
 		CA0AAC262A0E2BE6008367FB /* Seeker.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA0AAC252A0E2BE6008367FB /* Seeker.swift */; };
 		CA0AAC282A0E2BF1008367FB /* Runner.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA0AAC272A0E2BF1008367FB /* Runner.swift */; };
 		CA0AAC2B2A0E2C17008367FB /* AnyPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA0AAC2A2A0E2C17008367FB /* AnyPlayer.swift */; };
@@ -44,7 +46,6 @@
 		CA0AAC862A25D6D3008367FB /* Kanit-SemiBoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = CA0AAC742A25D6D3008367FB /* Kanit-SemiBoldItalic.ttf */; };
 		CA0AAC892A25DF8C008367FB /* ProfileIcon.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA0AAC882A25DF8C008367FB /* ProfileIcon.swift */; };
 		CA0AAC8E2A26219B008367FB /* MenuItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA0AAC8D2A26219B008367FB /* MenuItemView.swift */; };
-		CA0AAC942A2621E7008367FB /* MenuItem.xib in Resources */ = {isa = PBXBuildFile; fileRef = CA0AAC932A2621E7008367FB /* MenuItem.xib */; };
 		CA25B1D22A56E9B50063CBA3 /* AblyAuthDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA25B1D12A56E9B50063CBA3 /* AblyAuthDelegate.swift */; };
 		CA35E7B72A28D0B60057BAB6 /* ViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA35E7B62A28D0B60057BAB6 /* ViewExtension.swift */; };
 		CA4E3F542A07A80E00D36266 /* Game.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CA4E3F532A07A80E00D36266 /* Game.storyboard */; };
@@ -85,6 +86,11 @@
 		CA8CBF9C2A504276003CF44B /* MoveResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA8CBF9B2A504276003CF44B /* MoveResponse.swift */; };
 		CA8CBF9E2A504A82003CF44B /* SLMove.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA8CBF9D2A504A82003CF44B /* SLMove.swift */; };
 		CA8CBFA82A51A9AA003CF44B /* GameOver.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA8CBFA72A51A9AA003CF44B /* GameOver.swift */; };
+		CAAA1CE32AA07138007886B9 /* GridRunLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAAA1CE22AA07138007886B9 /* GridRunLabel.swift */; };
+		CAAA1CE72AA085BF007886B9 /* MenuButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAAA1CE62AA085BF007886B9 /* MenuButton.swift */; };
+		CAAA1CE92AA1D966007886B9 /* PrimaryButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAAA1CE82AA1D966007886B9 /* PrimaryButton.swift */; };
+		CAAF75022A9E1B3600978B5F /* RoundView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAAF75012A9E1B3600978B5F /* RoundView.swift */; };
+		CAAF75062A9E459100978B5F /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAAF75052A9E459100978B5F /* ProfileView.swift */; };
 		CAB6EAAF2A2A086C00997852 /* ButtonExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAB6EAAE2A2A086C00997852 /* ButtonExtension.swift */; };
 		CAB728FD2A648EBB00BB4908 /* CreateRoomViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAB728FC2A648EBB00BB4908 /* CreateRoomViewController.swift */; };
 		CAB728FF2A648EF200BB4908 /* CreateRoom.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CAB728FE2A648EF200BB4908 /* CreateRoom.storyboard */; };
@@ -142,6 +148,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		CA045EA72AA2282F00BFF03E /* VersionLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VersionLabel.swift; sourceTree = "<group>"; };
+		CA045EA92AA22D5300BFF03E /* Dimensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Dimensions.swift; sourceTree = "<group>"; };
 		CA0AAC252A0E2BE6008367FB /* Seeker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Seeker.swift; sourceTree = "<group>"; };
 		CA0AAC272A0E2BF1008367FB /* Runner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Runner.swift; sourceTree = "<group>"; };
 		CA0AAC2A2A0E2C17008367FB /* AnyPlayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnyPlayer.swift; sourceTree = "<group>"; };
@@ -179,7 +187,6 @@
 		CA0AAC742A25D6D3008367FB /* Kanit-SemiBoldItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Kanit-SemiBoldItalic.ttf"; path = "../../../../../Downloads/Kanit/Kanit-SemiBoldItalic.ttf"; sourceTree = "<group>"; };
 		CA0AAC882A25DF8C008367FB /* ProfileIcon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileIcon.swift; sourceTree = "<group>"; };
 		CA0AAC8D2A26219B008367FB /* MenuItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuItemView.swift; sourceTree = "<group>"; };
-		CA0AAC932A2621E7008367FB /* MenuItem.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MenuItem.xib; sourceTree = "<group>"; };
 		CA25B1D12A56E9B50063CBA3 /* AblyAuthDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AblyAuthDelegate.swift; sourceTree = "<group>"; };
 		CA35E7B62A28D0B60057BAB6 /* ViewExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewExtension.swift; sourceTree = "<group>"; };
 		CA4E3F532A07A80E00D36266 /* Game.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Game.storyboard; sourceTree = "<group>"; };
@@ -219,6 +226,11 @@
 		CA8CBF9B2A504276003CF44B /* MoveResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoveResponse.swift; sourceTree = "<group>"; };
 		CA8CBF9D2A504A82003CF44B /* SLMove.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SLMove.swift; sourceTree = "<group>"; };
 		CA8CBFA72A51A9AA003CF44B /* GameOver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameOver.swift; sourceTree = "<group>"; };
+		CAAA1CE22AA07138007886B9 /* GridRunLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GridRunLabel.swift; sourceTree = "<group>"; };
+		CAAA1CE62AA085BF007886B9 /* MenuButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuButton.swift; sourceTree = "<group>"; };
+		CAAA1CE82AA1D966007886B9 /* PrimaryButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrimaryButton.swift; sourceTree = "<group>"; };
+		CAAF75012A9E1B3600978B5F /* RoundView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundView.swift; sourceTree = "<group>"; };
+		CAAF75052A9E459100978B5F /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
 		CAB6EAAE2A2A086C00997852 /* ButtonExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonExtension.swift; sourceTree = "<group>"; };
 		CAB728FC2A648EBB00BB4908 /* CreateRoomViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateRoomViewController.swift; sourceTree = "<group>"; };
 		CAB728FE2A648EF200BB4908 /* CreateRoom.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = CreateRoom.storyboard; sourceTree = "<group>"; };
@@ -352,8 +364,6 @@
 		CA0AAC8C2A262160008367FB /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				CA0AAC8D2A26219B008367FB /* MenuItemView.swift */,
-				CA0AAC932A2621E7008367FB /* MenuItem.xib */,
 				CA852A4C2A387D6200961E65 /* GameSearchView.swift */,
 				CA852A4E2A387D6F00961E65 /* GameSearch.xib */,
 				CA852A6E2A406E9800961E65 /* LoadingView.swift */,
@@ -433,6 +443,7 @@
 		CA4E3F612A08DCA100D36266 /* Utils */ = {
 			isa = PBXGroup;
 			children = (
+				CAAF75002A9E1B0800978B5F /* CustomUI */,
 				CA852A2F2A30A1EA00961E65 /* Structs */,
 				CA4E3F672A0CE30100D36266 /* CustomClasses */,
 				CA4E3F622A08DCA600D36266 /* Extensions */,
@@ -456,7 +467,6 @@
 			isa = PBXGroup;
 			children = (
 				CA4E3F682A0CE31200D36266 /* TransitionViewController.swift */,
-				CA0AAC2D2A0E2F0F008367FB /* Tile.swift */,
 			);
 			path = CustomClasses;
 			sourceTree = "<group>";
@@ -474,6 +484,7 @@
 			isa = PBXGroup;
 			children = (
 				CA852A302A30A20200961E65 /* AlertAdapter.swift */,
+				CA045EA92AA22D5300BFF03E /* Dimensions.swift */,
 			);
 			path = Structs;
 			sourceTree = "<group>";
@@ -605,6 +616,29 @@
 				CA8CBF9D2A504A82003CF44B /* SLMove.swift */,
 			);
 			name = MoveResponse;
+			sourceTree = "<group>";
+		};
+		CAAA1CE42AA0859D007886B9 /* Game */ = {
+			isa = PBXGroup;
+			children = (
+				CA0AAC2D2A0E2F0F008367FB /* Tile.swift */,
+			);
+			path = Game;
+			sourceTree = "<group>";
+		};
+		CAAF75002A9E1B0800978B5F /* CustomUI */ = {
+			isa = PBXGroup;
+			children = (
+				CAAA1CE42AA0859D007886B9 /* Game */,
+				CAAF75012A9E1B3600978B5F /* RoundView.swift */,
+				CAAF75052A9E459100978B5F /* ProfileView.swift */,
+				CAAA1CE22AA07138007886B9 /* GridRunLabel.swift */,
+				CAAA1CE62AA085BF007886B9 /* MenuButton.swift */,
+				CA0AAC8D2A26219B008367FB /* MenuItemView.swift */,
+				CAAA1CE82AA1D966007886B9 /* PrimaryButton.swift */,
+				CA045EA72AA2282F00BFF03E /* VersionLabel.swift */,
+			);
+			path = CustomUI;
 			sourceTree = "<group>";
 		};
 		CAB729042A64A5BD00BB4908 /* Friendly */ = {
@@ -932,7 +966,6 @@
 			files = (
 				CAB728FF2A648EF200BB4908 /* CreateRoom.storyboard in Resources */,
 				CA0AAC802A25D6D3008367FB /* Kanit-ExtraLight.ttf in Resources */,
-				CA0AAC942A2621E7008367FB /* MenuItem.xib in Resources */,
 				CA852A4F2A387D6F00961E65 /* GameSearch.xib in Resources */,
 				CA4E3F542A07A80E00D36266 /* Game.storyboard in Resources */,
 				CA0AAC862A25D6D3008367FB /* Kanit-SemiBoldItalic.ttf in Resources */,
@@ -994,6 +1027,7 @@
 				CAF8ECB92A2E205700179EF1 /* Credentials.swift in Sources */,
 				CA852A332A30ABB700961E65 /* Response.swift in Sources */,
 				CA0AAC322A0E637E008367FB /* Game.swift in Sources */,
+				CAAA1CE92AA1D966007886B9 /* PrimaryButton.swift in Sources */,
 				CA0AAC3D2A121EE2008367FB /* MoveDirection.swift in Sources */,
 				CA0AAC342A0E6395008367FB /* Map.swift in Sources */,
 				CAE031E22A6323EA0089E839 /* TextFieldExtension.swift in Sources */,
@@ -1002,10 +1036,12 @@
 				CA852A4B2A38655A00961E65 /* AblyJWTService.swift in Sources */,
 				CAB7290A2A6554FC00BB4908 /* JoinRoomViewController.swift in Sources */,
 				CAF8ECB52A2E1FCE00179EF1 /* LoginCredentials.swift in Sources */,
+				CAAA1CE32AA07138007886B9 /* GridRunLabel.swift in Sources */,
 				CAB729062A64A5E400BB4908 /* Friendly.swift in Sources */,
 				CA852A392A30B19100961E65 /* UserRole.swift in Sources */,
 				CAB729012A64A22200BB4908 /* RoleType.swift in Sources */,
 				CA0AAC8E2A26219B008367FB /* MenuItemView.swift in Sources */,
+				CAAA1CE72AA085BF007886B9 /* MenuButton.swift in Sources */,
 				CAF8ECBD2A2F6CFC00179EF1 /* ActivityIndicatorExtension.swift in Sources */,
 				CA852A4D2A387D6200961E65 /* GameSearchView.swift in Sources */,
 				CA4E3F5C2A07BBF100D36266 /* PlayerType.swift in Sources */,
@@ -1041,9 +1077,11 @@
 				CA852A3D2A370A2100961E65 /* LaunchViewController.swift in Sources */,
 				CA852A452A3742C900961E65 /* ProfileViewController.swift in Sources */,
 				CA35E7B72A28D0B60057BAB6 /* ViewExtension.swift in Sources */,
+				CAAF75062A9E459100978B5F /* ProfileView.swift in Sources */,
 				CA0AAC432A166F18008367FB /* GameHistoryExamples.swift in Sources */,
 				CA0AAC612A1D1D1D008367FB /* Player.swift in Sources */,
 				CAF8ECA92A2DBF9400179EF1 /* User.swift in Sources */,
+				CAAF75022A9E1B3600978B5F /* RoundView.swift in Sources */,
 				CA4E3F602A0891F300D36266 /* RegisterViewController.swift in Sources */,
 				CAF8ECB72A2E1FDE00179EF1 /* RegisterCredentials.swift in Sources */,
 				CA852A582A39C96D00961E65 /* AblyService.swift in Sources */,
@@ -1053,6 +1091,8 @@
 				CA852A6B2A40597A00961E65 /* SpecialTile.swift in Sources */,
 				CA0AAC302A0E484F008367FB /* Coordinate.swift in Sources */,
 				CA0AAC5B2A1B7EDF008367FB /* History.swift in Sources */,
+				CA045EAA2AA22D5300BFF03E /* Dimensions.swift in Sources */,
+				CA045EA82AA2282F00BFF03E /* VersionLabel.swift in Sources */,
 				CAB7290E2A65CE5800BB4908 /* RoomLoadingView.swift in Sources */,
 				CA8CBF9E2A504A82003CF44B /* SLMove.swift in Sources */,
 				CA852A312A30A20200961E65 /* AlertAdapter.swift in Sources */,
@@ -1250,7 +1290,7 @@
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen.storyboard;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UIStatusBarHidden = YES;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationLandscapeRight;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = UIInterfaceOrientationLandscapeRight;
 				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -1285,7 +1325,7 @@
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen.storyboard;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UIStatusBarHidden = YES;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationLandscapeRight;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = UIInterfaceOrientationLandscapeRight;
 				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (

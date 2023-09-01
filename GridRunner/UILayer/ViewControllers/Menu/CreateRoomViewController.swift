@@ -23,13 +23,9 @@ class CreateRoomViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.cancelView.transformToCircle()
         self.createRoomButton.setup()
         
         self.setupRolePopUp()
-        
-        // Adding elevation/shadow to cancel view
-        self.cancelView.addButtonElevation()
         
         // Close current view, dismiss with animation, on cancel view tap.
         let cancelViewTap = UITapGestureRecognizer(target: self, action: #selector(closeView))

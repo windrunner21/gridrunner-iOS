@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
-    <device id="retina6_12" orientation="landscape" appearance="light"/>
+    <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21679"/>
@@ -19,16 +19,16 @@
             <objects>
                 <viewController storyboardIdentifier="LaunchScreen" id="Y6W-OH-hqX" customClass="LaunchViewController" customModule="GridRunner" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="U1j-Ds-Sr9">
-                        <rect key="frame" x="0.0" y="0.0" width="852" height="393"/>
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" animating="YES" style="large" translatesAutoresizingMaskIntoConstraints="NO" id="yyH-9w-gL3">
-                                <rect key="frame" x="407.66666666666669" y="178" width="37" height="37"/>
+                                <rect key="frame" x="178" y="407.66666666666669" width="37" height="37"/>
                                 <color key="tintColor" name="RedAccentColor"/>
                                 <color key="color" name="FrostBlackColor"/>
                             </activityIndicatorView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Loading..." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="djB-Km-HKr">
-                                <rect key="frame" x="99" y="235" width="654" height="25.666666666666686"/>
+                                <rect key="frame" x="40" y="464.66666666666669" width="313" height="25.666666666666686"/>
                                 <fontDescription key="fontDescription" name="Kanit-Medium" family="Kanit Medium" pointSize="17"/>
                                 <color key="textColor" name="FrostBlackColor"/>
                                 <nil key="highlightedColor"/>

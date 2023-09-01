@@ -465,10 +465,7 @@ class GameViewController: UIViewController {
         self.highlightRunnerMoves()
     }
     
-    private func setupCancelButton() {
-        self.cancelView.transformToCircle()
-        self.cancelView.addButtonElevation()
-        
+    private func setupCancelButton() {        
         let cancelTap = UITapGestureRecognizer(target: self, action: #selector(cancel))
         self.cancelView.addGestureRecognizer(cancelTap)
     }
@@ -481,10 +478,8 @@ class GameViewController: UIViewController {
         
         self.playerTypeLabel.text = player.type == .runner ? "Runner" : "Seeker"
         
-        self.profileView.transformToCircle()
         self.profileView.addLightBorder()
-        self.emojiIconView.transformToCircle()
-        self.emojiIconView.backgroundColor = player.type == .runner ? UIColor(named: "RedAccentColor")?.withAlphaComponent(0.5) : UIColor(named: "FrostBlackColor")?.withAlphaComponent(0.5)
+        self.emojiIconView.backgroundColor = player.type == .runner ? UIColor(named: "Red")?.withAlphaComponent(0.5) : UIColor(named: "Black")?.withAlphaComponent(0.5)
         
         self.emojiIconLabel.text = profileIcon.getIcon()
         
@@ -499,10 +494,8 @@ class GameViewController: UIViewController {
             return
         }
         
-        self.versusProfileView.transformToCircle()
         self.versusProfileView.addLightBorder()
-        self.versusEmojiIconView.transformToCircle()
-        self.versusEmojiIconView.backgroundColor = player.type == .seeker ? UIColor(named: "RedAccentColor")?.withAlphaComponent(0.5) : UIColor(named: "FrostBlackColor")?.withAlphaComponent(0.5)
+        self.versusEmojiIconView.backgroundColor = player.type == .seeker ? UIColor(named: "Red")?.withAlphaComponent(0.5) : UIColor(named: "Black")?.withAlphaComponent(0.5)
         
         self.versusEmojiIconLabel.text = ProfileIcon().getIcon()
         self.versusPlayerLabel.text = "@\(GameConfig.shared.opponent)"

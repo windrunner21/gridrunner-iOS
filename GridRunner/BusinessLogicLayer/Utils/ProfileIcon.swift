@@ -6,6 +6,8 @@
 //
 
 class ProfileIcon {
+    static let shared = ProfileIcon()
+    
     private var icon: String
     private static let emojiList = ["🤣", "🤪", "🤭", "🤡", "🤙", "👋", "👅", "👀", "👾", "😼", "🐣", "🦁", "🐷", "🐺", "🌰", "🏃", "🏃‍♀️", "🥐", "💭"]
     

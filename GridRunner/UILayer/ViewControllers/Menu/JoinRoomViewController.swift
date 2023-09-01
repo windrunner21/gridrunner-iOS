@@ -24,14 +24,11 @@ class JoinRoomViewController: UIViewController, UITextFieldDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        self.cancelView.transformToCircle()
         self.joinRoomButton.setup()
         
         self.roomCodeTextField.delegate = self
         self.roomCodeTextField.setup(with: "Enter your shared room code")
         
-        // Adding elevation/shadow to cancel view
-        self.cancelView.addButtonElevation()
         
         // Close current view, dismiss with animation, on cancel view tap.
         let cancelViewTap = UITapGestureRecognizer(target: self, action: #selector(closeView))
@@ -86,11 +83,11 @@ class JoinRoomViewController: UIViewController, UITextFieldDelegate {
     func textFieldDidBeginEditing(_ textField: UITextField) {
         textField.layer.cornerRadius = 6
         textField.layer.borderWidth = 1
-        textField.layer.borderColor = UIColor(named: "RedAccentColor")?.cgColor
+        textField.layer.borderColor = UIColor(named: "Red")?.cgColor
     }
     
     func textFieldDidEndEditing(_ textField: UITextField) {
-        textField.layer.borderColor = UIColor(named: "SecondaryColor")?.withAlphaComponent(0.25).cgColor
+        textField.layer.borderColor = UIColor(named: "Gray")?.withAlphaComponent(0.25).cgColor
     }
     
     @IBAction func onCreateRoom(_ sender: Any) {

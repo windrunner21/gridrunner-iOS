@@ -32,7 +32,6 @@ class RoomLoadingView: UIView {
         
         self.copyButton.setup()
         
-        self.cancelView.transformToCircle()
         self.cancelView.addElevation()
         
         self.roomCodeTextField.setup()

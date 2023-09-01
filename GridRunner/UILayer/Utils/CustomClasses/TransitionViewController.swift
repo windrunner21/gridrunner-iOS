@@ -12,10 +12,6 @@ class TransitionViewController: UIViewController {
     
     private var currentViewController: UIViewController?
     
-    override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
-        return .landscapeRight
-    }
-    
     func transition(to viewController: UIViewController, with options: UIView.AnimationOptions) {
         guard viewController.parent == nil else {
             print("Error: The view controller is already a child view controller.")

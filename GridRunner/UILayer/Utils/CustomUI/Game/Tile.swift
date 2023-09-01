@@ -63,7 +63,7 @@ class Tile: UIView {
         
         self.openedByRunner = true
         if explicit {
-            self.backgroundColor = UIColor(named: "RedAccentColor")?.withAlphaComponent(0.5)
+            self.backgroundColor = UIColor(named: "Red")?.withAlphaComponent(0.5)
             self.updateDirectionImage(
                 to: direction,
                 from: lastTurn?.getMoves().last?.identifyMoveDirection(),
@@ -79,7 +79,7 @@ class Tile: UIView {
         
         self.openedBySeeker = true
         if explicit {
-            self.backgroundColor = UIColor(named: "FrostBlackColor")?.withAlphaComponent(0.5)
+            self.backgroundColor = UIColor(named: "Black")?.withAlphaComponent(0.5)
         }
     }
     
@@ -91,7 +91,7 @@ class Tile: UIView {
             self.removeHighlight()
         }
         
-        self.backgroundColor = self.previousImageView == nil ? UIColor(named: "SecondaryColor")?.withAlphaComponent(0.25) : UIColor(named: "RedAccentColor")?.withAlphaComponent(0.5)
+        self.backgroundColor = self.previousImageView == nil ? UIColor(named: "Gray")?.withAlphaComponent(0.25) : UIColor(named: "Red")?.withAlphaComponent(0.5)
         
         self.imageView.image = self.previousImageView?.image
     }
@@ -120,7 +120,7 @@ class Tile: UIView {
         // If not special tile assign basic type.
         if self.type == .unknown {
             self.type = .basic
-            self.backgroundColor = UIColor(named: "SecondaryColor")?.withAlphaComponent(0.25)
+            self.backgroundColor = UIColor(named: "Gray")?.withAlphaComponent(0.25)
 
         }
         
@@ -212,7 +212,7 @@ class Tile: UIView {
     func decorateRunnerHighlight() {
         if self.type == .basic {
             self.layer.borderWidth = 2
-            self.layer.borderColor = UIColor(named: "RedAccentColor")?.withAlphaComponent(0.3).cgColor
+            self.layer.borderColor = UIColor(named: "Red")?.withAlphaComponent(0.3).cgColor
         }
     }
     
@@ -226,22 +226,22 @@ class Tile: UIView {
     }
     
     func decorateExit() {
-        self.backgroundColor = UIColor(named: "FrostBlackColor")
+        self.backgroundColor = UIColor(named: "Black")
         self.imageView.image = UIImage(systemName: "flag.checkered")
     }
     
     func decorateClosed() {
-        self.backgroundColor = UIColor(named: "SecondaryColor")
+        self.backgroundColor = UIColor(named: "Gray")
         self.imageView.image = UIImage(systemName: "minus.circle.fill")
     }
     
     func decorateSpawn() {
-        self.backgroundColor = UIColor(named: "FrostBlackColor")
+        self.backgroundColor = UIColor(named: "Black")
         self.imageView.image = UIImage(systemName: "house.fill")
     }
     
     func decorateRunner() {
-        self.backgroundColor = UIColor(named: "RedAccentColor")
+        self.backgroundColor = UIColor(named: "Red")
         self.imageView.image = UIImage(systemName: "face.smiling.fill")
     }
     
@@ -260,7 +260,7 @@ class Tile: UIView {
         
         guard oldTile?.type != .start else { return }
         oldTile?.setDirectionImage(to: oldDirection)
-        oldTile?.backgroundColor = UIColor(named: "RedAccentColor")?.withAlphaComponent(0.5)
+        oldTile?.backgroundColor = UIColor(named: "Red")?.withAlphaComponent(0.5)
     }
         
     private func setDirectionImage(to direction: ArrowDirection) {
