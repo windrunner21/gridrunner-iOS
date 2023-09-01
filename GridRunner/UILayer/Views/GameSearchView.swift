@@ -64,7 +64,7 @@ class GameSearchView: UIView {
     func slideIn() {
         superview?.insertSubview(self.overlayView, belowSubview: self)
         UIView.animate(withDuration: 0.3) {
-            self.frame.origin.y = 20
+            self.frame.origin.y = self.safeAreaInsets.top + 10
         }
     }
     

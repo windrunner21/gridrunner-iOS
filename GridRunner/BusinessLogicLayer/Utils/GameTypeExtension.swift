@@ -9,11 +9,11 @@ extension GameType {
     var label: String {
         switch self {
         case .quickplay:
-            return "Quick Play"
+            return "Unranked"
         case .rankedplay:
-            return "Competitive Play"
+            return "Competitive"
         case .roomplay:
-            return "Friendly Play"
+            return "Friendly"
         }
     }
 }

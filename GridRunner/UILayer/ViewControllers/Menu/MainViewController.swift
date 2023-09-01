@@ -12,9 +12,9 @@ class MainViewController: UIViewController {
     let alertAdapter = AlertAdapter()
     let gameSearchView = GameSearchView(
         frame: CGRect(
-            x: UIScreen.main.bounds.width / 2 - 150,
+            x: UIScreen.main.bounds.width / 2 - UIScreen.main.bounds.width / 3,
             y: 0,
-            width: 300,
+            width: UIScreen.main.bounds.width / 1.5,
             height: 150
         )
     )
