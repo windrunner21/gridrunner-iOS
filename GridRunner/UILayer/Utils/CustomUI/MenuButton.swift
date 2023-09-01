@@ -74,7 +74,8 @@ class MenuButton: UIView {
         ])
         
         self.layer.cornerRadius = 10
-        self.backgroundColor = .white
+        self.backgroundColor = UIColor(named: "Background")
+        
         self.addButtonElevation()
         
         let tap = UITapGestureRecognizer(target: self, action: #selector(performAction))
@@ -83,5 +84,10 @@ class MenuButton: UIView {
     
     @objc func performAction() {
         self.menuAction?()
+    }
+    
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        super.traitCollectionDidChange(previousTraitCollection)
+        self.addButtonElevation()
     }
 }

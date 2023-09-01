@@ -48,7 +48,7 @@ class MainViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        print(UIScreen.main.bounds.width)
+
         // Setup programmable UIs.
         self.setupGridRunLabel()
         self.setupVersionLabel()
@@ -237,7 +237,8 @@ class MainViewController: UIViewController {
     }
     
     private func setupProfileView() {
-        self.profileView.setup(in: self.view, asButton: true)
+        self.profileView.isButton = true
+        self.profileView.setup(in: self.view)
         
         NSLayoutConstraint.activate([
             self.profileView.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor, constant: 10),
@@ -252,7 +253,7 @@ class MainViewController: UIViewController {
             self?.openJoinRoomScreen()
         }
         
-        createRoomButton.icon = "➕"
+        createRoomButton.icon = "🆕"
         createRoomButton.text = "Create Room"
         createRoomButton.menuAction = { [weak self] in
             self?.openCreateRoomScreen()

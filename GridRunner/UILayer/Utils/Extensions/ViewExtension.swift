@@ -16,10 +16,14 @@ extension UIView {
     }
 
     func addButtonElevation() {
-        self.layer.shadowColor = UIColor.black.withAlphaComponent(0.8).cgColor
+        self.layer.shadowColor = self.traitCollection.userInterfaceStyle == .dark ? UIColor.white.cgColor : UIColor.black.withAlphaComponent(0.8).cgColor
         self.layer.shadowOpacity = 0.3
         self.layer.shadowOffset = .zero
         self.layer.shadowRadius = 4
+    }
+    
+    func removeElevation() {
+        self.layer.shadowOpacity = 0.0
     }
     
     func addLightBorder() {
