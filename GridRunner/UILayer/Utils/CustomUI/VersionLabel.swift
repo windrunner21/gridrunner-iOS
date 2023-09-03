@@ -16,7 +16,7 @@ class VersionLabel: UILabel {
         
         self.text = "Version \(versionNumber ?? "not found")"
         self.textColor = UIColor(named: "Black")
-        self.font = UIFont(name: "Kanit-Regular", size: Dimensions.captionFont)
+        self.font = UIFont(name: "Kanit-Thin", size: Dimensions.captionFont)
         
         parentView.addSubview(self)
     }

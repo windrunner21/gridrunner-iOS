@@ -13,10 +13,12 @@ class ProfileView: RoundView {
     func setup(in parentView: UIView) {
         self.text = ProfileIcon.shared.getIcon()
         self.color = UIColor(named: "Profile")
+        
         self.addBorder(width: 3.5, color: UIColor(named: "Background") ?? .white)
-    
         if self.isButton {
             self.addButtonElevation()
+        } else {
+            self.addElevation()
         }
         
         parentView.addSubview(self)
@@ -24,9 +26,22 @@ class ProfileView: RoundView {
     
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
         super.traitCollectionDidChange(previousTraitCollection)
+        
         self.addBorder(width: 3.5, color: UIColor(named: "Background") ?? .white)
         if self.isButton {
             self.addButtonElevation()
+        } else {
+            self.addElevation()
         }
+    }
+    
+    func setSize(to size: CGFloat) {
+        self.deactivateSizeConstraints()
+        
+        self.size = size
+        self.setSizeConstraints()
+        self.toCircle()
+      
+        self.activateSizeConstraints()
     }
 }

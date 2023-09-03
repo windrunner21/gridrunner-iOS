@@ -8,14 +8,17 @@
 import UIKit
 
 class RoundView: UIView {
+    private var widthConstraint: NSLayoutConstraint!
+    private var heighConstraint: NSLayoutConstraint!
+    
+    var size: CGFloat = Dimensions.roundViewHeight
+    
     private let label: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.textAlignment = .center
         return label
     }()
-    
-    private let size: CGFloat = Dimensions.roundButtonSize
     
     // Computed properties.
     var text: String? {
@@ -24,6 +27,15 @@ class RoundView: UIView {
         }
         set {
             self.label.text = newValue
+        }
+    }
+    
+    var textSize: CGFloat {
+        get {
+            return label.font.pointSize
+        }
+        set {
+            self.label.font = .systemFont(ofSize: newValue)
         }
     }
     
@@ -51,14 +63,14 @@ class RoundView: UIView {
         
         self.addSubview(label)
         
+        self.setSizeConstraints()
+        self.activateSizeConstraints()
+        
         NSLayoutConstraint.activate([
-            label.centerXAnchor.constraint(equalTo: self.centerXAnchor),
-            label.centerYAnchor.constraint(equalTo: self.centerYAnchor),
-            label.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 8),
-            label.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -8),
-            
-            self.widthAnchor.constraint(equalToConstant: size),
-            self.heightAnchor.constraint(equalToConstant: size)
+            self.label.centerXAnchor.constraint(equalTo: self.centerXAnchor),
+            self.label.centerYAnchor.constraint(equalTo: self.centerYAnchor),
+            self.label.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 8),
+            self.label.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -8),
         ])
         
         self.toCircle()
@@ -76,5 +88,20 @@ class RoundView: UIView {
     
     func toCircle() {
         self.layer.cornerRadius = self.size / 2
+    }
+    
+    func activateSizeConstraints() {
+        self.widthConstraint.isActive = true
+        self.heighConstraint.isActive = true
+    }
+    
+    func deactivateSizeConstraints() {
+        self.widthConstraint.isActive = false
+        self.heighConstraint.isActive = false
+    }
+    
+    func setSizeConstraints() {
+        self.widthConstraint = self.widthAnchor.constraint(equalToConstant: self.size)
+        self.heighConstraint = self.heightAnchor.constraint(equalToConstant: self.size)
     }
 }

@@ -2,6 +2,21 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>UIAppFonts</key>
+	<array>
+		<string>Kanit-Black.ttf</string>
+		<string>Kanit-BlackItalic.ttf</string>
+		<string>Kanit-Bold.ttf</string>
+		<string>Kanit-BoldItalic.ttf</string>
+		<string>Kanit-Medium.ttf</string>
+		<string>Kanit-MediumItalic.ttf</string>
+		<string>Kanit-Regular.ttf</string>
+		<string>Kanit-Italic.ttf</string>
+		<string>Kanit-SemiBold.ttf</string>
+		<string>Kanit-SemiBoldItalic.ttf</string>
+		<string>Kanit-Thin.ttf</string>
+		<string>Kanit-ThinItalic.ttf</string>
+	</array>
 	<key>UIApplicationSceneManifest</key>
 	<dict>
 		<key>UIApplicationSupportsMultipleScenes</key>
