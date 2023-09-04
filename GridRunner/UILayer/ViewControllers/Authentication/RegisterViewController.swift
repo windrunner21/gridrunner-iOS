@@ -33,14 +33,10 @@ class RegisterViewController: UIViewController, UITextFieldDelegate {
         return stackView
     }()
     
-//    let signUpButton: PrimaryButton = PrimaryButton()
-    
-    // Storyboard related properties.
     let usernameTextField: TextField = TextField()
     let emailTextField: TextField = TextField()
     let passwordTextField: TextField = TextField()
     
-//    @IBOutlet weak var signInButton: UIButton!
     let signUpButton: PrimaryButton = PrimaryButton()
     
     var signUpButtonBottomConstraint: NSLayoutConstraint!
