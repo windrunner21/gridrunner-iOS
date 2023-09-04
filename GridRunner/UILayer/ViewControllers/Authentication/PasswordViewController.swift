@@ -31,7 +31,7 @@ class PasswordViewController: UIViewController, UITextFieldDelegate {
         
         // Manage delegate to override UITextField methods.
         self.emailTextField.delegate = self
-        self.emailTextField.setup(with: "Enter your email")
+        //self.emailTextField.setup(with: "Enter your email")
         
         // Close current view, dismiss with animation, on cancel view tap.
         let cancelViewTap = UITapGestureRecognizer(target: self, action: #selector(closeView))

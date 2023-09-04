@@ -27,7 +27,7 @@ class JoinRoomViewController: UIViewController, UITextFieldDelegate {
         self.joinRoomButton.setup()
         
         self.roomCodeTextField.delegate = self
-        self.roomCodeTextField.setup(with: "Enter your shared room code")
+        //self.roomCodeTextField.setup(with: "Enter your shared room code")
         
         
         // Close current view, dismiss with animation, on cancel view tap.

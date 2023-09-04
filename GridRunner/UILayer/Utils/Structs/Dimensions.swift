@@ -10,7 +10,8 @@ import UIKit
 struct Dimensions {
     // Font sizes
     static let largeFont = UIScreen.main.bounds.width * 0.1
-    static let titleFont = UIScreen.main.bounds.width * 0.075
+    static let nameFont = UIScreen.main.bounds.width * 0.075
+    static let titleFont = UIScreen.main.bounds.width * 0.06
     static let subtitleFont = UIScreen.main.bounds.width * 0.04
     static let headingFont = UIScreen.main.bounds.width * 0.05
     static let buttonFont = UIScreen.main.bounds.width * 0.035

@@ -13,7 +13,7 @@ class GridRunLabel: UILabel {
         
         self.text = "GRIDRUN"
         self.textColor = UIColor(named: "Black")
-        self.font = UIFont(name: "Kanit-Black", size: Dimensions.titleFont)
+        self.font = UIFont(name: "Kanit-Black", size: Dimensions.nameFont)
         
         parentView.addSubview(self)
     }

@@ -34,7 +34,7 @@ class RoomLoadingView: UIView {
         
         self.cancelView.addElevation()
         
-        self.roomCodeTextField.setup()
+        //self.roomCodeTextField.setup()
         self.roomCodeTextField.isEnabled = false
         self.roomCodeTextField.text = GameSessionDetails.shared.roomCode
         

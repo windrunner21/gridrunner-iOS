@@ -16,6 +16,11 @@ class CancelView: RoundView {
         self.addButtonElevation()
         
         parentView.addSubview(self)
+        
+        NSLayoutConstraint.activate([
+            self.topAnchor.constraint(equalTo: parentView.safeAreaLayoutGuide.topAnchor, constant: 20),
+            self.leadingAnchor.constraint(equalTo: parentView.safeAreaLayoutGuide.leadingAnchor, constant: 20)
+        ])
     }
     
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {

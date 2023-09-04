@@ -151,11 +151,8 @@ class MainViewController: UIViewController {
     }
     
     private func openRegisterScreen() {
-        let registerStoryboard: UIStoryboard = UIStoryboard(name: "Register", bundle: .main)
-        let registerViewController: RegisterViewController = registerStoryboard.instantiateViewController(identifier: "RegisterScreen")
-        
+        let registerViewController: RegisterViewController = RegisterViewController()
         registerViewController.mainViewController = self
-        
         self.present(registerViewController, animated: true)
     }
     
@@ -285,7 +282,7 @@ class MainViewController: UIViewController {
         NSLayoutConstraint.activate([
             self.stackView.topAnchor.constraint(equalTo: self.scrollView.topAnchor, constant: Dimensions.verticalSpacing20),
             self.stackView.leadingAnchor.constraint(equalTo: self.scrollView.leadingAnchor, constant: 20),
-            self.stackView.trailingAnchor.constraint(equalTo: self.scrollView.trailingAnchor, constant: 20),
+            self.stackView.trailingAnchor.constraint(equalTo: self.scrollView.trailingAnchor, constant: -20),
             self.stackView.bottomAnchor.constraint(equalTo: self.scrollView.bottomAnchor, constant: -Dimensions.verticalSpacing20)
         ])
         

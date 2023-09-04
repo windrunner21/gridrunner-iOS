@@ -30,9 +30,9 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         
         // Manage delegate to override UITextField methods.
         self.usernameTextField.delegate = self
-        self.usernameTextField.setup(with: "Enter your username")
+        //self.usernameTextField.setup(with: "Enter your username")
         self.passwordTextField.delegate = self
-        self.passwordTextField.setup(with: "Enter your password")
+       // self.passwordTextField.setup(with: "Enter your password")
         
         // Close current view, dismiss with animation, on cancel view tap.
         let cancelViewTap = UITapGestureRecognizer(target: self, action: #selector(closeView))

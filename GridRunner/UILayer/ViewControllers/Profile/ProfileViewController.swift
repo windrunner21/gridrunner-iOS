@@ -30,7 +30,7 @@ class ProfileViewController: UIViewController {
         
         self.view.backgroundColor = UIColor(named: "Background")
         
-        self.setupCancelView()
+        self.cancelView.setup(in: self.view)
         self.setupProfileView()
         self.setupProfileLabels()
         self.setupRankViews()
@@ -128,15 +128,6 @@ class ProfileViewController: UIViewController {
                 }
             }
         }
-    }
-
-    private func setupCancelView() {
-        self.cancelView.setup(in: self.view)
-        
-        NSLayoutConstraint.activate([
-            self.cancelView.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor, constant: 20),
-            self.cancelView.leadingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leadingAnchor, constant: 20)
-        ])
     }
     
     private func setupProfileView() {

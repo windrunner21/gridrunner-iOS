@@ -51,11 +51,14 @@
 		CA4E3F542A07A80E00D36266 /* Game.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CA4E3F532A07A80E00D36266 /* Game.storyboard */; };
 		CA4E3F582A07A85900D36266 /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA4E3F572A07A85900D36266 /* GameViewController.swift */; };
 		CA4E3F5C2A07BBF100D36266 /* PlayerType.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA4E3F5B2A07BBF100D36266 /* PlayerType.swift */; };
-		CA4E3F5E2A0891D800D36266 /* Register.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CA4E3F5D2A0891D800D36266 /* Register.storyboard */; };
 		CA4E3F602A0891F300D36266 /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA4E3F5F2A0891F300D36266 /* RegisterViewController.swift */; };
 		CA4E3F642A08DCB400D36266 /* ViewControllerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA4E3F632A08DCB400D36266 /* ViewControllerExtension.swift */; };
 		CA4E3F662A0BCD3300D36266 /* MapExits.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA4E3F652A0BCD3300D36266 /* MapExits.swift */; };
 		CA4E3F692A0CE31200D36266 /* TransitionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA4E3F682A0CE31200D36266 /* TransitionViewController.swift */; };
+		CA71F9C92AA5DE0A007AF4F0 /* TitleLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA71F9C82AA5DE0A007AF4F0 /* TitleLabel.swift */; };
+		CA71F9CB2AA5DFFB007AF4F0 /* SubtitleLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA71F9CA2AA5DFFB007AF4F0 /* SubtitleLabel.swift */; };
+		CA71F9CD2AA60665007AF4F0 /* TextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA71F9CC2AA60665007AF4F0 /* TextField.swift */; };
+		CA71F9CF2AA613FC007AF4F0 /* ClickableLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA71F9CE2AA613FC007AF4F0 /* ClickableLabel.swift */; };
 		CA7417B32A56ECE900A9683A /* AblyAuthenticationError.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA7417B22A56ECE900A9683A /* AblyAuthenticationError.swift */; };
 		CA852A312A30A20200961E65 /* AlertAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA852A302A30A20200961E65 /* AlertAdapter.swift */; };
 		CA852A332A30ABB700961E65 /* Response.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA852A322A30ABB700961E65 /* Response.swift */; };
@@ -107,7 +110,6 @@
 		CAC833652A5BEDD500EED95B /* Password.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CAC833642A5BEDD500EED95B /* Password.storyboard */; };
 		CAC833672A5BEE3B00EED95B /* PasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAC833662A5BEE3B00EED95B /* PasswordViewController.swift */; };
 		CAC833692A5C008400EED95B /* PasswordService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAC833682A5C008400EED95B /* PasswordService.swift */; };
-		CAE031E22A6323EA0089E839 /* TextFieldExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAE031E12A6323EA0089E839 /* TextFieldExtension.swift */; };
 		CAF8EC9F2A2DBD1A00179EF1 /* APIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAF8EC9E2A2DBD1A00179EF1 /* APIClient.swift */; };
 		CAF8ECA22A2DBD5500179EF1 /* AuthService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAF8ECA12A2DBD5500179EF1 /* AuthService.swift */; };
 		CAF8ECA42A2DBD6700179EF1 /* GameService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAF8ECA32A2DBD6700179EF1 /* GameService.swift */; };
@@ -194,11 +196,14 @@
 		CA4E3F532A07A80E00D36266 /* Game.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Game.storyboard; sourceTree = "<group>"; };
 		CA4E3F572A07A85900D36266 /* GameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameViewController.swift; sourceTree = "<group>"; };
 		CA4E3F5B2A07BBF100D36266 /* PlayerType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerType.swift; sourceTree = "<group>"; };
-		CA4E3F5D2A0891D800D36266 /* Register.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Register.storyboard; sourceTree = "<group>"; };
 		CA4E3F5F2A0891F300D36266 /* RegisterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewController.swift; sourceTree = "<group>"; };
 		CA4E3F632A08DCB400D36266 /* ViewControllerExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewControllerExtension.swift; sourceTree = "<group>"; };
 		CA4E3F652A0BCD3300D36266 /* MapExits.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapExits.swift; sourceTree = "<group>"; };
 		CA4E3F682A0CE31200D36266 /* TransitionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransitionViewController.swift; sourceTree = "<group>"; };
+		CA71F9C82AA5DE0A007AF4F0 /* TitleLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleLabel.swift; sourceTree = "<group>"; };
+		CA71F9CA2AA5DFFB007AF4F0 /* SubtitleLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubtitleLabel.swift; sourceTree = "<group>"; };
+		CA71F9CC2AA60665007AF4F0 /* TextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextField.swift; sourceTree = "<group>"; };
+		CA71F9CE2AA613FC007AF4F0 /* ClickableLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClickableLabel.swift; sourceTree = "<group>"; };
 		CA7417B22A56ECE900A9683A /* AblyAuthenticationError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AblyAuthenticationError.swift; sourceTree = "<group>"; };
 		CA852A302A30A20200961E65 /* AlertAdapter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertAdapter.swift; sourceTree = "<group>"; };
 		CA852A322A30ABB700961E65 /* Response.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Response.swift; sourceTree = "<group>"; };
@@ -249,7 +254,6 @@
 		CAC833642A5BEDD500EED95B /* Password.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Password.storyboard; sourceTree = "<group>"; };
 		CAC833662A5BEE3B00EED95B /* PasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordViewController.swift; sourceTree = "<group>"; };
 		CAC833682A5C008400EED95B /* PasswordService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordService.swift; sourceTree = "<group>"; };
-		CAE031E12A6323EA0089E839 /* TextFieldExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldExtension.swift; sourceTree = "<group>"; };
 		CAF8EC9E2A2DBD1A00179EF1 /* APIClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIClient.swift; sourceTree = "<group>"; };
 		CAF8ECA12A2DBD5500179EF1 /* AuthService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthService.swift; sourceTree = "<group>"; };
 		CAF8ECA32A2DBD6700179EF1 /* GameService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameService.swift; sourceTree = "<group>"; };
@@ -391,7 +395,6 @@
 		CA4E3F502A07A75800D36266 /* Authentication */ = {
 			isa = PBXGroup;
 			children = (
-				CA4E3F5D2A0891D800D36266 /* Register.storyboard */,
 				CAF8ECC02A2F767600179EF1 /* Login.storyboard */,
 				CAC833642A5BEDD500EED95B /* Password.storyboard */,
 			);
@@ -462,7 +465,6 @@
 				CA35E7B62A28D0B60057BAB6 /* ViewExtension.swift */,
 				CAB6EAAE2A2A086C00997852 /* ButtonExtension.swift */,
 				CAF8ECBC2A2F6CFC00179EF1 /* ActivityIndicatorExtension.swift */,
-				CAE031E12A6323EA0089E839 /* TextFieldExtension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -637,6 +639,10 @@
 				CAB12C442AA2901500BF71E1 /* CancelView.swift */,
 				CAB12C462AA4C3C800BF71E1 /* RankView.swift */,
 				CAB12C4A2AA527E500BF71E1 /* ProfileItemView.swift */,
+				CA71F9C82AA5DE0A007AF4F0 /* TitleLabel.swift */,
+				CA71F9CA2AA5DFFB007AF4F0 /* SubtitleLabel.swift */,
+				CA71F9CC2AA60665007AF4F0 /* TextField.swift */,
+				CA71F9CE2AA613FC007AF4F0 /* ClickableLabel.swift */,
 			);
 			path = CustomUI;
 			sourceTree = "<group>";
@@ -999,7 +1005,6 @@
 				CA0AAC832A25D6D3008367FB /* Kanit-ExtraBold.ttf in Resources */,
 				CA0AAC782A25D6D3008367FB /* Kanit-Medium.ttf in Resources */,
 				CA0AAC7D2A25D6D3008367FB /* Kanit-Black.ttf in Resources */,
-				CA4E3F5E2A0891D800D36266 /* Register.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1035,7 +1040,6 @@
 				CAAA1CE92AA1D966007886B9 /* PrimaryButton.swift in Sources */,
 				CA0AAC3D2A121EE2008367FB /* MoveDirection.swift in Sources */,
 				CA0AAC342A0E6395008367FB /* Map.swift in Sources */,
-				CAE031E22A6323EA0089E839 /* TextFieldExtension.swift in Sources */,
 				CAF8ECAE2A2DC38200179EF1 /* Method.swift in Sources */,
 				CA25B1D22A56E9B50063CBA3 /* AblyAuthDelegate.swift in Sources */,
 				CA852A4B2A38655A00961E65 /* AblyJWTService.swift in Sources */,
@@ -1057,6 +1061,7 @@
 				CA852A632A4042D900961E65 /* ResponseParser.swift in Sources */,
 				CAB728FD2A648EBB00BB4908 /* CreateRoomViewController.swift in Sources */,
 				CAF8ECB32A2DD23600179EF1 /* BaseURL.swift in Sources */,
+				CA71F9C92AA5DE0A007AF4F0 /* TitleLabel.swift in Sources */,
 				CA4E3F642A08DCB400D36266 /* ViewControllerExtension.swift in Sources */,
 				CA0AAC892A25DF8C008367FB /* ProfileIcon.swift in Sources */,
 				CA852A692A40489000961E65 /* Grid.swift in Sources */,
@@ -1093,7 +1098,9 @@
 				CAF8ECB72A2E1FDE00179EF1 /* RegisterCredentials.swift in Sources */,
 				CA852A582A39C96D00961E65 /* AblyService.swift in Sources */,
 				CA8CBFA82A51A9AA003CF44B /* GameOver.swift in Sources */,
+				CA71F9CF2AA613FC007AF4F0 /* ClickableLabel.swift in Sources */,
 				CAF8ECC32A2F78A600179EF1 /* LoginViewController.swift in Sources */,
+				CA71F9CD2AA60665007AF4F0 /* TextField.swift in Sources */,
 				CA89AC652A52FBC300265465 /* MoveType.swift in Sources */,
 				CA852A6B2A40597A00961E65 /* SpecialTile.swift in Sources */,
 				CA0AAC302A0E484F008367FB /* Coordinate.swift in Sources */,
@@ -1109,6 +1116,7 @@
 				CA852A5F2A4029A900961E65 /* GameConfig.swift in Sources */,
 				CAB6EAAF2A2A086C00997852 /* ButtonExtension.swift in Sources */,
 				CA0AAC262A0E2BE6008367FB /* Seeker.swift in Sources */,
+				CA71F9CB2AA5DFFB007AF4F0 /* SubtitleLabel.swift in Sources */,
 				CAFED48F2A02496E00FB4B9B /* SceneDelegate.swift in Sources */,
 				CA8CBF9A2A4F1FFA003CF44B /* AuthenticationError.swift in Sources */,
 				CAF8EC9F2A2DBD1A00179EF1 /* APIClient.swift in Sources */,
@@ -1288,7 +1296,6 @@
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.strategy-games";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen.storyboard;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UIStatusBarHidden = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = UIInterfaceOrientationLandscapeRight;
@@ -1323,7 +1330,6 @@
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.strategy-games";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen.storyboard;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UIStatusBarHidden = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = UIInterfaceOrientationLandscapeRight;

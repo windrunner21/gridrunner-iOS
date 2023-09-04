@@ -20,7 +20,7 @@ extension UIViewController {
         
         if up {
             let safeArea = self.view.window?.safeAreaInsets.bottom != 0
-            constraint.constant = keyboardHeight + (safeArea ? 0 : value)
+            constraint.constant = -keyboardHeight + (safeArea ? 0 : value)
         } else {
             constraint.constant = value
         }
