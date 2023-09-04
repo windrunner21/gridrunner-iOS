@@ -62,8 +62,8 @@ class RankView: UIView {
 
         NSLayoutConstraint.activate([
             self.stackView.topAnchor.constraint(equalTo: self.topAnchor, constant: 10),
-            self.stackView.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 10),
-            self.stackView.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -10),
+            self.stackView.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 20),
+            self.stackView.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -20),
             self.stackView.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -10),
         ])
         
@@ -72,7 +72,6 @@ class RankView: UIView {
         
         self.layer.cornerRadius = 20
         self.backgroundColor = .white
-        self.addElevation()
     }
     
 }

@@ -33,84 +33,101 @@ class ProfileViewController: UIViewController {
         self.setupProfileLabels()
         self.setupRankViews()
         self.setupProfileItemViews()
-        
-        // MARK: to do later
-        // self.setupGrayBackgroundColor()
-        
+        self.setupGrayBackgroundColor()
+    
         // Close current view, dismiss with animation, on cancel view tap.
         let cancelViewTap = UITapGestureRecognizer(target: self, action: #selector(closeView))
         self.cancelView.addGestureRecognizer(cancelViewTap)
+        
+        let logoutLongPress = UILongPressGestureRecognizer(target: self, action: #selector(handleLongPress))
+        logoutLongPress.minimumPressDuration = 0
+        let deleteAccountLongPress = UILongPressGestureRecognizer(target: self, action: #selector(handleLongPress))
+        deleteAccountLongPress.minimumPressDuration = 0
+        
+        self.logoutView.addGestureRecognizer(logoutLongPress)
+        self.deleteAccountView.addGestureRecognizer(deleteAccountLongPress)
     }
     
     @objc func closeView() {
         self.mainViewController.dismiss(animated: true)
     }
+
+    @objc func handleLongPress(_ gestureRecognizer: UILongPressGestureRecognizer) {
+        switch gestureRecognizer.view {
+        case self.logoutView:
+            self.handleViewChanges(
+                in: self.logoutView,
+                for: gestureRecognizer,
+                completion: self.onLogout(caller: self.logoutView)
+            )
+        case self.deleteAccountView:
+            self.handleViewChanges(
+                in: self.deleteAccountView,
+                for: gestureRecognizer,
+                completion: self.onDeleteAccount(caller: self.deleteAccountView)
+            )
+        default:
+            break
+        }
+    }
     
-//    @IBAction func onLogoutTouchDown(_ sender: Any) {
-//        self.logoutButton.onTouchDown()
-//    }
-//    
-//    @IBAction func onDeleteAccountTouchDown(_ sender: Any) {
-//        self.deleteAccountButton.onTouchDown()
-//    }
-//    
-//    @IBAction func onLogoutTouchUpOutside(_ sender: Any) {
-//        self.logoutButton.onTouchUpOutside()
-//    }
-//    
-//    @IBAction func onDeleteAccountTouchUpOutside(_ sender: Any) {
-//        self.deleteAccountButton.onTouchUpOutside()
-//    }
-//    
-//    @IBAction func onLogout(_ sender: Any) {
-//        self.logoutButton.disable()
-//        AuthService().logout { response in
-//            DispatchQueue.main.async {
-//                self.logoutButton.enable()
-//                
-//                switch response {
-//                case .success:
-//                    self.mainViewController.checkUserAuthentication()
-//                    self.mainViewController.dismiss(animated: true)
-//                case .networkError:
-//                    let alert = self.alertAdapter.createNetworkErrorAlert()
-//                    self.present(alert, animated: true)
-//                case .requestError:
-//                    let alert = self.alertAdapter.createServiceRequestErrorAlert()
-//                    self.present(alert, animated: true)
-//                case .decoderError:
-//                    let alert = self.alertAdapter.createDecoderErrorAlert()
-//                    self.present(alert, animated: true)
-//                }
-//            }
-//        }
-//    }
-//    
-//    @IBAction func onDeleteAccount(_ sender: Any) {
-//        self.deleteAccountButton.disable()
-//        
-//        AuthService().deleteAccount { response in
-//            DispatchQueue.main.async {
-//                self.deleteAccountButton.enable()
-//                
-//                switch response {
-//                case .success:
-//                    self.mainViewController.checkUserAuthentication()
-//                    self.mainViewController.dismiss(animated: true)
-//                case .networkError:
-//                    let alert = self.alertAdapter.createNetworkErrorAlert()
-//                    self.present(alert, animated: true)
-//                case .requestError:
-//                    let alert = self.alertAdapter.createServiceRequestErrorAlert()
-//                    self.present(alert, animated: true)
-//                case .decoderError:
-//                    let alert = self.alertAdapter.createDecoderErrorAlert()
-//                    self.present(alert, animated: true)
-//                }
-//            }
-//        }
-//    }
+    private func handleViewChanges(in view: UIView, for gestureRecognizer: UILongPressGestureRecognizer, completion: ()) {
+        switch gestureRecognizer.state {
+        case .began, .changed:
+            view.alpha = 0.3
+        case .ended:
+            completion
+        default:
+            break
+        }
+    }
     
+    private func onLogout(caller view: UIView) {
+        AuthService().logout { response in
+            DispatchQueue.main.async {
+                view.alpha = 1
+
+                switch response {
+                case .success:
+                    self.mainViewController.checkUserAuthentication()
+                    self.mainViewController.dismiss(animated: true)
+                case .networkError:
+                    let alert = self.alertAdapter.createNetworkErrorAlert()
+                    self.present(alert, animated: true)
+                case .requestError:
+                    let alert = self.alertAdapter.createServiceRequestErrorAlert()
+                    self.present(alert, animated: true)
+                case .decoderError:
+                    let alert = self.alertAdapter.createDecoderErrorAlert()
+                    self.present(alert, animated: true)
+                }
+            }
+        }
+    }
+    
+    private func onDeleteAccount(caller view: UIView) {
+        AuthService().deleteAccount { response in
+            DispatchQueue.main.async {
+                view.alpha = 1
+
+                switch response {
+                case .success:
+                    self.mainViewController.checkUserAuthentication()
+                    self.mainViewController.dismiss(animated: true)
+                case .networkError:
+                    let alert = self.alertAdapter.createNetworkErrorAlert()
+                    self.present(alert, animated: true)
+                case .requestError:
+                    let alert = self.alertAdapter.createServiceRequestErrorAlert()
+                    self.present(alert, animated: true)
+                case .decoderError:
+                    let alert = self.alertAdapter.createDecoderErrorAlert()
+                    self.present(alert, animated: true)
+                }
+            }
+        }
+    }
+
     private func setupCancelView() {
         self.cancelView.setup(in: self.view)
         
@@ -190,13 +207,24 @@ class ProfileViewController: UIViewController {
     private func setupProfileItemViews() {
         self.logoutView.title = "Logout"
         self.logoutView.image = "arrow.left.circle.fill"
+        self.logoutView.imageColor = UIColor(named: "Red") ?? .systemRed
+        
+        self.deleteAccountView.title = "Delete Account"
+        self.deleteAccountView.image = "trash.circle.fill"
+        self.deleteAccountView.imageColor = .white
+        self.deleteAccountView.textColor = .white
+        self.deleteAccountView.backgroundColor = UIColor(named: "Red")
         
         self.view.addSubview(self.logoutView)
+        self.view.addSubview(self.deleteAccountView)
         
         NSLayoutConstraint.activate([
-            self.logoutView.bottomAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.bottomAnchor, constant: -10),
+            self.deleteAccountView.bottomAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.bottomAnchor, constant: -10),
+            self.deleteAccountView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 20),
+            self.deleteAccountView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: -20),
+            self.logoutView.bottomAnchor.constraint(equalTo: self.deleteAccountView.topAnchor, constant: -20),
             self.logoutView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 20),
-            self.logoutView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: -20)
+            self.logoutView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: -20),
         ])
     }
     
@@ -206,9 +234,9 @@ class ProfileViewController: UIViewController {
         let screenHeight = UIScreen.main.bounds.height
         
         grayLayer.backgroundColor = UIColor.systemGray6.cgColor
-        print(self.emailLabel.frame)
-        let yPosition = self.emailLabel.frame.maxY + 20
- 
+        self.view.layoutIfNeeded()
+        let yPosition = self.emailLabel.frame.maxY + Dimensions.verticalSpacing20
+        
         grayLayer.frame = CGRect(x: 0, y: yPosition, width: screenWidth, height: screenHeight - yPosition)
         
         self.view.layer.insertSublayer(grayLayer, at: 0)

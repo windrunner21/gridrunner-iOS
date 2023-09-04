@@ -14,7 +14,7 @@ class ProfileItemView: UIView {
         mainStackView.axis = .horizontal
         mainStackView.alignment = .center
         mainStackView.distribution = .fillProportionally
-        mainStackView.spacing = 0
+        mainStackView.spacing = 10
         return mainStackView
     }()
     
@@ -30,6 +30,8 @@ class ProfileItemView: UIView {
         let imageView = UIImageView()
         imageView.translatesAutoresizingMaskIntoConstraints = false
         imageView.contentMode = .scaleAspectFit
+        imageView.widthAnchor.constraint(equalToConstant: 35).isActive = true
+        imageView.heightAnchor.constraint(equalToConstant: 35).isActive = true
         return imageView
     }()
     
@@ -48,6 +50,24 @@ class ProfileItemView: UIView {
         }
     }
     
+    var imageColor: UIColor {
+        get {
+            return imageView.tintColor
+        }
+        set {
+            self.imageView.tintColor = newValue
+        }
+    }
+    
+    var textColor: UIColor {
+        get {
+            return self.titleLabel.textColor
+        }
+        set {
+            self.titleLabel.textColor = newValue
+        }
+    }
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         self.commonInit()
@@ -63,17 +83,17 @@ class ProfileItemView: UIView {
         self.addSubview(mainStackView)
         
         NSLayoutConstraint.activate([
-            self.mainStackView.topAnchor.constraint(equalTo: self.topAnchor, constant: 20),
+            self.mainStackView.topAnchor.constraint(equalTo: self.topAnchor, constant: 10),
             self.mainStackView.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 10),
             self.mainStackView.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -10),
-            self.mainStackView.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -20),
+            self.mainStackView.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -10),
         ])
         
         mainStackView.addArrangedSubview(imageView)
         mainStackView.addArrangedSubview(titleLabel)
 
-        self.layer.cornerRadius = 20
+        self.layer.cornerRadius = 10
         self.backgroundColor = .white
-        self.addElevation()
+        self.addButtonElevation()
     }
 }
