@@ -33,9 +33,7 @@ class LaunchViewController: UIViewController {
 
     private func transitionToMainScreen() {
         AppDelegate.shared.performNetworkRequest { _ in
-            let mainStoryboard: UIStoryboard = UIStoryboard(name: "Main", bundle: .main)
-            let mainViewController: UIViewController = mainStoryboard.instantiateViewController(identifier: "MainScreen") as MainViewController
-
+            let mainViewController: MainViewController = MainViewController()
             let sceneDelegate = UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate
             sceneDelegate?.transitionViewController.transition(to: mainViewController, with: [.transitionCurlUp])
         }

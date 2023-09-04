@@ -48,6 +48,8 @@ class MainViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        self.view.backgroundColor = UIColor(named: "Background")
 
         // Setup programmable UIs.
         self.setupGridRunLabel()
@@ -167,11 +169,8 @@ class MainViewController: UIViewController {
     }
     
     private func openAccountScreen() {
-        let profileStoryboard: UIStoryboard = UIStoryboard(name: "Profile", bundle: .main)
-        let profileViewController: ProfileViewController = profileStoryboard.instantiateViewController(identifier: "ProfileScreen")
-        
+        let profileViewController: ProfileViewController = ProfileViewController()
         profileViewController.mainViewController = self
-        
         self.present(profileViewController, animated: true)
     }
     

@@ -28,6 +28,8 @@ class ProfileViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        self.view.backgroundColor = UIColor(named: "Background")
+        
         self.setupCancelView()
         self.setupProfileView()
         self.setupProfileLabels()
