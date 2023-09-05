@@ -33,9 +33,9 @@ class RegisterViewController: UIViewController, UITextFieldDelegate {
         return stackView
     }()
     
-    let usernameTextField: TextField = TextField()
-    let emailTextField: TextField = TextField()
-    let passwordTextField: TextField = TextField()
+    let usernameTextFieldView: TextFieldView = TextFieldView()
+    let emailTextFieldView: TextFieldView = TextFieldView()
+    let passwordTextFieldView: TextFieldView = TextFieldView()
     
     let signUpButton: PrimaryButton = PrimaryButton()
     
@@ -50,7 +50,7 @@ class RegisterViewController: UIViewController, UITextFieldDelegate {
         self.setupViewLabels()
         self.setupSignUpButton()
         self.setupScrollView()
-        self.setupTextFields()
+        self.setupTextFieldViews()
 
         // Close current view, dismiss with animation, on cancel view tap.
         let cancelViewTap = UITapGestureRecognizer(target: self, action: #selector(closeView))
@@ -66,14 +66,14 @@ class RegisterViewController: UIViewController, UITextFieldDelegate {
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         switch textField {
-        case usernameTextField:
-            usernameTextField.resignFirstResponder()
-            emailTextField.becomeFirstResponder()
-        case emailTextField:
-            emailTextField.resignFirstResponder()
-            passwordTextField.becomeFirstResponder()
-        case passwordTextField:
-            passwordTextField.resignFirstResponder()
+        case usernameTextFieldView.textField:
+            usernameTextFieldView.textField.resignFirstResponder()
+            emailTextFieldView.textField.becomeFirstResponder()
+        case emailTextFieldView.textField:
+            emailTextFieldView.textField.resignFirstResponder()
+            passwordTextFieldView.textField.becomeFirstResponder()
+        case passwordTextFieldView.textField:
+            passwordTextFieldView.textField.resignFirstResponder()
             self.sendRegisterRequest()
         default:
             textField.resignFirstResponder()
@@ -117,7 +117,7 @@ class RegisterViewController: UIViewController, UITextFieldDelegate {
     }
 
     @objc func keyboardWillShow(_ notification: NSNotification) {
-        if usernameTextField.isEditing || emailTextField.isEditing || passwordTextField.isEditing {
+        if usernameTextFieldView.textField.isEditing || emailTextFieldView.textField.isEditing || passwordTextFieldView.textField.isEditing {
             moveWithKeyboard(on: notification, by: -10, this: signUpButtonBottomConstraint, up: true)
         }
     }
@@ -153,7 +153,7 @@ class RegisterViewController: UIViewController, UITextFieldDelegate {
         
         self.signUpButton.disable()
         
-        guard let username = usernameTextField.text, let password = passwordTextField.text, let email = emailTextField.text else {
+        guard let username = usernameTextFieldView.textField.text, let password = passwordTextFieldView.textField.text, let email = emailTextFieldView.textField.text else {
             self.signUpButton.enable()
             return
         }
@@ -216,36 +216,33 @@ class RegisterViewController: UIViewController, UITextFieldDelegate {
             self.stackView.widthAnchor.constraint(equalToConstant: UIScreen.main.bounds.width - 40)
         ])
         
-        self.stackView.addArrangedSubview(self.usernameTextField)
-        self.stackView.addArrangedSubview(self.emailTextField)
-        self.stackView.addArrangedSubview(self.passwordTextField)
+        self.stackView.addArrangedSubview(self.usernameTextFieldView)
+        self.stackView.addArrangedSubview(self.emailTextFieldView)
+        self.stackView.addArrangedSubview(self.passwordTextFieldView)
     }
     
-    private func setupTextFields() {
-        self.usernameTextField.delegate = self
-        self.usernameTextField.keyboardType = .namePhonePad
-        self.usernameTextField.textContentType = .username
-        self.usernameTextField.returnKeyType = .continue
-        self.usernameTextField.setup(with: "Create your username")
+    private func setupTextFieldViews() {
+        self.usernameTextFieldView.text = "Username"
+        self.usernameTextFieldView.textField.delegate = self
+        self.usernameTextFieldView.textField.keyboardType = .namePhonePad
+        self.usernameTextFieldView.textField.textContentType = .username
+        self.usernameTextFieldView.textField.returnKeyType = .continue
+        self.usernameTextFieldView.textField.setup(with: "Create your username")
         
-        self.emailTextField.delegate = self
-        self.emailTextField.keyboardType = .emailAddress
-        self.emailTextField.textContentType = .emailAddress
-        self.emailTextField.returnKeyType = .continue
-        self.emailTextField.setup(with: "Enter your email")
+        self.emailTextFieldView.text = "Email"
+        self.emailTextFieldView.textField.delegate = self
+        self.emailTextFieldView.textField.keyboardType = .emailAddress
+        self.emailTextFieldView.textField.textContentType = .emailAddress
+        self.emailTextFieldView.textField.returnKeyType = .continue
+        self.emailTextFieldView.textField.setup(with: "Enter your email")
         
-        self.passwordTextField.delegate = self
-        self.passwordTextField.keyboardType = .default
-        self.passwordTextField.textContentType = .newPassword
-        self.passwordTextField.returnKeyType = .done
-        self.passwordTextField.isSecureTextEntry = true
-        self.passwordTextField.setup(with: "Create new password")
-        
-        NSLayoutConstraint.activate([
-            self.usernameTextField.heightAnchor.constraint(equalToConstant: 45),
-            self.emailTextField.heightAnchor.constraint(equalToConstant: 45),
-            self.passwordTextField.heightAnchor.constraint(equalToConstant: 45)
-        ])
+        self.passwordTextFieldView.text = "Password"
+        self.passwordTextFieldView.textField.delegate = self
+        self.passwordTextFieldView.textField.keyboardType = .default
+        self.passwordTextFieldView.textField.textContentType = .newPassword
+        self.passwordTextFieldView.textField.returnKeyType = .done
+        self.passwordTextFieldView.textField.isSecureTextEntry = true
+        self.passwordTextFieldView.textField.setup(with: "Create new password")
     }
     
     private func setupSignUpButton() {
