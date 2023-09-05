@@ -187,11 +187,8 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     }
     
     @objc func onForgotPassword() {
-        let passwordStoryboard: UIStoryboard = UIStoryboard(name: "Password", bundle: .main)
-        let passwordViewController: PasswordViewController = passwordStoryboard.instantiateViewController(identifier: "PasswordScreen")
-
+        let passwordViewController: PasswordViewController = PasswordViewController()
         passwordViewController.mainViewController = self.mainViewController
-
         self.present(passwordViewController, animated: true)
     }
     
