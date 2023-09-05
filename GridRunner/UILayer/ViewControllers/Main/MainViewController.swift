@@ -233,6 +233,7 @@ class MainViewController: UIViewController {
     }
     
     private func setupProfileView() {
+        self.profileView.textSize = Dimensions.buttonFont
         self.profileView.isButton = true
         self.profileView.setup(in: self.view)
         
