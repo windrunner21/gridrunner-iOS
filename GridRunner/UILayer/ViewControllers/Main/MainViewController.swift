@@ -155,16 +155,7 @@ class MainViewController: UIViewController {
         registerViewController.mainViewController = self
         self.present(registerViewController, animated: true)
     }
-    
-    private func openLoginScreen() {
-        let loginStoryboard: UIStoryboard = UIStoryboard(name: "Login", bundle: .main)
-        let loginViewController: LoginViewController = loginStoryboard.instantiateViewController(identifier: "LoginScreen")
         
-        loginViewController.mainViewController = self
-        
-        self.present(loginViewController, animated: true)
-    }
-    
     private func openAccountScreen() {
         let profileViewController: ProfileViewController = ProfileViewController()
         profileViewController.mainViewController = self
@@ -178,15 +169,6 @@ class MainViewController: UIViewController {
         createRoomViewController.mainViewController = self
         
         self.present(createRoomViewController, animated: true)
-    }
-    
-    private func openJoinRoomScreen() {
-        let joinRoomStoryboard: UIStoryboard = UIStoryboard(name: "JoinRoom", bundle: .main)
-        let joinRoomViewController: JoinRoomViewController = joinRoomStoryboard.instantiateViewController(identifier: "JoinRoomScreen")
-        
-        joinRoomViewController.mainViewController = self
-        
-        self.present(joinRoomViewController, animated: true)
     }
     
     func checkUserAuthentication() {
@@ -247,7 +229,9 @@ class MainViewController: UIViewController {
         joinRoomButton.icon = "➡️"
         joinRoomButton.text = "Join Room"
         joinRoomButton.menuAction = { [weak self] in
-            self?.openJoinRoomScreen()
+            let alert = self?.alertAdapter.createJoinRoomAlert()
+            guard let alert = alert else { return }
+            self?.present(alert, animated: true)
         }
         
         createRoomButton.icon = "🆕"

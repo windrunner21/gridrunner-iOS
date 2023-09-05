@@ -104,7 +104,6 @@
 		CAB729012A64A22200BB4908 /* RoleType.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAB729002A64A22200BB4908 /* RoleType.swift */; };
 		CAB729032A64A28F00BB4908 /* RoleTypeExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAB729022A64A28F00BB4908 /* RoleTypeExtension.swift */; };
 		CAB729062A64A5E400BB4908 /* Friendly.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAB729052A64A5E400BB4908 /* Friendly.swift */; };
-		CAB729082A6554D300BB4908 /* JoinRoom.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CAB729072A6554D300BB4908 /* JoinRoom.storyboard */; };
 		CAB7290A2A6554FC00BB4908 /* JoinRoomViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAB729092A6554FC00BB4908 /* JoinRoomViewController.swift */; };
 		CAB7290C2A65CDD900BB4908 /* RoomLoading.xib in Resources */ = {isa = PBXBuildFile; fileRef = CAB7290B2A65CDD900BB4908 /* RoomLoading.xib */; };
 		CAB7290E2A65CE5800BB4908 /* RoomLoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAB7290D2A65CE5800BB4908 /* RoomLoadingView.swift */; };
@@ -247,7 +246,6 @@
 		CAB729002A64A22200BB4908 /* RoleType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoleType.swift; sourceTree = "<group>"; };
 		CAB729022A64A28F00BB4908 /* RoleTypeExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoleTypeExtension.swift; sourceTree = "<group>"; };
 		CAB729052A64A5E400BB4908 /* Friendly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Friendly.swift; sourceTree = "<group>"; };
-		CAB729072A6554D300BB4908 /* JoinRoom.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = JoinRoom.storyboard; sourceTree = "<group>"; };
 		CAB729092A6554FC00BB4908 /* JoinRoomViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JoinRoomViewController.swift; sourceTree = "<group>"; };
 		CAB7290B2A65CDD900BB4908 /* RoomLoading.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RoomLoading.xib; sourceTree = "<group>"; };
 		CAB7290D2A65CE5800BB4908 /* RoomLoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoomLoadingView.swift; sourceTree = "<group>"; };
@@ -658,7 +656,6 @@
 			isa = PBXGroup;
 			children = (
 				CAB728FE2A648EF200BB4908 /* CreateRoom.storyboard */,
-				CAB729072A6554D300BB4908 /* JoinRoom.storyboard */,
 			);
 			path = Rooms;
 			sourceTree = "<group>";
@@ -983,7 +980,6 @@
 				CA0AAC762A25D6D3008367FB /* Kanit-MediumItalic.ttf in Resources */,
 				CA0AAC822A25D6D3008367FB /* Kanit-ThinItalic.ttf in Resources */,
 				CA0AAC7B2A25D6D3008367FB /* Kanit-BlackItalic.ttf in Resources */,
-				CAB729082A6554D300BB4908 /* JoinRoom.storyboard in Resources */,
 				CA0AAC7C2A25D6D3008367FB /* Kanit-SemiBold.ttf in Resources */,
 				CAB7290C2A65CDD900BB4908 /* RoomLoading.xib in Resources */,
 				CA0AAC842A25D6D3008367FB /* Kanit-Bold.ttf in Resources */,

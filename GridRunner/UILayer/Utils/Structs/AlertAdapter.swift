@@ -8,26 +8,7 @@
 import UIKit
 
 class AlertAdapter {
-    
-    func createInfoAlert() -> UIAlertController {
         
-        let info: String = "Gridrun is a turn based strategy game played on a random sized grid. Player can be assigned one of the two roles: Runner or Seeker.\n\nRunner: The goal of the Runner is to reach the exit tile before the Seeker finds them. Runner can move only LEFT, UP, RIGHT, DOWN.\n\nSeeker: The goal fo the Seeker is to find the Runner before they can escape. Seeker can move anywhere."
-        
-        let alert = UIAlertController(title: "Game Info", message: info, preferredStyle: .alert)
-        
-        alert.addAction(
-            UIAlertAction(
-                title: "OK",
-                style: .default,
-                handler: { _ in
-                    alert.dismiss(animated: true)
-                }
-            )
-        )
-        
-        return alert
-    }
-    
     func createGameOverAlert(winner: PlayerType, reason: String? = nil ,alertActionHandler: @escaping () -> Void) -> UIAlertController {
         
         var player: String = String()
@@ -136,20 +117,114 @@ class AlertAdapter {
         return alert
     }
     
-    func createEnterRoomAlert() -> UIAlertController {
-        let actionSheet = UIAlertController(title: "Enter room code", message: "Need to enter room code", preferredStyle: .actionSheet)
+    func createJoinRoomAlert() -> UIAlertController {
+        let alert = UIAlertController(title: "Join Room", message: nil, preferredStyle: .alert)
         
-        actionSheet.addAction(
+        alert.addTextField { (textField) in
+            textField.placeholder = "Enter room code"
+            textField.returnKeyType = .done
+            textField.keyboardType = .namePhonePad
+        }
+        
+        alert.addAction(
             UIAlertAction(
-                title: NSLocalizedString("OK", comment: "Default action"),
+                title: NSLocalizedString("Cancel", comment: "Default action"),
                 style: .default,
                 handler: { _ in
-                    actionSheet.dismiss(animated: true)
+                    alert.dismiss(animated: true)
                 }
             )
         )
         
-        return actionSheet
+        alert.addAction(
+            UIAlertAction(
+                title: NSLocalizedString("Join", comment: "Default action"),
+                style: .default,
+                handler: { _ in
+//                    if let textField = alert.textFields?.first {
+//                        guard let roomCode = textField.text else {
+//                            DispatchQueue.main.async {
+//                                let alert = self.alertAdapter.createNetworkErrorAlert()
+//                                self.present(alert, animated: true)
+//                            }
+//                            return
+//                        }
+//                        
+//                        GameSessionDetails.shared.setRoomCode(to: roomCode)
+//                        
+//                        AblyJWTService().getJWT() { response, token in
+//                            switch response {
+//                            case .success:
+//                                guard let token = token else {
+//                                    DispatchQueue.main.async {
+//                                        let alert = self.alertAdapter.createNetworkErrorAlert()
+//                                        self.present(alert, animated: true)
+//                                    }
+//                                    return
+//                                }
+//                            
+//                                AblyService.shared.update(with: token) { response, clientId in
+//                                    switch response {
+//                                    case .success:
+//                                        guard let _ = clientId else {
+//                                            DispatchQueue.main.async {
+//                                                let alert = self.alertAdapter.createNetworkErrorAlert()
+//                                                self.present(alert, animated: true)
+//                                            }
+//                                            return
+//                                        }
+//                                    
+//                                        GameService().joinRoom(withCode: roomCode) { response in
+//                                            switch response {
+//                                            case .success:
+//                                                DispatchQueue.main.async {
+//                                                    self.joinRoomButton.enable()
+//                                                    self.mainViewController.dismiss(animated: true) {
+//                                                        NotificationCenter.default.post(name: NSNotification.Name("Success::Matchmaking::Custom::Join"), object: nil)
+//                                                    }
+//                                                }
+//                                            case .networkError:
+//                                                DispatchQueue.main.async {
+//                                                    let alert = self.alertAdapter.createNetworkErrorAlert()
+//                                                    self.present(alert, animated: true)
+//                                                }
+//                                            case .requestError:
+//                                                DispatchQueue.main.async {
+//                                                    let alert = self.alertAdapter.createServiceRequestErrorAlert()
+//                                                    self.present(alert, animated: true)
+//                                                }
+//                                            case .decoderError:
+//                                                DispatchQueue.main.async {
+//                                                    let alert = self.alertAdapter.createDecoderErrorAlert()
+//                                                    self.present(alert, animated: true)
+//                                                }
+//                                            }
+//                                        }
+//                                    default:
+//                                        DispatchQueue.main.async {
+//                                            let alert = self.alertAdapter.createNetworkErrorAlert()
+//                                            self.present(alert, animated: true)
+//                                        }
+//                                    }
+//                                }
+//                            case .requestError:
+//                                DispatchQueue.main.async {
+//                                    let alert = self.alertAdapter.createServiceRequestErrorAlert()
+//                                    self.present(alert, animated: true)
+//                                }
+//                            default:
+//                                DispatchQueue.main.async {
+//                                    let alert = self.alertAdapter.createNetworkErrorAlert()
+//                                    self.present(alert, animated: true)
+//                                }
+//                            }
+//                        }
+//                    }
+                }
+            )
+        )
+        
+        return alert
     }
     
     func createCheckEmailAlert() -> UIAlertController {
