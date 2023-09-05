@@ -12,27 +12,84 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     var mainViewController: MainViewController!
     var alertAdapter: AlertAdapter = AlertAdapter()
     
-    // Storyboard related properties.
-    @IBOutlet weak var cancelView: UIView!
+    // Programmable UI properties.
+    let cancelView: CancelView = CancelView()
+    let viewTitle: TitleLabel = TitleLabel()
+    let viewSubtitle: SubtitleLabel = SubtitleLabel()
+
+    let scrollView: UIScrollView = {
+        let scrollView = UIScrollView()
+        scrollView.translatesAutoresizingMaskIntoConstraints = false
+        return scrollView
+    }()
     
-    @IBOutlet weak var usernameTextField: UITextField!
-    @IBOutlet weak var passwordTextField: UITextField!
+    let stackView: UIStackView = {
+        let stackView = UIStackView()
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        stackView.axis = .vertical
+        stackView.alignment = .fill
+        stackView.distribution = .fill
+        stackView.spacing = Dimensions.verticalSpacing20
+        return stackView
+    }()
     
-    @IBOutlet weak var signUpButton: UIButton!
-    @IBOutlet weak var signInButton: UIButton!
+    let signUpStackView: UIStackView = {
+        let stackView = UIStackView()
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        stackView.axis = .horizontal
+        stackView.alignment = .fill
+        stackView.distribution = .fill
+        stackView.spacing = 4
+        return stackView
+    }()
     
-    @IBOutlet weak var signUpButtonBottomConstraint: NSLayoutConstraint!
+    let signUpPromptLabel: UILabel = {
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.text = "don't have an account?"
+        label.font = UIFont(name: "Kanit-Regular", size: Dimensions.subHeadingFont)
+        label.textColor = UIColor(named: "Gray")
+        return label
+    }()
+    
+    let signUpLabel: UILabel = {
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.text = "sign up"
+        label.font = UIFont(name: "Kanit-Regular", size: Dimensions.subHeadingFont)
+        label.textColor = UIColor(named: "Red")
+        label.isUserInteractionEnabled = true
+        return label
+    }()
+    
+    let forgotPasswordLabel: UILabel = {
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.text = "Forgot password?"
+        label.font = UIFont(name: "Kanit-Regular", size: Dimensions.buttonFont)
+        label.textColor = UIColor(named: "Red")
+        label.isUserInteractionEnabled = true
+        return label
+    }()
+    
+    let usernameTextFieldView: TextFieldView = TextFieldView()
+    let passwordTextFieldView: TextFieldView = TextFieldView()
+    
+    let signInButton: PrimaryButton = PrimaryButton()
+    
+    var signInButtonBottomConstraint: NSLayoutConstraint!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.signInButton.setup()
-        
-        // Manage delegate to override UITextField methods.
-        self.usernameTextField.delegate = self
-        //self.usernameTextField.setup(with: "Enter your username")
-        self.passwordTextField.delegate = self
-       // self.passwordTextField.setup(with: "Enter your password")
+        self.view.backgroundColor = UIColor(named: "Background")
+
+        self.cancelView.setup(in: self.view)
+        self.setupViewLabels()
+        self.setupSignUpLabels()
+        self.setupSignInButton()
+        self.setupScrollView()
+        self.setupTextFieldViews()
         
         // Close current view, dismiss with animation, on cancel view tap.
         let cancelViewTap = UITapGestureRecognizer(target: self, action: #selector(closeView))
@@ -42,17 +99,23 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         let externalKeyboardTap = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
         self.view.addGestureRecognizer(externalKeyboardTap)
         
+        let signUpTap = UITapGestureRecognizer(target: self, action: #selector(onSignUp))
+        self.signUpLabel.addGestureRecognizer(signUpTap)
+        
+        let forgotPasswordTap = UITapGestureRecognizer(target: self, action: #selector(onForgotPassword))
+        self.forgotPasswordLabel.addGestureRecognizer(forgotPasswordTap)
+        
         // On keyboard show and hide notification move UI elements.
         self.configureKeyboardNotifications()
     }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         switch textField {
-        case usernameTextField:
-            usernameTextField.resignFirstResponder()
-            passwordTextField.becomeFirstResponder()
-        case passwordTextField:
-            passwordTextField.resignFirstResponder()
+        case usernameTextFieldView.textField:
+            usernameTextFieldView.textField.resignFirstResponder()
+            passwordTextFieldView.textField.becomeFirstResponder()
+        case passwordTextFieldView.textField:
+            passwordTextFieldView.textField.resignFirstResponder()
             self.sendLoginRequest()
         default:
             textField.resignFirstResponder()
@@ -96,42 +159,41 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     }
 
     @objc func keyboardWillShow(_ notification: NSNotification) {
-        if usernameTextField.isEditing || passwordTextField.isEditing {
-            moveWithKeyboard(on: notification, by: 40, this: signUpButtonBottomConstraint, up: true)
+        if usernameTextFieldView.textField.isEditing || passwordTextFieldView.textField.isEditing {
+            moveWithKeyboard(on: notification, by: -10, this: signInButtonBottomConstraint, up: true)
         }
     }
 
     @objc func keyboardWillHide(_ notification: NSNotification) {
-        moveWithKeyboard(on: notification, by: 40, this: signUpButtonBottomConstraint, up: false)
+        moveWithKeyboard(on: notification, by:  -Dimensions.verticalSpacing20 - self.signUpStackView.frame.height - 10, this: signInButtonBottomConstraint, up: false)
     }
     
     
-    @IBAction func onSignInTouchDown(_ sender: Any) {
+    @objc func onSignInTouchDown() {
         self.signInButton.onTouchDown()
     }
     
     
-    @IBAction func onSignInTouchUpOutside(_ sender: Any) {
+    @objc func onSignInTouchUpOutside() {
         self.signInButton.onTouchUpOutside()
     }
     
-    @IBAction func onSignIn(_ sender: Any) {
+    @objc func onSignIn() {
         self.sendLoginRequest()
     }
     
-    @IBAction func onSignUp(_ sender: Any) {
+    @objc func onSignUp() {
         self.dismiss(animated: true)
     }
     
-    @IBAction func onForgotPassword(_ sender: Any) {
+    @objc func onForgotPassword() {
         let passwordStoryboard: UIStoryboard = UIStoryboard(name: "Password", bundle: .main)
         let passwordViewController: PasswordViewController = passwordStoryboard.instantiateViewController(identifier: "PasswordScreen")
-        
+
         passwordViewController.mainViewController = self.mainViewController
-        
+
         self.present(passwordViewController, animated: true)
     }
-    
     
     private func sendLoginRequest() {
         // Hide keyboard if open.
@@ -139,7 +201,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         
         self.signInButton.disable()
         
-        guard let username = usernameTextField.text, let password = passwordTextField.text else {
+        guard let username = usernameTextFieldView.textField.text, let password = passwordTextFieldView.textField.text else {
             self.signInButton.enable()
             return
         }
@@ -166,5 +228,95 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
                 }
             }
         }
+    }
+    
+    private func setupViewLabels() {
+        self.viewTitle.setup(in: self.view, as: "Hey, welcome back 👋")
+        self.viewSubtitle.setup(in: self.view, as: "you have been missed! jump right in and continue from where you have left")
+        
+        NSLayoutConstraint.activate([
+            self.viewTitle.topAnchor.constraint(equalTo: self.cancelView.bottomAnchor, constant: Dimensions.verticalSpacing20),
+            self.viewTitle.leadingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leadingAnchor, constant: 20),
+            self.viewTitle.trailingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.trailingAnchor, constant: -20),
+            
+            self.viewSubtitle.topAnchor.constraint(equalTo: self.viewTitle.bottomAnchor),
+            self.viewSubtitle.leadingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leadingAnchor, constant: 20),
+            self.viewSubtitle.trailingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.trailingAnchor, constant: -20),
+        ])
+    }
+    
+    private func setupScrollView() {
+        self.view.addSubview(self.scrollView)
+        
+        NSLayoutConstraint.activate([
+            self.scrollView.topAnchor.constraint(equalTo: self.viewSubtitle.bottomAnchor, constant: Dimensions.verticalSpacing20 * 1.5),
+            self.scrollView.leadingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leadingAnchor),
+            self.scrollView.trailingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.trailingAnchor),
+            self.scrollView.bottomAnchor.constraint(equalTo: self.signInButton.topAnchor, constant: -Dimensions.verticalSpacing20)
+        ])
+        
+        self.scrollView.addSubview(self.stackView)
+        
+        NSLayoutConstraint.activate([
+            self.stackView.topAnchor.constraint(equalTo: self.scrollView.topAnchor, constant: Dimensions.verticalSpacing20),
+            self.stackView.leadingAnchor.constraint(equalTo: self.scrollView.leadingAnchor, constant: 20),
+            self.stackView.trailingAnchor.constraint(equalTo: self.scrollView.trailingAnchor, constant: -20),
+            self.stackView.bottomAnchor.constraint(equalTo: self.scrollView.bottomAnchor, constant: -Dimensions.verticalSpacing20),
+            self.stackView.widthAnchor.constraint(equalToConstant: UIScreen.main.bounds.width - 40)
+        ])
+        
+        self.stackView.addArrangedSubview(self.usernameTextFieldView)
+        self.stackView.addArrangedSubview(self.passwordTextFieldView)
+        self.stackView.addArrangedSubview(self.forgotPasswordLabel)
+    }
+    
+    private func setupTextFieldViews() {
+        self.usernameTextFieldView.text = "Username"
+        self.usernameTextFieldView.textField.delegate = self
+        self.usernameTextFieldView.textField.keyboardType = .namePhonePad
+        self.usernameTextFieldView.textField.textContentType = .username
+        self.usernameTextFieldView.textField.returnKeyType = .continue
+        self.usernameTextFieldView.textField.setup(with: "Enter your username")
+        
+        self.passwordTextFieldView.text = "Password"
+        self.passwordTextFieldView.textField.delegate = self
+        self.passwordTextFieldView.textField.keyboardType = .default
+        self.passwordTextFieldView.textField.textContentType = .password
+        self.passwordTextFieldView.textField.returnKeyType = .done
+        self.passwordTextFieldView.textField.isSecureTextEntry = true
+        self.passwordTextFieldView.textField.setup(with: "Enter your password")
+    }
+    
+    private func setupSignInButton() {
+        self.signInButton.addTarget(self, action: #selector(onSignIn), for: .touchUpInside)
+        self.signInButton.addTarget(self, action: #selector(onSignInTouchUpOutside), for: .touchUpOutside)
+        self.signInButton.addTarget(self, action: #selector(onSignInTouchDown), for: .touchDown)
+        
+        self.signInButton.width = UIScreen.main.bounds.width - 40
+        self.signInButton.height = self.signInButton.width / 8
+        self.signInButton.setup(in: self.view, withTitle: "Sign in")
+        
+        // Update frame to set correct sign in button bottom constraint.
+        self.view.layoutIfNeeded()
+        
+        self.signInButtonBottomConstraint = self.signInButton.bottomAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.bottomAnchor, constant: -Dimensions.verticalSpacing20 - self.signUpStackView.frame.height - 10)
+        
+        NSLayoutConstraint.activate([
+            self.signInButton.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 20),
+            self.signInButton.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: -20),
+            self.signInButtonBottomConstraint
+        ])
+    }
+    
+    private func setupSignUpLabels() {
+        self.view.addSubview(signUpStackView)
+
+        self.signUpStackView.addArrangedSubview(signUpPromptLabel)
+        self.signUpStackView.addArrangedSubview(signUpLabel)
+        
+        NSLayoutConstraint.activate([
+            self.signUpStackView.centerXAnchor.constraint(equalTo: self.view.centerXAnchor),
+            self.signUpStackView.bottomAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.bottomAnchor, constant: -10)
+        ])
     }
 }

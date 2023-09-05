@@ -123,7 +123,6 @@
 		CAF8ECB92A2E205700179EF1 /* Credentials.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAF8ECB82A2E205700179EF1 /* Credentials.swift */; };
 		CAF8ECBD2A2F6CFC00179EF1 /* ActivityIndicatorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAF8ECBC2A2F6CFC00179EF1 /* ActivityIndicatorExtension.swift */; };
 		CAF8ECBF2A2F741900179EF1 /* URLPath.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAF8ECBE2A2F741900179EF1 /* URLPath.swift */; };
-		CAF8ECC12A2F767600179EF1 /* Login.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CAF8ECC02A2F767600179EF1 /* Login.storyboard */; };
 		CAF8ECC32A2F78A600179EF1 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAF8ECC22A2F78A600179EF1 /* LoginViewController.swift */; };
 		CAFED48D2A02496E00FB4B9B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAFED48C2A02496E00FB4B9B /* AppDelegate.swift */; };
 		CAFED48F2A02496E00FB4B9B /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAFED48E2A02496E00FB4B9B /* SceneDelegate.swift */; };
@@ -268,7 +267,6 @@
 		CAF8ECB82A2E205700179EF1 /* Credentials.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Credentials.swift; sourceTree = "<group>"; };
 		CAF8ECBC2A2F6CFC00179EF1 /* ActivityIndicatorExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityIndicatorExtension.swift; sourceTree = "<group>"; };
 		CAF8ECBE2A2F741900179EF1 /* URLPath.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLPath.swift; sourceTree = "<group>"; };
-		CAF8ECC02A2F767600179EF1 /* Login.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Login.storyboard; sourceTree = "<group>"; };
 		CAF8ECC22A2F78A600179EF1 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		CAFED4892A02496E00FB4B9B /* GridRunner.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GridRunner.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CAFED48C2A02496E00FB4B9B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -397,7 +395,6 @@
 		CA4E3F502A07A75800D36266 /* Authentication */ = {
 			isa = PBXGroup;
 			children = (
-				CAF8ECC02A2F767600179EF1 /* Login.storyboard */,
 				CAC833642A5BEDD500EED95B /* Password.storyboard */,
 			);
 			path = Authentication;
@@ -989,7 +986,6 @@
 				CA0AAC752A25D6D3008367FB /* Kanit-ExtraBoldItalic.ttf in Resources */,
 				CA0AAC792A25D6D3008367FB /* Kanit-LightItalic.ttf in Resources */,
 				CAFED4962A02497000FB4B9B /* Assets.xcassets in Resources */,
-				CAF8ECC12A2F767600179EF1 /* Login.storyboard in Resources */,
 				CA0AAC7E2A25D6D3008367FB /* Kanit-Regular.ttf in Resources */,
 				CA0AAC7A2A25D6D3008367FB /* Kanit-Thin.ttf in Resources */,
 				CA0AAC852A25D6D3008367FB /* Kanit-ExtraLightItalic.ttf in Resources */,

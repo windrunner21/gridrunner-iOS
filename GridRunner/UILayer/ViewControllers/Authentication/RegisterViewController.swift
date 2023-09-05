@@ -171,11 +171,8 @@ class RegisterViewController: UIViewController, UITextFieldDelegate {
     }
     
     @objc func onSignIn() {
-        let loginStoryboard: UIStoryboard = UIStoryboard(name: "Login", bundle: .main)
-        let loginViewController: LoginViewController = loginStoryboard.instantiateViewController(identifier: "LoginScreen")
-
+        let loginViewController: LoginViewController = LoginViewController()
         loginViewController.mainViewController = self.mainViewController
-
         self.present(loginViewController, animated: true)
     }
     
@@ -286,6 +283,7 @@ class RegisterViewController: UIViewController, UITextFieldDelegate {
         self.signUpButton.height = self.signUpButton.width / 8
         self.signUpButton.setup(in: self.view, withTitle: "Sign up")
         
+        // Update frame to set correct sign up button bottom constraint.
         self.view.layoutIfNeeded()
         
         self.signUpButtonBottomConstraint = self.signUpButton.bottomAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.bottomAnchor, constant: -Dimensions.verticalSpacing20 - self.signInStackView.frame.height - 10)
