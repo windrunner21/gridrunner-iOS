@@ -104,7 +104,6 @@
 		CAB729012A64A22200BB4908 /* RoleType.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAB729002A64A22200BB4908 /* RoleType.swift */; };
 		CAB729032A64A28F00BB4908 /* RoleTypeExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAB729022A64A28F00BB4908 /* RoleTypeExtension.swift */; };
 		CAB729062A64A5E400BB4908 /* Friendly.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAB729052A64A5E400BB4908 /* Friendly.swift */; };
-		CAB7290A2A6554FC00BB4908 /* JoinRoomViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAB729092A6554FC00BB4908 /* JoinRoomViewController.swift */; };
 		CAB7290C2A65CDD900BB4908 /* RoomLoading.xib in Resources */ = {isa = PBXBuildFile; fileRef = CAB7290B2A65CDD900BB4908 /* RoomLoading.xib */; };
 		CAB7290E2A65CE5800BB4908 /* RoomLoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAB7290D2A65CE5800BB4908 /* RoomLoadingView.swift */; };
 		CAC833672A5BEE3B00EED95B /* PasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAC833662A5BEE3B00EED95B /* PasswordViewController.swift */; };
@@ -246,7 +245,6 @@
 		CAB729002A64A22200BB4908 /* RoleType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoleType.swift; sourceTree = "<group>"; };
 		CAB729022A64A28F00BB4908 /* RoleTypeExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoleTypeExtension.swift; sourceTree = "<group>"; };
 		CAB729052A64A5E400BB4908 /* Friendly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Friendly.swift; sourceTree = "<group>"; };
-		CAB729092A6554FC00BB4908 /* JoinRoomViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JoinRoomViewController.swift; sourceTree = "<group>"; };
 		CAB7290B2A65CDD900BB4908 /* RoomLoading.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RoomLoading.xib; sourceTree = "<group>"; };
 		CAB7290D2A65CE5800BB4908 /* RoomLoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoomLoadingView.swift; sourceTree = "<group>"; };
 		CAC833662A5BEE3B00EED95B /* PasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordViewController.swift; sourceTree = "<group>"; };
@@ -639,7 +637,6 @@
 			isa = PBXGroup;
 			children = (
 				CAB728FC2A648EBB00BB4908 /* CreateRoomViewController.swift */,
-				CAB729092A6554FC00BB4908 /* JoinRoomViewController.swift */,
 			);
 			path = Rooms;
 			sourceTree = "<group>";
@@ -1026,7 +1023,6 @@
 				CAF8ECAE2A2DC38200179EF1 /* Method.swift in Sources */,
 				CA25B1D22A56E9B50063CBA3 /* AblyAuthDelegate.swift in Sources */,
 				CA852A4B2A38655A00961E65 /* AblyJWTService.swift in Sources */,
-				CAB7290A2A6554FC00BB4908 /* JoinRoomViewController.swift in Sources */,
 				CAF8ECB52A2E1FCE00179EF1 /* LoginCredentials.swift in Sources */,
 				CAAA1CE32AA07138007886B9 /* GridRunLabel.swift in Sources */,
 				CAB12C4B2AA527E500BF71E1 /* ProfileItemView.swift in Sources */,

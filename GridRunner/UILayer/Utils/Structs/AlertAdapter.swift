@@ -117,7 +117,7 @@ class AlertAdapter {
         return alert
     }
     
-    func createJoinRoomAlert() -> UIAlertController {
+    func createJoinRoomAlert(completion: @escaping (UIAlertController?) -> Void) -> UIAlertController {
         let alert = UIAlertController(title: "Join Room", message: nil, preferredStyle: .alert)
         
         alert.addTextField { (textField) in
@@ -125,104 +125,95 @@ class AlertAdapter {
             textField.returnKeyType = .done
             textField.keyboardType = .namePhonePad
         }
-        
-        alert.addAction(
-            UIAlertAction(
-                title: NSLocalizedString("Cancel", comment: "Default action"),
-                style: .default,
-                handler: { _ in
-                    alert.dismiss(animated: true)
+                
+        let cancelAction = UIAlertAction(
+            title: NSLocalizedString("Cancel", comment: "Default action"),
+            style: .default,
+            handler: { _ in
+                alert.dismiss(animated: true)
+            }
+        )
+        let joinAction = UIAlertAction(
+            title: NSLocalizedString("Join", comment: "Default action"),
+            style: .default,
+            handler: { _ in
+                // MARK: not to dismiss it right away
+                alert.view.isUserInteractionEnabled = false
+                
+                if let textField = alert.textFields?.first {
+                    guard let roomCode = textField.text else {
+                        completion(self.createNetworkErrorAlert())
+                        return
+                    }
+
+                    GameSessionDetails.shared.setRoomCode(to: roomCode)
+
+                    AblyJWTService().getJWT() { response, token in
+                        switch response {
+                        case .success:
+                            guard let token = token else {
+                                DispatchQueue.main.async {
+                                    completion(self.createNetworkErrorAlert())
+                                }
+                                return
+                            }
+
+                            AblyService.shared.update(with: token) { response, clientId in
+                                switch response {
+                                case .success:
+                                    guard let _ = clientId else {
+                                        DispatchQueue.main.async {
+                                            completion(self.createNetworkErrorAlert())
+                                        }
+                                        return
+                                    }
+
+                                    GameService().joinRoom(withCode: roomCode) { response in
+                                        switch response {
+                                        case .success:
+                                            DispatchQueue.main.async {
+                                                // MARK: disable button action
+                                                alert.view.isUserInteractionEnabled = true
+                                                alert.dismiss(animated: true) {
+                                                    NotificationCenter.default.post(name: NSNotification.Name("Success::Matchmaking::Custom::Join"), object: nil)
+                                                }
+                                            }
+                                        case .networkError:
+                                            DispatchQueue.main.async {
+                                                completion(self.createNetworkErrorAlert())
+                                            }
+                                        case .requestError:
+                                            DispatchQueue.main.async {
+                                                completion(self.createServiceRequestErrorAlert())
+                                            }
+                                        case .decoderError:
+                                            DispatchQueue.main.async {
+                                                completion(self.createDecoderErrorAlert())
+                                            }
+                                        }
+                                    }
+                                default:
+                                    DispatchQueue.main.async {
+                                        completion(self.createNetworkErrorAlert())
+                                    }
+                                }
+                            }
+                        case .requestError:
+                            DispatchQueue.main.async {
+                                completion(self.createServiceRequestErrorAlert())
+                            }
+                        default:
+                            DispatchQueue.main.async {
+                                completion(self.createNetworkErrorAlert())
+                            }
+                        }
+                    }
                 }
-            )
+            }
         )
         
-        alert.addAction(
-            UIAlertAction(
-                title: NSLocalizedString("Join", comment: "Default action"),
-                style: .default,
-                handler: { _ in
-//                    if let textField = alert.textFields?.first {
-//                        guard let roomCode = textField.text else {
-//                            DispatchQueue.main.async {
-//                                let alert = self.alertAdapter.createNetworkErrorAlert()
-//                                self.present(alert, animated: true)
-//                            }
-//                            return
-//                        }
-//                        
-//                        GameSessionDetails.shared.setRoomCode(to: roomCode)
-//                        
-//                        AblyJWTService().getJWT() { response, token in
-//                            switch response {
-//                            case .success:
-//                                guard let token = token else {
-//                                    DispatchQueue.main.async {
-//                                        let alert = self.alertAdapter.createNetworkErrorAlert()
-//                                        self.present(alert, animated: true)
-//                                    }
-//                                    return
-//                                }
-//                            
-//                                AblyService.shared.update(with: token) { response, clientId in
-//                                    switch response {
-//                                    case .success:
-//                                        guard let _ = clientId else {
-//                                            DispatchQueue.main.async {
-//                                                let alert = self.alertAdapter.createNetworkErrorAlert()
-//                                                self.present(alert, animated: true)
-//                                            }
-//                                            return
-//                                        }
-//                                    
-//                                        GameService().joinRoom(withCode: roomCode) { response in
-//                                            switch response {
-//                                            case .success:
-//                                                DispatchQueue.main.async {
-//                                                    self.joinRoomButton.enable()
-//                                                    self.mainViewController.dismiss(animated: true) {
-//                                                        NotificationCenter.default.post(name: NSNotification.Name("Success::Matchmaking::Custom::Join"), object: nil)
-//                                                    }
-//                                                }
-//                                            case .networkError:
-//                                                DispatchQueue.main.async {
-//                                                    let alert = self.alertAdapter.createNetworkErrorAlert()
-//                                                    self.present(alert, animated: true)
-//                                                }
-//                                            case .requestError:
-//                                                DispatchQueue.main.async {
-//                                                    let alert = self.alertAdapter.createServiceRequestErrorAlert()
-//                                                    self.present(alert, animated: true)
-//                                                }
-//                                            case .decoderError:
-//                                                DispatchQueue.main.async {
-//                                                    let alert = self.alertAdapter.createDecoderErrorAlert()
-//                                                    self.present(alert, animated: true)
-//                                                }
-//                                            }
-//                                        }
-//                                    default:
-//                                        DispatchQueue.main.async {
-//                                            let alert = self.alertAdapter.createNetworkErrorAlert()
-//                                            self.present(alert, animated: true)
-//                                        }
-//                                    }
-//                                }
-//                            case .requestError:
-//                                DispatchQueue.main.async {
-//                                    let alert = self.alertAdapter.createServiceRequestErrorAlert()
-//                                    self.present(alert, animated: true)
-//                                }
-//                            default:
-//                                DispatchQueue.main.async {
-//                                    let alert = self.alertAdapter.createNetworkErrorAlert()
-//                                    self.present(alert, animated: true)
-//                                }
-//                            }
-//                        }
-//                    }
-                }
-            )
-        )
+        alert.addAction(cancelAction)
+        alert.addAction(joinAction)
         
         return alert
     }

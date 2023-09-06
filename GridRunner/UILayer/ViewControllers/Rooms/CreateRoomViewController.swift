@@ -54,12 +54,6 @@ class CreateRoomViewController: UIViewController {
     
     
     @IBAction func onJoinRoom(_ sender: Any) {
-        let joinRoomStoryboard: UIStoryboard = UIStoryboard(name: "JoinRoom", bundle: .main)
-        let joinRoomViewController: JoinRoomViewController = joinRoomStoryboard.instantiateViewController(identifier: "JoinRoomScreen")
-        
-        joinRoomViewController.mainViewController = self.mainViewController
-        
-        self.present(joinRoomViewController, animated: true)
     }
     
     @IBAction func onCreateRoomTouchDown(_ sender: Any) {

@@ -229,7 +229,13 @@ class MainViewController: UIViewController {
         joinRoomButton.icon = "➡️"
         joinRoomButton.text = "Join Room"
         joinRoomButton.menuAction = { [weak self] in
-            let alert = self?.alertAdapter.createJoinRoomAlert()
+            
+            let alert = self?.alertAdapter.createJoinRoomAlert() { errorAlert in
+                if let errorAlert = errorAlert {
+                    self?.present(errorAlert, animated: true)
+                }
+            }
+            
             guard let alert = alert else { return }
             self?.present(alert, animated: true)
         }
