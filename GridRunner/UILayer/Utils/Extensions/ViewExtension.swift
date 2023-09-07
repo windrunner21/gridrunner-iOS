@@ -9,7 +9,7 @@ import UIKit
 
 extension UIView {
     func addElevation() {
-        self.layer.shadowColor = UIColor.black.withAlphaComponent(0.4).cgColor
+        self.layer.shadowColor = self.traitCollection.userInterfaceStyle == .dark ? UIColor.white.cgColor : UIColor.black.withAlphaComponent(0.4).cgColor
         self.layer.shadowOpacity = 0.5
         self.layer.shadowOffset = .zero
         self.layer.shadowRadius = 10

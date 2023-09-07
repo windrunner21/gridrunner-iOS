@@ -96,4 +96,9 @@ class ProfileItemView: UIView {
         self.backgroundColor = .white
         self.addButtonElevation()
     }
+    
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        super.traitCollectionDidChange(previousTraitCollection)
+        self.addButtonElevation()
+     }
 }

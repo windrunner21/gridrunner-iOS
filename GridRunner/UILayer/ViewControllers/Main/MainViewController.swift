@@ -73,8 +73,6 @@ class MainViewController: UIViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(openGameScreen), name: NSNotification.Name("Success::Matchmaking"), object: nil)
 
         NotificationCenter.default.addObserver(self, selector: #selector(openCustomGameScreen), name: NSNotification.Name("Success::Matchmaking::Custom"), object: nil)
-        
-        NotificationCenter.default.addObserver(self, selector: #selector(joinCustomGameScreen), name: NSNotification.Name("Success::Matchmaking::Custom::Join"), object: nil)
     }
     
     @objc func openGameScreen(_ notification: Notification) {
@@ -83,10 +81,6 @@ class MainViewController: UIViewController {
     
     @objc func openCustomGameScreen(_ notification: Notification) {
         self.startGame(custom: true, isJoining: false)
-    }
-    
-    @objc func joinCustomGameScreen(_ notification: Notification) {
-        self.startGame(custom: false, isJoining: true)
     }
     
     @objc func openProfileMenu(_ gesture: UITapGestureRecognizer) {
@@ -171,6 +165,28 @@ class MainViewController: UIViewController {
         self.present(createRoomViewController, animated: true)
     }
     
+    private func openJoinRoomAlert() {
+        let loadingOverlayView = LoadingOverlayView()
+        self.view.addSubview(loadingOverlayView)
+        
+        let alert = self.alertAdapter.createJoinRoomAlert(loadingOverlayView: loadingOverlayView) { errorAlert, response in
+            UIView.animate(withDuration: 0.3, animations: {
+                loadingOverlayView.removeFromSuperview()
+                
+                if let errorAlert = errorAlert {
+                    self.present(errorAlert, animated: true)
+                    return
+                }
+                
+                if response == .success {
+                    self.startGame(custom: false, isJoining: true)
+                }
+            })
+        }
+        
+        self.present(alert, animated: true)
+    }
+    
     func checkUserAuthentication() {
         self.rankedPlayView.shouldBeEnabled(
             if: User.shared.isLoggedIn,
@@ -229,15 +245,7 @@ class MainViewController: UIViewController {
         joinRoomButton.icon = "➡️"
         joinRoomButton.text = "Join Room"
         joinRoomButton.menuAction = { [weak self] in
-            
-            let alert = self?.alertAdapter.createJoinRoomAlert() { errorAlert in
-                if let errorAlert = errorAlert {
-                    self?.present(errorAlert, animated: true)
-                }
-            }
-            
-            guard let alert = alert else { return }
-            self?.present(alert, animated: true)
+            self?.openJoinRoomAlert()
         }
         
         createRoomButton.icon = "🆕"

@@ -13,6 +13,7 @@ class ProfileViewController: UIViewController {
     var alertAdapter: AlertAdapter = AlertAdapter()
     
     // Programmable UI properties.
+    let grayLayer = CALayer()
     let cancelView: CancelView = CancelView()
     let profileView: ProfileView = ProfileView()
     
@@ -178,6 +179,9 @@ class ProfileViewController: UIViewController {
         self.runnerRank.rankType = .runner
         self.seekerRank.rankType = .seeker
         
+        self.runnerRank.backgroundColor = UIColor(named: "Background")
+        self.seekerRank.backgroundColor = UIColor(named: "Background")
+        
         let stackView = UIStackView()
         stackView.translatesAutoresizingMaskIntoConstraints = false
         stackView.axis = .horizontal
@@ -201,11 +205,13 @@ class ProfileViewController: UIViewController {
         self.logoutView.title = "Logout"
         self.logoutView.image = "arrow.left.circle.fill"
         self.logoutView.imageColor = UIColor(named: "Red") ?? .systemRed
+        self.logoutView.textColor = UIColor(named: "Black") ?? .systemBackground
+        self.logoutView.backgroundColor = UIColor(named: "Background")
         
         self.deleteAccountView.title = "Delete Account"
         self.deleteAccountView.image = "trash.circle.fill"
-        self.deleteAccountView.imageColor = .white
-        self.deleteAccountView.textColor = .white
+        self.deleteAccountView.imageColor = UIColor(named: "Background") ?? .systemBackground
+        self.deleteAccountView.textColor = UIColor(named: "Background") ?? .systemBackground
         self.deleteAccountView.backgroundColor = UIColor(named: "Red")
         
         self.view.addSubview(self.logoutView)
@@ -222,11 +228,10 @@ class ProfileViewController: UIViewController {
     }
     
     private func setupGrayBackgroundColor() {
-        let grayLayer = CALayer()
         let screenWidth = UIScreen.main.bounds.width
         let screenHeight = UIScreen.main.bounds.height
         
-        grayLayer.backgroundColor = UIColor.systemGray6.cgColor
+        self.grayLayer.backgroundColor = UIColor.systemGray6.cgColor
         self.view.layoutIfNeeded()
         let yPosition = self.emailLabel.frame.maxY + Dimensions.verticalSpacing20
         
@@ -234,4 +239,9 @@ class ProfileViewController: UIViewController {
         
         self.view.layer.insertSublayer(grayLayer, at: 0)
     }
+    
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+       super.traitCollectionDidChange(previousTraitCollection)
+       self.grayLayer.backgroundColor = UIColor.systemGray6.cgColor
+     }
 }
