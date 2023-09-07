@@ -157,11 +157,8 @@ class MainViewController: UIViewController {
     }
     
     private func openCreateRoomScreen() {
-        let createRoomStoryboard: UIStoryboard = UIStoryboard(name: "CreateRoom", bundle: .main)
-        let createRoomViewController: CreateRoomViewController = createRoomStoryboard.instantiateViewController(identifier: "CreateRoomScreen")
-        
+        let createRoomViewController: CreateRoomViewController = CreateRoomViewController()
         createRoomViewController.mainViewController = self
-        
         self.present(createRoomViewController, animated: true)
     }
     

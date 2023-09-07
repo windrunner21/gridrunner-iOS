@@ -101,7 +101,6 @@
 		CAB12C4B2AA527E500BF71E1 /* ProfileItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAB12C4A2AA527E500BF71E1 /* ProfileItemView.swift */; };
 		CAB6EAAF2A2A086C00997852 /* ButtonExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAB6EAAE2A2A086C00997852 /* ButtonExtension.swift */; };
 		CAB728FD2A648EBB00BB4908 /* CreateRoomViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAB728FC2A648EBB00BB4908 /* CreateRoomViewController.swift */; };
-		CAB728FF2A648EF200BB4908 /* CreateRoom.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CAB728FE2A648EF200BB4908 /* CreateRoom.storyboard */; };
 		CAB729012A64A22200BB4908 /* RoleType.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAB729002A64A22200BB4908 /* RoleType.swift */; };
 		CAB729032A64A28F00BB4908 /* RoleTypeExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAB729022A64A28F00BB4908 /* RoleTypeExtension.swift */; };
 		CAB729062A64A5E400BB4908 /* Friendly.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAB729052A64A5E400BB4908 /* Friendly.swift */; };
@@ -243,7 +242,6 @@
 		CAB12C4A2AA527E500BF71E1 /* ProfileItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileItemView.swift; sourceTree = "<group>"; };
 		CAB6EAAE2A2A086C00997852 /* ButtonExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonExtension.swift; sourceTree = "<group>"; };
 		CAB728FC2A648EBB00BB4908 /* CreateRoomViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateRoomViewController.swift; sourceTree = "<group>"; };
-		CAB728FE2A648EF200BB4908 /* CreateRoom.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = CreateRoom.storyboard; sourceTree = "<group>"; };
 		CAB729002A64A22200BB4908 /* RoleType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoleType.swift; sourceTree = "<group>"; };
 		CAB729022A64A28F00BB4908 /* RoleTypeExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoleTypeExtension.swift; sourceTree = "<group>"; };
 		CAB729052A64A5E400BB4908 /* Friendly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Friendly.swift; sourceTree = "<group>"; };
@@ -652,14 +650,6 @@
 			name = Friendly;
 			sourceTree = "<group>";
 		};
-		CAC833602A5BED8300EED95B /* Rooms */ = {
-			isa = PBXGroup;
-			children = (
-				CAB728FE2A648EF200BB4908 /* CreateRoom.storyboard */,
-			);
-			path = Rooms;
-			sourceTree = "<group>";
-		};
 		CAC833612A5BED8C00EED95B /* Main */ = {
 			isa = PBXGroup;
 			children = (
@@ -833,7 +823,6 @@
 			isa = PBXGroup;
 			children = (
 				CAC833632A5BED9800EED95B /* Launch */,
-				CAC833602A5BED8300EED95B /* Rooms */,
 				CA4E3F512A07A7FB00D36266 /* Game */,
 			);
 			path = Storyboards;
@@ -962,7 +951,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CAB728FF2A648EF200BB4908 /* CreateRoom.storyboard in Resources */,
 				CA0AAC802A25D6D3008367FB /* Kanit-ExtraLight.ttf in Resources */,
 				CA852A4F2A387D6F00961E65 /* GameSearch.xib in Resources */,
 				CA4E3F542A07A80E00D36266 /* Game.storyboard in Resources */,

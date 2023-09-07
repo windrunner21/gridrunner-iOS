@@ -13,19 +13,24 @@ class CreateRoomViewController: UIViewController {
     private let alertAdapter: AlertAdapter = AlertAdapter()
     private var currentRole: RoleType!
     
-    @IBOutlet weak var cancelView: UIView!
+    // Programmable UI properties.
+    let cancelView: CancelView = CancelView()
+    let viewTitle: TitleLabel = TitleLabel()
+    let viewSubtitle: SubtitleLabel = SubtitleLabel()
     
-    @IBOutlet weak var rolePopUpButton: UIButton!
-    
-    @IBOutlet weak var createRoomButton: UIButton!
-    @IBOutlet weak var joinRoomButton: UIButton!
+    // @IBOutlet weak var rolePopUpButton: UIButton!
+    let createRoomButton: PrimaryButton = PrimaryButton()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.createRoomButton.setup()
+        self.view.backgroundColor = UIColor(named: "Background")
+
+        self.cancelView.setup(in: self.view)
+        self.setupViewLabels()
+        self.setupCreateRoomButtonButton()
         
-        self.setupRolePopUp()
+        //self.setupRolePopUp()
         
         // Close current view, dismiss with animation, on cancel view tap.
         let cancelViewTap = UITapGestureRecognizer(target: self, action: #selector(closeView))
@@ -36,35 +41,35 @@ class CreateRoomViewController: UIViewController {
         self.mainViewController.dismiss(animated: true)
     }
     
-    private func setupRolePopUp() {
-        self.currentRole = .runner
-        
-        self.rolePopUpButton.menu = UIMenu(children: [
-            UIAction(title: "Runner", handler: {_ in
-                self.currentRole = .runner
-            }),
-            UIAction(title: "Seeker", handler: {_ in
-                self.currentRole = .seeker
-            }),
-            UIAction(title: "Random", handler: {_ in
-                self.currentRole = .random
-            })
-        ])
-    }
+//    private func setupRolePopUp() {
+//        self.currentRole = .runner
+//
+//        self.rolePopUpButton.menu = UIMenu(children: [
+//            UIAction(title: "Runner", handler: {_ in
+//                self.currentRole = .runner
+//            }),
+//            UIAction(title: "Seeker", handler: {_ in
+//                self.currentRole = .seeker
+//            }),
+//            UIAction(title: "Random", handler: {_ in
+//                self.currentRole = .random
+//            })
+//        ])
+//    }
     
-    
-    @IBAction func onJoinRoom(_ sender: Any) {
-    }
-    
-    @IBAction func onCreateRoomTouchDown(_ sender: Any) {
+    @objc func onCreateRoomTouchDown() {
         self.createRoomButton.onTouchDown()
     }
     
-    @IBAction func onCreateRoomTouchUpOutside(_ sender: Any) {
+    @objc func onCreateRoomTouchUpOutside() {
         self.createRoomButton.onTouchUpOutside()
     }
     
-    @IBAction func onCreateRoom(_ sender: Any) {
+    @objc func onCreateRoom() {
+        self.sendCreateRoomRequest()
+    }
+    
+    private func sendCreateRoomRequest() {
         self.createRoomButton.disable()
         AblyJWTService().getJWT() { response, token in
             switch response {
@@ -161,5 +166,36 @@ class CreateRoomViewController: UIViewController {
                 }
             }
         }
+    }
+    
+    private func setupViewLabels() {
+        self.viewTitle.setup(in: self.view, as: "Create custom room 🚪")
+        self.viewSubtitle.setup(in: self.view, as: "make your own customizable game for yourself and your friends. more customization options are coming 🔜")
+        
+        NSLayoutConstraint.activate([
+            self.viewTitle.topAnchor.constraint(equalTo: self.cancelView.bottomAnchor, constant: Dimensions.verticalSpacing20),
+            self.viewTitle.leadingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leadingAnchor, constant: 20),
+            self.viewTitle.trailingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.trailingAnchor, constant: -20),
+            
+            self.viewSubtitle.topAnchor.constraint(equalTo: self.viewTitle.bottomAnchor),
+            self.viewSubtitle.leadingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leadingAnchor, constant: 20),
+            self.viewSubtitle.trailingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.trailingAnchor, constant: -20),
+        ])
+    }
+    
+    private func setupCreateRoomButtonButton() {
+        self.createRoomButton.addTarget(self, action: #selector(onCreateRoom), for: .touchUpInside)
+        self.createRoomButton.addTarget(self, action: #selector(onCreateRoomTouchUpOutside), for: .touchUpOutside)
+        self.createRoomButton.addTarget(self, action: #selector(onCreateRoomTouchDown), for: .touchDown)
+        
+        self.createRoomButton.width = UIScreen.main.bounds.width - 40
+        self.createRoomButton.height = self.createRoomButton.width / 8
+        self.createRoomButton.setup(in: self.view, withTitle: "Create room")
+        
+        NSLayoutConstraint.activate([
+            self.createRoomButton.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 20),
+            self.createRoomButton.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: -20),
+            self.createRoomButton.bottomAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.bottomAnchor, constant: -10)
+        ])
     }
 }
