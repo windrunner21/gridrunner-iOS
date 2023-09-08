@@ -176,8 +176,8 @@ class ProfileViewController: UIViewController {
         self.runnerRank.rank = User.shared.runnerElo
         self.seekerRank.rank = User.shared.seekerElo
         
-        self.runnerRank.rankType = .runner
-        self.seekerRank.rankType = .seeker
+        self.runnerRank.playerType = .runner
+        self.seekerRank.playerType = .seeker
         
         self.runnerRank.backgroundColor = UIColor(named: "Background")
         self.seekerRank.backgroundColor = UIColor(named: "Background")
@@ -204,14 +204,14 @@ class ProfileViewController: UIViewController {
     private func setupProfileItemViews() {
         self.logoutView.title = "Logout"
         self.logoutView.image = "arrow.left.circle.fill"
-        self.logoutView.imageColor = UIColor(named: "Red") ?? .systemRed
-        self.logoutView.textColor = UIColor(named: "Black") ?? .systemBackground
+        self.logoutView.imageColor = UIColor(named: "Red")
+        self.logoutView.textColor = UIColor(named: "Black")
         self.logoutView.backgroundColor = UIColor(named: "Background")
         
         self.deleteAccountView.title = "Delete Account"
         self.deleteAccountView.image = "trash.circle.fill"
-        self.deleteAccountView.imageColor = UIColor(named: "Background") ?? .systemBackground
-        self.deleteAccountView.textColor = UIColor(named: "Background") ?? .systemBackground
+        self.deleteAccountView.imageColor = UIColor(named: "Background")
+        self.deleteAccountView.textColor = UIColor(named: "Background")
         self.deleteAccountView.backgroundColor = UIColor(named: "Red")
         
         self.view.addSubview(self.logoutView)

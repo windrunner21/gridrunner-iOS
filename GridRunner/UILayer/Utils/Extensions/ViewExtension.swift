@@ -26,8 +26,8 @@ extension UIView {
         self.layer.shadowOpacity = 0.0
     }
     
-    func addLightBorder() {
-        self.layer.borderWidth = 0.75
-        self.layer.borderColor = UIColor.systemGray5.cgColor
+    func addBorder(color: UIColor?, width: CGFloat) {
+        self.layer.borderWidth = width
+        self.layer.borderColor = color?.cgColor
     }
 }

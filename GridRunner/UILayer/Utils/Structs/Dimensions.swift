@@ -23,4 +23,5 @@ struct Dimensions {
     static let buttonWidth =  UIScreen.main.bounds.width / 5
     static let roundViewHeight =  UIScreen.main.bounds.width / 10
     static let menuItemViewHeight = UIScreen.main.bounds.width > 400 ? UIScreen.main.bounds.height / 4 : UIScreen.main.bounds.height / 3.5
+    static let roomParameterView = UIScreen.main.bounds.height / 12
 }

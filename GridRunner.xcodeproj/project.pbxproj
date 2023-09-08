@@ -92,16 +92,15 @@
 		CAAA1CE72AA085BF007886B9 /* MenuButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAAA1CE62AA085BF007886B9 /* MenuButton.swift */; };
 		CAAA1CE92AA1D966007886B9 /* PrimaryButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAAA1CE82AA1D966007886B9 /* PrimaryButton.swift */; };
 		CAAF16922AA9FDA9000D8984 /* LoadingOverlayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAAF16912AA9FDA9000D8984 /* LoadingOverlayView.swift */; };
+		CAAF16982AAAF3AE000D8984 /* RoomParameterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAAF16972AAAF3AE000D8984 /* RoomParameterView.swift */; };
+		CAAF169A2AAB536E000D8984 /* PlayerRole.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAAF16992AAB536E000D8984 /* PlayerRole.swift */; };
 		CAAF75022A9E1B3600978B5F /* RoundView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAAF75012A9E1B3600978B5F /* RoundView.swift */; };
 		CAAF75062A9E459100978B5F /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAAF75052A9E459100978B5F /* ProfileView.swift */; };
 		CAB12C452AA2901500BF71E1 /* CancelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAB12C442AA2901500BF71E1 /* CancelView.swift */; };
 		CAB12C472AA4C3C800BF71E1 /* RankView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAB12C462AA4C3C800BF71E1 /* RankView.swift */; };
-		CAB12C492AA4C66600BF71E1 /* RankType.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAB12C482AA4C66600BF71E1 /* RankType.swift */; };
 		CAB12C4B2AA527E500BF71E1 /* ProfileItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAB12C4A2AA527E500BF71E1 /* ProfileItemView.swift */; };
 		CAB6EAAF2A2A086C00997852 /* ButtonExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAB6EAAE2A2A086C00997852 /* ButtonExtension.swift */; };
 		CAB728FD2A648EBB00BB4908 /* CreateRoomViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAB728FC2A648EBB00BB4908 /* CreateRoomViewController.swift */; };
-		CAB729012A64A22200BB4908 /* RoleType.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAB729002A64A22200BB4908 /* RoleType.swift */; };
-		CAB729032A64A28F00BB4908 /* RoleTypeExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAB729022A64A28F00BB4908 /* RoleTypeExtension.swift */; };
 		CAB729062A64A5E400BB4908 /* Friendly.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAB729052A64A5E400BB4908 /* Friendly.swift */; };
 		CAB7290C2A65CDD900BB4908 /* RoomLoading.xib in Resources */ = {isa = PBXBuildFile; fileRef = CAB7290B2A65CDD900BB4908 /* RoomLoading.xib */; };
 		CAB7290E2A65CE5800BB4908 /* RoomLoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAB7290D2A65CE5800BB4908 /* RoomLoadingView.swift */; };
@@ -232,16 +231,15 @@
 		CAAA1CE62AA085BF007886B9 /* MenuButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuButton.swift; sourceTree = "<group>"; };
 		CAAA1CE82AA1D966007886B9 /* PrimaryButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrimaryButton.swift; sourceTree = "<group>"; };
 		CAAF16912AA9FDA9000D8984 /* LoadingOverlayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingOverlayView.swift; sourceTree = "<group>"; };
+		CAAF16972AAAF3AE000D8984 /* RoomParameterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoomParameterView.swift; sourceTree = "<group>"; };
+		CAAF16992AAB536E000D8984 /* PlayerRole.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerRole.swift; sourceTree = "<group>"; };
 		CAAF75012A9E1B3600978B5F /* RoundView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundView.swift; sourceTree = "<group>"; };
 		CAAF75052A9E459100978B5F /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
 		CAB12C442AA2901500BF71E1 /* CancelView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CancelView.swift; sourceTree = "<group>"; };
 		CAB12C462AA4C3C800BF71E1 /* RankView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RankView.swift; sourceTree = "<group>"; };
-		CAB12C482AA4C66600BF71E1 /* RankType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RankType.swift; sourceTree = "<group>"; };
 		CAB12C4A2AA527E500BF71E1 /* ProfileItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileItemView.swift; sourceTree = "<group>"; };
 		CAB6EAAE2A2A086C00997852 /* ButtonExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonExtension.swift; sourceTree = "<group>"; };
 		CAB728FC2A648EBB00BB4908 /* CreateRoomViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateRoomViewController.swift; sourceTree = "<group>"; };
-		CAB729002A64A22200BB4908 /* RoleType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoleType.swift; sourceTree = "<group>"; };
-		CAB729022A64A28F00BB4908 /* RoleTypeExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoleTypeExtension.swift; sourceTree = "<group>"; };
 		CAB729052A64A5E400BB4908 /* Friendly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Friendly.swift; sourceTree = "<group>"; };
 		CAB7290B2A65CDD900BB4908 /* RoomLoading.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RoomLoading.xib; sourceTree = "<group>"; };
 		CAB7290D2A65CE5800BB4908 /* RoomLoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoomLoadingView.swift; sourceTree = "<group>"; };
@@ -519,8 +517,7 @@
 				CA7417B12A56ECCF00A9683A /* Errors */,
 				CA852A382A30B19100961E65 /* UserRole.swift */,
 				CA852A502A39ABC600961E65 /* GameType.swift */,
-				CAB729002A64A22200BB4908 /* RoleType.swift */,
-				CAB12C482AA4C66600BF71E1 /* RankType.swift */,
+				CAAF16992AAB536E000D8984 /* PlayerRole.swift */,
 			);
 			path = System;
 			sourceTree = "<group>";
@@ -537,7 +534,6 @@
 			isa = PBXGroup;
 			children = (
 				CA852A532A39ABF900961E65 /* GameTypeExtension.swift */,
-				CAB729022A64A28F00BB4908 /* RoleTypeExtension.swift */,
 			);
 			name = Extensions;
 			sourceTree = "<group>";
@@ -659,6 +655,7 @@
 				CAAA1CE82AA1D966007886B9 /* PrimaryButton.swift */,
 				CA71F9CC2AA60665007AF4F0 /* TextField.swift */,
 				CA71F9D02AA70172007AF4F0 /* TextFieldView.swift */,
+				CAAF16972AAAF3AE000D8984 /* RoomParameterView.swift */,
 			);
 			path = CustomUI;
 			sourceTree = "<group>";
@@ -1048,7 +1045,6 @@
 				CAB12C4B2AA527E500BF71E1 /* ProfileItemView.swift in Sources */,
 				CAB729062A64A5E400BB4908 /* Friendly.swift in Sources */,
 				CA852A392A30B19100961E65 /* UserRole.swift in Sources */,
-				CAB729012A64A22200BB4908 /* RoleType.swift in Sources */,
 				CA0AAC8E2A26219B008367FB /* MenuItemView.swift in Sources */,
 				CAAA1CE72AA085BF007886B9 /* MenuButton.swift in Sources */,
 				CAF8ECBD2A2F6CFC00179EF1 /* ActivityIndicatorExtension.swift in Sources */,
@@ -1072,8 +1068,8 @@
 				CAC833672A5BEE3B00EED95B /* PasswordViewController.swift in Sources */,
 				CA852A6F2A406E9800961E65 /* LoadingView.swift in Sources */,
 				CA0AAC2E2A0E2F0F008367FB /* Tile.swift in Sources */,
+				CAAF16982AAAF3AE000D8984 /* RoomParameterView.swift in Sources */,
 				CA852A3B2A331B8300961E65 /* UserService.swift in Sources */,
-				CAB729032A64A28F00BB4908 /* RoleTypeExtension.swift in Sources */,
 				CAFED4912A02496E00FB4B9B /* MainViewController.swift in Sources */,
 				CAC833692A5C008400EED95B /* PasswordService.swift in Sources */,
 				CAF8ECA22A2DBD5500179EF1 /* AuthService.swift in Sources */,
@@ -1092,6 +1088,7 @@
 				CA0AAC612A1D1D1D008367FB /* Player.swift in Sources */,
 				CAAF16922AA9FDA9000D8984 /* LoadingOverlayView.swift in Sources */,
 				CAB12C472AA4C3C800BF71E1 /* RankView.swift in Sources */,
+				CAAF169A2AAB536E000D8984 /* PlayerRole.swift in Sources */,
 				CAF8ECA92A2DBF9400179EF1 /* User.swift in Sources */,
 				CAAF75022A9E1B3600978B5F /* RoundView.swift in Sources */,
 				CA4E3F602A0891F300D36266 /* RegisterViewController.swift in Sources */,
@@ -1120,7 +1117,6 @@
 				CAFED48F2A02496E00FB4B9B /* SceneDelegate.swift in Sources */,
 				CA8CBF9A2A4F1FFA003CF44B /* AuthenticationError.swift in Sources */,
 				CAF8EC9F2A2DBD1A00179EF1 /* APIClient.swift in Sources */,
-				CAB12C492AA4C66600BF71E1 /* RankType.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

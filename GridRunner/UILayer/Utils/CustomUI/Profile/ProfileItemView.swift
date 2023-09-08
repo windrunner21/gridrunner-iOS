@@ -50,7 +50,7 @@ class ProfileItemView: UIView {
         }
     }
     
-    var imageColor: UIColor {
+    var imageColor: UIColor? {
         get {
             return imageView.tintColor
         }
@@ -59,7 +59,7 @@ class ProfileItemView: UIView {
         }
     }
     
-    var textColor: UIColor {
+    var textColor: UIColor? {
         get {
             return self.titleLabel.textColor
         }

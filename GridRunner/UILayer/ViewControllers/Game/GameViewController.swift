@@ -478,7 +478,6 @@ class GameViewController: UIViewController {
         
         self.playerTypeLabel.text = player.type == .runner ? "Runner" : "Seeker"
         
-        self.profileView.addLightBorder()
         self.emojiIconView.backgroundColor = player.type == .runner ? UIColor(named: "Red")?.withAlphaComponent(0.5) : UIColor(named: "Black")?.withAlphaComponent(0.5)
         
         self.emojiIconLabel.text = profileIcon.getIcon()
@@ -494,7 +493,6 @@ class GameViewController: UIViewController {
             return
         }
         
-        self.versusProfileView.addLightBorder()
         self.versusEmojiIconView.backgroundColor = player.type == .seeker ? UIColor(named: "Red")?.withAlphaComponent(0.5) : UIColor(named: "Black")?.withAlphaComponent(0.5)
         
         self.versusEmojiIconLabel.text = ProfileIcon().getIcon()

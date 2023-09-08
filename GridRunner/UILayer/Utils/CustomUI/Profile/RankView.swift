@@ -41,9 +41,9 @@ class RankView: UIView {
         }
     }
     
-    var rankType: RankType? {
+    var playerType: PlayerType? {
         didSet {
-            self.rankTypeLabel.text = "your \(self.rankType?.rawValue ?? "player") rank"
+            self.rankTypeLabel.text = "your \(self.playerType?.rawValue ?? "player") rank"
         }
     }
     
