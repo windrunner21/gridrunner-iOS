@@ -58,7 +58,6 @@
 		CA71F9C92AA5DE0A007AF4F0 /* TitleLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA71F9C82AA5DE0A007AF4F0 /* TitleLabel.swift */; };
 		CA71F9CB2AA5DFFB007AF4F0 /* SubtitleLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA71F9CA2AA5DFFB007AF4F0 /* SubtitleLabel.swift */; };
 		CA71F9CD2AA60665007AF4F0 /* TextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA71F9CC2AA60665007AF4F0 /* TextField.swift */; };
-		CA71F9CF2AA613FC007AF4F0 /* ClickableLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA71F9CE2AA613FC007AF4F0 /* ClickableLabel.swift */; };
 		CA71F9D12AA70172007AF4F0 /* TextFieldView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA71F9D02AA70172007AF4F0 /* TextFieldView.swift */; };
 		CA7417B32A56ECE900A9683A /* AblyAuthenticationError.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA7417B22A56ECE900A9683A /* AblyAuthenticationError.swift */; };
 		CA852A312A30A20200961E65 /* AlertAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA852A302A30A20200961E65 /* AlertAdapter.swift */; };
@@ -200,7 +199,6 @@
 		CA71F9C82AA5DE0A007AF4F0 /* TitleLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleLabel.swift; sourceTree = "<group>"; };
 		CA71F9CA2AA5DFFB007AF4F0 /* SubtitleLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubtitleLabel.swift; sourceTree = "<group>"; };
 		CA71F9CC2AA60665007AF4F0 /* TextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextField.swift; sourceTree = "<group>"; };
-		CA71F9CE2AA613FC007AF4F0 /* ClickableLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClickableLabel.swift; sourceTree = "<group>"; };
 		CA71F9D02AA70172007AF4F0 /* TextFieldView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldView.swift; sourceTree = "<group>"; };
 		CA7417B22A56ECE900A9683A /* AblyAuthenticationError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AblyAuthenticationError.swift; sourceTree = "<group>"; };
 		CA852A302A30A20200961E65 /* AlertAdapter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertAdapter.swift; sourceTree = "<group>"; };
@@ -610,25 +608,56 @@
 			path = Game;
 			sourceTree = "<group>";
 		};
+		CAAF16932AAAF154000D8984 /* RoundViews */ = {
+			isa = PBXGroup;
+			children = (
+				CAAF75012A9E1B3600978B5F /* RoundView.swift */,
+				CAAF75052A9E459100978B5F /* ProfileView.swift */,
+				CAB12C442AA2901500BF71E1 /* CancelView.swift */,
+			);
+			path = RoundViews;
+			sourceTree = "<group>";
+		};
+		CAAF16942AAAF174000D8984 /* Labels */ = {
+			isa = PBXGroup;
+			children = (
+				CAAA1CE22AA07138007886B9 /* GridRunLabel.swift */,
+				CA045EA72AA2282F00BFF03E /* VersionLabel.swift */,
+				CA71F9C82AA5DE0A007AF4F0 /* TitleLabel.swift */,
+				CA71F9CA2AA5DFFB007AF4F0 /* SubtitleLabel.swift */,
+			);
+			path = Labels;
+			sourceTree = "<group>";
+		};
+		CAAF16952AAAF204000D8984 /* Menu */ = {
+			isa = PBXGroup;
+			children = (
+				CAAF16912AA9FDA9000D8984 /* LoadingOverlayView.swift */,
+				CA0AAC8D2A26219B008367FB /* MenuItemView.swift */,
+				CAAA1CE62AA085BF007886B9 /* MenuButton.swift */,
+			);
+			path = Menu;
+			sourceTree = "<group>";
+		};
+		CAAF16962AAAF215000D8984 /* Profile */ = {
+			isa = PBXGroup;
+			children = (
+				CAB12C4A2AA527E500BF71E1 /* ProfileItemView.swift */,
+				CAB12C462AA4C3C800BF71E1 /* RankView.swift */,
+			);
+			path = Profile;
+			sourceTree = "<group>";
+		};
 		CAAF75002A9E1B0800978B5F /* CustomUI */ = {
 			isa = PBXGroup;
 			children = (
+				CAAF16962AAAF215000D8984 /* Profile */,
+				CAAF16952AAAF204000D8984 /* Menu */,
+				CAAF16942AAAF174000D8984 /* Labels */,
+				CAAF16932AAAF154000D8984 /* RoundViews */,
 				CAAA1CE42AA0859D007886B9 /* Game */,
-				CAAF16912AA9FDA9000D8984 /* LoadingOverlayView.swift */,
-				CAAF75012A9E1B3600978B5F /* RoundView.swift */,
-				CAAF75052A9E459100978B5F /* ProfileView.swift */,
-				CAAA1CE22AA07138007886B9 /* GridRunLabel.swift */,
-				CAAA1CE62AA085BF007886B9 /* MenuButton.swift */,
-				CA0AAC8D2A26219B008367FB /* MenuItemView.swift */,
 				CAAA1CE82AA1D966007886B9 /* PrimaryButton.swift */,
-				CA045EA72AA2282F00BFF03E /* VersionLabel.swift */,
-				CAB12C442AA2901500BF71E1 /* CancelView.swift */,
-				CAB12C462AA4C3C800BF71E1 /* RankView.swift */,
-				CAB12C4A2AA527E500BF71E1 /* ProfileItemView.swift */,
-				CA71F9C82AA5DE0A007AF4F0 /* TitleLabel.swift */,
-				CA71F9CA2AA5DFFB007AF4F0 /* SubtitleLabel.swift */,
 				CA71F9CC2AA60665007AF4F0 /* TextField.swift */,
-				CA71F9CE2AA613FC007AF4F0 /* ClickableLabel.swift */,
 				CA71F9D02AA70172007AF4F0 /* TextFieldView.swift */,
 			);
 			path = CustomUI;
@@ -1069,7 +1098,6 @@
 				CAF8ECB72A2E1FDE00179EF1 /* RegisterCredentials.swift in Sources */,
 				CA852A582A39C96D00961E65 /* AblyService.swift in Sources */,
 				CA8CBFA82A51A9AA003CF44B /* GameOver.swift in Sources */,
-				CA71F9CF2AA613FC007AF4F0 /* ClickableLabel.swift in Sources */,
 				CAF8ECC32A2F78A600179EF1 /* LoginViewController.swift in Sources */,
 				CA71F9D12AA70172007AF4F0 /* TextFieldView.swift in Sources */,
 				CA71F9CD2AA60665007AF4F0 /* TextField.swift in Sources */,
