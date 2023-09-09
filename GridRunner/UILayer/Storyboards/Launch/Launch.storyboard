@@ -25,17 +25,17 @@
                             <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" animating="YES" style="large" translatesAutoresizingMaskIntoConstraints="NO" id="yyH-9w-gL3">
                                 <rect key="frame" x="178" y="407.66666666666669" width="37" height="37"/>
                                 <color key="tintColor" name="RedAccentColor"/>
-                                <color key="color" name="FrostBlackColor"/>
+                                <color key="color" name="Black"/>
                             </activityIndicatorView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Loading..." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="djB-Km-HKr">
                                 <rect key="frame" x="40" y="464.66666666666669" width="313" height="25.666666666666686"/>
                                 <fontDescription key="fontDescription" name="Kanit-Medium" family="Kanit Medium" pointSize="17"/>
-                                <color key="textColor" name="FrostBlackColor"/>
+                                <color key="textColor" name="Black"/>
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="xSi-0Z-Yjf"/>
-                        <color key="backgroundColor" name="BackgroundColor"/>
+                        <color key="backgroundColor" name="Background"/>
                         <constraints>
                             <constraint firstItem="djB-Km-HKr" firstAttribute="top" secondItem="yyH-9w-gL3" secondAttribute="bottom" constant="20" id="6rS-Ph-ZWU"/>
                             <constraint firstItem="yyH-9w-gL3" firstAttribute="centerX" secondItem="U1j-Ds-Sr9" secondAttribute="centerX" id="Hmi-vA-k1j"/>
@@ -54,11 +54,11 @@
         </scene>
     </scenes>
     <resources>
-        <namedColor name="BackgroundColor">
+        <namedColor name="Background">
             <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
-        <namedColor name="FrostBlackColor">
-            <color red="0.097999997437000275" green="0.10999999940395355" blue="0.125" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        <namedColor name="Black">
+            <color red="0.094117648899555206" green="0.10980391502380371" blue="0.12156863510608673" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="RedAccentColor">
             <color red="0.70599997043609619" green="0.19200000166893005" blue="0.21600000560283661" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

@@ -97,18 +97,18 @@ class CreateRoomViewController: UIViewController {
             self.runnerRoleView.image = UIImage(systemName: "checkmark.circle.fill")
             self.runnerRoleView.imageColor = UIColor(named: "Red")
             
-            self.seekerRoleView.addBorder(color: UIColor(named: "Gray"), width: 1)
+            self.seekerRoleView.removeAnyBorder()
             self.seekerRoleView.image = UIImage(systemName: "circle")
             self.seekerRoleView.imageColor = UIColor(named: "Black")
             
-            self.randomRoleView.addBorder(color: UIColor(named: "Gray"), width: 1)
+            self.randomRoleView.removeAnyBorder()
             self.randomRoleView.image = UIImage(systemName: "circle")
             self.randomRoleView.imageColor = UIColor(named: "Black")
             
         case self.seekerRoleView:
             self.currentRole = .seeker
             
-            self.runnerRoleView.addBorder(color: UIColor(named: "Gray"), width: 1)
+            self.runnerRoleView.removeAnyBorder()
             self.runnerRoleView.image = UIImage(systemName: "circle")
             self.runnerRoleView.imageColor = UIColor(named: "Black")
             
@@ -116,18 +116,18 @@ class CreateRoomViewController: UIViewController {
             self.seekerRoleView.image = UIImage(systemName: "checkmark.circle.fill")
             self.seekerRoleView.imageColor = UIColor(named: "Red")
             
-            self.randomRoleView.addBorder(color: UIColor(named: "Gray"), width: 1)
+            self.randomRoleView.removeAnyBorder()
             self.randomRoleView.image = UIImage(systemName: "circle")
             self.randomRoleView.imageColor = UIColor(named: "Black")
             
         case self.randomRoleView:
             self.currentRole = .random
             
-            self.runnerRoleView.addBorder(color: UIColor(named: "Gray"), width: 1)
+            self.runnerRoleView.removeAnyBorder()
             self.runnerRoleView.image = UIImage(systemName: "circle")
             self.runnerRoleView.imageColor = UIColor(named: "Black")
             
-            self.seekerRoleView.addBorder(color: UIColor(named: "Gray"), width: 1)
+            self.seekerRoleView.removeAnyBorder()
             self.seekerRoleView.image = UIImage(systemName: "circle")
             self.seekerRoleView.imageColor = UIColor(named: "Black")
             

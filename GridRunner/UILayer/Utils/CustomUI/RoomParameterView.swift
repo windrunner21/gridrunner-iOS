@@ -86,6 +86,5 @@ class RoomParameterView: UIView {
         self.layer.cornerRadius = 20
         self.backgroundColor = UIColor(named: "Background")
         self.addButtonElevation()
-        self.addBorder(color: UIColor(named: "Gray"), width: 1)
     }
 }
