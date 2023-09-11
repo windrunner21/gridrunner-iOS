@@ -9,12 +9,19 @@ import UIKit
 
 class TitleLabel: UILabel {
     func setup(in parentView: UIView, as text: String) {
-        self.translatesAutoresizingMaskIntoConstraints = false
-        
         self.text = text
+        self.setupInView(parentView)
+    }
+    
+    func setup(in parentView: UIView) {
+        self.setupInView(parentView)
+    }
+    
+    private func setupInView(_ view: UIView) {
+        self.translatesAutoresizingMaskIntoConstraints = false
         self.textColor = UIColor(named: "Black")
         self.font = UIFont(name: "Kanit-Semibold", size: Dimensions.titleFont)
         
-        parentView.addSubview(self)
+        view.addSubview(self)
     }
 }

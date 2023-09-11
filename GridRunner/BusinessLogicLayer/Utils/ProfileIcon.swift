@@ -6,6 +6,7 @@
 //
 
 class ProfileIcon {
+    var enemyIcon = "🥷"
     static let shared = ProfileIcon()
     
     private var icon: String

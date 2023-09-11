@@ -16,6 +16,15 @@ class GameViewController: UIViewController {
             width: UIScreen.main.bounds.width,
             height: UIScreen.main.bounds.height)
     )
+    
+    let greetingView = GreetingView(
+        frame: CGRect(
+            x: 0,
+            y: 0,
+            width: UIScreen.main.bounds.width,
+            height: UIScreen.main.bounds.height)
+    )
+
     let roomLoadingView = RoomLoadingView(
         frame: CGRect(
             x: 0,
@@ -73,16 +82,26 @@ class GameViewController: UIViewController {
     }
     
     @objc private func setupGame() {
+        self.initializeGame()
+        guard let player = self.game.getPlayer() else { presentErrorAlert(); return }
+        
         self.loadingView.remove()
         self.roomLoadingView.remove()
         
-        self.initializeGame()
-        
-        guard let player = self.game.getPlayer() else { presentErrorAlert(); return }
         self.setupProfileViews(with: player)
         self.setupGameView()
         self.setupCounterViews()
         self.setupButtons()
+        
+        self.showGreetingView(with: player.type)
+    }
+    
+    private func showGreetingView(with playerType: PlayerType) {
+        UIView.animate(withDuration: 0.3, animations: {
+            self.greetingView.playerType = playerType
+            self.greetingView.setupLabels()
+            self.view.addSubview(self.greetingView)
+        })
     }
     
     @objc private func updateGame() {
@@ -499,6 +518,7 @@ class GameViewController: UIViewController {
         
         self.opponentProfileView.textSize = Dimensions.buttonFont
         self.opponentProfileView.setup(in: self.view)
+        self.opponentProfileView.text = ProfileIcon.shared.enemyIcon
         self.opponentProfileView.color = player.type == .runner ? UIColor(named: "Gray") : UIColor(named: "Red")
         self.opponentUsernameLabel.setup(in: self.view, as: "@\(GameConfig.shared.opponent)")
         self.opponentUsernameLabel.textAlignment = .right

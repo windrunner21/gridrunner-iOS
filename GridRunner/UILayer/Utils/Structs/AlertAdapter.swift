@@ -174,7 +174,7 @@ class AlertAdapter {
     }
     
     func createResignAlert(alertActionHandler: @escaping () -> Void) -> UIAlertController {
-        let alert = UIAlertController(title: "Resigning", message: "Do you want to resign from game? If you resign, your opponent will win.", preferredStyle: .alert)
+        let alert = UIAlertController(title: "Resign from Game", message: "Are you sure you want to resign?", preferredStyle: .alert)
         
         alert.addAction(
             UIAlertAction(
