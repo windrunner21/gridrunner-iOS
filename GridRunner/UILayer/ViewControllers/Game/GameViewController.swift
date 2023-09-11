@@ -513,7 +513,7 @@ class GameViewController: UIViewController {
     }
     
     private func setupCounterViews() {
-        self.movesCounter.label = "moves left"
+        self.movesCounter.label = "move(s) left"
         self.turnCounter.label = "turn"
         
         self.view.addSubview(movesCounter)
@@ -521,9 +521,9 @@ class GameViewController: UIViewController {
         
         NSLayoutConstraint.activate([
             self.movesCounter.topAnchor.constraint(equalTo: self.gameView.bottomAnchor, constant: Dimensions.verticalSpacing20 * 2),
-            self.movesCounter.leadingAnchor.constraint(equalTo: self.view.layoutMarginsGuide.leadingAnchor, constant: 20),
-            self.turnCounter.topAnchor.constraint(equalTo: self.gameView.bottomAnchor, constant: Dimensions.verticalSpacing20 * 2),
-            self.turnCounter.leadingAnchor.constraint(equalTo: self.movesCounter.trailingAnchor, constant: 20),
+            self.movesCounter.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 20),
+            self.turnCounter.topAnchor.constraint(equalTo: self.movesCounter.bottomAnchor, constant: Dimensions.verticalSpacing20 / 2),
+            self.turnCounter.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 20),
         ])
     }
     
@@ -531,10 +531,10 @@ class GameViewController: UIViewController {
         self.view.addSubview(self.buttonsStackView)
         
         NSLayoutConstraint.activate([
-            self.buttonsStackView.topAnchor.constraint(equalTo: self.movesCounter.bottomAnchor, constant: Dimensions.verticalSpacing20 * 2),
-            self.buttonsStackView.leadingAnchor.constraint(equalTo: self.view.layoutMarginsGuide.leadingAnchor, constant: 40),
-            self.buttonsStackView.trailingAnchor.constraint(equalTo: self.view.layoutMarginsGuide.trailingAnchor, constant: -40),
-            self.buttonsStackView.bottomAnchor.constraint(equalTo: self.view.layoutMarginsGuide.bottomAnchor, constant: -Dimensions.verticalSpacing20),
+            self.buttonsStackView.topAnchor.constraint(equalTo: self.turnCounter.bottomAnchor, constant: Dimensions.verticalSpacing20 * 2),
+            self.buttonsStackView.leadingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leadingAnchor, constant: 40),
+            self.buttonsStackView.trailingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.trailingAnchor, constant: -40),
+            self.buttonsStackView.bottomAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.bottomAnchor, constant: -Dimensions.verticalSpacing20),
         ])
                 
         self.resignButton.text = "Resign"

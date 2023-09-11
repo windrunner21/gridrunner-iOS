@@ -11,8 +11,8 @@ class CounterView: UIView {
     private let stackView: UIStackView = {
         let stackView = UIStackView()
         stackView.translatesAutoresizingMaskIntoConstraints = false
-        stackView.axis = .vertical
-        stackView.alignment = .center
+        stackView.axis = .horizontal
+        stackView.alignment = .firstBaseline
         stackView.distribution = .fill
         stackView.spacing = 5
         return stackView
@@ -21,7 +21,7 @@ class CounterView: UIView {
     private let counterLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.font = UIFont(name: "Kanit-Semibold", size: Dimensions.headingFont)
+        label.font = UIFont(name: "Kanit-Semibold", size: Dimensions.nameFont)
         label.textColor = UIColor(named: "Black")
         return label
     }()
