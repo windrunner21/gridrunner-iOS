@@ -127,6 +127,7 @@
 		CAFED4B02A02497000FB4B9B /* GridRunnerUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAFED4AF2A02497000FB4B9B /* GridRunnerUITestsLaunchTests.swift */; };
 		CAFED8BF2AAEED0400C32741 /* UsernameLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAFED8BE2AAEED0400C32741 /* UsernameLabel.swift */; };
 		CAFED8C12AAF032500C32741 /* GameButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAFED8C02AAF032500C32741 /* GameButtonView.swift */; };
+		CAFED8C32AAF3B7000C32741 /* CounterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAFED8C22AAF3B7000C32741 /* CounterView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -270,6 +271,7 @@
 		CAFED4AF2A02497000FB4B9B /* GridRunnerUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GridRunnerUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		CAFED8BE2AAEED0400C32741 /* UsernameLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UsernameLabel.swift; sourceTree = "<group>"; };
 		CAFED8C02AAF032500C32741 /* GameButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameButtonView.swift; sourceTree = "<group>"; };
+		CAFED8C22AAF3B7000C32741 /* CounterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CounterView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -649,6 +651,7 @@
 				CA71F9D02AA70172007AF4F0 /* TextFieldView.swift */,
 				CAB7290D2A65CE5800BB4908 /* RoomLoadingView.swift */,
 				CAAF16972AAAF3AE000D8984 /* RoomParameterView.swift */,
+				CAFED8C22AAF3B7000C32741 /* CounterView.swift */,
 			);
 			path = CustomUI;
 			sourceTree = "<group>";
@@ -1091,6 +1094,7 @@
 				CA71F9D12AA70172007AF4F0 /* TextFieldView.swift in Sources */,
 				CA71F9CD2AA60665007AF4F0 /* TextField.swift in Sources */,
 				CA89AC652A52FBC300265465 /* MoveType.swift in Sources */,
+				CAFED8C32AAF3B7000C32741 /* CounterView.swift in Sources */,
 				CA852A6B2A40597A00961E65 /* SpecialTile.swift in Sources */,
 				CA0AAC302A0E484F008367FB /* Coordinate.swift in Sources */,
 				CA0AAC5B2A1B7EDF008367FB /* History.swift in Sources */,

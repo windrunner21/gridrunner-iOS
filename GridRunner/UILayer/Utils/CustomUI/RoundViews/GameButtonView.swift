@@ -8,6 +8,10 @@
 import UIKit
 
 class GameButtonView: UIView {
+    var isEnabled: Bool {
+        self.gameButton.isEnabled
+    }
+    
     private let stackView: UIStackView = {
         let stackView = UIStackView()
         stackView.translatesAutoresizingMaskIntoConstraints = false
@@ -84,7 +88,11 @@ class GameButtonView: UIView {
 }
 
 class GameButton: UIView {
-    var isEnabled: Bool = false
+    var isEnabled: Bool = false {
+        didSet {
+            self.backgroundColor = isEnabled ? UIColor(named: "Red") : .systemGray
+        }
+    }
     
     private let buttonImageView: UIImageView = {
         let imageView = UIImageView()

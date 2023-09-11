@@ -34,15 +34,24 @@ class GameViewController: UIViewController {
     let opponentProfileView: ProfileView = ProfileView()
     let opponentUsernameLabel: UsernameLabel = UsernameLabel()
     
-    // Storyboard properties.
-    let turnLabel: UILabel = UILabel()
-    let movesLabel: UILabel = UILabel()
+    let turnCounter: CounterView = CounterView()
+    let movesCounter: CounterView = CounterView()
     
     let gameView: UIView = UIView()
     
     let resignButton: GameButtonView = GameButtonView()
     let undoButton: GameButtonView = GameButtonView()
     let finishButton: GameButtonView = GameButtonView()
+    
+    let buttonsStackView: UIStackView = {
+        let stackView = UIStackView()
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        stackView.axis = .horizontal
+        stackView.alignment = .fill
+        stackView.distribution = .equalCentering
+        stackView.spacing = 20
+        return stackView
+    }()
     
     // Controller properties.
     var game = Game()
@@ -70,6 +79,7 @@ class GameViewController: UIViewController {
         guard let player = self.game.getPlayer() else { presentErrorAlert(); return }
         self.setupProfileViews(with: player)
         self.setupGameView()
+        self.setupCounterViews()
         self.setupButtons()
     }
     
@@ -134,54 +144,60 @@ class GameViewController: UIViewController {
         self.presentGameOverAlert()
     }
     
-    @objc private func cancel() {
-        self.transitionToMainScreen()
+    @objc private func onResign() {
+        if resignButton.isEnabled {
+            self.transitionToMainScreen()
+        }
     }
     
-    @IBAction func onUndo(_ sender: Any) {
-        guard let player = game.getPlayer() else {
-            presentErrorAlert()
-            return
+    @objc func onUndo() {
+        if undoButton.isEnabled {
+            guard let player = game.getPlayer() else {
+                presentErrorAlert()
+                return
+            }
+            
+            guard let lastMove = player.history.last?.getMoves().last else {
+                print("Could not get last move from Player. Returning...")
+                presentErrorAlert()
+                return
+            }
+            
+            let lastTile = self.accessTile(with: lastMove.to, in: gameView)
+            let previousTile = self.accessTile(with: lastMove.from, in: gameView)
+            
+            lastTile?.closeBy(player)
+            
+            player.undo(lastMove)
+            
+            if let runner = player as? Runner {
+                runner.undo(previousTile: previousTile)
+            }
+            
+            self.updateGameHUD(of: player)
         }
-        
-        guard let lastMove = player.history.last?.getMoves().last else {
-            print("Could not get last move from Player. Returning...")
-            presentErrorAlert()
-            return
-        }
-        
-        let lastTile = self.accessTile(with: lastMove.to, in: gameView)
-        let previousTile = self.accessTile(with: lastMove.from, in: gameView)
-        
-        lastTile?.closeBy(player)
-        
-        player.undo(lastMove)
-        
-        if let runner = player as? Runner {
-            runner.undo(previousTile: previousTile)
-        }
-        
-        self.updateGameHUD(of: player)
     }
     
-    @IBAction func onFinish(_ sender: Any) {
-        guard let player = game.getPlayer() else {
-            presentErrorAlert()
-            return
+    @objc func onFinish() {
+        if finishButton.isEnabled {
+            guard let player = game.getPlayer() else {
+                presentErrorAlert()
+                return
+            }
+            
+            player.finish()
+            player.publishTurn()
+            
+            if let _ = player as? Runner {
+                self.visualizeTurnForOpponent()
+            }
+            
+            self.updateMovesCounter(with: player.numberOfMoves)
+            self.updateTurnCounter(with: player.currentTurnNumber)
+            
+            self.undoButton.disable()
+            self.finishButton.disable()
         }
-        
-        player.finish()
-        player.publishTurn()
-        
-        if let _ = player as? Runner {
-            self.visualizeTurnForOpponent()
-        }
-        
-        self.updateMovesLabel(with: player.numberOfMoves)
-        self.updateTurnLabel(with: player.currentTurnNumber)
-        
-        self.undoButton.disable()
-        self.finishButton.disable()
     }
     
     private func createGameGrid(rows: Int, columns: Int, inside rootView: UIView, spacing: CGFloat = 5) {
@@ -292,12 +308,12 @@ class GameViewController: UIViewController {
         return nil
     }
     
-    private func updateMovesLabel(with value: Int) {
-        self.movesLabel.text = "\(value)"
+    private func updateMovesCounter(with value: Int) {
+        self.movesCounter.counter = "\(value)"
     }
     
-    private func updateTurnLabel(with value: Int) {
-        self.turnLabel.text = "\(value)"
+    private func updateTurnCounter(with value: Int) {
+        self.turnCounter.counter = "\(value)"
     }
     
     private func enableUndoButton(on condition: Bool? = nil) {
@@ -320,8 +336,8 @@ class GameViewController: UIViewController {
         self.highlightRunnerMoves()
         self.highlightSeekerMove()
         
-        self.updateMovesLabel(with: player.numberOfMoves)
-        self.updateTurnLabel(with: player.currentTurnNumber)
+        self.updateMovesCounter(with: player.numberOfMoves)
+        self.updateTurnCounter(with: player.currentTurnNumber)
         
         // Handle enabling finish and undo buttons.
         self.enableUndoButton(on: player.numberOfMoves < player.maximumNumberOfMoves)
@@ -450,8 +466,8 @@ class GameViewController: UIViewController {
         self.updateGameHistory(isOver: false)
         self.reconstructRunnerHistory()
         self.reconstructSeekerHistory()
-        self.updateMovesLabel(with: player.numberOfMoves)
-        self.updateTurnLabel(with: player.currentTurnNumber)
+        self.updateMovesCounter(with: player.numberOfMoves)
+        self.updateTurnCounter(with: player.currentTurnNumber)
         
         // Checks if player is Runner. If Runner highlights possible move coordinates.
         self.highlightRunnerMoves()
@@ -496,7 +512,31 @@ class GameViewController: UIViewController {
         self.visualizeTurn(for: player, initial: true)
     }
     
+    private func setupCounterViews() {
+        self.movesCounter.label = "moves left"
+        self.turnCounter.label = "turn"
+        
+        self.view.addSubview(movesCounter)
+        self.view.addSubview(turnCounter)
+        
+        NSLayoutConstraint.activate([
+            self.movesCounter.topAnchor.constraint(equalTo: self.gameView.bottomAnchor, constant: Dimensions.verticalSpacing20 * 2),
+            self.movesCounter.leadingAnchor.constraint(equalTo: self.view.layoutMarginsGuide.leadingAnchor, constant: 20),
+            self.turnCounter.topAnchor.constraint(equalTo: self.gameView.bottomAnchor, constant: Dimensions.verticalSpacing20 * 2),
+            self.turnCounter.leadingAnchor.constraint(equalTo: self.movesCounter.trailingAnchor, constant: 20),
+        ])
+    }
+    
     private func setupButtons() {
+        self.view.addSubview(self.buttonsStackView)
+        
+        NSLayoutConstraint.activate([
+            self.buttonsStackView.topAnchor.constraint(equalTo: self.movesCounter.bottomAnchor, constant: Dimensions.verticalSpacing20 * 2),
+            self.buttonsStackView.leadingAnchor.constraint(equalTo: self.view.layoutMarginsGuide.leadingAnchor, constant: 40),
+            self.buttonsStackView.trailingAnchor.constraint(equalTo: self.view.layoutMarginsGuide.trailingAnchor, constant: -40),
+            self.buttonsStackView.bottomAnchor.constraint(equalTo: self.view.layoutMarginsGuide.bottomAnchor, constant: -Dimensions.verticalSpacing20),
+        ])
+                
         self.resignButton.text = "Resign"
         self.undoButton.text = "Undo"
         self.finishButton.text = "Finish"
@@ -505,22 +545,19 @@ class GameViewController: UIViewController {
         self.undoButton.image = UIImage(systemName: "arrow.counterclockwise")
         self.finishButton.image = UIImage(systemName: "checkmark")
         
-        self.view.addSubview(self.resignButton)
-        self.view.addSubview(self.undoButton)
-        self.view.addSubview(self.finishButton)
+        self.buttonsStackView.addArrangedSubview(resignButton)
+        self.buttonsStackView.addArrangedSubview(undoButton)
+        self.buttonsStackView.addArrangedSubview(finishButton)
         
-        NSLayoutConstraint.activate([
-            self.undoButton.centerXAnchor.constraint(equalTo: self.view.centerXAnchor),
-            self.undoButton.topAnchor.constraint(equalTo: self.gameView.bottomAnchor, constant: Dimensions.verticalSpacing20 * 2),
-            self.undoButton.bottomAnchor.constraint(equalTo: self.view.layoutMarginsGuide.bottomAnchor, constant: -Dimensions.verticalSpacing20),
-            self.resignButton.trailingAnchor.constraint(equalTo: self.undoButton.leadingAnchor, constant: -20),
-            self.resignButton.topAnchor.constraint(equalTo: self.gameView.bottomAnchor, constant: Dimensions.verticalSpacing20 * 2),
-            self.resignButton.bottomAnchor.constraint(equalTo: self.view.layoutMarginsGuide.bottomAnchor, constant: -Dimensions.verticalSpacing20),
-            self.finishButton.leadingAnchor.constraint(equalTo: self.undoButton.trailingAnchor, constant: 20),
-            self.finishButton.topAnchor.constraint(equalTo: self.gameView.bottomAnchor, constant: Dimensions.verticalSpacing20 * 2),
-            self.finishButton.bottomAnchor.constraint(equalTo: self.view.layoutMarginsGuide.bottomAnchor, constant: -Dimensions.verticalSpacing20),
-        ])
+        let resignGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(onResign))
+        let undoGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(onUndo))
+        let finishGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(onFinish))
         
+        self.resignButton.addGestureRecognizer(resignGestureRecognizer)
+        self.undoButton.addGestureRecognizer(undoGestureRecognizer)
+        self.finishButton.addGestureRecognizer(finishGestureRecognizer)
+        
+        self.resignButton.enable()
         self.undoButton.disable()
         self.finishButton.disable()
     }
