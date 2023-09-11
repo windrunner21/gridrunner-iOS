@@ -228,6 +228,7 @@ class Tile: UIView {
     func decorateExit() {
         self.backgroundColor = UIColor(named: "Black")
         self.imageView.image = UIImage(systemName: "flag.checkered")
+        self.imageView.tintColor = UIColor(named: "Background")
     }
     
     func decorateClosed() {
@@ -238,6 +239,7 @@ class Tile: UIView {
     func decorateSpawn() {
         self.backgroundColor = UIColor(named: "Black")
         self.imageView.image = UIImage(systemName: "house.fill")
+        self.imageView.tintColor = UIColor(named: "Background")
     }
     
     func decorateRunner() {
