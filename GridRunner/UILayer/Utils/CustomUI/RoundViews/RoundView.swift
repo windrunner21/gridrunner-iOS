@@ -76,14 +76,18 @@ class RoundView: UIView {
         self.toCircle()
     }
     
-    func addBorder(width: CGFloat, color: UIColor) {
-        self.layer.borderColor = color.cgColor
+    func addBorder(width: CGFloat, color: UIColor?) {
+        self.layer.borderColor = color?.cgColor
         self.layer.borderWidth = width
     }
     
     func removeBorder() {
         self.layer.borderColor = UIColor.clear.cgColor
         self.layer.borderWidth = 0
+    }
+    
+    func setBorderColor(to color: UIColor?) {
+        self.layer.borderColor = color?.cgColor
     }
     
     func toCircle() {

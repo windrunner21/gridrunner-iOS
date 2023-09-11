@@ -134,12 +134,9 @@ class MainViewController: UIViewController {
     }
     
     private func startGame(custom: Bool, isJoining: Bool) {
-        let gameStoryboard: UIStoryboard = UIStoryboard(name: "Game", bundle: .main)
-        let gameViewController: GameViewController = gameStoryboard.instantiateViewController(identifier: "GameScreen")
-        
+        let gameViewController: GameViewController = GameViewController()
         gameViewController.ordinaryLoading = !custom
         gameViewController.fromJoiningRoom = isJoining
-        
         let sceneDelegate = UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate
         sceneDelegate?.transitionViewController.transition(to: gameViewController, with: [.transitionCurlUp])
     }

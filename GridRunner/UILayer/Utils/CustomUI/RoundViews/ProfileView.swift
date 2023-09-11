@@ -27,7 +27,7 @@ class ProfileView: RoundView {
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
         super.traitCollectionDidChange(previousTraitCollection)
         
-        self.addBorder(width: 3.5, color: UIColor(named: "Background") ?? .white)
+        self.addBorder(width: 3.5, color: UIColor(named: "Background"))
         if self.isButton {
             self.addButtonElevation()
         } else {

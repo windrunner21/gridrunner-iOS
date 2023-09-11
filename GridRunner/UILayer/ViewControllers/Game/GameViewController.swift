@@ -23,29 +23,26 @@ class GameViewController: UIViewController {
             width: UIScreen.main.bounds.width,
             height: UIScreen.main.bounds.height)
     )
-    var profileIcon: ProfileIcon!
+
     var ordinaryLoading: Bool!
     var fromJoiningRoom: Bool!
     
+    // Programmable UI properties.
+    let playerProfileView: ProfileView = ProfileView()
+    let playerUsernameLabel: UsernameLabel = UsernameLabel()
+    
+    let opponentProfileView: ProfileView = ProfileView()
+    let opponentUsernameLabel: UsernameLabel = UsernameLabel()
+    
     // Storyboard properties.
-    @IBOutlet weak var playerTypeLabel: UILabel!
-    @IBOutlet weak var turnLabel: UILabel!
-    @IBOutlet weak var movesLabel: UILabel!
-    @IBOutlet weak var emojiIconLabel: UILabel!
-    @IBOutlet weak var versusEmojiIconLabel: UILabel!
+    let turnLabel: UILabel = UILabel()
+    let movesLabel: UILabel = UILabel()
     
-    @IBOutlet weak var playerLabel: UILabel!
-    @IBOutlet weak var versusPlayerLabel: UILabel!
+    let gameView: UIView = UIView()
     
-    @IBOutlet weak var gameView: UIView!
-    @IBOutlet weak var profileView: UIView!
-    @IBOutlet weak var emojiIconView: UIView!
-    @IBOutlet weak var cancelView: UIView!
-    @IBOutlet weak var versusProfileView: UIView!
-    @IBOutlet weak var versusEmojiIconView: UIView!
-    
-    @IBOutlet weak var undoButton: UIButton!
-    @IBOutlet weak var finishButton: UIButton!
+    let resignButton: GameButtonView = GameButtonView()
+    let undoButton: GameButtonView = GameButtonView()
+    let finishButton: GameButtonView = GameButtonView()
     
     // Controller properties.
     var game = Game()
@@ -55,6 +52,7 @@ class GameViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.addSubview(ordinaryLoading ? self.loadingView : self.roomLoadingView)
+        self.view.backgroundColor = UIColor(named: "Background")
         
         AblyService.shared.enterGame(joining: fromJoiningRoom)
 
@@ -64,17 +62,15 @@ class GameViewController: UIViewController {
     }
     
     @objc private func setupGame() {
-        self.setupCancelButton()
-        self.setupUndoButton()
-        self.setupFinishButton()
-        
         self.loadingView.remove()
         self.roomLoadingView.remove()
         
         self.initializeGame()
         
-        self.setupProfileView()
-        self.setupVersusProfileView()
+        guard let player = self.game.getPlayer() else { presentErrorAlert(); return }
+        self.setupProfileViews(with: player)
+        self.setupGameView()
+        self.setupButtons()
     }
     
     @objc private func updateGame() {
@@ -350,10 +346,7 @@ class GameViewController: UIViewController {
     
     private func transitionToMainScreen() {
         AblyService.shared.leaveGame()
-        
-        let mainStoryboard: UIStoryboard = UIStoryboard(name: "Main", bundle: .main)
-        let mainViewController: UIViewController = mainStoryboard.instantiateViewController(identifier: "MainScreen") as MainViewController
-        
+        let mainViewController: MainViewController = MainViewController()
         let sceneDelegate = UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate
         sceneDelegate?.transitionViewController.transition(to: mainViewController, with: [.transitionCurlDown])
     }
@@ -459,53 +452,76 @@ class GameViewController: UIViewController {
         self.reconstructSeekerHistory()
         self.updateMovesLabel(with: player.numberOfMoves)
         self.updateTurnLabel(with: player.currentTurnNumber)
-        self.visualizeTurn(for: player, initial: true)
         
         // Checks if player is Runner. If Runner highlights possible move coordinates.
         self.highlightRunnerMoves()
     }
     
-    private func setupCancelButton() {        
-        let cancelTap = UITapGestureRecognizer(target: self, action: #selector(cancel))
-        self.cancelView.addGestureRecognizer(cancelTap)
+    private func setupGameView() {
+        self.gameView.translatesAutoresizingMaskIntoConstraints = false
+        self.view.addSubview(self.gameView)
+
+        NSLayoutConstraint.activate([
+            self.gameView.topAnchor.constraint(equalTo: self.playerUsernameLabel.bottomAnchor, constant: Dimensions.verticalSpacing20),
+            self.gameView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 5),
+            self.gameView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: -5)
+        ])
     }
     
-    private func setupProfileView() {
-        guard let player = self.game.getPlayer() else {
-            presentErrorAlert()
-            return
-        }
+    private func setupProfileViews(with player: AnyPlayer) {
+        self.playerProfileView.textSize = Dimensions.buttonFont
+        self.playerProfileView.setup(in: self.view)
+        self.playerProfileView.color = player.type == .runner ? UIColor(named: "Red") : UIColor(named: "Gray")
+        self.playerUsernameLabel.setup(in: self.view, as: player.type == .runner ? "@\(GameConfig.shared.runner ?? "you")" : "@\(GameConfig.shared.seeker ?? "you")")
         
-        self.playerTypeLabel.text = player.type == .runner ? "Runner" : "Seeker"
+        self.opponentProfileView.textSize = Dimensions.buttonFont
+        self.opponentProfileView.setup(in: self.view)
+        self.opponentProfileView.color = player.type == .runner ? UIColor(named: "Gray") : UIColor(named: "Red")
+        self.opponentUsernameLabel.setup(in: self.view, as: "@\(GameConfig.shared.opponent)")
+        self.opponentUsernameLabel.textAlignment = .right
         
-        self.emojiIconView.backgroundColor = player.type == .runner ? UIColor(named: "Red")?.withAlphaComponent(0.5) : UIColor(named: "Black")?.withAlphaComponent(0.5)
+        NSLayoutConstraint.activate([
+            self.playerProfileView.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor, constant: 10),
+            self.playerProfileView.leadingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leadingAnchor, constant: 20),
+            self.playerUsernameLabel.topAnchor.constraint(equalTo: self.playerProfileView.bottomAnchor, constant: 5),
+            self.playerUsernameLabel.leadingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leadingAnchor, constant: 20),
+            self.playerUsernameLabel.trailingAnchor.constraint(equalTo: self.view.centerXAnchor, constant: -10),
+            self.opponentProfileView.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor, constant: 10),
+            self.opponentProfileView.trailingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.trailingAnchor, constant: -20),
+            self.opponentUsernameLabel.topAnchor.constraint(equalTo: self.opponentProfileView.bottomAnchor, constant: 5),
+            self.opponentUsernameLabel.trailingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.trailingAnchor, constant: -20),
+            self.opponentUsernameLabel.leadingAnchor.constraint(equalTo: self.view.centerXAnchor, constant: 10),
+        ])
         
-        self.emojiIconLabel.text = profileIcon.getIcon()
-        
-        self.playerLabel.text = player.type == .runner ?
-        "@\(GameConfig.shared.runner ?? "username")" :
-        "@\(GameConfig.shared.seeker ?? "username")"
+        self.visualizeTurn(for: player, initial: true)
     }
     
-    private func setupVersusProfileView() {
-        guard let player = self.game.getPlayer() else {
-            presentErrorAlert()
-            return
-        }
+    private func setupButtons() {
+        self.resignButton.text = "Resign"
+        self.undoButton.text = "Undo"
+        self.finishButton.text = "Finish"
         
-        self.versusEmojiIconView.backgroundColor = player.type == .seeker ? UIColor(named: "Red")?.withAlphaComponent(0.5) : UIColor(named: "Black")?.withAlphaComponent(0.5)
+        self.resignButton.image = UIImage(systemName: "arrow.uturn.left")
+        self.undoButton.image = UIImage(systemName: "arrow.counterclockwise")
+        self.finishButton.image = UIImage(systemName: "checkmark")
         
-        self.versusEmojiIconLabel.text = ProfileIcon().getIcon()
-        self.versusPlayerLabel.text = "@\(GameConfig.shared.opponent)"
-    }
-    
-    private func setupUndoButton() {
-        self.undoButton.setup()
+        self.view.addSubview(self.resignButton)
+        self.view.addSubview(self.undoButton)
+        self.view.addSubview(self.finishButton)
+        
+        NSLayoutConstraint.activate([
+            self.undoButton.centerXAnchor.constraint(equalTo: self.view.centerXAnchor),
+            self.undoButton.topAnchor.constraint(equalTo: self.gameView.bottomAnchor, constant: Dimensions.verticalSpacing20 * 2),
+            self.undoButton.bottomAnchor.constraint(equalTo: self.view.layoutMarginsGuide.bottomAnchor, constant: -Dimensions.verticalSpacing20),
+            self.resignButton.trailingAnchor.constraint(equalTo: self.undoButton.leadingAnchor, constant: -20),
+            self.resignButton.topAnchor.constraint(equalTo: self.gameView.bottomAnchor, constant: Dimensions.verticalSpacing20 * 2),
+            self.resignButton.bottomAnchor.constraint(equalTo: self.view.layoutMarginsGuide.bottomAnchor, constant: -Dimensions.verticalSpacing20),
+            self.finishButton.leadingAnchor.constraint(equalTo: self.undoButton.trailingAnchor, constant: 20),
+            self.finishButton.topAnchor.constraint(equalTo: self.gameView.bottomAnchor, constant: Dimensions.verticalSpacing20 * 2),
+            self.finishButton.bottomAnchor.constraint(equalTo: self.view.layoutMarginsGuide.bottomAnchor, constant: -Dimensions.verticalSpacing20),
+        ])
+        
         self.undoButton.disable()
-    }
-    
-    private func setupFinishButton() {
-        self.finishButton.setup()
         self.finishButton.disable()
     }
     
@@ -514,22 +530,22 @@ class GameViewController: UIViewController {
         
         if player.type == compareAgainstType {
             self.isPlayersTurn = true
-            self.profileView.backgroundColor = .systemGreen.withAlphaComponent(0.5)
-            self.versusProfileView.backgroundColor = .white
+            self.playerProfileView.setBorderColor(to: .systemGreen)
+            self.opponentProfileView.setBorderColor(to: UIColor(named: "Background"))
             
             // Highlight when turn comes back to Runner.
             self.highlightRunnerMoves()
         } else {
             self.isPlayersTurn = false
-            self.profileView.backgroundColor = .white
-            self.versusProfileView.backgroundColor = .systemGreen.withAlphaComponent(0.5)
+            self.playerProfileView.setBorderColor(to: UIColor(named: "Background"))
+            self.opponentProfileView.setBorderColor(to: .systemGreen)
         }
     }
     
     private func visualizeTurnForOpponent() {
         self.isPlayersTurn = false
-        self.profileView.backgroundColor = .white
-        self.versusProfileView.backgroundColor = .systemGreen.withAlphaComponent(0.5)
+        self.playerProfileView.setBorderColor(to: UIColor(named: "Background"))
+        self.opponentProfileView.setBorderColor(to: .systemGreen)
     }
     
     private func updateGameHistory(isOver over: Bool) {
