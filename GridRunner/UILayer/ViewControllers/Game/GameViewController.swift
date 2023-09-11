@@ -30,9 +30,11 @@ class GameViewController: UIViewController {
     // Programmable UI properties.
     let playerProfileView: ProfileView = ProfileView()
     let playerUsernameLabel: UsernameLabel = UsernameLabel()
+    let playerTypeLabel: PlayerTypeLabel = PlayerTypeLabel()
     
     let opponentProfileView: ProfileView = ProfileView()
     let opponentUsernameLabel: UsernameLabel = UsernameLabel()
+    let opponentTypeLabel: PlayerTypeLabel = PlayerTypeLabel()
     
     let turnCounter: CounterView = CounterView()
     let movesCounter: CounterView = CounterView()
@@ -146,7 +148,11 @@ class GameViewController: UIViewController {
     
     @objc private func onResign() {
         if resignButton.isEnabled {
-            self.transitionToMainScreen()
+            let alert = alertAdapter.createResignAlert(alertActionHandler: { [weak self] in
+                self?.transitionToMainScreen()
+            })
+            
+            self.present(alert, animated: true)
         }
     }
     
@@ -478,7 +484,7 @@ class GameViewController: UIViewController {
         self.view.addSubview(self.gameView)
 
         NSLayoutConstraint.activate([
-            self.gameView.topAnchor.constraint(equalTo: self.playerUsernameLabel.bottomAnchor, constant: Dimensions.verticalSpacing20),
+            self.gameView.topAnchor.constraint(equalTo: self.playerTypeLabel.bottomAnchor, constant: Dimensions.verticalSpacing20),
             self.gameView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 5),
             self.gameView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: -5)
         ])
@@ -489,12 +495,15 @@ class GameViewController: UIViewController {
         self.playerProfileView.setup(in: self.view)
         self.playerProfileView.color = player.type == .runner ? UIColor(named: "Red") : UIColor(named: "Gray")
         self.playerUsernameLabel.setup(in: self.view, as: player.type == .runner ? "@\(GameConfig.shared.runner ?? "you")" : "@\(GameConfig.shared.seeker ?? "you")")
+        self.playerTypeLabel.setup(in: self.view, as: player.type == .runner ? "Runner" : "Seeker")
         
         self.opponentProfileView.textSize = Dimensions.buttonFont
         self.opponentProfileView.setup(in: self.view)
         self.opponentProfileView.color = player.type == .runner ? UIColor(named: "Gray") : UIColor(named: "Red")
         self.opponentUsernameLabel.setup(in: self.view, as: "@\(GameConfig.shared.opponent)")
         self.opponentUsernameLabel.textAlignment = .right
+        self.opponentTypeLabel.setup(in: self.view, as: player.type == .runner ? "Seeker" : "Runner")
+        self.opponentTypeLabel.textAlignment = .right
         
         NSLayoutConstraint.activate([
             self.playerProfileView.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor, constant: 10),
@@ -502,11 +511,17 @@ class GameViewController: UIViewController {
             self.playerUsernameLabel.topAnchor.constraint(equalTo: self.playerProfileView.bottomAnchor, constant: 5),
             self.playerUsernameLabel.leadingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leadingAnchor, constant: 20),
             self.playerUsernameLabel.trailingAnchor.constraint(equalTo: self.view.centerXAnchor, constant: -10),
+            self.playerTypeLabel.topAnchor.constraint(equalTo: self.playerUsernameLabel.bottomAnchor),
+            self.playerTypeLabel.leadingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leadingAnchor, constant: 20),
+            self.playerTypeLabel.trailingAnchor.constraint(equalTo: self.view.centerXAnchor, constant: -10),
             self.opponentProfileView.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor, constant: 10),
             self.opponentProfileView.trailingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.trailingAnchor, constant: -20),
             self.opponentUsernameLabel.topAnchor.constraint(equalTo: self.opponentProfileView.bottomAnchor, constant: 5),
             self.opponentUsernameLabel.trailingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.trailingAnchor, constant: -20),
             self.opponentUsernameLabel.leadingAnchor.constraint(equalTo: self.view.centerXAnchor, constant: 10),
+            self.opponentTypeLabel.topAnchor.constraint(equalTo: self.playerUsernameLabel.bottomAnchor),
+            self.opponentTypeLabel.trailingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.trailingAnchor, constant: -20),
+            self.opponentTypeLabel.leadingAnchor.constraint(equalTo: self.view.centerXAnchor, constant: 10),
         ])
         
         self.visualizeTurn(for: player, initial: true)

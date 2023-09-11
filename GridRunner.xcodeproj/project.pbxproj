@@ -128,6 +128,8 @@
 		CAFED8BF2AAEED0400C32741 /* UsernameLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAFED8BE2AAEED0400C32741 /* UsernameLabel.swift */; };
 		CAFED8C12AAF032500C32741 /* GameButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAFED8C02AAF032500C32741 /* GameButtonView.swift */; };
 		CAFED8C32AAF3B7000C32741 /* CounterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAFED8C22AAF3B7000C32741 /* CounterView.swift */; };
+		CAFED8C62AAF4CBF00C32741 /* GreetingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAFED8C52AAF4CBF00C32741 /* GreetingView.swift */; };
+		CAFED8C82AAF4DAC00C32741 /* PlayerTypeLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAFED8C72AAF4DAC00C32741 /* PlayerTypeLabel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -272,6 +274,8 @@
 		CAFED8BE2AAEED0400C32741 /* UsernameLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UsernameLabel.swift; sourceTree = "<group>"; };
 		CAFED8C02AAF032500C32741 /* GameButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameButtonView.swift; sourceTree = "<group>"; };
 		CAFED8C22AAF3B7000C32741 /* CounterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CounterView.swift; sourceTree = "<group>"; };
+		CAFED8C52AAF4CBF00C32741 /* GreetingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GreetingView.swift; sourceTree = "<group>"; };
+		CAFED8C72AAF4DAC00C32741 /* PlayerTypeLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerTypeLabel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -591,7 +595,9 @@
 		CAAA1CE42AA0859D007886B9 /* Game */ = {
 			isa = PBXGroup;
 			children = (
+				CAFED8C52AAF4CBF00C32741 /* GreetingView.swift */,
 				CA0AAC2D2A0E2F0F008367FB /* Tile.swift */,
+				CAFED8C22AAF3B7000C32741 /* CounterView.swift */,
 			);
 			path = Game;
 			sourceTree = "<group>";
@@ -615,6 +621,7 @@
 				CA71F9C82AA5DE0A007AF4F0 /* TitleLabel.swift */,
 				CA71F9CA2AA5DFFB007AF4F0 /* SubtitleLabel.swift */,
 				CAFED8BE2AAEED0400C32741 /* UsernameLabel.swift */,
+				CAFED8C72AAF4DAC00C32741 /* PlayerTypeLabel.swift */,
 			);
 			path = Labels;
 			sourceTree = "<group>";
@@ -641,6 +648,7 @@
 		CAAF75002A9E1B0800978B5F /* CustomUI */ = {
 			isa = PBXGroup;
 			children = (
+				CAFED8C42AAF4C7400C32741 /* Room */,
 				CAAF16962AAAF215000D8984 /* Profile */,
 				CAAF16952AAAF204000D8984 /* Menu */,
 				CAAF16942AAAF174000D8984 /* Labels */,
@@ -649,9 +657,6 @@
 				CAAA1CE82AA1D966007886B9 /* PrimaryButton.swift */,
 				CA71F9CC2AA60665007AF4F0 /* TextField.swift */,
 				CA71F9D02AA70172007AF4F0 /* TextFieldView.swift */,
-				CAB7290D2A65CE5800BB4908 /* RoomLoadingView.swift */,
-				CAAF16972AAAF3AE000D8984 /* RoomParameterView.swift */,
-				CAFED8C22AAF3B7000C32741 /* CounterView.swift */,
 			);
 			path = CustomUI;
 			sourceTree = "<group>";
@@ -862,6 +867,15 @@
 			path = ViewControllers;
 			sourceTree = "<group>";
 		};
+		CAFED8C42AAF4C7400C32741 /* Room */ = {
+			isa = PBXGroup;
+			children = (
+				CAAF16972AAAF3AE000D8984 /* RoomParameterView.swift */,
+				CAB7290D2A65CE5800BB4908 /* RoomLoadingView.swift */,
+			);
+			path = Room;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -1050,6 +1064,7 @@
 				CA852A632A4042D900961E65 /* ResponseParser.swift in Sources */,
 				CAB728FD2A648EBB00BB4908 /* CreateRoomViewController.swift in Sources */,
 				CAF8ECB32A2DD23600179EF1 /* BaseURL.swift in Sources */,
+				CAFED8C82AAF4DAC00C32741 /* PlayerTypeLabel.swift in Sources */,
 				CA71F9C92AA5DE0A007AF4F0 /* TitleLabel.swift in Sources */,
 				CA4E3F642A08DCB400D36266 /* ViewControllerExtension.swift in Sources */,
 				CAFED8C12AAF032500C32741 /* GameButtonView.swift in Sources */,
@@ -1099,6 +1114,7 @@
 				CA0AAC302A0E484F008367FB /* Coordinate.swift in Sources */,
 				CA0AAC5B2A1B7EDF008367FB /* History.swift in Sources */,
 				CA045EAA2AA22D5300BFF03E /* Dimensions.swift in Sources */,
+				CAFED8C62AAF4CBF00C32741 /* GreetingView.swift in Sources */,
 				CA045EA82AA2282F00BFF03E /* VersionLabel.swift in Sources */,
 				CAB7290E2A65CE5800BB4908 /* RoomLoadingView.swift in Sources */,
 				CA8CBF9E2A504A82003CF44B /* SLMove.swift in Sources */,

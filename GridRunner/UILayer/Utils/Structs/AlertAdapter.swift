@@ -173,6 +173,32 @@ class AlertAdapter {
         return alert
     }
     
+    func createResignAlert(alertActionHandler: @escaping () -> Void) -> UIAlertController {
+        let alert = UIAlertController(title: "Resigning", message: "Do you want to resign from game? If you resign, your opponent will win.", preferredStyle: .alert)
+        
+        alert.addAction(
+            UIAlertAction(
+                title: NSLocalizedString("Cancel", comment: "Default action"),
+                style: .default,
+                handler: { _ in
+                    alertActionHandler()
+                }
+            )
+        )
+        
+        alert.addAction(
+            UIAlertAction(
+                title: NSLocalizedString("Resign", comment: "Default action"),
+                style: .destructive,
+                handler: { _ in
+                    alertActionHandler()
+                }
+            )
+        )
+        
+        return alert
+    }
+    
     func createNetworkErrorAlert() -> UIAlertController {
         let alert = UIAlertController(title: "Network Error.", message: "Something went wrong. Please try later.", preferredStyle: .alert)
         
