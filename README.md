@@ -1,7 +1,5 @@
 # gridrunner-iOS
 iOS Game
 
-<p align="row">
-<img src= "https://www.flickr.com/photos/199125516@N07/53182999723/" width="400" >
-<img src= "https://flic.kr/p/2p2ALX6" width="400" >
-</p>
+
+![Simulator Screenshot - iPhone 14 Plus - 2023-09-12 at 10 41 01](https://github.com/windrunner21/gridrunner-iOS/assets/18750749/bf6f37db-e977-44b2-b424-d9bbc1f091e3)
