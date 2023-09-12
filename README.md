@@ -10,6 +10,7 @@ Seeker's goal is to capture Runner. Chasing down Runner is not easy, but if Seek
 
 ### Availability:
 - iOS 15.0 and higher
+- App Store Link (In Review)
 
 ##
 <p align="row">
