@@ -10,7 +10,7 @@ Seeker's goal is to capture Runner. Chasing down Runner is not easy, but if Seek
 
 ### Availability:
 - iOS 15.0 and higher
-- App Store Link (In Review)
+- App Store Link: https://apps.apple.com/app/gridrun-runner-v-seeker/id6450959111
 
 ##
 <p align="row">
