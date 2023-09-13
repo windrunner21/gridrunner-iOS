@@ -323,8 +323,8 @@ class GameViewController: UIViewController {
         let column = coordinate.x
         
         if let view = view.subviews.first as? UIStackView {
-            if let row = view.arrangedSubviews[row] as? UIStackView {
-                if let tile = row.arrangedSubviews[column] as? Tile {
+            if row >= 0, let row = view.arrangedSubviews[row] as? UIStackView {
+                if column >= 0, let tile = row.arrangedSubviews[column] as? Tile {
                     return tile
                 }
             }

@@ -15,7 +15,7 @@ struct Dimensions {
     static let subtitleFont = UIScreen.main.bounds.width * 0.04
     static let headingFont = UIScreen.main.bounds.width * 0.05
     static let buttonFont = UIScreen.main.bounds.width * 0.035
-    static let subHeadingFont = UIScreen.main.bounds.width * 0.0325
+    static let subHeadingFont = UIScreen.main.bounds.width * 0.03
     static let captionFont = UIScreen.main.bounds.width * 0.0275
     
     // Other
