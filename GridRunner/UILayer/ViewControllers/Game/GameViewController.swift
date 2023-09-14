@@ -319,12 +319,17 @@ class GameViewController: UIViewController {
     }
     
     private func accessTile(with coordinate: Coordinate, in view: UIView) -> Tile? {
+        let min = -1
+        let max = self.game.getMap().getDimensions().dimensions()
+        
+        print(max)
+        
         let row = coordinate.y
         let column = coordinate.x
         
         if let view = view.subviews.first as? UIStackView {
-            if row >= 0, let row = view.arrangedSubviews[row] as? UIStackView {
-                if column >= 0, let tile = row.arrangedSubviews[column] as? Tile {
+            if row > min, row < max.rows, let row = view.arrangedSubviews[row] as? UIStackView {
+                if column > min, column < max.columns, let tile = row.arrangedSubviews[column] as? Tile {
                     return tile
                 }
             }

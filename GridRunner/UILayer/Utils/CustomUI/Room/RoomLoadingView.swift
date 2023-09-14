@@ -109,6 +109,8 @@ class RoomLoadingView: UIView {
     }
     
     private func setupCopyRoomCodeButton() {
+        self.copyRoomCodeButton.width = Dimensions.buttonWidth * 1.5
+        self.copyRoomCodeButton.height = self.copyRoomCodeButton.width / 4
         self.copyRoomCodeButton.setup(in: self, withTitle: "Copy code")
         
         self.copyRoomCodeButton.addTarget(self, action: #selector(onCopy), for: .touchUpInside)
