@@ -88,7 +88,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         print("SceneDelegate: path = \(path)")
         
-        if let roomCode = params.first(where: {$0.name == "roomCode"})?.value {
+        if let roomCode = params.first(where: {$0.name == "room"})?.value {
             print("SceneDelegate: room code = \(roomCode)")
         } else {
             print("SceneDelegate: room code is missing")

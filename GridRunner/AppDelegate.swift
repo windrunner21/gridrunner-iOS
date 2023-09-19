@@ -45,7 +45,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         print("AppDelegate: path = \(path)")
         
-        if let roomCode = params.first(where: {$0.name == "roomCode"})?.value {
+        if let roomCode = params.first(where: {$0.name == "room"})?.value {
             print("AppDelegate: room code = \(roomCode)")
             return true
         } else {
