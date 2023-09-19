@@ -27,6 +27,32 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Use this method to select a configuration to create the new scene with.
         return UISceneConfiguration(name: "Default Configuration", sessionRole: connectingSceneSession.role)
     }
+    
+    func application(_ application: UIApplication, continue userActivity: NSUserActivity, restorationHandler: @escaping ([UIUserActivityRestoring]?) -> Void) -> Bool {
+        // Get user activity
+        guard userActivity.activityType == NSUserActivityTypeBrowsingWeb,
+              let incomingUrl = userActivity.webpageURL,
+              let components = NSURLComponents(url: incomingUrl, resolvingAgainstBaseURL: true) else {
+            return false
+        }
+              
+        // Check for specific URL component
+        guard let path = components.path,
+              let params = components.queryItems else {
+            print("AppDelegate: Invalid URL or path missing")
+            return false
+        }
+        
+        print("AppDelegate: path = \(path)")
+        
+        if let roomCode = params.first(where: {$0.name == "roomCode"})?.value {
+            print("AppDelegate: room code = \(roomCode)")
+            return true
+        } else {
+            print("AppDelegate: room code is missing")
+            return false
+        }
+    }
 
     func application(_ application: UIApplication, didDiscardSceneSessions sceneSessions: Set<UISceneSession>) {
         // Called when the user discards a scene session.

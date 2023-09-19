@@ -89,6 +89,8 @@ class CreateRoomViewController: UIViewController {
     }
     
     @objc func chooseRole(_ gestureRecognizer: UITapGestureRecognizer) {
+        self.createRoomButton.enable()
+        
         switch gestureRecognizer.view {
         case self.runnerRoleView:
             self.currentRole = .runner
@@ -135,6 +137,7 @@ class CreateRoomViewController: UIViewController {
             self.randomRoleView.image = UIImage(systemName: "checkmark.circle.fill")
             self.randomRoleView.imageColor = UIColor(named: "Red")
         default:
+            self.createRoomButton.disable()
             break
         }
     }
@@ -178,6 +181,11 @@ class CreateRoomViewController: UIViewController {
                                 self.currentRole = .seeker
                             }
                         default:
+                            DispatchQueue.main.async {
+                                let alert = self.alertAdapter.createServiceRequestErrorAlert()
+                                self.present(alert, animated: true)
+                                self.createRoomButton.enable()
+                            }
                             return
                         }
                     
@@ -294,6 +302,7 @@ class CreateRoomViewController: UIViewController {
     }
     
     private func setupCreateRoomButtonButton() {
+        self.createRoomButton.disable()
         self.createRoomButton.addTarget(self, action: #selector(onCreateRoom), for: .touchUpInside)
         self.createRoomButton.addTarget(self, action: #selector(onCreateRoomTouchUpOutside), for: .touchUpOutside)
         self.createRoomButton.addTarget(self, action: #selector(onCreateRoomTouchDown), for: .touchDown)

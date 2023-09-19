@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		CA045EA82AA2282F00BFF03E /* VersionLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA045EA72AA2282F00BFF03E /* VersionLabel.swift */; };
 		CA045EAA2AA22D5300BFF03E /* Dimensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA045EA92AA22D5300BFF03E /* Dimensions.swift */; };
+		CA053D1C2AB878C10019FAD1 /* Bot.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA053D1B2AB878C10019FAD1 /* Bot.swift */; };
+		CA053D1E2AB878DF0019FAD1 /* GameDifficulty.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA053D1D2AB878DF0019FAD1 /* GameDifficulty.swift */; };
 		CA0AAC262A0E2BE6008367FB /* Seeker.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA0AAC252A0E2BE6008367FB /* Seeker.swift */; };
 		CA0AAC282A0E2BF1008367FB /* Runner.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA0AAC272A0E2BF1008367FB /* Runner.swift */; };
 		CA0AAC2B2A0E2C17008367FB /* AnyPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA0AAC2A2A0E2C17008367FB /* AnyPlayer.swift */; };
@@ -152,6 +154,8 @@
 /* Begin PBXFileReference section */
 		CA045EA72AA2282F00BFF03E /* VersionLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VersionLabel.swift; sourceTree = "<group>"; };
 		CA045EA92AA22D5300BFF03E /* Dimensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Dimensions.swift; sourceTree = "<group>"; };
+		CA053D1B2AB878C10019FAD1 /* Bot.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bot.swift; sourceTree = "<group>"; };
+		CA053D1D2AB878DF0019FAD1 /* GameDifficulty.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameDifficulty.swift; sourceTree = "<group>"; };
 		CA0AAC252A0E2BE6008367FB /* Seeker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Seeker.swift; sourceTree = "<group>"; };
 		CA0AAC272A0E2BF1008367FB /* Runner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Runner.swift; sourceTree = "<group>"; };
 		CA0AAC2A2A0E2C17008367FB /* AnyPlayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnyPlayer.swift; sourceTree = "<group>"; };
@@ -190,6 +194,7 @@
 		CA0AAC882A25DF8C008367FB /* ProfileIcon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileIcon.swift; sourceTree = "<group>"; };
 		CA0AAC8D2A26219B008367FB /* MenuItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuItemView.swift; sourceTree = "<group>"; };
 		CA25B1D12A56E9B50063CBA3 /* AblyAuthDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AblyAuthDelegate.swift; sourceTree = "<group>"; };
+		CA3024172AB98A6400BADF26 /* GridRunner.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = GridRunner.entitlements; sourceTree = "<group>"; };
 		CA35E7B62A28D0B60057BAB6 /* ViewExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewExtension.swift; sourceTree = "<group>"; };
 		CA4E3F572A07A85900D36266 /* GameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameViewController.swift; sourceTree = "<group>"; };
 		CA4E3F5B2A07BBF100D36266 /* PlayerType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerType.swift; sourceTree = "<group>"; };
@@ -490,6 +495,7 @@
 				CA0AAC5A2A1B7EDF008367FB /* History.swift */,
 				CA0AAC5C2A1B7EE6008367FB /* Turn.swift */,
 				CA0AAC5E2A1B7EEF008367FB /* Move.swift */,
+				CA053D1B2AB878C10019FAD1 /* Bot.swift */,
 			);
 			path = Game;
 			sourceTree = "<group>";
@@ -503,6 +509,7 @@
 				CA0AAC3C2A121EE2008367FB /* MoveDirection.swift */,
 				CA0AAC3E2A13A2A0008367FB /* ArrowDirection.swift */,
 				CA89AC642A52FBC300265465 /* MoveType.swift */,
+				CA053D1D2AB878DF0019FAD1 /* GameDifficulty.swift */,
 			);
 			path = Game;
 			sourceTree = "<group>";
@@ -777,6 +784,7 @@
 		CAFED48B2A02496E00FB4B9B /* GridRunner */ = {
 			isa = PBXGroup;
 			children = (
+				CA3024172AB98A6400BADF26 /* GridRunner.entitlements */,
 				CAFED4BF2A0249D200FB4B9B /* BusinessLogicLayer */,
 				CAFED4BE2A0249CF00FB4B9B /* UILayer */,
 				CAFED4BD2A0249C800FB4B9B /* ServiceLayer */,
@@ -1042,6 +1050,7 @@
 				CAFED8BF2AAEED0400C32741 /* UsernameLabel.swift in Sources */,
 				CA852A332A30ABB700961E65 /* Response.swift in Sources */,
 				CA0AAC322A0E637E008367FB /* Game.swift in Sources */,
+				CA053D1C2AB878C10019FAD1 /* Bot.swift in Sources */,
 				CAAA1CE92AA1D966007886B9 /* PrimaryButton.swift in Sources */,
 				CA0AAC3D2A121EE2008367FB /* MoveDirection.swift in Sources */,
 				CA0AAC342A0E6395008367FB /* Map.swift in Sources */,
@@ -1068,6 +1077,7 @@
 				CA71F9C92AA5DE0A007AF4F0 /* TitleLabel.swift in Sources */,
 				CA4E3F642A08DCB400D36266 /* ViewControllerExtension.swift in Sources */,
 				CAFED8C12AAF032500C32741 /* GameButtonView.swift in Sources */,
+				CA053D1E2AB878DF0019FAD1 /* GameDifficulty.swift in Sources */,
 				CA0AAC892A25DF8C008367FB /* ProfileIcon.swift in Sources */,
 				CA852A692A40489000961E65 /* Grid.swift in Sources */,
 				CA852A612A40425800961E65 /* AnyResponseParser.swift in Sources */,
@@ -1295,6 +1305,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = GridRunner/GridRunner.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 20230914;
 				DEVELOPMENT_TEAM = 9258H7N9X2;
@@ -1329,6 +1340,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = GridRunner/GridRunner.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 20230914;
 				DEVELOPMENT_TEAM = 9258H7N9X2;

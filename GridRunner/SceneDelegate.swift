@@ -16,6 +16,15 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // Use this method to optionally configure and attach the UIWindow `window` to the provided UIWindowScene `scene`.
         // If using a storyboard, the `window` property will automatically be initialized and attached to the scene.
         // This delegate does not imply the connecting scene or session are new (see `application:configurationForConnectingSceneSession` instead).
+        
+        // Get user activity
+        if userActivity == connectionOptions.userActivities.first,
+              userActivity?.activityType == NSUserActivityTypeBrowsingWeb,
+              let incomingUrl = userActivity?.webpageURL,
+              let components = NSURLComponents(url: incomingUrl, resolvingAgainstBaseURL: true) {
+            self.handleUniversalLink(with: components)
+        }
+        
         guard let windowScene = (scene as? UIWindowScene) else { return }
         let window = UIWindow(windowScene: windowScene)
         window.makeKeyAndVisible()
@@ -27,6 +36,17 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         window.rootViewController = self.transitionViewController
         
         self.transitionViewController.transition(to: launchViewController, with: [.transitionCurlUp])
+    }
+    
+    func scene(_ scene: UIScene, continue userActivity: NSUserActivity) {
+        // Get user activity
+        guard userActivity.activityType == NSUserActivityTypeBrowsingWeb,
+              let incomingUrl = userActivity.webpageURL,
+              let components = NSURLComponents(url: incomingUrl, resolvingAgainstBaseURL: true) else {
+            return
+        }
+        
+        self.handleUniversalLink(with: components)
     }
 
     func sceneDidDisconnect(_ scene: UIScene) {
@@ -58,5 +78,21 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     }
 
 
+    private func handleUniversalLink(with components: NSURLComponents) {
+        // Check for specific URL component
+        guard let path = components.path,
+              let params = components.queryItems else {
+            print("SceneDelegate: Invalid URL or path missing")
+            return
+        }
+        
+        print("SceneDelegate: path = \(path)")
+        
+        if let roomCode = params.first(where: {$0.name == "roomCode"})?.value {
+            print("SceneDelegate: room code = \(roomCode)")
+        } else {
+            print("SceneDelegate: room code is missing")
+        }
+    }
 }
 

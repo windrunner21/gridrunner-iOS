@@ -70,9 +70,18 @@ class RoomLoadingView: UIView {
     }
     
     @objc func onCopy() {
+        guard let code = roomCodeLabel.text else { return }
+        
         self.copyRoomCodeButton.disable()
+        
+        // Creating deep link.
+        let url = URL(string:"https://gridrun.live/join?roomCode=\(code)")
+ 
+        let pasteboardString = "You have been invited to a game of GridRun. Room code is: \(code). Click \(url!.absoluteString) to join your friend!."
+        
         let pasteboard = UIPasteboard.general
-        pasteboard.string = roomCodeLabel.text
+        pasteboard.string = pasteboardString
+        
         self.copyRoomCodeButton.enable()
     }
     
