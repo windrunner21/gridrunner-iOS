@@ -17,25 +17,23 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // If using a storyboard, the `window` property will automatically be initialized and attached to the scene.
         // This delegate does not imply the connecting scene or session are new (see `application:configurationForConnectingSceneSession` instead).
         
+        guard let windowScene = (scene as? UIWindowScene) else { return }
+        let window = UIWindow(windowScene: windowScene)
+        window.makeKeyAndVisible()
+        self.window = window
+        window.rootViewController = self.transitionViewController
+        
         // Get user activity
         if userActivity == connectionOptions.userActivities.first,
               userActivity?.activityType == NSUserActivityTypeBrowsingWeb,
               let incomingUrl = userActivity?.webpageURL,
               let components = NSURLComponents(url: incomingUrl, resolvingAgainstBaseURL: true) {
-            self.handleUniversalLink(with: components)
+            let roomCode = self.handleUniversalLink(with: components)
+            guard let roomCode = roomCode else { return }
+            self.transitionToLaunchScreen(with: roomCode)
         }
         
-        guard let windowScene = (scene as? UIWindowScene) else { return }
-        let window = UIWindow(windowScene: windowScene)
-        window.makeKeyAndVisible()
-        self.window = window
-        
-        let launchStoryboard: UIStoryboard = UIStoryboard(name: "Launch", bundle: .main)
-        let launchViewController: UIViewController = launchStoryboard.instantiateViewController(identifier: "LaunchScreen") as LaunchViewController
-        
-        window.rootViewController = self.transitionViewController
-        
-        self.transitionViewController.transition(to: launchViewController, with: [.transitionCurlUp])
+        self.transitionToLaunchScreen()
     }
     
     func scene(_ scene: UIScene, continue userActivity: NSUserActivity) {
@@ -46,7 +44,9 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             return
         }
         
-        self.handleUniversalLink(with: components)
+        let roomCode = self.handleUniversalLink(with: components)
+        guard let roomCode = roomCode else { return }
+        self.transitionToMainScreen(with: roomCode)
     }
 
     func sceneDidDisconnect(_ scene: UIScene) {
@@ -77,21 +77,42 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // to restore the scene back to its current state.
     }
 
+    private func transitionToLaunchScreen(with roomCode: String? = nil) {
+        let launchStoryboard: UIStoryboard = UIStoryboard(name: "Launch", bundle: .main)
+        let launchViewController: LaunchViewController = launchStoryboard.instantiateViewController(identifier: "LaunchScreen") as LaunchViewController
+    
+        if let roomCode = roomCode {
+            launchViewController.roomCode = roomCode
+        }
+        
+        self.transitionViewController.transition(to: launchViewController, with: [.transitionCurlUp])
+    }
+    
+    private func transitionToMainScreen(with roomCode: String) {
+        let mainViewController = MainViewController()
+        mainViewController.roomCode = roomCode
+        
+        self.transitionViewController.transition(to: mainViewController, with: [.transitionCurlUp]) {
+            mainViewController.openJoinRoomAlert()
+        }
+    }
 
-    private func handleUniversalLink(with components: NSURLComponents) {
+    private func handleUniversalLink(with components: NSURLComponents) -> String? {
         // Check for specific URL component
         guard let path = components.path,
               let params = components.queryItems else {
             print("SceneDelegate: Invalid URL or path missing")
-            return
+            return nil
         }
         
         print("SceneDelegate: path = \(path)")
         
         if let roomCode = params.first(where: {$0.name == "room"})?.value {
             print("SceneDelegate: room code = \(roomCode)")
+            return roomCode
         } else {
             print("SceneDelegate: room code is missing")
+            return nil
         }
     }
 }

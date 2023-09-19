@@ -9,6 +9,8 @@ import UIKit
 
 class LaunchViewController: UIViewController {
 
+    // When coming from universal link this value will be set to the parameter value from universal link.
+    var roomCode: String?
     var forceUpgrade: Bool = false
     let alertAdapter: AlertAdapter = AlertAdapter()
     
@@ -34,8 +36,14 @@ class LaunchViewController: UIViewController {
     private func transitionToMainScreen() {
         AppDelegate.shared.performNetworkRequest { _ in
             let mainViewController: MainViewController = MainViewController()
+            mainViewController.roomCode = self.roomCode
+            
             let sceneDelegate = UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate
-            sceneDelegate?.transitionViewController.transition(to: mainViewController, with: [.transitionCurlUp])
+            sceneDelegate?.transitionViewController.transition(to: mainViewController, with: [.transitionCurlUp]) {
+                guard self.roomCode != nil else  { return }
+                
+                mainViewController.openJoinRoomAlert()
+            }
         }
     }
     
