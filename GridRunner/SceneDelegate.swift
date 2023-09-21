@@ -24,16 +24,16 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         window.rootViewController = self.transitionViewController
         
         // Get user activity
-        if userActivity == connectionOptions.userActivities.first,
-              userActivity?.activityType == NSUserActivityTypeBrowsingWeb,
-              let incomingUrl = userActivity?.webpageURL,
-              let components = NSURLComponents(url: incomingUrl, resolvingAgainstBaseURL: true) {
+        if let userActivity = connectionOptions.userActivities.first,
+           userActivity.activityType == NSUserActivityTypeBrowsingWeb,
+           let incomingUrl = userActivity.webpageURL,
+           let components = NSURLComponents(url: incomingUrl, resolvingAgainstBaseURL: true) {
             let roomCode = self.handleUniversalLink(with: components)
             guard let roomCode = roomCode else { return }
-            self.transitionToLaunchScreen(with: roomCode)
+             self.transitionToLaunchScreen(with: roomCode)
+        } else {
+             self.transitionToLaunchScreen()
         }
-        
-        self.transitionToLaunchScreen()
     }
     
     func scene(_ scene: UIScene, continue userActivity: NSUserActivity) {
