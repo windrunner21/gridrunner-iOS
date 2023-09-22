@@ -15,7 +15,7 @@ class AlertAdapter {
         joinRoomAlert?.actions[1].isEnabled = text.count > 14
     }
     
-    func createJoinRoomAlert(loadingOverlayView: LoadingOverlayView,completion: @escaping (UIAlertController?, Response) -> Void) -> UIAlertController {
+    func createJoinRoomAlert(withCode roomCode: String? = nil, loadingOverlayView: LoadingOverlayView, completion: @escaping (UIAlertController?, Response) -> Void) -> UIAlertController {
         self.joinRoomAlert = UIAlertController(title: "Join Room", message: nil, preferredStyle: .alert)
         
         self.joinRoomAlert?.addTextField { (textField) in
@@ -108,7 +108,11 @@ class AlertAdapter {
         self.joinRoomAlert?.addAction(cancelAction)
         self.joinRoomAlert?.addAction(joinAction)
         
-        joinAction.isEnabled = false
+        if let roomCode = roomCode {
+            joinRoomAlert?.textFields?.first?.text = roomCode
+        } else {
+            joinAction.isEnabled = false
+        }
         
         return self.joinRoomAlert!
     }

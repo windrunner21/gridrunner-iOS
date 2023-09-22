@@ -9,8 +9,11 @@ import UIKit
 
 class MainViewController: UIViewController {
     
-    let alertAdapter = AlertAdapter()
-    let gameSearchView = GameSearchView(
+    // When coming from universal link this value will be set to the parameter value from universal link.
+    var roomCode: String?
+    
+    private let alertAdapter = AlertAdapter()
+    private let gameSearchView = GameSearchView(
         frame: CGRect(
             x: UIScreen.main.bounds.width / 2 - UIScreen.main.bounds.width / 3,
             y: 0,
@@ -20,20 +23,20 @@ class MainViewController: UIViewController {
     )
     
     // Programmable UI properties.
-    let gridRunLabel: GridRunLabel = GridRunLabel()
-    let versionLabel: VersionLabel = VersionLabel()
-    let profileView: ProfileView = ProfileView()
+    private let gridRunLabel: GridRunLabel = GridRunLabel()
+    private let versionLabel: VersionLabel = VersionLabel()
+    private let profileView: ProfileView = ProfileView()
     
-    let joinRoomButton: MenuButton = MenuButton()
-    let createRoomButton: MenuButton = MenuButton()
+    private let joinRoomButton: MenuButton = MenuButton()
+    private let createRoomButton: MenuButton = MenuButton()
     
-    let scrollView: UIScrollView = {
+    private let scrollView: UIScrollView = {
         let scrollView = UIScrollView()
         scrollView.translatesAutoresizingMaskIntoConstraints = false
         return scrollView
     }()
     
-    let stackView: UIStackView = {
+    private let stackView: UIStackView = {
         let stackView = UIStackView()
         stackView.translatesAutoresizingMaskIntoConstraints = false
         stackView.axis = .vertical
@@ -43,8 +46,8 @@ class MainViewController: UIViewController {
         return stackView
     }()
     
-    let quickPlayView: MenuItemView = MenuItemView()
-    let rankedPlayView: MenuItemView = MenuItemView()
+    private let quickPlayView: MenuItemView = MenuItemView()
+    private let rankedPlayView: MenuItemView = MenuItemView()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -158,11 +161,12 @@ class MainViewController: UIViewController {
         self.present(createRoomViewController, animated: true)
     }
     
-    private func openJoinRoomAlert() {
+    // Function is public to be called when needed by universal link.
+    func openJoinRoomAlert() {
         let loadingOverlayView = LoadingOverlayView()
         self.view.addSubview(loadingOverlayView)
         
-        let alert = self.alertAdapter.createJoinRoomAlert(loadingOverlayView: loadingOverlayView) { errorAlert, response in
+        let alert = self.alertAdapter.createJoinRoomAlert(withCode: roomCode, loadingOverlayView: loadingOverlayView) { errorAlert, response in
             UIView.animate(withDuration: 0.3, animations: {
                 loadingOverlayView.removeFromSuperview()
                 
@@ -177,6 +181,8 @@ class MainViewController: UIViewController {
             })
         }
         
+        // Remove room code from universal link after one use.
+        self.roomCode = nil
         self.present(alert, animated: true)
     }
     

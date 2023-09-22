@@ -12,7 +12,11 @@ class TransitionViewController: UIViewController {
     
     private var currentViewController: UIViewController?
     
-    func transition(to viewController: UIViewController, with options: UIView.AnimationOptions) {
+    func transition(
+        to viewController: UIViewController,
+        with options: UIView.AnimationOptions,
+        completion: (()->Void)? = nil
+    ) {
         guard viewController.parent == nil else {
             print("Error: The view controller is already a child view controller.")
             return
@@ -35,11 +39,13 @@ class TransitionViewController: UIViewController {
                 self.view.addSubview(newView)
                 viewController.didMove(toParent: self)
                 self.currentViewController = viewController
+                completion?()
             })
         } else {
             view.addSubview(newView)
             viewController.didMove(toParent: self)
             self.currentViewController = viewController
+            completion?()
         }
     }
 }
