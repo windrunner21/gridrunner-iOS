@@ -44,7 +44,7 @@ class GameSearchView: UIView {
         self.hideOnTop()
         
         // Add overlay to disable user interaction and clearly seperate design wise.
-        self.overlayView.backgroundColor = UIColor(named: "Black")?.withAlphaComponent(0.5)
+        self.overlayView.backgroundColor = UIColor(named: "PureBlack")?.withAlphaComponent(0.5)
         self.overlayView.frame = UIScreen.main.bounds
         self.overlayView.autoresizingMask = [.flexibleHeight, .flexibleWidth]
         self.addSubview(overlayView)

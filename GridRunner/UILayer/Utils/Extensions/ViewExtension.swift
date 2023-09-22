@@ -9,14 +9,14 @@ import UIKit
 
 extension UIView {
     func addElevation() {
-        self.layer.shadowColor = self.traitCollection.userInterfaceStyle == .dark ? UIColor.white.cgColor : UIColor.black.withAlphaComponent(0.4).cgColor
+        self.layer.shadowColor = self.traitCollection.userInterfaceStyle == .dark ? UIColor.white.withAlphaComponent(0.5).cgColor : UIColor.black.withAlphaComponent(0.4).cgColor
         self.layer.shadowOpacity = 0.5
         self.layer.shadowOffset = .zero
         self.layer.shadowRadius = 10
     }
 
     func addButtonElevation() {
-        self.layer.shadowColor = self.traitCollection.userInterfaceStyle == .dark ? UIColor.white.cgColor : UIColor.black.withAlphaComponent(0.8).cgColor
+        self.layer.shadowColor = self.traitCollection.userInterfaceStyle == .dark ? UIColor.white.withAlphaComponent(0.7).cgColor : UIColor.black.withAlphaComponent(0.8).cgColor
         self.layer.shadowOpacity = 0.3
         self.layer.shadowOffset = .zero
         self.layer.shadowRadius = 4
