@@ -22,7 +22,7 @@ class LoadingOverlayView: UIView {
     }
     
     private func commonInit() {
-        self.backgroundColor = UIColor(named: "Black")?.withAlphaComponent(0.5)
+        self.backgroundColor = UIColor(named: "PureBlack")?.withAlphaComponent(0.5)
         self.frame = UIScreen.main.bounds
         self.setupActivityIndicator()
     }
