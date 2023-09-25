@@ -25,6 +25,7 @@ Seeker's goal is to capture Runner. Chasing down Runner is not easy, but if Seek
 - [x] Custom Game Rooms
 - [x] Account Management
 - [x] Account Creation and Login.
+- [x] Local Notifications and Support for Remote.
 - [ ] Customization (soon)
 - [ ] Tutorial (soon)
 - [ ] Playing against AI (soon)
