@@ -1311,7 +1311,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = GridRunner/GridRunner.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 20230921;
+				CURRENT_PROJECT_VERSION = 20230925;
 				DEVELOPMENT_TEAM = 9258H7N9X2;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = GridRunner/Info.plist;
@@ -1327,7 +1327,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 2.0.4;
+				MARKETING_VERSION = 2.0.5;
 				PRODUCT_BUNDLE_IDENTIFIER = com.imranhajiyev.GridRunner;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
@@ -1346,7 +1346,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = GridRunner/GridRunner.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 20230921;
+				CURRENT_PROJECT_VERSION = 20230925;
 				DEVELOPMENT_TEAM = 9258H7N9X2;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = GridRunner/Info.plist;
@@ -1362,7 +1362,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 2.0.4;
+				MARKETING_VERSION = 2.0.5;
 				PRODUCT_BUNDLE_IDENTIFIER = com.imranhajiyev.GridRunner;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
