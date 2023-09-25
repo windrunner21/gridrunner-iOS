@@ -34,7 +34,7 @@ class LaunchViewController: UIViewController {
     }
 
     private func transitionToMainScreen() {
-        AppDelegate.shared.performNetworkRequest { _ in
+        self.retrieveUserSession { _ in
             let mainViewController: MainViewController = MainViewController()
             mainViewController.roomCode = self.roomCode
             
@@ -49,5 +49,27 @@ class LaunchViewController: UIViewController {
     
     private func isAPIAvailable() -> Bool {
         self.forceUpgrade
+    }
+    
+    private func retrieveUserSession(completion: @escaping (Response) -> Void) {
+        let session = UserDefaults.standard.value(forKey: "session")
+        if let session = session {
+            UserService().getUser() { response in
+                DispatchQueue.main.async {
+                    if response == .success {
+                        NSLog("User retrieval completed successfully. Session: \(session)")
+                        completion(.success)
+                    } else {
+                        NSLog("Cannot get User.")
+                        completion(.requestError)
+                    }
+                }
+            }
+        } else {
+            DispatchQueue.main.async {
+                NSLog("No session found.")
+                completion(.requestError)
+            }
+        }
     }
 }
