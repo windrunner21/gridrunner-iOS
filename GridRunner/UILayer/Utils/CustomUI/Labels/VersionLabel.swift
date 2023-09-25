@@ -15,8 +15,8 @@ class VersionLabel: UILabel {
         self.translatesAutoresizingMaskIntoConstraints = false
         
         self.text = "Version \(versionNumber ?? "not found")"
-        self.textColor = UIColor(named: "Black")
-        self.font = UIFont(name: "Kanit-Thin", size: Dimensions.captionFont)
+        self.textColor = UIColor(named: "Gray")
+        self.font = UIFont(name: "Kanit-Regular", size: Dimensions.captionFont)
         
         parentView.addSubview(self)
     }
