@@ -136,6 +136,9 @@ class MainViewController: UIViewController {
     }
     
     private func startGame(custom: Bool, isJoining: Bool) {
+        // Set notification for successful matchmaking.
+        Notifications.scheduleMatchmakingNotification()
+        
         let gameViewController: GameViewController = GameViewController()
         gameViewController.ordinaryLoading = !custom
         gameViewController.fromJoiningRoom = isJoining
