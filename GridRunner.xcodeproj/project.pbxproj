@@ -48,6 +48,8 @@
 		CA0AAC862A25D6D3008367FB /* Kanit-SemiBoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = CA0AAC742A25D6D3008367FB /* Kanit-SemiBoldItalic.ttf */; };
 		CA0AAC892A25DF8C008367FB /* ProfileIcon.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA0AAC882A25DF8C008367FB /* ProfileIcon.swift */; };
 		CA0AAC8E2A26219B008367FB /* MenuItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA0AAC8D2A26219B008367FB /* MenuItemView.swift */; };
+		CA1F56362AE4322A00ED5FCB /* LoadingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA1F56352AE4322A00ED5FCB /* LoadingViewController.swift */; };
+		CA1F56382AE433AB00ED5FCB /* RoomLoadingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA1F56372AE433AB00ED5FCB /* RoomLoadingViewController.swift */; };
 		CA25B1D22A56E9B50063CBA3 /* AblyAuthDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA25B1D12A56E9B50063CBA3 /* AblyAuthDelegate.swift */; };
 		CA35E7B72A28D0B60057BAB6 /* ViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA35E7B62A28D0B60057BAB6 /* ViewExtension.swift */; };
 		CA4E3F582A07A85900D36266 /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA4E3F572A07A85900D36266 /* GameViewController.swift */; };
@@ -82,8 +84,6 @@
 		CA852A672A40487900961E65 /* TurnHistory.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA852A662A40487800961E65 /* TurnHistory.swift */; };
 		CA852A692A40489000961E65 /* Grid.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA852A682A40488F00961E65 /* Grid.swift */; };
 		CA852A6B2A40597A00961E65 /* SpecialTile.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA852A6A2A40597A00961E65 /* SpecialTile.swift */; };
-		CA852A6F2A406E9800961E65 /* LoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA852A6E2A406E9800961E65 /* LoadingView.swift */; };
-		CA852A712A406EA400961E65 /* Loading.xib in Resources */ = {isa = PBXBuildFile; fileRef = CA852A702A406EA400961E65 /* Loading.xib */; };
 		CA89AC652A52FBC300265465 /* MoveType.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA89AC642A52FBC300265465 /* MoveType.swift */; };
 		CA8CBF9A2A4F1FFA003CF44B /* AuthenticationError.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA8CBF992A4F1FFA003CF44B /* AuthenticationError.swift */; };
 		CA8CBF9C2A504276003CF44B /* MoveResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA8CBF9B2A504276003CF44B /* MoveResponse.swift */; };
@@ -103,7 +103,6 @@
 		CAB6EAAF2A2A086C00997852 /* ButtonExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAB6EAAE2A2A086C00997852 /* ButtonExtension.swift */; };
 		CAB728FD2A648EBB00BB4908 /* CreateRoomViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAB728FC2A648EBB00BB4908 /* CreateRoomViewController.swift */; };
 		CAB729062A64A5E400BB4908 /* Friendly.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAB729052A64A5E400BB4908 /* Friendly.swift */; };
-		CAB7290E2A65CE5800BB4908 /* RoomLoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAB7290D2A65CE5800BB4908 /* RoomLoadingView.swift */; };
 		CAC833672A5BEE3B00EED95B /* PasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAC833662A5BEE3B00EED95B /* PasswordViewController.swift */; };
 		CAC833692A5C008400EED95B /* PasswordService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAC833682A5C008400EED95B /* PasswordService.swift */; };
 		CAEC677D2AC18C2C003A3E8A /* Notifications.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAEC677C2AC18C2C003A3E8A /* Notifications.swift */; };
@@ -194,6 +193,8 @@
 		CA0AAC742A25D6D3008367FB /* Kanit-SemiBoldItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Kanit-SemiBoldItalic.ttf"; path = "../../../../../Downloads/Kanit/Kanit-SemiBoldItalic.ttf"; sourceTree = "<group>"; };
 		CA0AAC882A25DF8C008367FB /* ProfileIcon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileIcon.swift; sourceTree = "<group>"; };
 		CA0AAC8D2A26219B008367FB /* MenuItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuItemView.swift; sourceTree = "<group>"; };
+		CA1F56352AE4322A00ED5FCB /* LoadingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingViewController.swift; sourceTree = "<group>"; };
+		CA1F56372AE433AB00ED5FCB /* RoomLoadingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoomLoadingViewController.swift; sourceTree = "<group>"; };
 		CA25B1D12A56E9B50063CBA3 /* AblyAuthDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AblyAuthDelegate.swift; sourceTree = "<group>"; };
 		CA3024172AB98A6400BADF26 /* GridRunner.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = GridRunner.entitlements; sourceTree = "<group>"; };
 		CA35E7B62A28D0B60057BAB6 /* ViewExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewExtension.swift; sourceTree = "<group>"; };
@@ -228,8 +229,6 @@
 		CA852A662A40487800961E65 /* TurnHistory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TurnHistory.swift; sourceTree = "<group>"; };
 		CA852A682A40488F00961E65 /* Grid.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Grid.swift; sourceTree = "<group>"; };
 		CA852A6A2A40597A00961E65 /* SpecialTile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpecialTile.swift; sourceTree = "<group>"; };
-		CA852A6E2A406E9800961E65 /* LoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingView.swift; sourceTree = "<group>"; };
-		CA852A702A406EA400961E65 /* Loading.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = Loading.xib; sourceTree = "<group>"; };
 		CA89AC642A52FBC300265465 /* MoveType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoveType.swift; sourceTree = "<group>"; };
 		CA8CBF992A4F1FFA003CF44B /* AuthenticationError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationError.swift; sourceTree = "<group>"; };
 		CA8CBF9B2A504276003CF44B /* MoveResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoveResponse.swift; sourceTree = "<group>"; };
@@ -249,7 +248,6 @@
 		CAB6EAAE2A2A086C00997852 /* ButtonExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonExtension.swift; sourceTree = "<group>"; };
 		CAB728FC2A648EBB00BB4908 /* CreateRoomViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateRoomViewController.swift; sourceTree = "<group>"; };
 		CAB729052A64A5E400BB4908 /* Friendly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Friendly.swift; sourceTree = "<group>"; };
-		CAB7290D2A65CE5800BB4908 /* RoomLoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoomLoadingView.swift; sourceTree = "<group>"; };
 		CAC833662A5BEE3B00EED95B /* PasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordViewController.swift; sourceTree = "<group>"; };
 		CAC833682A5C008400EED95B /* PasswordService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordService.swift; sourceTree = "<group>"; };
 		CAEC677C2AC18C2C003A3E8A /* Notifications.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Notifications.swift; sourceTree = "<group>"; };
@@ -377,10 +375,24 @@
 			children = (
 				CA852A4C2A387D6200961E65 /* GameSearchView.swift */,
 				CA852A4E2A387D6F00961E65 /* GameSearch.xib */,
-				CA852A6E2A406E9800961E65 /* LoadingView.swift */,
-				CA852A702A406EA400961E65 /* Loading.xib */,
 			);
 			path = Views;
+			sourceTree = "<group>";
+		};
+		CA1F56312AE42C0100ED5FCB /* Loading */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Loading;
+			sourceTree = "<group>";
+		};
+		CA1F56342AE4321700ED5FCB /* Loading */ = {
+			isa = PBXGroup;
+			children = (
+				CA1F56352AE4322A00ED5FCB /* LoadingViewController.swift */,
+				CA1F56372AE433AB00ED5FCB /* RoomLoadingViewController.swift */,
+			);
+			path = Loading;
 			sourceTree = "<group>";
 		};
 		CA4A6DF02A4C61E40026AF01 /* GameConfig */ = {
@@ -657,6 +669,7 @@
 		CAAF75002A9E1B0800978B5F /* CustomUI */ = {
 			isa = PBXGroup;
 			children = (
+				CA1F56312AE42C0100ED5FCB /* Loading */,
 				CAFED8C42AAF4C7400C32741 /* Room */,
 				CAAF16962AAAF215000D8984 /* Profile */,
 				CAAF16952AAAF204000D8984 /* Menu */,
@@ -868,6 +881,7 @@
 		CAFED4C12A0249DC00FB4B9B /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				CA1F56342AE4321700ED5FCB /* Loading */,
 				CAB12C4C2AA5DACC00BF71E1 /* Rooms */,
 				CAC833622A5BED9300EED95B /* Launch */,
 				CAC833612A5BED8C00EED95B /* Main */,
@@ -882,7 +896,6 @@
 			isa = PBXGroup;
 			children = (
 				CAAF16972AAAF3AE000D8984 /* RoomParameterView.swift */,
-				CAB7290D2A65CE5800BB4908 /* RoomLoadingView.swift */,
 			);
 			path = Room;
 			sourceTree = "<group>";
@@ -1000,7 +1013,6 @@
 				CA0AAC802A25D6D3008367FB /* Kanit-ExtraLight.ttf in Resources */,
 				CA852A4F2A387D6F00961E65 /* GameSearch.xib in Resources */,
 				CA0AAC862A25D6D3008367FB /* Kanit-SemiBoldItalic.ttf in Resources */,
-				CA852A712A406EA400961E65 /* Loading.xib in Resources */,
 				CAFED4992A02497000FB4B9B /* LaunchScreen.storyboard in Resources */,
 				CA0AAC752A25D6D3008367FB /* Kanit-ExtraBoldItalic.ttf in Resources */,
 				CA0AAC792A25D6D3008367FB /* Kanit-LightItalic.ttf in Resources */,
@@ -1051,6 +1063,7 @@
 				CAF8ECBF2A2F741900179EF1 /* URLPath.swift in Sources */,
 				CAF8ECB92A2E205700179EF1 /* Credentials.swift in Sources */,
 				CAFED8BF2AAEED0400C32741 /* UsernameLabel.swift in Sources */,
+				CA1F56362AE4322A00ED5FCB /* LoadingViewController.swift in Sources */,
 				CA852A332A30ABB700961E65 /* Response.swift in Sources */,
 				CA0AAC322A0E637E008367FB /* Game.swift in Sources */,
 				CA053D1C2AB878C10019FAD1 /* Bot.swift in Sources */,
@@ -1063,6 +1076,7 @@
 				CAF8ECB52A2E1FCE00179EF1 /* LoginCredentials.swift in Sources */,
 				CAAA1CE32AA07138007886B9 /* GridRunLabel.swift in Sources */,
 				CAB12C4B2AA527E500BF71E1 /* ProfileItemView.swift in Sources */,
+				CA1F56382AE433AB00ED5FCB /* RoomLoadingViewController.swift in Sources */,
 				CAB729062A64A5E400BB4908 /* Friendly.swift in Sources */,
 				CA852A392A30B19100961E65 /* UserRole.swift in Sources */,
 				CA0AAC8E2A26219B008367FB /* MenuItemView.swift in Sources */,
@@ -1089,7 +1103,6 @@
 				CA0AAC2B2A0E2C17008367FB /* AnyPlayer.swift in Sources */,
 				CA0AAC362A0E6428008367FB /* MapDimensions.swift in Sources */,
 				CAC833672A5BEE3B00EED95B /* PasswordViewController.swift in Sources */,
-				CA852A6F2A406E9800961E65 /* LoadingView.swift in Sources */,
 				CA0AAC2E2A0E2F0F008367FB /* Tile.swift in Sources */,
 				CAAF16982AAAF3AE000D8984 /* RoomParameterView.swift in Sources */,
 				CA852A3B2A331B8300961E65 /* UserService.swift in Sources */,
@@ -1130,7 +1143,6 @@
 				CAEC677D2AC18C2C003A3E8A /* Notifications.swift in Sources */,
 				CAFED8C62AAF4CBF00C32741 /* GreetingView.swift in Sources */,
 				CA045EA82AA2282F00BFF03E /* VersionLabel.swift in Sources */,
-				CAB7290E2A65CE5800BB4908 /* RoomLoadingView.swift in Sources */,
 				CA8CBF9E2A504A82003CF44B /* SLMove.swift in Sources */,
 				CA852A312A30A20200961E65 /* AlertAdapter.swift in Sources */,
 				CA7417B32A56ECE900A9683A /* AblyAuthenticationError.swift in Sources */,

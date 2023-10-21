@@ -29,6 +29,7 @@ class MainViewController: UIViewController {
     
     private let joinRoomButton: MenuButton = MenuButton()
     private let createRoomButton: MenuButton = MenuButton()
+    private let playAgainstAIButton: MenuButton = MenuButton()
     
     private let scrollView: UIScrollView = {
         let scrollView = UIScrollView()
@@ -139,11 +140,14 @@ class MainViewController: UIViewController {
         // Set notification for successful matchmaking.
         Notifications.scheduleMatchmakingNotification()
         
-        let gameViewController: GameViewController = GameViewController()
-        gameViewController.ordinaryLoading = !custom
-        gameViewController.fromJoiningRoom = isJoining
+        let loadingTypeViewController = custom ? RoomLoadingViewController() : LoadingViewController()
+        
+        if let loadingViewController = loadingTypeViewController as? LoadingViewController {
+            loadingViewController.joining = isJoining
+        }
+         
         let sceneDelegate = UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate
-        sceneDelegate?.transitionViewController.transition(to: gameViewController, with: [.transitionCurlUp])
+        sceneDelegate?.transitionViewController.transition(to: loadingTypeViewController, with: [.transitionCurlUp])
     }
     
     private func openRegisterScreen() {
@@ -187,6 +191,14 @@ class MainViewController: UIViewController {
         // Remove room code from universal link after one use.
         self.roomCode = nil
         self.present(alert, animated: true)
+    }
+    
+    private func startOfflineMode() {
+        let lvc = LoadingViewController()
+        let gameViewController: GameViewController = GameViewController()
+        gameViewController.isOnline = false
+        let sceneDelegate = UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate
+        sceneDelegate?.transitionViewController.transition(to: lvc, with: [.transitionCurlUp])
     }
     
     func checkUserAuthentication() {
@@ -256,15 +268,25 @@ class MainViewController: UIViewController {
             self?.openCreateRoomScreen()
         }
         
+        playAgainstAIButton.icon = "🆚"
+        playAgainstAIButton.text = "Versus AI"
+        playAgainstAIButton.menuAction = { [weak self] in
+            self?.startOfflineMode()
+        }
+        
         self.view.addSubview(joinRoomButton)
         self.view.addSubview(createRoomButton)
+        self.view.addSubview(playAgainstAIButton)
         
         NSLayoutConstraint.activate([
             self.joinRoomButton.topAnchor.constraint(equalTo: self.gridRunLabel.bottomAnchor, constant: Dimensions.verticalSpacing20 * 1.5),
             self.joinRoomButton.leadingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leadingAnchor, constant: 20),
             
             self.createRoomButton.topAnchor.constraint(equalTo: self.gridRunLabel.bottomAnchor, constant: Dimensions.verticalSpacing20 * 1.5),
-            self.createRoomButton.leadingAnchor.constraint(equalTo: self.joinRoomButton.trailingAnchor, constant: 20)
+            self.createRoomButton.leadingAnchor.constraint(equalTo: self.joinRoomButton.trailingAnchor, constant: 20),
+            
+            self.playAgainstAIButton.topAnchor.constraint(equalTo: self.gridRunLabel.bottomAnchor, constant: Dimensions.verticalSpacing20 * 1.5),
+            self.playAgainstAIButton.leadingAnchor.constraint(equalTo: self.createRoomButton.trailingAnchor, constant: 20)
         ])
     }
     

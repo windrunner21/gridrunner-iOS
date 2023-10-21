@@ -8,14 +8,8 @@
 import UIKit
 
 class GameViewController: UIViewController {
-    
-    let loadingView = LoadingView(
-        frame: CGRect(
-            x: 0,
-            y: 0,
-            width: UIScreen.main.bounds.width,
-            height: UIScreen.main.bounds.height)
-    )
+        
+    var isOnline: Bool = true
     
     let greetingView = GreetingView(
         frame: CGRect(
@@ -24,17 +18,6 @@ class GameViewController: UIViewController {
             width: UIScreen.main.bounds.width,
             height: UIScreen.main.bounds.height)
     )
-
-    let roomLoadingView = RoomLoadingView(
-        frame: CGRect(
-            x: 0,
-            y: 0,
-            width: UIScreen.main.bounds.width,
-            height: UIScreen.main.bounds.height)
-    )
-
-    var ordinaryLoading: Bool!
-    var fromJoiningRoom: Bool!
     
     // Programmable UI properties.
     let playerProfileView: ProfileView = ProfileView()
@@ -71,29 +54,32 @@ class GameViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.view.addSubview(ordinaryLoading ? self.loadingView : self.roomLoadingView)
         self.view.backgroundColor = UIColor(named: "Background")
         
-        AblyService.shared.enterGame(joining: fromJoiningRoom)
-
-        NotificationCenter.default.addObserver(self, selector: #selector(setupGame), name: NSNotification.Name("Success:GameConfig"), object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(updateGame), name: NSNotification.Name("Success:MoveResponse"), object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(finishGame), name: NSNotification.Name("Success:GameOver"), object: nil)
+        self.setupGame(online: self.isOnline)
     }
     
-    @objc private func setupGame() {
+    private func setupGame(online: Bool) {
+        if online { self.setupOnlineMode() } else { self.setupOfflineMode() }
+    }
+    
+    private func setupOfflineMode() {
+        print("Offline mode instantiated")
+    }
+    
+    private func setupOnlineMode() {
         self.initializeGame()
         guard let player = self.game.getPlayer() else { presentErrorAlert(); return }
-        
-        self.loadingView.remove()
-        self.roomLoadingView.remove()
-        
+                
         self.setupProfileViews(with: player)
         self.setupGameView()
         self.setupCounterViews()
         self.setupButtons()
         
         self.showGreetingView(with: player.type)
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(updateGame), name: NSNotification.Name("Success:MoveResponse"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(finishGame), name: NSNotification.Name("Success:GameOver"), object: nil)
     }
     
     private func showGreetingView(with playerType: PlayerType) {
@@ -455,8 +441,19 @@ class GameViewController: UIViewController {
                 return Runner(at: startTile.position)
             }
             
-            return clientId == GameConfig.shared.runner ?
-            Runner(at: startTile.position) : Seeker(at: startTile.position)
+            switch (GameConfig.shared.runner, GameConfig.shared.seeker) {
+            case (clientId, _):
+                return Runner(at: startTile.position)
+            case ("you", _):
+                return Runner(at: startTile.position)
+            case (_, clientId):
+                return Seeker(at: startTile.position)
+            case (_, "you"):
+                return Seeker(at: startTile.position)
+            default:
+                self.presentErrorAlert()
+                return Runner(at: startTile.position)
+            }
         }
         
         let history = GameConfig.shared.getHistory()
