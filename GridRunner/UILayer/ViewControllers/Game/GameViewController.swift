@@ -56,19 +56,18 @@ class GameViewController: UIViewController {
         super.viewDidLoad()
         self.view.backgroundColor = UIColor(named: "Background")
         
-        self.setupGame(online: self.isOnline)
+        self.setupGame()
     }
-    
-    private func setupGame(online: Bool) {
-        if online { self.setupOnlineMode() } else { self.setupOfflineMode() }
-    }
-    
-    private func setupOfflineMode() {
-        print("Offline mode instantiated")
-    }
-    
-    private func setupOnlineMode() {
-        self.initializeGame()
+        
+    private func setupGame() {
+        if self.isOnline {
+            self.initializeOnlineGame()
+            NotificationCenter.default.addObserver(self, selector: #selector(updateGame), name: NSNotification.Name("Success:MoveResponse"), object: nil)
+            NotificationCenter.default.addObserver(self, selector: #selector(finishGame), name: NSNotification.Name("Success:GameOver"), object: nil)
+        } else {
+            self.initializeOfflineGame()
+        }
+        
         guard let player = self.game.getPlayer() else { presentErrorAlert(); return }
                 
         self.setupProfileViews(with: player)
@@ -77,9 +76,6 @@ class GameViewController: UIViewController {
         self.setupButtons()
         
         self.showGreetingView(with: player.type)
-        
-        NotificationCenter.default.addObserver(self, selector: #selector(updateGame), name: NSNotification.Name("Success:MoveResponse"), object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(finishGame), name: NSNotification.Name("Success:GameOver"), object: nil)
     }
     
     private func showGreetingView(with playerType: PlayerType) {
@@ -241,16 +237,7 @@ class GameViewController: UIViewController {
             verticalStackView.addArrangedSubview(horizontalStackView)
         }
         
-        // NOTE: GameConfig can be initialized multiple times. Remove and renew view insteaf of pilling them up.
-        if rootView.subviews.isEmpty {
-            rootView.addSubview(verticalStackView)
-        } else {
-            for subview in rootView.subviews {
-                subview.removeFromSuperview()
-            }
-            
-            rootView.addSubview(verticalStackView)
-        }
+        rootView.addSubview(verticalStackView)
         
         verticalStackView.translatesAutoresizingMaskIntoConstraints = false
         verticalStackView.topAnchor.constraint(equalTo: rootView.topAnchor, constant: 0).isActive = true
@@ -425,7 +412,26 @@ class GameViewController: UIViewController {
         }
     }
     
-    private func initializeGame() {
+    private func initializeOfflineGame() {
+        let map = Map(with: MapDimensions(13, by: 13))
+        let player = Runner(at: map.getCenterCoordinates())
+        self.game.createSession(with: map, for: player)
+        
+        // Prepare game grid.
+        self.createGameGrid(
+            rows: game.getMap().getDimensions().getNumberOfRows(),
+            columns: game.getMap().getDimensions().getNumberOfColumns(),
+            inside: gameView
+        )
+        
+        self.updateMovesCounter(with: player.numberOfMoves)
+        self.updateTurnCounter(with: player.currentTurnNumber)
+        
+        // Checks if player is Runner. If Runner highlights possible move coordinates.
+        self.highlightRunnerMoves()
+    }
+    
+    private func initializeOnlineGame() {
         let map = Map(with: MapDimensions(GameConfig.shared.grid.height, by: GameConfig.shared.grid.width))
         
         guard let startTile = GameConfig.shared.grid.tiles().first(where: {$0.type == .start}) else {
@@ -515,17 +521,17 @@ class GameViewController: UIViewController {
         self.playerProfileView.textSize = Dimensions.buttonFont
         self.playerProfileView.setup(in: self.view)
         self.playerProfileView.color = player.type == .runner ? UIColor(named: "Red") : UIColor(named: "Gray")
-        self.playerUsernameLabel.setup(in: self.view, as: player.type == .runner ? "@\(GameConfig.shared.runner ?? "you")" : "@\(GameConfig.shared.seeker ?? "you")")
         self.playerTypeLabel.setup(in: self.view, as: player.type == .runner ? "Runner" : "Seeker")
         
         self.opponentProfileView.textSize = Dimensions.buttonFont
         self.opponentProfileView.setup(in: self.view)
         self.opponentProfileView.text = ProfileIcon.shared.enemyIcon
         self.opponentProfileView.color = player.type == .runner ? UIColor(named: "Gray") : UIColor(named: "Red")
-        self.opponentUsernameLabel.setup(in: self.view, as: "@\(GameConfig.shared.opponent)")
         self.opponentUsernameLabel.textAlignment = .right
         self.opponentTypeLabel.setup(in: self.view, as: player.type == .runner ? "Seeker" : "Runner")
         self.opponentTypeLabel.textAlignment = .right
+        
+        self.setupProfileViewLabels(with: player)
         
         NSLayoutConstraint.activate([
             self.playerProfileView.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor, constant: 10),
@@ -547,6 +553,16 @@ class GameViewController: UIViewController {
         ])
         
         self.visualizeTurn(for: player, initial: true)
+    }
+    
+    private func setupProfileViewLabels(with player: AnyPlayer) {
+        if self.isOnline {
+            self.playerUsernameLabel.setup(in: self.view, as: player.type == .runner ? "@\(GameConfig.shared.runner ?? "you")" : "@\(GameConfig.shared.seeker ?? "you")")
+            self.opponentUsernameLabel.setup(in: self.view, as: "@\(GameConfig.shared.opponent)")
+        } else {
+            self.playerUsernameLabel.setup(in: self.view, as: "@you")
+            self.opponentUsernameLabel.setup(in: self.view, as: "@opponent")
+        }
     }
     
     private func setupCounterViews() {
