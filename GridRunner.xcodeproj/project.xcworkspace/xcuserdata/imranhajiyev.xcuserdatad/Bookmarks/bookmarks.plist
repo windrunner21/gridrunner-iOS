@@ -12,13 +12,13 @@
 					<key>EndingColumnNumber</key>
 					<string>0</string>
 					<key>EndingLineNumber</key>
-					<string>53</string>
+					<string>57</string>
 					<key>StartingColumnNumber</key>
 					<string>0</string>
 					<key>StartingLineNumber</key>
-					<string>52</string>
+					<string>56</string>
 					<key>Timestamp</key>
-					<string>719605700.74701</string>
+					<string>719663471.839115</string>
 				</dict>
 				<key>rebasable-url</key>
 				<dict>
@@ -37,7 +37,7 @@
 				<string>        NotificationCenter.default.addObserver(self, selector: #selector(transitionToGame), name: NSNotification.Name("Success:GameConfig"), object: nil)
 </string>
 				<key>leading</key>
-				<string>        //AblyService.shared.enterGame(joining: self.joining)
+				<string>        AblyService.shared.enterGame(joining: self.joining)
         
 </string>
 				<key>trailing</key>

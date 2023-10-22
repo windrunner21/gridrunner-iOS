@@ -194,11 +194,10 @@ class MainViewController: UIViewController {
     }
     
     private func startOfflineMode() {
-        let lvc = LoadingViewController()
         let gameViewController: GameViewController = GameViewController()
         gameViewController.isOnline = false
         let sceneDelegate = UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate
-        sceneDelegate?.transitionViewController.transition(to: lvc, with: [.transitionCurlUp])
+        sceneDelegate?.transitionViewController.transition(to: gameViewController, with: [.transitionCurlUp])
     }
     
     func checkUserAuthentication() {

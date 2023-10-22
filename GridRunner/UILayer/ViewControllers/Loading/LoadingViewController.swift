@@ -9,6 +9,7 @@ import UIKit
 
 class LoadingViewController: UIViewController {
     
+    var hintsIndex: Int = 0
     var joining: Bool!
     
     // Programmable UI properties.
@@ -34,6 +35,7 @@ class LoadingViewController: UIViewController {
         label.font = UIFont(name: "Kanit-Regular", size: Dimensions.subtitleFont)
         label.textColor = UIColor(named: "Black")
         label.textAlignment = .center
+        label.numberOfLines = 3
         return label
     }()
     
@@ -48,7 +50,9 @@ class LoadingViewController: UIViewController {
         self.setupContainerSubViews()
         self.setupHints()
         
-        //AblyService.shared.enterGame(joining: self.joining)
+        self.startHintTimer()
+        
+        AblyService.shared.enterGame(joining: self.joining)
         
         NotificationCenter.default.addObserver(self, selector: #selector(transitionToGame), name: NSNotification.Name("Success:GameConfig"), object: nil)
     }
@@ -90,8 +94,9 @@ class LoadingViewController: UIViewController {
     
     private func setupHints() {
         self.view.addSubview(hintsLabel)
-        
-        self.hintsLabel.text = "⚠️ Hint #1"
+                
+        hintsLabel.text = "⚠️ \(GameHints.hints[hintsIndex])"
+        hintsIndex += 1
         
         NSLayoutConstraint.activate([
             self.hintsLabel.centerXAnchor.constraint(equalTo: self.view.centerXAnchor),
@@ -99,5 +104,14 @@ class LoadingViewController: UIViewController {
             self.hintsLabel.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: -20),
             self.hintsLabel.bottomAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.bottomAnchor, constant: -20)
         ])
+    }
+    
+    private func startHintTimer() {
+        Timer.scheduledTimer(timeInterval: 5, target: self, selector: #selector(updateHintsLabel), userInfo: nil, repeats: true)
+    }
+    
+    @objc private func updateHintsLabel() {
+        hintsLabel.text = "⚠️ \(GameHints.hints[hintsIndex])"
+        hintsIndex = (hintsIndex + 1) % GameHints.hints.count
     }
 }
