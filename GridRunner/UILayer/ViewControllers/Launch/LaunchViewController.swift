@@ -39,9 +39,8 @@ class LaunchViewController: UIViewController {
             mainViewController.roomCode = self.roomCode
             
             let sceneDelegate = UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate
-            sceneDelegate?.transitionViewController.transition(to: mainViewController, with: [.transitionCurlUp]) {
-                guard self.roomCode != nil else  { return }
-                
+            sceneDelegate?.transitionViewController.transition(to: mainViewController, with: [.transitionCurlUp]) { [weak self] in
+                guard self?.roomCode != nil else  { return }
                 mainViewController.openJoinRoomAlert()
             }
         }

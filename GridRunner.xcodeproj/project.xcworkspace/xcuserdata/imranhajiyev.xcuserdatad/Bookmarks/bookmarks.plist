@@ -12,60 +12,13 @@
 					<key>EndingColumnNumber</key>
 					<string>0</string>
 					<key>EndingLineNumber</key>
-					<string>57</string>
-					<key>StartingColumnNumber</key>
-					<string>0</string>
-					<key>StartingLineNumber</key>
-					<string>56</string>
-					<key>Timestamp</key>
-					<string>719663471.839115</string>
-				</dict>
-				<key>rebasable-url</key>
-				<dict>
-					<key>base</key>
-					<string>workspace</string>
-					<key>payload</key>
-					<dict>
-						<key>relative-path</key>
-						<string>GridRunner/UILayer/ViewControllers/Loading/LoadingViewController.swift</string>
-					</dict>
-				</dict>
-			</dict>
-			<key>text-context</key>
-			<dict>
-				<key>focused</key>
-				<string>        NotificationCenter.default.addObserver(self, selector: #selector(transitionToGame), name: NSNotification.Name("Success:GameConfig"), object: nil)
-</string>
-				<key>leading</key>
-				<string>        AblyService.shared.enterGame(joining: self.joining)
-        
-</string>
-				<key>trailing</key>
-				<string>    }
-    
-    @objc func transitionToGame() {
-</string>
-			</dict>
-			<key>title</key>
-			<string>Gets called multiple times</string>
-			<key>type</key>
-			<string>bookmark</string>
-		</dict>
-		<dict>
-			<key>destination</key>
-			<dict>
-				<key>location-parameters</key>
-				<dict>
-					<key>EndingColumnNumber</key>
-					<string>0</string>
-					<key>EndingLineNumber</key>
 					<string>68</string>
 					<key>StartingColumnNumber</key>
 					<string>0</string>
 					<key>StartingLineNumber</key>
 					<string>67</string>
 					<key>Timestamp</key>
-					<string>719668312.434706</string>
+					<string>719831542.320371</string>
 				</dict>
 				<key>rebasable-url</key>
 				<dict>

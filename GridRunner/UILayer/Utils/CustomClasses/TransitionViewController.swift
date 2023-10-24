@@ -10,7 +10,7 @@ import UIKit
 
 class TransitionViewController: UIViewController {
     
-    private var currentViewController: UIViewController?
+    private weak var currentViewController: UIViewController?
     
     func transition(
         to viewController: UIViewController,
@@ -32,13 +32,13 @@ class TransitionViewController: UIViewController {
         newView.frame = self.view.bounds
         
         if let currentViewController = self.currentViewController, let oldView = currentViewController.view {
-            UIView.transition(with: self.view, duration: 0.5, options: options, animations: {
+            UIView.transition(with: self.view, duration: 0.5, options: options, animations: { [weak self] in
                 oldView.removeFromSuperview()
                 currentViewController.removeFromParent()
                 
-                self.view.addSubview(newView)
+                self?.view.addSubview(newView)
                 viewController.didMove(toParent: self)
-                self.currentViewController = viewController
+                self?.currentViewController = viewController
                 completion?()
             })
         } else {

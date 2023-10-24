@@ -128,6 +128,8 @@ class AblyService {
         
         NSLog("Entering channel \"\(channelName)\".")
         
+        var didReceiveConfigFile: Bool = false
+        
         self.gameChannel.subscribe(GameSessionDetails.shared.roomCode) { message in
             if let data = message.data as? [String: Any] {
                 
@@ -138,8 +140,12 @@ class AblyService {
                     type == "config",
                     let payload = GameConfig.toJSONAndDecode(data: data, type: GameConfig.self) {
                     GameConfig.shared.update(with: payload)
-                    DispatchQueue.main.async {
-                        NotificationCenter.default.post(name: NSNotification.Name("Success:GameConfig"), object: nil)
+            
+                    if !didReceiveConfigFile {
+                        DispatchQueue.main.async {
+                            NotificationCenter.default.post(name: NSNotification.Name("Success:GameConfig"), object: nil)
+                        }
+                        didReceiveConfigFile = true
                     }
                 }
                 

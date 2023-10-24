@@ -9,8 +9,10 @@ import UIKit
 
 class LoadingViewController: UIViewController {
     
-    var hintsIndex: Int = 0
     var joining: Bool!
+    private let alertAdapter = AlertAdapter()
+    private var hintsIndex: Int = 0
+    private weak var hintsTimer: Timer?
     
     // Programmable UI properties.
     private let backgroundContainerView: UIView = {
@@ -43,7 +45,6 @@ class LoadingViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
         self.view.backgroundColor = UIColor(named: "Background")
         
         self.setupBackgroundContainerView()
@@ -55,12 +56,21 @@ class LoadingViewController: UIViewController {
         AblyService.shared.enterGame(joining: self.joining)
         
         NotificationCenter.default.addObserver(self, selector: #selector(transitionToGame), name: NSNotification.Name("Success:GameConfig"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(presentGameOverAlert), name: NSNotification.Name("Success:GameOver"), object: nil)
     }
     
-    @objc func transitionToGame() {
+    @objc private func transitionToGame() {
         let gameViewController: GameViewController = GameViewController()
         let sceneDelegate = UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate
         sceneDelegate?.transitionViewController.transition(to: gameViewController, with: [.transitionCurlUp])
+    }
+    
+    @objc private func presentGameOverAlert() {
+        let alert = alertAdapter.createGameOverAlert(winner: GameOver.shared.getWinner(), reason: GameOver.shared.reason, alertActionHandler: { [weak self] in
+            self?._transitionToMainScreen()
+        })
+        
+        self.present(alert, animated: true)
     }
     
     private func setupBackgroundContainerView() {
@@ -107,11 +117,20 @@ class LoadingViewController: UIViewController {
     }
     
     private func startHintTimer() {
-        Timer.scheduledTimer(timeInterval: 5, target: self, selector: #selector(updateHintsLabel), userInfo: nil, repeats: true)
+        self.hintsTimer = Timer.scheduledTimer(withTimeInterval: 5, repeats: true) { [weak self] _ in
+            self?.updateHintsLabel()
+        }
     }
     
-    @objc private func updateHintsLabel() {
+    private func updateHintsLabel() {
         hintsLabel.text = "⚠️ \(GameHints.hints[hintsIndex])"
         hintsIndex = (hintsIndex + 1) % GameHints.hints.count
+    }
+    
+    private func _transitionToMainScreen() {
+        AblyService.shared.leaveGame()
+        let mainViewController: MainViewController = MainViewController()
+        let sceneDelegate = UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate
+        sceneDelegate?.transitionViewController.transition(to: mainViewController, with: [.transitionCurlDown])
     }
 }
