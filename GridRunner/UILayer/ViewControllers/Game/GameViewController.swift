@@ -364,7 +364,7 @@ class GameViewController: UIViewController {
     }
     
     private func transitionToMainScreen() {
-        AblyService.shared.leaveGame()
+        if self.isOnline { AblyService.shared.leaveGame() }
         let mainViewController: MainViewController = MainViewController()
         let sceneDelegate = UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate
         sceneDelegate?.transitionViewController.transition(to: mainViewController, with: [.transitionCurlDown])

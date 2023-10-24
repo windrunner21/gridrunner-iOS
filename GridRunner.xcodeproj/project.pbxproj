@@ -104,6 +104,10 @@
 		CAB6EAAF2A2A086C00997852 /* ButtonExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAB6EAAE2A2A086C00997852 /* ButtonExtension.swift */; };
 		CAB728FD2A648EBB00BB4908 /* CreateRoomViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAB728FC2A648EBB00BB4908 /* CreateRoomViewController.swift */; };
 		CAB729062A64A5E400BB4908 /* Friendly.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAB729052A64A5E400BB4908 /* Friendly.swift */; };
+		CAC4A4232AE7F4B00023A6CD /* OfflineSettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAC4A4222AE7F4B00023A6CD /* OfflineSettingsViewController.swift */; };
+		CAC4A4252AE7FD780023A6CD /* Difficulty.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAC4A4242AE7FD780023A6CD /* Difficulty.swift */; };
+		CAC4A4272AE7FD810023A6CD /* MapType.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAC4A4262AE7FD810023A6CD /* MapType.swift */; };
+		CAC4A4292AE7FEBB0023A6CD /* Settable.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAC4A4282AE7FEBB0023A6CD /* Settable.swift */; };
 		CAC833672A5BEE3B00EED95B /* PasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAC833662A5BEE3B00EED95B /* PasswordViewController.swift */; };
 		CAC833692A5C008400EED95B /* PasswordService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAC833682A5C008400EED95B /* PasswordService.swift */; };
 		CAEC677D2AC18C2C003A3E8A /* Notifications.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAEC677C2AC18C2C003A3E8A /* Notifications.swift */; };
@@ -250,6 +254,10 @@
 		CAB6EAAE2A2A086C00997852 /* ButtonExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonExtension.swift; sourceTree = "<group>"; };
 		CAB728FC2A648EBB00BB4908 /* CreateRoomViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateRoomViewController.swift; sourceTree = "<group>"; };
 		CAB729052A64A5E400BB4908 /* Friendly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Friendly.swift; sourceTree = "<group>"; };
+		CAC4A4222AE7F4B00023A6CD /* OfflineSettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OfflineSettingsViewController.swift; sourceTree = "<group>"; };
+		CAC4A4242AE7FD780023A6CD /* Difficulty.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Difficulty.swift; sourceTree = "<group>"; };
+		CAC4A4262AE7FD810023A6CD /* MapType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapType.swift; sourceTree = "<group>"; };
+		CAC4A4282AE7FEBB0023A6CD /* Settable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Settable.swift; sourceTree = "<group>"; };
 		CAC833662A5BEE3B00EED95B /* PasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordViewController.swift; sourceTree = "<group>"; };
 		CAC833682A5C008400EED95B /* PasswordService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordService.swift; sourceTree = "<group>"; };
 		CAEC677C2AC18C2C003A3E8A /* Notifications.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Notifications.swift; sourceTree = "<group>"; };
@@ -325,6 +333,7 @@
 			children = (
 				CA0AAC2A2A0E2C17008367FB /* AnyPlayer.swift */,
 				CA0AAC3A2A0E7528008367FB /* AnyPowerUp.swift */,
+				CAC4A4282AE7FEBB0023A6CD /* Settable.swift */,
 			);
 			path = Protocols;
 			sourceTree = "<group>";
@@ -537,6 +546,8 @@
 				CA852A382A30B19100961E65 /* UserRole.swift */,
 				CA852A502A39ABC600961E65 /* GameType.swift */,
 				CAAF16992AAB536E000D8984 /* PlayerRole.swift */,
+				CAC4A4242AE7FD780023A6CD /* Difficulty.swift */,
+				CAC4A4262AE7FD810023A6CD /* MapType.swift */,
 			);
 			path = System;
 			sourceTree = "<group>";
@@ -699,6 +710,14 @@
 				CAB729052A64A5E400BB4908 /* Friendly.swift */,
 			);
 			name = Friendly;
+			sourceTree = "<group>";
+		};
+		CAC4A4212AE7F4810023A6CD /* OfflineSettings */ = {
+			isa = PBXGroup;
+			children = (
+				CAC4A4222AE7F4B00023A6CD /* OfflineSettingsViewController.swift */,
+			);
+			path = OfflineSettings;
 			sourceTree = "<group>";
 		};
 		CAC833612A5BED8C00EED95B /* Main */ = {
@@ -884,6 +903,7 @@
 		CAFED4C12A0249DC00FB4B9B /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				CAC4A4212AE7F4810023A6CD /* OfflineSettings */,
 				CA1F56342AE4321700ED5FCB /* Loading */,
 				CAB12C4C2AA5DACC00BF71E1 /* Rooms */,
 				CAC833622A5BED9300EED95B /* Launch */,
@@ -1073,10 +1093,12 @@
 				CAAA1CE92AA1D966007886B9 /* PrimaryButton.swift in Sources */,
 				CA0AAC3D2A121EE2008367FB /* MoveDirection.swift in Sources */,
 				CA0AAC342A0E6395008367FB /* Map.swift in Sources */,
+				CAC4A4252AE7FD780023A6CD /* Difficulty.swift in Sources */,
 				CAF8ECAE2A2DC38200179EF1 /* Method.swift in Sources */,
 				CA25B1D22A56E9B50063CBA3 /* AblyAuthDelegate.swift in Sources */,
 				CA852A4B2A38655A00961E65 /* AblyJWTService.swift in Sources */,
 				CAF8ECB52A2E1FCE00179EF1 /* LoginCredentials.swift in Sources */,
+				CAC4A4232AE7F4B00023A6CD /* OfflineSettingsViewController.swift in Sources */,
 				CAAA1CE32AA07138007886B9 /* GridRunLabel.swift in Sources */,
 				CAB12C4B2AA527E500BF71E1 /* ProfileItemView.swift in Sources */,
 				CA1F56382AE433AB00ED5FCB /* RoomLoadingViewController.swift in Sources */,
@@ -1134,6 +1156,7 @@
 				CAF8ECB72A2E1FDE00179EF1 /* RegisterCredentials.swift in Sources */,
 				CA852A582A39C96D00961E65 /* AblyService.swift in Sources */,
 				CA8CBFA82A51A9AA003CF44B /* GameOver.swift in Sources */,
+				CAC4A4292AE7FEBB0023A6CD /* Settable.swift in Sources */,
 				CAF8ECC32A2F78A600179EF1 /* LoginViewController.swift in Sources */,
 				CA71F9D12AA70172007AF4F0 /* TextFieldView.swift in Sources */,
 				CA71F9CD2AA60665007AF4F0 /* TextField.swift in Sources */,
@@ -1155,6 +1178,7 @@
 				CA852A5F2A4029A900961E65 /* GameConfig.swift in Sources */,
 				CAB6EAAF2A2A086C00997852 /* ButtonExtension.swift in Sources */,
 				CA0AAC262A0E2BE6008367FB /* Seeker.swift in Sources */,
+				CAC4A4272AE7FD810023A6CD /* MapType.swift in Sources */,
 				CA71F9CB2AA5DFFB007AF4F0 /* SubtitleLabel.swift in Sources */,
 				CAFED48F2A02496E00FB4B9B /* SceneDelegate.swift in Sources */,
 				CA8CBF9A2A4F1FFA003CF44B /* AuthenticationError.swift in Sources */,

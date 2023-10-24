@@ -8,7 +8,7 @@
 import UIKit
 
 class RoomParameterView: UIView {
-    private let roleLabel: UILabel = {
+    private let label: UILabel = {
         let label: UILabel = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.font = UIFont(name: "Kanit-Semibold", size: Dimensions.subtitleFont)
@@ -36,9 +36,9 @@ class RoomParameterView: UIView {
     }()
     
     // Computed properties.
-    var role: PlayerRole? {
+    var settingName: Settable? {
         didSet {
-            self.roleLabel.text = self.role?.rawValue.capitalized
+            self.label.text = self.settingName?.rawValue.capitalized
         }
     }
     
@@ -80,7 +80,7 @@ class RoomParameterView: UIView {
             self.stackView.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -10)
         ])
         
-        self.stackView.addArrangedSubview(roleLabel)
+        self.stackView.addArrangedSubview(label)
         self.stackView.addArrangedSubview(imageView)
         
         self.layer.cornerRadius = 20
