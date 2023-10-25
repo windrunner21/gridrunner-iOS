@@ -8,6 +8,11 @@
 import UIKit
 
 class RoomParameterView: UIView {
+    
+    var setting: Settable?
+    var tapAction: (()->Void)?
+    private var settingName: String
+    
     private let label: UILabel = {
         let label: UILabel = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -35,13 +40,6 @@ class RoomParameterView: UIView {
         return stackView
     }()
     
-    // Computed properties.
-    var settingName: Settable? {
-        didSet {
-            self.label.text = self.settingName?.rawValue.capitalized
-        }
-    }
-    
     var image: UIImage? {
         didSet {
             self.imageView.image = self.image
@@ -57,16 +55,23 @@ class RoomParameterView: UIView {
         }
     }
     
-    override init(frame: CGRect) {
-        super.init(frame: frame)
+    convenience init(setting: Settable) {
+        self.init()
+        self.setting = setting
+        self.settingName = setting.rawValue.capitalized
         self.commonInit()
+    }
+    
+    override init(frame: CGRect) {
+        self.settingName = String()
+        super.init(frame: frame)
     }
     
     required init?(coder: NSCoder) {
+        self.settingName = String()
         super.init(coder: coder)
-        self.commonInit()
     }
-    
+        
     private func commonInit() {
         self.addSubview(self.stackView)
         
@@ -79,12 +84,25 @@ class RoomParameterView: UIView {
             self.stackView.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -20),
             self.stackView.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -10)
         ])
-        
-        self.stackView.addArrangedSubview(label)
-        self.stackView.addArrangedSubview(imageView)
+
+        self.label.text = self.settingName
+
+        self.stackView.addArrangedSubview(self.label)
+        self.stackView.addArrangedSubview(self.imageView)
         
         self.layer.cornerRadius = 20
         self.backgroundColor = UIColor(named: "Background")
         self.addButtonElevation()
+        
+        self.setTapGestureAction()
+    }
+    
+    private func setTapGestureAction() {
+        let runnerRoleTap = UITapGestureRecognizer(target: self, action: #selector(tapGestureAction))
+        self.addGestureRecognizer(runnerRoleTap)
+    }
+    
+    @objc private func tapGestureAction() {
+        self.tapAction?()
     }
 }

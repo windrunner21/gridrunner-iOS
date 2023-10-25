@@ -63,17 +63,23 @@ class OfflineSettingsViewController: UIViewController {
         return label
     }()
     
-    let easyDifficultyView: RoomParameterView = RoomParameterView()
-    let mediumDifficultyView: RoomParameterView = RoomParameterView()
-    let hardDifficultyView: RoomParameterView = RoomParameterView()
+    let difficultyViews: [RoomParameterView] = [
+        RoomParameterView(setting: Difficulty.easy),
+        RoomParameterView(setting: Difficulty.medium),
+        RoomParameterView(setting: Difficulty.hard)
+    ]
+        
+    let roleViews: [RoomParameterView] = [
+        RoomParameterView(setting: PlayerRole.runner),
+        RoomParameterView(setting: PlayerRole.seeker),
+        RoomParameterView(setting: PlayerRole.random)
+    ]
     
-    let runnerRoleView: RoomParameterView = RoomParameterView()
-    let seekerRoleView: RoomParameterView = RoomParameterView()
-    let randomRoleView: RoomParameterView = RoomParameterView()
-    
-    let basicMapView: RoomParameterView = RoomParameterView()
-    let borderedMapView: RoomParameterView = RoomParameterView()
-    let shapedMapView: RoomParameterView = RoomParameterView()
+    let mapViews: [RoomParameterView] = [
+        RoomParameterView(setting: MapType.basic),
+        RoomParameterView(setting: MapType.bordered),
+        RoomParameterView(setting: MapType.shaped)
+    ]
     
     let playOfflineButton: PrimaryButton = PrimaryButton()
     
@@ -86,18 +92,11 @@ class OfflineSettingsViewController: UIViewController {
         self.setupViewLabels()
         self.setupPlayOfflineButton()
         self.setupScrollView()
-        self.setupRoomParameters()
+        self.setupOfflineSettingParameters()
                 
         // Close current view, dismiss with animation, on cancel view tap.
         let cancelViewTap = UITapGestureRecognizer(target: self, action: #selector(closeView))
         self.cancelView.addGestureRecognizer(cancelViewTap)
-        
-        let runnerRoleTap = UITapGestureRecognizer(target: self, action: #selector(chooseRole))
-        self.runnerRoleView.addGestureRecognizer(runnerRoleTap)
-        let seekerRoleTap = UITapGestureRecognizer(target: self, action: #selector(chooseRole))
-        self.seekerRoleView.addGestureRecognizer(seekerRoleTap)
-        let randomRoleTap = UITapGestureRecognizer(target: self, action: #selector(chooseRole))
-        self.randomRoleView.addGestureRecognizer(randomRoleTap)
     }
     
     @objc func closeView() {
@@ -112,61 +111,7 @@ class OfflineSettingsViewController: UIViewController {
             sceneDelegate?.transitionViewController.transition(to: gameViewController, with: [.transitionCurlUp])
         }
     }
-    
-    @objc func chooseRole(_ gestureRecognizer: UITapGestureRecognizer) {
-        self.playOfflineButton.enable()
-        
-        switch gestureRecognizer.view {
-        case self.runnerRoleView:
-            self.currentRole = .runner
-            
-            self.runnerRoleView.addBorder(color: UIColor(named: "Red"), width: 2)
-            self.runnerRoleView.image = UIImage(systemName: "checkmark.circle.fill")
-            self.runnerRoleView.imageColor = UIColor(named: "Red")
-            
-            self.seekerRoleView.removeAnyBorder()
-            self.seekerRoleView.image = UIImage(systemName: "circle")
-            self.seekerRoleView.imageColor = UIColor(named: "Black")
-            
-            self.randomRoleView.removeAnyBorder()
-            self.randomRoleView.image = UIImage(systemName: "circle")
-            self.randomRoleView.imageColor = UIColor(named: "Black")
-            
-        case self.seekerRoleView:
-            self.currentRole = .seeker
-            
-            self.runnerRoleView.removeAnyBorder()
-            self.runnerRoleView.image = UIImage(systemName: "circle")
-            self.runnerRoleView.imageColor = UIColor(named: "Black")
-            
-            self.seekerRoleView.addBorder(color: UIColor(named: "Red"), width: 2)
-            self.seekerRoleView.image = UIImage(systemName: "checkmark.circle.fill")
-            self.seekerRoleView.imageColor = UIColor(named: "Red")
-            
-            self.randomRoleView.removeAnyBorder()
-            self.randomRoleView.image = UIImage(systemName: "circle")
-            self.randomRoleView.imageColor = UIColor(named: "Black")
-            
-        case self.randomRoleView:
-            self.currentRole = .random
-            
-            self.runnerRoleView.removeAnyBorder()
-            self.runnerRoleView.image = UIImage(systemName: "circle")
-            self.runnerRoleView.imageColor = UIColor(named: "Black")
-            
-            self.seekerRoleView.removeAnyBorder()
-            self.seekerRoleView.image = UIImage(systemName: "circle")
-            self.seekerRoleView.imageColor = UIColor(named: "Black")
-            
-            self.randomRoleView.addBorder(color: UIColor(named: "Red"), width: 2)
-            self.randomRoleView.image = UIImage(systemName: "checkmark.circle.fill")
-            self.randomRoleView.imageColor = UIColor(named: "Red")
-        default:
-            self.playOfflineButton.disable()
-            break
-        }
-    }
-    
+
     private func setupViewLabels() {
         self.viewTitle.setup(in: self.view, as: "Versus AI Settings ⚙️")
         self.viewSubtitle.setup(in: self.view, as: "configure settings for your offline game. select AI difficulty, your desired role and game map!")
@@ -204,24 +149,24 @@ class OfflineSettingsViewController: UIViewController {
         
         self.stackView.addArrangedSubview(self.selectDifficultyLabel)
         
-        self.stackView.addArrangedSubview(self.easyDifficultyView)
-        self.stackView.addArrangedSubview(self.mediumDifficultyView)
-        self.stackView.addArrangedSubview(self.hardDifficultyView)
+        for difficultyView in difficultyViews {
+            self.stackView.addArrangedSubview(difficultyView)
+        }
         
         self.stackView.addArrangedSubview(self.selectRoleLabel)
         
-        self.stackView.addArrangedSubview(self.runnerRoleView)
-        self.stackView.addArrangedSubview(self.seekerRoleView)
-        self.stackView.addArrangedSubview(self.randomRoleView)
+        for roleView in roleViews {
+            self.stackView.addArrangedSubview(roleView)
+        }
         
         self.stackView.addArrangedSubview(self.selectMapLabel)
         
-        self.stackView.addArrangedSubview(self.basicMapView)
-        self.stackView.addArrangedSubview(self.borderedMapView)
-        self.stackView.addArrangedSubview(self.shapedMapView)
+        for mapView in mapViews {
+            self.stackView.addArrangedSubview(mapView)
+        }
     }
     
-    private func setupRoomParameters() {
+    private func setupOfflineSettingParameters() {
         self._setupDifficultyParameters()
         self._setupRoleParameters()
         self._setupMapParameters()
@@ -243,41 +188,69 @@ class OfflineSettingsViewController: UIViewController {
     }
     
     private func _setupDifficultyParameters() {
-        self.easyDifficultyView.settingName = Difficulty.easy
-        self.mediumDifficultyView.settingName = Difficulty.medium
-        self.hardDifficultyView.settingName = Difficulty.hard
-        
-        self.easyDifficultyView.image = UIImage(systemName: "circle")
-        self.easyDifficultyView.imageColor = UIColor(named: "Black")
-        self.mediumDifficultyView.image = UIImage(systemName: "circle")
-        self.mediumDifficultyView.imageColor = UIColor(named: "Black")
-        self.hardDifficultyView.image = UIImage(systemName: "circle")
-        self.hardDifficultyView.imageColor = UIColor(named: "Black")
+        for difficultyView in difficultyViews {
+            difficultyView.image = UIImage(systemName: "circle")
+            difficultyView.imageColor = UIColor(named: "Black")
+            guard let parameter = difficultyView.setting else { return }
+            difficultyView.tapAction = { [weak self] in
+                if var setting = self?.currentDifficulty as? Settable {
+                    self?._chooseSetting(setting: &setting, for: parameter, for: self?.playOfflineButton, views: self?.difficultyViews)
+                    self?.currentDifficulty = setting as! Difficulty
+                    self?.playOfflineButton.shouldBeEnabled(if: self?._shouldEnablePrimaryButton() ?? false)
+                }
+            }
+        }
     }
     
     private func _setupRoleParameters() {
-        self.runnerRoleView.settingName = PlayerRole.runner
-        self.seekerRoleView.settingName = PlayerRole.seeker
-        self.randomRoleView.settingName = PlayerRole.random
-        
-        self.runnerRoleView.image = UIImage(systemName: "circle")
-        self.runnerRoleView.imageColor = UIColor(named: "Black")
-        self.seekerRoleView.image = UIImage(systemName: "circle")
-        self.seekerRoleView.imageColor = UIColor(named: "Black")
-        self.randomRoleView.image = UIImage(systemName: "circle")
-        self.randomRoleView.imageColor = UIColor(named: "Black")
+        for roleView in roleViews {
+            roleView.image = UIImage(systemName: "circle")
+            roleView.imageColor = UIColor(named: "Black")
+            guard let parameter = roleView.setting else { return }
+            roleView.tapAction = { [weak self] in
+                if var setting = self?.currentRole as? Settable {
+                    self?._chooseSetting(setting: &setting, for: parameter, for: self?.playOfflineButton, views: self?.roleViews)
+                    self?.currentRole = setting as! PlayerRole
+                    self?.playOfflineButton.shouldBeEnabled(if: self?._shouldEnablePrimaryButton() ?? false)
+                }
+            }
+        }
     }
     
     private func _setupMapParameters() {
-        self.basicMapView.settingName = MapType.basic
-        self.borderedMapView.settingName = MapType.bordered
-        self.shapedMapView.settingName = MapType.shaped
+        for mapView in mapViews {
+            mapView.image = UIImage(systemName: "circle")
+            mapView.imageColor = UIColor(named: "Black")
+            guard let parameter = mapView.setting else { return }
+            mapView.tapAction = { [weak self] in
+                if var setting = self?.currentMap as? Settable {
+                    self?._chooseSetting(setting: &setting, for: parameter, for: self?.playOfflineButton, views: self?.mapViews)
+                    self?.currentMap = setting as! MapType
+                    self?.playOfflineButton.shouldBeEnabled(if: self?._shouldEnablePrimaryButton() ?? false)
+                }
+            }
+        }
+    }
+    
+    private func _chooseSetting(setting: inout Settable, for parameter: Settable, for button: PrimaryButton?, views: [RoomParameterView]?) {
+
+        guard let views = views else { return }
         
-        self.basicMapView.image = UIImage(systemName: "circle")
-        self.basicMapView.imageColor = UIColor(named: "Black")
-        self.borderedMapView.image = UIImage(systemName: "circle")
-        self.borderedMapView.imageColor = UIColor(named: "Black")
-        self.shapedMapView.image = UIImage(systemName: "circle")
-        self.shapedMapView.imageColor = UIColor(named: "Black")
+        for view in views {
+            if view.setting?.rawValue == parameter.rawValue {
+                setting = parameter
+                view.addBorder(color: UIColor(named: "Red"), width: 2)
+                view.image = UIImage(systemName: "checkmark.circle.fill")
+                view.imageColor = UIColor(named: "Red")
+            } else {
+                view.removeAnyBorder()
+                view.image = UIImage(systemName: "circle")
+                view.imageColor = UIColor(named: "Black")
+            }
+        }
+    }
+    
+    private func _shouldEnablePrimaryButton() ->  Bool {
+        self.currentDifficulty != .unknown && self.currentRole != .unknown && self.currentMap != .unknown
     }
 }

@@ -43,9 +43,11 @@ class CreateRoomViewController: UIViewController {
         return label
     }()
     
-    let runnerRoleView: RoomParameterView = RoomParameterView()
-    let seekerRoleView: RoomParameterView = RoomParameterView()
-    let randomRoleView: RoomParameterView = RoomParameterView()
+    let roleViews: [RoomParameterView] = [
+        RoomParameterView(setting: PlayerRole.runner),
+        RoomParameterView(setting: PlayerRole.seeker),
+        RoomParameterView(setting: PlayerRole.random)
+    ]
     
     let createRoomButton: PrimaryButton = PrimaryButton()
     
@@ -58,18 +60,12 @@ class CreateRoomViewController: UIViewController {
         self.setupViewLabels()
         self.setupCreateRoomButtonButton()
         self.setupScrollView()
+        
         self.setupRoomParameters()
-                
+        
         // Close current view, dismiss with animation, on cancel view tap.
         let cancelViewTap = UITapGestureRecognizer(target: self, action: #selector(closeView))
         self.cancelView.addGestureRecognizer(cancelViewTap)
-        
-        let runnerRoleTap = UITapGestureRecognizer(target: self, action: #selector(chooseRole))
-        self.runnerRoleView.addGestureRecognizer(runnerRoleTap)
-        let seekerRoleTap = UITapGestureRecognizer(target: self, action: #selector(chooseRole))
-        self.seekerRoleView.addGestureRecognizer(seekerRoleTap)
-        let randomRoleTap = UITapGestureRecognizer(target: self, action: #selector(chooseRole))
-        self.randomRoleView.addGestureRecognizer(randomRoleTap)
     }
     
     @objc func closeView() {
@@ -87,61 +83,7 @@ class CreateRoomViewController: UIViewController {
     @objc func onCreateRoom() {
         self.sendCreateRoomRequest()
     }
-    
-    @objc func chooseRole(_ gestureRecognizer: UITapGestureRecognizer) {
-        self.createRoomButton.enable()
         
-        switch gestureRecognizer.view {
-        case self.runnerRoleView:
-            self.currentRole = .runner
-            
-            self.runnerRoleView.addBorder(color: UIColor(named: "Red"), width: 2)
-            self.runnerRoleView.image = UIImage(systemName: "checkmark.circle.fill")
-            self.runnerRoleView.imageColor = UIColor(named: "Red")
-            
-            self.seekerRoleView.removeAnyBorder()
-            self.seekerRoleView.image = UIImage(systemName: "circle")
-            self.seekerRoleView.imageColor = UIColor(named: "Black")
-            
-            self.randomRoleView.removeAnyBorder()
-            self.randomRoleView.image = UIImage(systemName: "circle")
-            self.randomRoleView.imageColor = UIColor(named: "Black")
-            
-        case self.seekerRoleView:
-            self.currentRole = .seeker
-            
-            self.runnerRoleView.removeAnyBorder()
-            self.runnerRoleView.image = UIImage(systemName: "circle")
-            self.runnerRoleView.imageColor = UIColor(named: "Black")
-            
-            self.seekerRoleView.addBorder(color: UIColor(named: "Red"), width: 2)
-            self.seekerRoleView.image = UIImage(systemName: "checkmark.circle.fill")
-            self.seekerRoleView.imageColor = UIColor(named: "Red")
-            
-            self.randomRoleView.removeAnyBorder()
-            self.randomRoleView.image = UIImage(systemName: "circle")
-            self.randomRoleView.imageColor = UIColor(named: "Black")
-            
-        case self.randomRoleView:
-            self.currentRole = .random
-            
-            self.runnerRoleView.removeAnyBorder()
-            self.runnerRoleView.image = UIImage(systemName: "circle")
-            self.runnerRoleView.imageColor = UIColor(named: "Black")
-            
-            self.seekerRoleView.removeAnyBorder()
-            self.seekerRoleView.image = UIImage(systemName: "circle")
-            self.seekerRoleView.imageColor = UIColor(named: "Black")
-            
-            self.randomRoleView.addBorder(color: UIColor(named: "Red"), width: 2)
-            self.randomRoleView.image = UIImage(systemName: "checkmark.circle.fill")
-            self.randomRoleView.imageColor = UIColor(named: "Red")
-        default:
-            self.createRoomButton.disable()
-            break
-        }
-    }
-    
     private func sendCreateRoomRequest() {
         self.createRoomButton.disable()
         AblyJWTService().getJWT() { response, token in
@@ -283,22 +225,24 @@ class CreateRoomViewController: UIViewController {
         
         self.stackView.addArrangedSubview(self.selectRoleLabel)
         
-        self.stackView.addArrangedSubview(self.runnerRoleView)
-        self.stackView.addArrangedSubview(self.seekerRoleView)
-        self.stackView.addArrangedSubview(self.randomRoleView)
+        for roleView in roleViews {
+            self.stackView.addArrangedSubview(roleView)
+        }
     }
     
-    private func setupRoomParameters() {
-        self.runnerRoleView.settingName = PlayerRole.runner
-        self.seekerRoleView.settingName = PlayerRole.seeker
-        self.randomRoleView.settingName = PlayerRole.random
-        
-        self.runnerRoleView.image = UIImage(systemName: "circle")
-        self.runnerRoleView.imageColor = UIColor(named: "Black")
-        self.seekerRoleView.image = UIImage(systemName: "circle")
-        self.seekerRoleView.imageColor = UIColor(named: "Black")
-        self.randomRoleView.image = UIImage(systemName: "circle")
-        self.randomRoleView.imageColor = UIColor(named: "Black")
+    private func _setupRoleParameters() {
+        for roleView in roleViews {
+            roleView.image = UIImage(systemName: "circle")
+            roleView.imageColor = UIColor(named: "Black")
+            guard let parameter = roleView.setting else { return }
+            roleView.tapAction = { [weak self] in
+                if var setting = self?.currentRole as? Settable {
+                    self?._chooseSetting(setting: &setting, for: parameter, for: self?.createRoomButton, views: self?.roleViews)
+                    self?.currentRole = setting as! PlayerRole
+                    self?.createRoomButton.shouldBeEnabled(if: self?._shouldEnablePrimaryButton() ?? false)
+                }
+            }
+        }
     }
     
     private func setupCreateRoomButtonButton() {
@@ -316,5 +260,31 @@ class CreateRoomViewController: UIViewController {
             self.createRoomButton.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: -20),
             self.createRoomButton.bottomAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.bottomAnchor, constant: -10)
         ])
+    }
+    
+    private func setupRoomParameters() {
+        self._setupRoleParameters()
+    }
+    
+    private func _chooseSetting(setting: inout Settable, for parameter: Settable, for button: PrimaryButton?, views: [RoomParameterView]?) {
+
+        guard let views = views else { return }
+        
+        for view in views {
+            if view.setting?.rawValue == parameter.rawValue {
+                setting = parameter
+                view.addBorder(color: UIColor(named: "Red"), width: 2)
+                view.image = UIImage(systemName: "checkmark.circle.fill")
+                view.imageColor = UIColor(named: "Red")
+            } else {
+                view.removeAnyBorder()
+                view.image = UIImage(systemName: "circle")
+                view.imageColor = UIColor(named: "Black")
+            }
+        }
+    }
+    
+    private func _shouldEnablePrimaryButton() ->  Bool {
+        self.currentRole != .unknown
     }
 }
