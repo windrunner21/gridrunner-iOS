@@ -1,30 +1,25 @@
 //
-//  GameConfig.swift
+//  OnlineGameConfig.swift
 //  GridRunner
 //
-//  Created by Imran Hajiyev on 19.06.23.
+//  Created by Imran Hajiyev on 27.10.23.
 //
 
-import Foundation
-
-class GameConfig: ResponseParser, Decodable, CustomStringConvertible {
+class GameConfig: Configurable {
     static let shared = GameConfig()
     
+    // change name to game config and online config in model
     var grid: Grid
     var runner: String?
     var seeker: String?
     var opponent: String
     var runnerMovesLeft: Int
     var seekerMovesLeft: Int
-    private var turn: String
-    private var turnHistory: TurnHistory
+    var turn: String
+    var turnHistory: TurnHistory
     var type: String
     
-    var description: String {
-        "GameConfig is initialized. Current turn is \(turn)'s. Runner is: \(runner ?? "X"). Seeker is: \(seeker ?? "X"). Opponent is: \(opponent). Number of moves left for Runner: \(runnerMovesLeft). Number of moves left for Seeker: \(seekerMovesLeft). Type: \(type). \(grid). \(turnHistory)."
-    }
-    
-    private override init() {
+    private init() {
         self.grid = Grid()
         self.runner = String()
         self.seeker = String()
@@ -48,7 +43,7 @@ class GameConfig: ResponseParser, Decodable, CustomStringConvertible {
         self.type = type
     }
     
-    func update(with config: GameConfig) {
+    func update(with config: Configurable) {
         self.grid = config.grid
         self.runner = config.runner
         self.seeker = config.seeker
@@ -59,12 +54,12 @@ class GameConfig: ResponseParser, Decodable, CustomStringConvertible {
         self.turnHistory = config.turnHistory
         self.type = config.type
     }
-     
+    
     func getHistory() -> History {
         return turnHistory.toHistory()
     }
     
     func getCurrentTurn() -> PlayerType {
         self.turn == "seeker" ? .seeker : .runner
-    }
+    }    
 }

@@ -138,7 +138,7 @@ class AblyService {
                 // Decode as game config if type is inside the response and it equals to config.
                 if let type = data["type"] as? String,
                     type == "config",
-                    let payload = GameConfig.toJSONAndDecode(data: data, type: GameConfig.self) {
+                    let payload = OnlineGameConfig.toJSONAndDecode(data: data, type: OnlineGameConfig.self) {
                     GameConfig.shared.update(with: payload)
             
                     if !didReceiveConfigFile {

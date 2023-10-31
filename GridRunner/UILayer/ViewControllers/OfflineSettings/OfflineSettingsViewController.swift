@@ -104,6 +104,9 @@ class OfflineSettingsViewController: UIViewController {
     }
             
     @objc func onStartOfflineMode() {
+        
+        //GameConfig.update(<#T##self: GameConfig##GameConfig#>)
+        
         self.dismiss(animated: true) {
             let gameViewController: GameViewController = GameViewController()
             gameViewController.isOnline = false
