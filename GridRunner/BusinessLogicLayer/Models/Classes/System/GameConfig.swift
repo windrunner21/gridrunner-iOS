@@ -31,18 +31,6 @@ class GameConfig: Configurable {
         self.type = String()
     }
     
-    private init(grid: Grid, runner: String, seeker: String, opponent: String, runnerMovesLeft: Int, seekerMovesLeft: Int, turn: String, turnHistory: TurnHistory, type: String) {
-        self.grid = grid
-        self.runner = runner
-        self.seeker = seeker
-        self.opponent = opponent
-        self.runnerMovesLeft = runnerMovesLeft
-        self.seekerMovesLeft = seekerMovesLeft
-        self.turn = turn
-        self.turnHistory = turnHistory
-        self.type = type
-    }
-    
     func update(with config: Configurable) {
         self.grid = config.grid
         self.runner = config.runner
