@@ -7,7 +7,7 @@
 
 import Foundation
 
-class SLMove: AnyResponseParser, Decodable {
+struct SLMove: AnyResponseParser, Decodable {
     private var type: String
     private var from: SLRunnerCoordinate?
     private var to: SLRunnerCoordinate?
@@ -38,7 +38,7 @@ class SLMove: AnyResponseParser, Decodable {
     }
 }
 
-private class SLRunnerCoordinate: AnyResponseParser, Decodable {
+private struct SLRunnerCoordinate: AnyResponseParser, Decodable {
     private var x: Int
     private var y: Int
     

@@ -96,7 +96,6 @@ class GameViewController: UIViewController {
         
         if player.type == .runner && MoveResponse.shared.getPlayedBy() == .seeker {
             game.updateSeekerHistory()
-            print(game.getHistory().outputSeekerHistory())
             for move in game.getHistory().getSeekerHistory()[player.currentTurnNumber - 2].getMoves() {
                 self.accessTile(with: move.to, in: gameView)?.openBySeeker(explicit: true)
             }
@@ -104,7 +103,6 @@ class GameViewController: UIViewController {
         
         if player.type == .seeker && MoveResponse.shared.getPlayedBy() == .server {
             game.updateRunnerHistory()
-            print(game.getHistory().outputRunnerHistory())
             
             guard let serverTurn = MoveResponse.shared.getRunnerTurn() else { return }
             guard let firstMove = serverTurn.getMoves().first else { return }

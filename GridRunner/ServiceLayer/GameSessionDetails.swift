@@ -24,12 +24,6 @@ class GameSessionDetails: AnyResponseParser, Decodable, CustomStringConvertible 
         self.seeker = String()
     }
     
-    private init(roomCode: String, runner: String, seeker: String) {
-        self.roomCode = roomCode
-        self.runner = runner
-        self.seeker = seeker
-    }
-    
     func update(with details: GameSessionDetails) {
         self.roomCode = details.roomCode
         self.runner = details.runner

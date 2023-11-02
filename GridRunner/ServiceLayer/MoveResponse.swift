@@ -18,11 +18,6 @@ class MoveResponse: AnyResponseParser, Decodable {
         self.playedBy = String()
     }
     
-    private init(playedBy: String, moves: [SLMove]?) {
-        self.playedBy = playedBy
-        self.moves = moves
-    }
-    
     func update(with response: MoveResponse) {
         self.moves = response.moves
         self.playedBy = response.playedBy
