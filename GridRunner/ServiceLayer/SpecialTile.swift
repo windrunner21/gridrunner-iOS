@@ -7,7 +7,7 @@
 
 import Foundation
 
-class SpecialTile: ResponseParser, Decodable, CustomStringConvertible {
+class SpecialTile: AnyResponseParser, Decodable, CustomStringConvertible {
     private var type: String
     private var x: Int
     private var y: Int

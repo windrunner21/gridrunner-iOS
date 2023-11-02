@@ -7,7 +7,7 @@
 
 import Foundation
 
-class GameOver: ResponseParser, Decodable, CustomStringConvertible {
+class GameOver: AnyResponseParser, Decodable, CustomStringConvertible {
     static let shared = GameOver()
     
     private var turnHistory: TurnHistory
@@ -19,7 +19,7 @@ class GameOver: ResponseParser, Decodable, CustomStringConvertible {
         "Game is over. Winner is: \(winner ?? "none"). History is: \(turnHistory)"
     }
     
-    private override init() {
+    private init() {
         self.turnHistory = TurnHistory()
         self.winner = String()
         self.type = String()

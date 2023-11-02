@@ -1,5 +1,5 @@
 //
-//  ResponseParser.swift
+//  AnyResponseParserExtension.swift
 //  GridRunner
 //
 //  Created by Imran Hajiyev on 19.06.23.
@@ -7,7 +7,7 @@
 
 import Foundation
 
-class ResponseParser: AnyResponseParser {
+extension AnyResponseParser {
     static func toJSONAndDecode<T: Decodable>(data: [String: Any], type: T.Type) -> T? {
         guard let data = self.convertToJSON(data) else {
             return nil

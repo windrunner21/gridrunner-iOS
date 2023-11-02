@@ -7,13 +7,13 @@
 
 import Foundation
 
-class Friendly: ResponseParser, Decodable {
+class Friendly: AnyResponseParser, Decodable {
     static let shared = Friendly()
     
     private var roomCode: String?
     private var host: String?
     
-    private override init() {
+    private init() {
         self.roomCode = String()
         self.host = String()
     }

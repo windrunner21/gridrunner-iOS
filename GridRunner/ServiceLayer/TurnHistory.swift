@@ -7,7 +7,7 @@
 
 import Foundation
 
-class TurnHistory: ResponseParser, Decodable, CustomStringConvertible {
+class TurnHistory: AnyResponseParser, Decodable, CustomStringConvertible {
     var runnerHistory: [[SLMove]]
     var seekerHistory: [[SLMove]]
     
@@ -15,7 +15,7 @@ class TurnHistory: ResponseParser, Decodable, CustomStringConvertible {
         "Turn history = runner history as: \(runnerHistory) and seeker history as: \(seekerHistory)"
     }
     
-    override init() {
+    init() {
         self.runnerHistory = []
         self.seekerHistory = []
     }

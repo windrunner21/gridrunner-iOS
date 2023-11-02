@@ -7,7 +7,7 @@
 
 import Foundation
 
-class OnlineGameConfig: ResponseParser, Decodable, CustomStringConvertible, Configurable {
+struct OnlineGameConfig: AnyResponseParser, Decodable, CustomStringConvertible, Configurable {
     var grid: Grid
     var runner: String?
     var seeker: String?

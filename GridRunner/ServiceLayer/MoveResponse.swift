@@ -7,13 +7,13 @@
 
 import Foundation
 
-class MoveResponse: ResponseParser, Decodable {
+class MoveResponse: AnyResponseParser, Decodable {
     static let shared = MoveResponse()
     
     private var moves: [SLMove]?
     private var playedBy: String
     
-    private override init() {
+    private init() {
         self.moves = nil
         self.playedBy = String()
     }

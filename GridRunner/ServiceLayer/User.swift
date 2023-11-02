@@ -7,7 +7,7 @@
 
 import Foundation
 
-class User: ResponseParser, Decodable, CustomStringConvertible {
+class User: AnyResponseParser, Decodable, CustomStringConvertible {
     
     static let shared = User()
     
@@ -33,7 +33,7 @@ class User: ResponseParser, Decodable, CustomStringConvertible {
         case isLoggedIn
     }
     
-    private override init() {
+    private init() {
         self.id = -1
         self.email = String()
         self.username = String()

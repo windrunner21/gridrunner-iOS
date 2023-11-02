@@ -82,7 +82,7 @@
 		CA852A5A2A3C4E9400961E65 /* GameSessionDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA852A592A3C4E9400961E65 /* GameSessionDetails.swift */; };
 		CA852A5F2A4029A900961E65 /* OnlineGameConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA852A5E2A4029A900961E65 /* OnlineGameConfig.swift */; };
 		CA852A612A40425800961E65 /* AnyResponseParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA852A602A40425800961E65 /* AnyResponseParser.swift */; };
-		CA852A632A4042D900961E65 /* ResponseParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA852A622A4042D900961E65 /* ResponseParser.swift */; };
+		CA852A632A4042D900961E65 /* AnyResponseParserExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA852A622A4042D900961E65 /* AnyResponseParserExtension.swift */; };
 		CA852A672A40487900961E65 /* TurnHistory.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA852A662A40487800961E65 /* TurnHistory.swift */; };
 		CA852A692A40489000961E65 /* Grid.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA852A682A40488F00961E65 /* Grid.swift */; };
 		CA852A6B2A40597A00961E65 /* SpecialTile.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA852A6A2A40597A00961E65 /* SpecialTile.swift */; };
@@ -235,7 +235,7 @@
 		CA852A592A3C4E9400961E65 /* GameSessionDetails.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameSessionDetails.swift; sourceTree = "<group>"; };
 		CA852A5E2A4029A900961E65 /* OnlineGameConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnlineGameConfig.swift; sourceTree = "<group>"; };
 		CA852A602A40425800961E65 /* AnyResponseParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnyResponseParser.swift; sourceTree = "<group>"; };
-		CA852A622A4042D900961E65 /* ResponseParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResponseParser.swift; sourceTree = "<group>"; };
+		CA852A622A4042D900961E65 /* AnyResponseParserExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnyResponseParserExtension.swift; sourceTree = "<group>"; };
 		CA852A662A40487800961E65 /* TurnHistory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TurnHistory.swift; sourceTree = "<group>"; };
 		CA852A682A40488F00961E65 /* Grid.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Grid.swift; sourceTree = "<group>"; };
 		CA852A6A2A40597A00961E65 /* SpecialTile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpecialTile.swift; sourceTree = "<group>"; };
@@ -500,6 +500,14 @@
 			path = Errors;
 			sourceTree = "<group>";
 		};
+		CA790B132AF3BB1700691DC9 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				CA852A622A4042D900961E65 /* AnyResponseParserExtension.swift */,
+			);
+			name = Extensions;
+			sourceTree = "<group>";
+		};
 		CA852A2F2A30A1EA00961E65 /* Structs */ = {
 			isa = PBXGroup;
 			children = (
@@ -605,7 +613,6 @@
 				CAB729042A64A5BD00BB4908 /* Friendly */,
 				CA8CBFA12A504DB1003CF44B /* Authentication */,
 				CA8CBFA02A504DAB003CF44B /* User */,
-				CA852A622A4042D900961E65 /* ResponseParser.swift */,
 			);
 			name = System;
 			sourceTree = "<group>";
@@ -769,6 +776,7 @@
 		CAF8ECA72A2DBF8600179EF1 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				CA790B132AF3BB1700691DC9 /* Extensions */,
 				CAF8ECAF2A2DC5B300179EF1 /* Protocols */,
 				CAF8ECAC2A2DC35500179EF1 /* Classes */,
 				CAF8ECAB2A2DC34E00179EF1 /* Enums */,
@@ -1121,7 +1129,7 @@
 				CA0AAC5D2A1B7EE6008367FB /* Turn.swift in Sources */,
 				CA4E3F582A07A85900D36266 /* GameViewController.swift in Sources */,
 				CA8CBF9C2A504276003CF44B /* MoveResponse.swift in Sources */,
-				CA852A632A4042D900961E65 /* ResponseParser.swift in Sources */,
+				CA852A632A4042D900961E65 /* AnyResponseParserExtension.swift in Sources */,
 				CAB8CE082AEB0DB0008F64A7 /* GameConfig.swift in Sources */,
 				CAB728FD2A648EBB00BB4908 /* CreateRoomViewController.swift in Sources */,
 				CAF8ECB32A2DD23600179EF1 /* BaseURL.swift in Sources */,

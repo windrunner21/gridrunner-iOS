@@ -7,7 +7,7 @@
 
 import Foundation
 
-class Grid: ResponseParser, Decodable, CustomStringConvertible {
+class Grid: AnyResponseParser, Decodable, CustomStringConvertible {
     
     var height: Int
     var width: Int
@@ -17,7 +17,7 @@ class Grid: ResponseParser, Decodable, CustomStringConvertible {
         "Grid is initialized with following dimensions: \(height)x\(width). Special tiles are: \(specialTiles)"
     }
     
-    override init() {
+    init() {
         self.height = Int()
         self.width = Int()
         self.specialTiles = []

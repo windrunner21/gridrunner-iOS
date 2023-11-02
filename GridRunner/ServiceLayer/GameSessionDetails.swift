@@ -7,8 +7,7 @@
 
 import Foundation
 
-class GameSessionDetails: ResponseParser, Decodable, CustomStringConvertible {
-    
+class GameSessionDetails: AnyResponseParser, Decodable, CustomStringConvertible {
     static let shared = GameSessionDetails()
     
     var roomCode: String
@@ -19,7 +18,7 @@ class GameSessionDetails: ResponseParser, Decodable, CustomStringConvertible {
         "Game Session initialized with room code: \(roomCode), runner id: \(runner), seeker id: \(seeker)"
     }
     
-    private override init() {
+    private init() {
         self.roomCode = String()
         self.runner = String()
         self.seeker = String()
