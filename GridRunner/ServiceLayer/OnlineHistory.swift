@@ -7,18 +7,16 @@
 
 import Foundation
 
-class TurnHistory: AnyResponseParser, Decodable {
-    var runnerHistory: [[SLMove]]
-    var seekerHistory: [[SLMove]]
-    
-    init() {
-        self.runnerHistory = []
-        self.seekerHistory = []
+struct OnlineHistory: AnyResponseParser, HistoryProtocol, Decodable {
+    var runner: [Turn] {
+        self.convertToRunnerHistory()
+    }
+    var seeker: [Turn] {
+        self.convertToSeekerHistory()
     }
     
-    func toHistory() -> History {
-        History(with: self.convertToRunnerHistory(), and: self.convertToSeekerHistory())
-    }
+    private var runnerHistory: [[SLMove]]
+    private var seekerHistory: [[SLMove]]
     
     private func convertToRunnerHistory() -> [Turn] {
         var moves: [Move] = []

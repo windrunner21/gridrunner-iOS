@@ -66,7 +66,7 @@ class LoadingViewController: UIViewController {
     }
     
     @objc private func presentGameOverAlert() {
-        let alert = alertAdapter.createGameOverAlert(winner: GameOver.shared.getWinner(), reason: GameOver.shared.reason, alertActionHandler: { [weak self] in
+        let alert = alertAdapter.createGameOverAlert(winner: GameOver.shared.winner, reason: GameOver.shared.reason, alertActionHandler: { [weak self] in
             self?._transitionToMainScreen()
         })
         

@@ -67,6 +67,9 @@
 		CA790B122AF3B61D00691DC9 /* OfflineGameConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA790B112AF3B61D00691DC9 /* OfflineGameConfig.swift */; };
 		CA790B152AF3C0B500691DC9 /* Grid.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA790B142AF3C0B500691DC9 /* Grid.swift */; };
 		CA790B172AF3C0E900691DC9 /* GridProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA790B162AF3C0E900691DC9 /* GridProtocol.swift */; };
+		CA790B1B2AF3CBDE00691DC9 /* HistoryProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA790B1A2AF3CBDE00691DC9 /* HistoryProtocol.swift */; };
+		CA790B1D2AF3DA8900691DC9 /* GameOver.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA790B1C2AF3DA8900691DC9 /* GameOver.swift */; };
+		CA790B1F2AF3DACB00691DC9 /* GameOverProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA790B1E2AF3DACB00691DC9 /* GameOverProtocol.swift */; };
 		CA852A312A30A20200961E65 /* AlertAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA852A302A30A20200961E65 /* AlertAdapter.swift */; };
 		CA852A332A30ABB700961E65 /* Response.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA852A322A30ABB700961E65 /* Response.swift */; };
 		CA852A392A30B19100961E65 /* UserRole.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA852A382A30B19100961E65 /* UserRole.swift */; };
@@ -85,14 +88,14 @@
 		CA852A5F2A4029A900961E65 /* OnlineGameConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA852A5E2A4029A900961E65 /* OnlineGameConfig.swift */; };
 		CA852A612A40425800961E65 /* AnyResponseParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA852A602A40425800961E65 /* AnyResponseParser.swift */; };
 		CA852A632A4042D900961E65 /* AnyResponseParserExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA852A622A4042D900961E65 /* AnyResponseParserExtension.swift */; };
-		CA852A672A40487900961E65 /* TurnHistory.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA852A662A40487800961E65 /* TurnHistory.swift */; };
+		CA852A672A40487900961E65 /* OnlineHistory.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA852A662A40487800961E65 /* OnlineHistory.swift */; };
 		CA852A692A40489000961E65 /* GridModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA852A682A40488F00961E65 /* GridModel.swift */; };
 		CA852A6B2A40597A00961E65 /* SpecialTile.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA852A6A2A40597A00961E65 /* SpecialTile.swift */; };
 		CA89AC652A52FBC300265465 /* MoveType.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA89AC642A52FBC300265465 /* MoveType.swift */; };
 		CA8CBF9A2A4F1FFA003CF44B /* AuthenticationError.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA8CBF992A4F1FFA003CF44B /* AuthenticationError.swift */; };
 		CA8CBF9C2A504276003CF44B /* MoveResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA8CBF9B2A504276003CF44B /* MoveResponse.swift */; };
 		CA8CBF9E2A504A82003CF44B /* SLMove.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA8CBF9D2A504A82003CF44B /* SLMove.swift */; };
-		CA8CBFA82A51A9AA003CF44B /* GameOver.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA8CBFA72A51A9AA003CF44B /* GameOver.swift */; };
+		CA8CBFA82A51A9AA003CF44B /* OnlineGameOver.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA8CBFA72A51A9AA003CF44B /* OnlineGameOver.swift */; };
 		CAAA1CE32AA07138007886B9 /* GridRunLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAAA1CE22AA07138007886B9 /* GridRunLabel.swift */; };
 		CAAA1CE72AA085BF007886B9 /* MenuButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAAA1CE62AA085BF007886B9 /* MenuButton.swift */; };
 		CAAA1CE92AA1D966007886B9 /* PrimaryButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAAA1CE82AA1D966007886B9 /* PrimaryButton.swift */; };
@@ -223,6 +226,9 @@
 		CA790B112AF3B61D00691DC9 /* OfflineGameConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OfflineGameConfig.swift; sourceTree = "<group>"; };
 		CA790B142AF3C0B500691DC9 /* Grid.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Grid.swift; sourceTree = "<group>"; };
 		CA790B162AF3C0E900691DC9 /* GridProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GridProtocol.swift; sourceTree = "<group>"; };
+		CA790B1A2AF3CBDE00691DC9 /* HistoryProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryProtocol.swift; sourceTree = "<group>"; };
+		CA790B1C2AF3DA8900691DC9 /* GameOver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameOver.swift; sourceTree = "<group>"; };
+		CA790B1E2AF3DACB00691DC9 /* GameOverProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameOverProtocol.swift; sourceTree = "<group>"; };
 		CA852A302A30A20200961E65 /* AlertAdapter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertAdapter.swift; sourceTree = "<group>"; };
 		CA852A322A30ABB700961E65 /* Response.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Response.swift; sourceTree = "<group>"; };
 		CA852A382A30B19100961E65 /* UserRole.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserRole.swift; sourceTree = "<group>"; };
@@ -240,14 +246,14 @@
 		CA852A5E2A4029A900961E65 /* OnlineGameConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnlineGameConfig.swift; sourceTree = "<group>"; };
 		CA852A602A40425800961E65 /* AnyResponseParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnyResponseParser.swift; sourceTree = "<group>"; };
 		CA852A622A4042D900961E65 /* AnyResponseParserExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnyResponseParserExtension.swift; sourceTree = "<group>"; };
-		CA852A662A40487800961E65 /* TurnHistory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TurnHistory.swift; sourceTree = "<group>"; };
+		CA852A662A40487800961E65 /* OnlineHistory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnlineHistory.swift; sourceTree = "<group>"; };
 		CA852A682A40488F00961E65 /* GridModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GridModel.swift; sourceTree = "<group>"; };
 		CA852A6A2A40597A00961E65 /* SpecialTile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpecialTile.swift; sourceTree = "<group>"; };
 		CA89AC642A52FBC300265465 /* MoveType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoveType.swift; sourceTree = "<group>"; };
 		CA8CBF992A4F1FFA003CF44B /* AuthenticationError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationError.swift; sourceTree = "<group>"; };
 		CA8CBF9B2A504276003CF44B /* MoveResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoveResponse.swift; sourceTree = "<group>"; };
 		CA8CBF9D2A504A82003CF44B /* SLMove.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SLMove.swift; sourceTree = "<group>"; };
-		CA8CBFA72A51A9AA003CF44B /* GameOver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameOver.swift; sourceTree = "<group>"; };
+		CA8CBFA72A51A9AA003CF44B /* OnlineGameOver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnlineGameOver.swift; sourceTree = "<group>"; };
 		CAAA1CE22AA07138007886B9 /* GridRunLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GridRunLabel.swift; sourceTree = "<group>"; };
 		CAAA1CE62AA085BF007886B9 /* MenuButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuButton.swift; sourceTree = "<group>"; };
 		CAAA1CE82AA1D966007886B9 /* PrimaryButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrimaryButton.swift; sourceTree = "<group>"; };
@@ -346,6 +352,8 @@
 				CAC4A4282AE7FEBB0023A6CD /* Settable.swift */,
 				CAB8CE092AEB0DCC008F64A7 /* Configurable.swift */,
 				CA790B162AF3C0E900691DC9 /* GridProtocol.swift */,
+				CA790B1A2AF3CBDE00691DC9 /* HistoryProtocol.swift */,
+				CA790B1E2AF3DACB00691DC9 /* GameOverProtocol.swift */,
 			);
 			path = Protocols;
 			sourceTree = "<group>";
@@ -423,7 +431,7 @@
 			children = (
 				CA852A682A40488F00961E65 /* GridModel.swift */,
 				CA852A6A2A40597A00961E65 /* SpecialTile.swift */,
-				CA852A662A40487800961E65 /* TurnHistory.swift */,
+				CA852A662A40487800961E65 /* OnlineHistory.swift */,
 			);
 			name = GameConfig;
 			sourceTree = "<group>";
@@ -528,6 +536,7 @@
 				CAB8CE072AEB0DB0008F64A7 /* GameConfig.swift */,
 				CA790B112AF3B61D00691DC9 /* OfflineGameConfig.swift */,
 				CA790B142AF3C0B500691DC9 /* Grid.swift */,
+				CA790B1C2AF3DA8900691DC9 /* GameOver.swift */,
 			);
 			path = System;
 			sourceTree = "<group>";
@@ -608,7 +617,7 @@
 				CA8CBF9B2A504276003CF44B /* MoveResponse.swift */,
 				CA8CBFA42A504E4C003CF44B /* MoveResponse */,
 				CA852A592A3C4E9400961E65 /* GameSessionDetails.swift */,
-				CA8CBFA72A51A9AA003CF44B /* GameOver.swift */,
+				CA8CBFA72A51A9AA003CF44B /* OnlineGameOver.swift */,
 			);
 			name = Game;
 			sourceTree = "<group>";
@@ -1126,6 +1135,7 @@
 				CAB12C4B2AA527E500BF71E1 /* ProfileItemView.swift in Sources */,
 				CA1F56382AE433AB00ED5FCB /* RoomLoadingViewController.swift in Sources */,
 				CAB729062A64A5E400BB4908 /* Friendly.swift in Sources */,
+				CA790B1D2AF3DA8900691DC9 /* GameOver.swift in Sources */,
 				CA852A392A30B19100961E65 /* UserRole.swift in Sources */,
 				CA0AAC8E2A26219B008367FB /* MenuItemView.swift in Sources */,
 				CAAA1CE72AA085BF007886B9 /* MenuButton.swift in Sources */,
@@ -1142,12 +1152,13 @@
 				CAFED8C82AAF4DAC00C32741 /* PlayerTypeLabel.swift in Sources */,
 				CA71F9C92AA5DE0A007AF4F0 /* TitleLabel.swift in Sources */,
 				CA4E3F642A08DCB400D36266 /* ViewControllerExtension.swift in Sources */,
+				CA790B1F2AF3DACB00691DC9 /* GameOverProtocol.swift in Sources */,
 				CAFED8C12AAF032500C32741 /* GameButtonView.swift in Sources */,
 				CA053D1E2AB878DF0019FAD1 /* GameDifficulty.swift in Sources */,
 				CA0AAC892A25DF8C008367FB /* ProfileIcon.swift in Sources */,
 				CA852A692A40489000961E65 /* GridModel.swift in Sources */,
 				CA852A612A40425800961E65 /* AnyResponseParser.swift in Sources */,
-				CA852A672A40487900961E65 /* TurnHistory.swift in Sources */,
+				CA852A672A40487900961E65 /* OnlineHistory.swift in Sources */,
 				CA0AAC3F2A13A2A0008367FB /* ArrowDirection.swift in Sources */,
 				CA0AAC2B2A0E2C17008367FB /* AnyPlayer.swift in Sources */,
 				CA0AAC362A0E6428008367FB /* MapDimensions.swift in Sources */,
@@ -1181,7 +1192,7 @@
 				CA4E3F602A0891F300D36266 /* RegisterViewController.swift in Sources */,
 				CAF8ECB72A2E1FDE00179EF1 /* RegisterCredentials.swift in Sources */,
 				CA852A582A39C96D00961E65 /* AblyService.swift in Sources */,
-				CA8CBFA82A51A9AA003CF44B /* GameOver.swift in Sources */,
+				CA8CBFA82A51A9AA003CF44B /* OnlineGameOver.swift in Sources */,
 				CAC4A4292AE7FEBB0023A6CD /* Settable.swift in Sources */,
 				CAF8ECC32A2F78A600179EF1 /* LoginViewController.swift in Sources */,
 				CA71F9D12AA70172007AF4F0 /* TextFieldView.swift in Sources */,
@@ -1206,6 +1217,7 @@
 				CAB6EAAF2A2A086C00997852 /* ButtonExtension.swift in Sources */,
 				CA0AAC262A0E2BE6008367FB /* Seeker.swift in Sources */,
 				CAC4A4272AE7FD810023A6CD /* MapType.swift in Sources */,
+				CA790B1B2AF3CBDE00691DC9 /* HistoryProtocol.swift in Sources */,
 				CA71F9CB2AA5DFFB007AF4F0 /* SubtitleLabel.swift in Sources */,
 				CAFED48F2A02496E00FB4B9B /* SceneDelegate.swift in Sources */,
 				CA8CBF9A2A4F1FFA003CF44B /* AuthenticationError.swift in Sources */,

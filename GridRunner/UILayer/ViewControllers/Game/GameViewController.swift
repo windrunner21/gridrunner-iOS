@@ -139,7 +139,7 @@ class GameViewController: UIViewController {
         self.reconstructRunnerHistory()
         self.reconstructSeekerHistory()
         
-        if player.type == GameOver.shared.getWinner() {
+        if player.type == GameOver.shared.winner {
             guard let tile = self.accessTile(with: player.position, in: gameView) else { return }
             player.win(on: tile)
         }
@@ -348,7 +348,7 @@ class GameViewController: UIViewController {
     }
     
     private func presentGameOverAlert() {
-        let alert = alertAdapter.createGameOverAlert(winner: GameOver.shared.getWinner(), reason: GameOver.shared.reason, alertActionHandler: { [weak self] in
+        let alert = alertAdapter.createGameOverAlert(winner: GameOver.shared.winner, reason: GameOver.shared.reason, alertActionHandler: { [weak self] in
             self?.transitionToMainScreen()
         })
         
@@ -462,7 +462,7 @@ class GameViewController: UIViewController {
             }
         }
         
-        let history = GameConfig.shared.getHistory()
+        let history = History(with: GameConfig.shared.history.runner, and: GameConfig.shared.history.seeker)
         
         self.game.createSession(
             with: map,
@@ -639,15 +639,15 @@ class GameViewController: UIViewController {
     }
     
     private func updateGameHistory(isOver over: Bool) {
-        let runnerHistory = over ? GameOver.shared.getHistory().getRunnerHistory() : GameConfig.shared.getHistory().getRunnerHistory()
-        let seekerHistory = over ? GameOver.shared.getHistory().getSeekerHistory() : GameConfig.shared.getHistory().getSeekerHistory()
+        let runnerHistory = over ? GameOver.shared.history.runner : GameConfig.shared.history.runner
+        let seekerHistory = over ? GameOver.shared.history.seeker : GameConfig.shared.history.seeker
         
         game.getHistory().setRunnerHistory(to: runnerHistory)
         game.getHistory().setSeekerHistory(to: seekerHistory)
     }
     
     private func reconstructSeekerHistory() {
-        for turn in game.getHistory().getSeekerHistory() {
+        for turn in game.getHistory().seeker {
             for move in turn.getMoves() {
                 self.accessTile(with: move.to, in: gameView)?.openBySeeker(explicit: true)
             }

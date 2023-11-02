@@ -5,29 +5,25 @@
 //  Created by Imran Hajiyev on 22.05.23.
 //
 
-class History {
-    private var runnerHistory: [Turn]
-    private var seekerHistory: [Turn]
+class History: HistoryProtocol {
+    var runner: [Turn]
+    var seeker: [Turn]
     
     convenience init() {
         self.init(with: [], and: [])
     }
     
     init(with runnerHistory: [Turn], and seekerHistory: [Turn]) {
-        self.runnerHistory = runnerHistory
-        self.seekerHistory = seekerHistory
-    }
-    
-    func getHistory() -> (runnerHistory: [Turn], seekerHistory: [Turn]) {
-        (self.runnerHistory, self.seekerHistory)
+        self.runner = runnerHistory
+        self.seeker = seekerHistory
     }
     
     func getRunnerHistory() -> [Turn] {
-        self.runnerHistory
+        self.runner
     }
     
     func getSeekerHistory() -> [Turn] {
-        self.seekerHistory
+        self.seeker
     }
     
     func setHistory(of player: PlayerType, to history: [Turn]) {
@@ -39,11 +35,11 @@ class History {
     }
     
     func setRunnerHistory(to history: [Turn]) {
-        self.runnerHistory = history
+        self.runner = history
     }
     
     func setSeekerHistory(to history: [Turn]) {
-        self.seekerHistory = history
+        self.seeker = history
     }
     
     func appendHistory(of player: AnyPlayer, with history: [Turn]) {
@@ -55,49 +51,31 @@ class History {
     }
     
     func appendRunnerHistory(with history: [Turn]) {
-        self.runnerHistory += history
+        self.runner += history
     }
     
     func appendRunnerHistory(with turn: Turn) {
-        self.runnerHistory.append(turn)
+        self.runner.append(turn)
     }
     
     func appendSeekerHistory(with history: [Turn]) {
-        self.seekerHistory += history
+        self.seeker += history
     }
     
     func appendSeekerHistory(with turn: Turn) {
-        self.seekerHistory.append(turn)
+        self.seeker.append(turn)
     }
     
-    func historyContains(coordinate: Coordinate, of playerType: PlayerType) -> Bool {
-        switch playerType {
-        case .runner:
-            for turn in self.runnerHistory {
-                for move in turn.getMoves() {
-                    if coordinate == move.to {
-                        return true
-                    }
-                }
-            }
-            return false
-        case .seeker:
-            for turn in self.seekerHistory {
-                for move in turn.getMoves() {
-                    if coordinate == move.to {
-                        return true
-                    }
-                }
-            }
-            return false
-        case .server:
-            return false
-        }
+    // MARK: History output methods
+    func outputHistory() {
+        print("Outputting Game's History.")
+        self.outputRunnerHistory()
+        self.outputSeekerHistory()
     }
     
     func outputRunnerHistory() {
-        print("Runner History ONLY:")
-        for (index, turn) in runnerHistory.enumerated() {
+        print("\nRunner History:")
+        for (index, turn) in runner.enumerated() {
             print("\nTURN #\(index + 1)\n")
             for (index, move) in turn.getMoves().enumerated() {
                 print("Move #\(index + 1): moving from \(move.from) to \(move.to) ")
@@ -106,27 +84,8 @@ class History {
     }
     
     func outputSeekerHistory() {
-        print("Seeker History ONLY:")
-        for (index, turn) in seekerHistory.enumerated() {
-            print("\nTURN #\(index + 1)\n")
-            for (index, move) in turn.getMoves().enumerated() {
-                print("Move #\(index + 1): moving from \(move.from) to \(move.to) ")
-            }
-        }
-    }
-    
-    func outputHistory() {
-        print("Outputting Game's History.")
-        print("\nRunner History:")
-        for (index, turn) in runnerHistory.enumerated() {
-            print("\nTURN #\(index + 1)\n")
-            for (index, move) in turn.getMoves().enumerated() {
-                print("Move #\(index + 1): moving from \(move.from) to \(move.to) ")
-            }
-        }
-        
         print("\nSeeker History:")
-        for (index, turn) in seekerHistory.enumerated() {
+        for (index, turn) in seeker.enumerated() {
             print("\nTURN #\(index + 1)\n")
             for (index, move) in turn.getMoves().enumerated() {
                 print("Move #\(index + 1): moving from \(move.from) to \(move.to) ")

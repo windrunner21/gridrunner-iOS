@@ -15,6 +15,6 @@ struct OfflineGameConfig: Configurable {
     var runnerMovesLeft: Int
     var seekerMovesLeft: Int
     var turn: String
-    var turnHistory: TurnHistory
+    var history: HistoryProtocol
     var type: String
 }

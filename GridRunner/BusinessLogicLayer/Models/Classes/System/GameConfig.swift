@@ -16,7 +16,7 @@ class GameConfig: Configurable {
     var runnerMovesLeft: Int
     var seekerMovesLeft: Int
     var turn: String
-    var turnHistory: TurnHistory
+    var history: HistoryProtocol
     var type: String
     
     private init() {
@@ -27,7 +27,7 @@ class GameConfig: Configurable {
         self.runnerMovesLeft = Int()
         self.seekerMovesLeft = Int()
         self.turn = String()
-        self.turnHistory = TurnHistory()
+        self.history = History()
         self.type = String()
     }
     
@@ -39,12 +39,8 @@ class GameConfig: Configurable {
         self.runnerMovesLeft = config.runnerMovesLeft
         self.seekerMovesLeft = config.seekerMovesLeft
         self.turn = config.turn
-        self.turnHistory = config.turnHistory
+        self.history = config.history
         self.type = config.type
-    }
-    
-    func getHistory() -> History {
-        return turnHistory.toHistory()
     }
     
     func getCurrentTurn() -> PlayerType {

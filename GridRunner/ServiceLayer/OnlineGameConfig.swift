@@ -15,7 +15,7 @@ struct OnlineGameConfig: AnyResponseParser, Configurable, Decodable {
     var runnerMovesLeft: Int
     var seekerMovesLeft: Int
     var turn: String
-    var turnHistory: TurnHistory
+    var history: HistoryProtocol
     var type: String
     
     enum CodingKeys: String, CodingKey {
@@ -26,7 +26,7 @@ struct OnlineGameConfig: AnyResponseParser, Configurable, Decodable {
         case runnerMovesLeft
         case seekerMovesLeft
         case turn
-        case turnHistory
+        case history = "turnHistory"
         case type
     }
         
@@ -39,7 +39,7 @@ struct OnlineGameConfig: AnyResponseParser, Configurable, Decodable {
         self.runnerMovesLeft = try container.decode(Int.self, forKey: .runnerMovesLeft)
         self.seekerMovesLeft = try container.decode(Int.self, forKey: .seekerMovesLeft)
         self.turn = try container.decode(String.self, forKey: .turn)
-        self.turnHistory = try container.decode(TurnHistory.self, forKey: .turnHistory)
+        self.history = try container.decode(OnlineHistory.self, forKey: .history)
         self.type = try container.decode(String.self, forKey: .type)
     }
 }

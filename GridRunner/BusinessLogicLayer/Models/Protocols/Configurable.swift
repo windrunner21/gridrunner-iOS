@@ -13,6 +13,6 @@ protocol Configurable {
     var runnerMovesLeft: Int { get }
     var seekerMovesLeft: Int { get }
     var turn: String { get }
-    var turnHistory: TurnHistory { get }
+    var history: HistoryProtocol { get }
     var type: String { get }
 }

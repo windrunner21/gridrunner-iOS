@@ -159,7 +159,7 @@ class AblyService {
                 
                 if let type = data["type"] as? String,
                     type == "game-over",
-                    let payload = GameOver.toJSONAndDecode(data: data, type: GameOver.self) {
+                    let payload = OnlineGameOver.toJSONAndDecode(data: data, type: OnlineGameOver.self) {
                     GameOver.shared.update(with: payload)
                     DispatchQueue.main.async {
                         NotificationCenter.default.post(name: NSNotification.Name("Success:GameOver"), object: nil)
