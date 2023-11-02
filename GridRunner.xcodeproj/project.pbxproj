@@ -335,15 +335,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		CA0AAC242A0E2BDD008367FB /* Classes */ = {
-			isa = PBXGroup;
-			children = (
-				CA852A352A30B14700961E65 /* Game */,
-				CA852A342A30B13B00961E65 /* System */,
-			);
-			path = Classes;
-			sourceTree = "<group>";
-		};
 		CA0AAC292A0E2C09008367FB /* Protocols */ = {
 			isa = PBXGroup;
 			children = (
@@ -356,15 +347,6 @@
 				CA790B1E2AF3DACB00691DC9 /* GameOverProtocol.swift */,
 			);
 			path = Protocols;
-			sourceTree = "<group>";
-		};
-		CA0AAC372A0E643A008367FB /* Structs */ = {
-			isa = PBXGroup;
-			children = (
-				CA0AAC352A0E6428008367FB /* MapDimensions.swift */,
-				CA0AAC2F2A0E484F008367FB /* Coordinate.swift */,
-			);
-			path = Structs;
 			sourceTree = "<group>";
 		};
 		CA0AAC622A25D628008367FB /* Fonts */ = {
@@ -395,8 +377,8 @@
 		CA0AAC872A25DF74008367FB /* Utils */ = {
 			isa = PBXGroup;
 			children = (
-				CA852A522A39ABEA00961E65 /* Extensions */,
 				CA0AAC882A25DF8C008367FB /* ProfileIcon.swift */,
+				CA852A522A39ABEA00961E65 /* Extensions */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -426,14 +408,15 @@
 			path = Loading;
 			sourceTree = "<group>";
 		};
-		CA4A6DF02A4C61E40026AF01 /* GameConfig */ = {
+		CA4A6DF02A4C61E40026AF01 /* OnlineGameConfig */ = {
 			isa = PBXGroup;
 			children = (
+				CA852A5E2A4029A900961E65 /* OnlineGameConfig.swift */,
 				CA852A682A40488F00961E65 /* GridModel.swift */,
 				CA852A6A2A40597A00961E65 /* SpecialTile.swift */,
 				CA852A662A40487800961E65 /* OnlineHistory.swift */,
 			);
-			name = GameConfig;
+			name = OnlineGameConfig;
 			sourceTree = "<group>";
 		};
 		CA4E3F552A07A84400D36266 /* Authentication */ = {
@@ -457,9 +440,9 @@
 		CA4E3F592A07BBE100D36266 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				CA0AAC372A0E643A008367FB /* Structs */,
+				CA852A352A30B14700961E65 /* Game */,
+				CA852A342A30B13B00961E65 /* System */,
 				CA0AAC292A0E2C09008367FB /* Protocols */,
-				CA0AAC242A0E2BDD008367FB /* Classes */,
 				CA4E3F5A2A07BBE400D36266 /* Enums */,
 			);
 			path = Models;
@@ -521,6 +504,15 @@
 			name = Extensions;
 			sourceTree = "<group>";
 		};
+		CA790B222AF3FDC700691DC9 /* InMemoryStorage */ = {
+			isa = PBXGroup;
+			children = (
+				CA0AAC422A166F18008367FB /* GameHistoryExamples.swift */,
+				CA1F56392AE52E8300ED5FCB /* GameHints.swift */,
+			);
+			path = InMemoryStorage;
+			sourceTree = "<group>";
+		};
 		CA852A2F2A30A1EA00961E65 /* Structs */ = {
 			isa = PBXGroup;
 			children = (
@@ -544,6 +536,8 @@
 		CA852A352A30B14700961E65 /* Game */ = {
 			isa = PBXGroup;
 			children = (
+				CA0AAC352A0E6428008367FB /* MapDimensions.swift */,
+				CA0AAC2F2A0E484F008367FB /* Coordinate.swift */,
 				CA0AAC312A0E637E008367FB /* Game.swift */,
 				CA0AAC332A0E6395008367FB /* Map.swift */,
 				CA0AAC602A1D1D1D008367FB /* Player.swift */,
@@ -612,9 +606,7 @@
 		CA852A642A40485700961E65 /* Game */ = {
 			isa = PBXGroup;
 			children = (
-				CA852A5E2A4029A900961E65 /* OnlineGameConfig.swift */,
-				CA4A6DF02A4C61E40026AF01 /* GameConfig */,
-				CA8CBF9B2A504276003CF44B /* MoveResponse.swift */,
+				CA4A6DF02A4C61E40026AF01 /* OnlineGameConfig */,
 				CA8CBFA42A504E4C003CF44B /* MoveResponse */,
 				CA852A592A3C4E9400961E65 /* GameSessionDetails.swift */,
 				CA8CBFA72A51A9AA003CF44B /* OnlineGameOver.swift */,
@@ -652,6 +644,7 @@
 		CA8CBFA42A504E4C003CF44B /* MoveResponse */ = {
 			isa = PBXGroup;
 			children = (
+				CA8CBF9B2A504276003CF44B /* MoveResponse.swift */,
 				CA8CBF9D2A504A82003CF44B /* SLMove.swift */,
 			);
 			name = MoveResponse;
@@ -791,9 +784,10 @@
 		CAF8ECA72A2DBF8600179EF1 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				CA8CBF9F2A504D9A003CF44B /* System */,
+				CA852A642A40485700961E65 /* Game */,
 				CA790B132AF3BB1700691DC9 /* Extensions */,
 				CAF8ECAF2A2DC5B300179EF1 /* Protocols */,
-				CAF8ECAC2A2DC35500179EF1 /* Classes */,
 				CAF8ECAB2A2DC34E00179EF1 /* Enums */,
 			);
 			name = Models;
@@ -808,15 +802,6 @@
 				CA852A322A30ABB700961E65 /* Response.swift */,
 			);
 			name = Enums;
-			sourceTree = "<group>";
-		};
-		CAF8ECAC2A2DC35500179EF1 /* Classes */ = {
-			isa = PBXGroup;
-			children = (
-				CA8CBF9F2A504D9A003CF44B /* System */,
-				CA852A642A40485700961E65 /* Game */,
-			);
-			name = Classes;
 			sourceTree = "<group>";
 		};
 		CAF8ECAF2A2DC5B300179EF1 /* Protocols */ = {
@@ -886,8 +871,7 @@
 		CAFED4BC2A0249C000FB4B9B /* StorageLayer */ = {
 			isa = PBXGroup;
 			children = (
-				CA0AAC422A166F18008367FB /* GameHistoryExamples.swift */,
-				CA1F56392AE52E8300ED5FCB /* GameHints.swift */,
+				CA790B222AF3FDC700691DC9 /* InMemoryStorage */,
 			);
 			path = StorageLayer;
 			sourceTree = "<group>";
