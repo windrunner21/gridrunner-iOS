@@ -65,6 +65,8 @@
 		CA71F9D12AA70172007AF4F0 /* TextFieldView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA71F9D02AA70172007AF4F0 /* TextFieldView.swift */; };
 		CA7417B32A56ECE900A9683A /* AblyAuthenticationError.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA7417B22A56ECE900A9683A /* AblyAuthenticationError.swift */; };
 		CA790B122AF3B61D00691DC9 /* OfflineGameConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA790B112AF3B61D00691DC9 /* OfflineGameConfig.swift */; };
+		CA790B152AF3C0B500691DC9 /* Grid.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA790B142AF3C0B500691DC9 /* Grid.swift */; };
+		CA790B172AF3C0E900691DC9 /* GridProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA790B162AF3C0E900691DC9 /* GridProtocol.swift */; };
 		CA852A312A30A20200961E65 /* AlertAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA852A302A30A20200961E65 /* AlertAdapter.swift */; };
 		CA852A332A30ABB700961E65 /* Response.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA852A322A30ABB700961E65 /* Response.swift */; };
 		CA852A392A30B19100961E65 /* UserRole.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA852A382A30B19100961E65 /* UserRole.swift */; };
@@ -84,7 +86,7 @@
 		CA852A612A40425800961E65 /* AnyResponseParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA852A602A40425800961E65 /* AnyResponseParser.swift */; };
 		CA852A632A4042D900961E65 /* AnyResponseParserExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA852A622A4042D900961E65 /* AnyResponseParserExtension.swift */; };
 		CA852A672A40487900961E65 /* TurnHistory.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA852A662A40487800961E65 /* TurnHistory.swift */; };
-		CA852A692A40489000961E65 /* Grid.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA852A682A40488F00961E65 /* Grid.swift */; };
+		CA852A692A40489000961E65 /* GridModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA852A682A40488F00961E65 /* GridModel.swift */; };
 		CA852A6B2A40597A00961E65 /* SpecialTile.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA852A6A2A40597A00961E65 /* SpecialTile.swift */; };
 		CA89AC652A52FBC300265465 /* MoveType.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA89AC642A52FBC300265465 /* MoveType.swift */; };
 		CA8CBF9A2A4F1FFA003CF44B /* AuthenticationError.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA8CBF992A4F1FFA003CF44B /* AuthenticationError.swift */; };
@@ -219,6 +221,8 @@
 		CA71F9D02AA70172007AF4F0 /* TextFieldView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldView.swift; sourceTree = "<group>"; };
 		CA7417B22A56ECE900A9683A /* AblyAuthenticationError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AblyAuthenticationError.swift; sourceTree = "<group>"; };
 		CA790B112AF3B61D00691DC9 /* OfflineGameConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OfflineGameConfig.swift; sourceTree = "<group>"; };
+		CA790B142AF3C0B500691DC9 /* Grid.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Grid.swift; sourceTree = "<group>"; };
+		CA790B162AF3C0E900691DC9 /* GridProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GridProtocol.swift; sourceTree = "<group>"; };
 		CA852A302A30A20200961E65 /* AlertAdapter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertAdapter.swift; sourceTree = "<group>"; };
 		CA852A322A30ABB700961E65 /* Response.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Response.swift; sourceTree = "<group>"; };
 		CA852A382A30B19100961E65 /* UserRole.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserRole.swift; sourceTree = "<group>"; };
@@ -237,7 +241,7 @@
 		CA852A602A40425800961E65 /* AnyResponseParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnyResponseParser.swift; sourceTree = "<group>"; };
 		CA852A622A4042D900961E65 /* AnyResponseParserExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnyResponseParserExtension.swift; sourceTree = "<group>"; };
 		CA852A662A40487800961E65 /* TurnHistory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TurnHistory.swift; sourceTree = "<group>"; };
-		CA852A682A40488F00961E65 /* Grid.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Grid.swift; sourceTree = "<group>"; };
+		CA852A682A40488F00961E65 /* GridModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GridModel.swift; sourceTree = "<group>"; };
 		CA852A6A2A40597A00961E65 /* SpecialTile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpecialTile.swift; sourceTree = "<group>"; };
 		CA89AC642A52FBC300265465 /* MoveType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoveType.swift; sourceTree = "<group>"; };
 		CA8CBF992A4F1FFA003CF44B /* AuthenticationError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationError.swift; sourceTree = "<group>"; };
@@ -341,6 +345,7 @@
 				CA0AAC3A2A0E7528008367FB /* AnyPowerUp.swift */,
 				CAC4A4282AE7FEBB0023A6CD /* Settable.swift */,
 				CAB8CE092AEB0DCC008F64A7 /* Configurable.swift */,
+				CA790B162AF3C0E900691DC9 /* GridProtocol.swift */,
 			);
 			path = Protocols;
 			sourceTree = "<group>";
@@ -416,7 +421,7 @@
 		CA4A6DF02A4C61E40026AF01 /* GameConfig */ = {
 			isa = PBXGroup;
 			children = (
-				CA852A682A40488F00961E65 /* Grid.swift */,
+				CA852A682A40488F00961E65 /* GridModel.swift */,
 				CA852A6A2A40597A00961E65 /* SpecialTile.swift */,
 				CA852A662A40487800961E65 /* TurnHistory.swift */,
 			);
@@ -522,6 +527,7 @@
 			children = (
 				CAB8CE072AEB0DB0008F64A7 /* GameConfig.swift */,
 				CA790B112AF3B61D00691DC9 /* OfflineGameConfig.swift */,
+				CA790B142AF3C0B500691DC9 /* Grid.swift */,
 			);
 			path = System;
 			sourceTree = "<group>";
@@ -1139,7 +1145,7 @@
 				CAFED8C12AAF032500C32741 /* GameButtonView.swift in Sources */,
 				CA053D1E2AB878DF0019FAD1 /* GameDifficulty.swift in Sources */,
 				CA0AAC892A25DF8C008367FB /* ProfileIcon.swift in Sources */,
-				CA852A692A40489000961E65 /* Grid.swift in Sources */,
+				CA852A692A40489000961E65 /* GridModel.swift in Sources */,
 				CA852A612A40425800961E65 /* AnyResponseParser.swift in Sources */,
 				CA852A672A40487900961E65 /* TurnHistory.swift in Sources */,
 				CA0AAC3F2A13A2A0008367FB /* ArrowDirection.swift in Sources */,
@@ -1156,6 +1162,7 @@
 				CA4E3F662A0BCD3300D36266 /* MapExits.swift in Sources */,
 				CA852A512A39ABC600961E65 /* GameType.swift in Sources */,
 				CAF8ECB12A2DC5BD00179EF1 /* RequestInterceptor.swift in Sources */,
+				CA790B172AF3C0E900691DC9 /* GridProtocol.swift in Sources */,
 				CA852A542A39ABF900961E65 /* GameTypeExtension.swift in Sources */,
 				CA0AAC3B2A0E7528008367FB /* AnyPowerUp.swift in Sources */,
 				CA0AAC392A0E722C008367FB /* TileType.swift in Sources */,
@@ -1203,6 +1210,7 @@
 				CAFED48F2A02496E00FB4B9B /* SceneDelegate.swift in Sources */,
 				CA8CBF9A2A4F1FFA003CF44B /* AuthenticationError.swift in Sources */,
 				CAF8EC9F2A2DBD1A00179EF1 /* APIClient.swift in Sources */,
+				CA790B152AF3C0B500691DC9 /* Grid.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

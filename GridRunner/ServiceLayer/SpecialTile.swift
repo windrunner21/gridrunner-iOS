@@ -7,14 +7,10 @@
 
 import Foundation
 
-class SpecialTile: AnyResponseParser, Decodable, CustomStringConvertible {
+struct SpecialTile: AnyResponseParser, Decodable {
     private var type: String
     private var x: Int
     private var y: Int
-    
-    var description: String {
-        "(Special Tile with coordinates at: \(x), \(y). Type: \(type))"
-    }
     
     func toTile() -> Tile {
         let tile = Tile()

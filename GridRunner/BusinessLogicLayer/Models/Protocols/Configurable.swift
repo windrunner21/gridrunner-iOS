@@ -6,7 +6,7 @@
 //
 
 protocol Configurable {
-    var grid: Grid { get }
+    var grid: GridProtocol { get }
     var runner: String? { get }
     var seeker: String? { get }
     var opponent: String { get }

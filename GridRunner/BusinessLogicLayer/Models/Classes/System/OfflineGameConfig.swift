@@ -8,7 +8,7 @@
 import Foundation
 
 struct OfflineGameConfig: Configurable {
-    var grid: Grid
+    var grid: GridProtocol
     var runner: String?
     var seeker: String?
     var opponent: String

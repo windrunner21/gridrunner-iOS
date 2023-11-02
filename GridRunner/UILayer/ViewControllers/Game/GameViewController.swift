@@ -434,7 +434,7 @@ class GameViewController: UIViewController {
     private func initializeOnlineGame() {
         let map = Map(with: MapDimensions(GameConfig.shared.grid.height, by: GameConfig.shared.grid.width))
         
-        guard let startTile = GameConfig.shared.grid.tiles().first(where: {$0.type == .start}) else {
+        guard let startTile = GameConfig.shared.grid.tiles.first(where: {$0.type == .start}) else {
             print("Cound not get start tile")
             self.presentErrorAlert()
             return

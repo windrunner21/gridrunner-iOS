@@ -9,7 +9,7 @@ class GameConfig: Configurable {
     static let shared = GameConfig()
     
     // change name to game config and online config in model
-    var grid: Grid
+    var grid: GridProtocol
     var runner: String?
     var seeker: String?
     var opponent: String

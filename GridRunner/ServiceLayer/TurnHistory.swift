@@ -7,13 +7,9 @@
 
 import Foundation
 
-class TurnHistory: AnyResponseParser, Decodable, CustomStringConvertible {
+class TurnHistory: AnyResponseParser, Decodable {
     var runnerHistory: [[SLMove]]
     var seekerHistory: [[SLMove]]
-    
-    var description: String {
-        "Turn history = runner history as: \(runnerHistory) and seeker history as: \(seekerHistory)"
-    }
     
     init() {
         self.runnerHistory = []
@@ -45,7 +41,7 @@ class TurnHistory: AnyResponseParser, Decodable, CustomStringConvertible {
     private func convertToSeekerHistory() -> [Turn] {
         var moves: [Move] = []
         var turns: [Turn] = []
-        guard let centerCoordinates = GameConfig.shared.grid.tiles().first(where: {$0.type == .start})?.position else { return [] }
+        guard let centerCoordinates = GameConfig.shared.grid.tiles.first(where: {$0.type == .start})?.position else { return [] }
         
         for turn in self.seekerHistory {
             moves = []
