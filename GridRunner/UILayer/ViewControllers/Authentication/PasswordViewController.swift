@@ -10,7 +10,7 @@ import UIKit
 class PasswordViewController: UIViewController, UITextFieldDelegate {
     
     var mainViewController: MainViewController!
-    var alertAdapter: AlertAdapter = AlertAdapter()
+    private let manager: PasswordManager = PasswordManager()
 
     // Programmable UI properties.
     let cancelView: CancelView = CancelView()
@@ -180,24 +180,18 @@ class PasswordViewController: UIViewController, UITextFieldDelegate {
             return
         }
         
-        PasswordService().resetPassword(for: email) {
+        self.manager.resetUserPassword(for: email) {
             response in
             DispatchQueue.main.async {
                 self.resetPasswordButton.enable()
                 
                 switch response {
                 case .success:
-                    let alert = self.alertAdapter.createCheckEmailAlert()
+                    let alert = self.manager.alertAdapter.createCheckEmailAlert()
                     self.present(alert, animated: true)
-                case .networkError:
-                    let alert = self.alertAdapter.createNetworkErrorAlert()
-                    self.present(alert, animated: true)
-                case .requestError:
-                    let alert = self.alertAdapter.createServiceRequestErrorAlert()
-                    self.present(alert, animated: true)
-                case .decoderError:
-                    let alert = self.alertAdapter.createDecoderErrorAlert()
-                    self.present(alert, animated: true)
+                default:
+                    let alert = self.manager.alertAdapter.createNetworkErrorAlert(ofType: response)
+                    if let alert = alert { self.present(alert, animated: true) }
                 }
             }
         }

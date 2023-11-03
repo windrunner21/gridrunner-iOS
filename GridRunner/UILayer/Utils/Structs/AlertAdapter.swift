@@ -39,68 +39,68 @@ class AlertAdapter {
                 
                 if let textField = self.joinRoomAlert?.textFields?.first {
                     guard let roomCode = textField.text else {
-                        completion(self.createNetworkErrorAlert(), .networkError)
+                        completion(self.createNetworkErrorAlert(ofType: .networkError), .networkError)
                         return
                     }
                     
                     GameSessionDetails.shared.setRoomCode(to: roomCode)
                     
-                    AblyJWTService().getJWT() { response, token in
-                        switch response {
-                        case .success:
-                            guard let token = token else {
-                                DispatchQueue.main.async {
-                                    completion(self.createNetworkErrorAlert(), .networkError)
-                                }
-                                return
-                            }
-                            
-                            AblyService.shared.update(with: token) { response, clientId in
-                                switch response {
-                                case .success:
-                                    guard let _ = clientId else {
-                                        DispatchQueue.main.async {
-                                            completion(self.createNetworkErrorAlert(), .networkError)
-                                        }
-                                        return
-                                    }
-                                    
-                                    GameService().joinRoom(withCode: roomCode) { response in
-                                        switch response {
-                                        case .success:
-                                            DispatchQueue.main.async {
-                                                completion(nil, .success)
-                                            }
-                                        case .networkError:
-                                            DispatchQueue.main.async {
-                                                completion(self.createNetworkErrorAlert(), .networkError)
-                                            }
-                                        case .requestError:
-                                            DispatchQueue.main.async {
-                                                completion(self.createServiceRequestErrorAlert(), .requestError)
-                                            }
-                                        case .decoderError:
-                                            DispatchQueue.main.async {
-                                                completion(self.createDecoderErrorAlert(), .decoderError)
-                                            }
-                                        }
-                                    }
-                                default:
-                                    DispatchQueue.main.async {
-                                        completion(self.createNetworkErrorAlert(), .networkError)
-                                    }
-                                }
-                            }
-                        case .requestError:
-                            DispatchQueue.main.async {
-                                completion(self.createServiceRequestErrorAlert(), .requestError)
-                            }
-                        default:
-                            DispatchQueue.main.async {
-                                completion(self.createNetworkErrorAlert(), .networkError)
-                            }
-                        }
-                    }
+//                    AblyJWTService().getJWT() { response, token in
+//                        switch response {
+//                        case .success:
+//                            guard let token = token else {
+//                                DispatchQueue.main.async {
+//                                    completion(self.createNetworkErrorAlert(ofType: .networkError), .networkError)
+//                                }
+//                                return
+//                            }
+//                            
+//                            AblyService.shared.update(with: token) { response, clientId in
+//                                switch response {
+//                                case .success:
+//                                    guard let _ = clientId else {
+//                                        DispatchQueue.main.async {
+//                                            completion(self.createNetworkErrorAlert(ofType: .networkError), .networkError)
+//                                        }
+//                                        return
+//                                    }
+//                                    
+//                                    GameService().joinRoom(withCode: roomCode) { response in
+//                                        switch response {
+//                                        case .success:
+//                                            DispatchQueue.main.async {
+//                                                completion(nil, .success)
+//                                            }
+//                                        case .networkError:
+//                                            DispatchQueue.main.async {
+//                                                completion(self.createNetworkErrorAlert(ofType: .networkError), .networkError)
+//                                            }
+//                                        case .requestError:
+//                                            DispatchQueue.main.async {
+//                                                completion(self.createNetworkErrorAlert(ofType: .requestError), .requestError)
+//                                            }
+//                                        case .decoderError:
+//                                            DispatchQueue.main.async {
+//                                                completion(self.createNetworkErrorAlert(ofType: .decoderError), .decoderError)
+//                                            }
+//                                        }
+//                                    }
+//                                default:
+//                                    DispatchQueue.main.async {
+//                                        completion(self.createNetworkErrorAlert(ofType: .networkError), .networkError)
+//                                    }
+//                                }
+//                            }
+//                        case .requestError:
+//                            DispatchQueue.main.async {
+//                                completion(self.createNetworkErrorAlert(ofType: .requestError), .requestError)
+//                            }
+//                        default:
+//                            DispatchQueue.main.async {
+//                                completion(self.createNetworkErrorAlert(ofType: .networkError), .networkError)
+//                            }
+//                        }
+//                    }
                 }
             }
         )
@@ -195,27 +195,30 @@ class AlertAdapter {
         return alert
     }
     
-    func createNetworkErrorAlert() -> UIAlertController {
-        let alert = UIAlertController(title: "Network Error.", message: "Something went wrong. Please try later.", preferredStyle: .alert)
-        
-        alert.addAction(UIAlertAction(title: NSLocalizedString("Try again", comment: "Default action"),style: .default))
-        
-        return alert
-    }
-    
-    func createServiceRequestErrorAlert() -> UIAlertController {
-        let alert = UIAlertController(title: "Error.", message: "Something went wrong. Check your credentials.", preferredStyle: .alert)
+    func createGeneralErrorAlert() -> UIAlertController {
+        let alert = UIAlertController(title: "General Error", message: "Something went wrong! Please try again.", preferredStyle: .alert)
         
         alert.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: "Default action"), style: .default))
         
         return alert
     }
     
-    func createDecoderErrorAlert() -> UIAlertController {
-        let alert = UIAlertController(title: "Oh no.", message: "Something went wrong. Please try again.", preferredStyle: .alert)
+    func createNetworkErrorAlert(ofType type: Response) -> UIAlertController? {
+        var alert: UIAlertController?
         
-        alert.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: "Default action"), style: .default))
-    
+        switch type {
+        case .networkError:
+            alert = UIAlertController(title: "Network Error.", message: "Something went wrong. Please try later.", preferredStyle: .alert)
+        case .requestError:
+            alert = UIAlertController(title: "Network Error.", message: "Something went wrong. Please try later.", preferredStyle: .alert)
+        case .decoderError:
+            alert = UIAlertController(title: "Oh no.", message: "Something went wrong. Please try again.", preferredStyle: .alert)
+        default:
+            break
+        }
+        
+        alert?.addAction(UIAlertAction(title: NSLocalizedString("Try again", comment: "Default action"),style: .default))
+        
         return alert
     }
     

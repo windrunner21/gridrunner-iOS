@@ -7,17 +7,18 @@
 
 import Foundation
 
-class AuthService {
-    private let client = APIClient(baseURL: .serverless)
+struct AuthService {
+    private let client: ApiClientProtocol
     private let loginURL = URL(string: BaseURL.serverless.url + URLPath.login.path)!
     private let registerURL = URL(string: BaseURL.serverless.url + URLPath.register.path)!
     
+    init(client: ApiClientProtocol) {
+        self.client = client
+    }
+    
     func login(with credentials: LoginCredentials, completion: @escaping(Response) -> Void) {
-        self.client.sendRequest(
-            path: URLPath.login.path,
-            method: .POST,
-            body: credentials.encode()
-        ) { data, response, error in
+        self.client.sendRequestWithBody(path: URLPath.login.path, method: .POST, body: credentials.encode()) {
+            data, response, error in
             
             if let error = error {
                 NSLog("Error occured in AuthService().login(): \(error)")
@@ -41,11 +42,8 @@ class AuthService {
     }
     
     func register(with credentials: RegisterCredentials, completion: @escaping(Response) -> Void) {
-        self.client.sendRequest(
-            path: URLPath.register.path,
-            method: .POST,
-            body: credentials.encode()
-        ) { data, response, error in
+        self.client.sendRequestWithBody(path: URLPath.register.path, method: .POST, body: credentials.encode()) {
+            data, response, error in
             
             if let error = error {
                 NSLog("Error occured in AuthService().register(): \(error)")
@@ -69,10 +67,8 @@ class AuthService {
     }
     
     func logout(completion: @escaping(Response) -> Void) {
-        self.client.sendRequest(
-            path: URLPath.logout.path,
-            method: .POST
-        ) { data, response, error in
+        self.client.sendRequest(path: URLPath.logout.path, method: .POST) { 
+            data, response, error in
             
             if let error = error {
                 NSLog("Error occured in AuthService().logout(): \(error)")
@@ -96,11 +92,11 @@ class AuthService {
     }
     
     func deleteAccount(completion: @escaping(Response) -> Void) {
-        self.client.sendRequest(
-            path: URLPath.delete.path,
-            method: .POST,
-            cookies: (name: "gridrun-session", value: UserDefaults.standard.value(forKey: "session") as? String)
-        ) { data, response, error in
+        let cookies = (name: "gridrun-session", value: UserDefaults.standard.value(forKey: "session") as? String)
+        
+        self.client.sendRequestWithCookies(path: URLPath.delete.path, method: .POST, cookies: cookies) {
+            data, response, error in
+            
             if let error = error {
                 NSLog("Error occured in AuthService().deleteAccount(): \(error)")
                 completion(.networkError)

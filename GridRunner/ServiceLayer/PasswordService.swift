@@ -7,16 +7,19 @@
 
 import Foundation
 
-class PasswordService {
-    private let client = APIClient(baseURL: .serverless)
+struct PasswordService {
+    private let client: ApiClientProtocol
     private let passwordURL = URL(string: BaseURL.serverless.url + URLPath.resetPassword.path)!
     
+    init(client: ApiClientProtocol) {
+        self.client = client
+    }
+    
     func resetPassword(for email: String, completion: @escaping(Response) -> Void) {
-        self.client.sendRequest(
-            path: URLPath.resetPassword.path,
-            method: .GET,
-            parameters: [URLQueryItem(name: "email", value: email)]
-        ) { data, response, error in
+        let parameters = [URLQueryItem(name: "email", value: email)]
+        
+        self.client.sendRequestWithParameters(path: URLPath.resetPassword.path, method: .GET, parameters: parameters) {
+            data, response, error in
             
             if let error = error {
                 NSLog("Error occured in PasswordService().resetPassword(): \(error)")

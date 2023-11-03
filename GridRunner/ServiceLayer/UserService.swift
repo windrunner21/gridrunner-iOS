@@ -7,15 +7,17 @@
 
 import Foundation
 
-class UserService {    
-    private let client = APIClient(baseURL: .serverless)
+struct UserService {
+    private let client: ApiClientProtocol
     private let userURL = URL(string: BaseURL.serverless.url + URLPath.user.path)!
     
+    init(client: ApiClientProtocol) {
+        self.client = client
+    }
+    
     func getUser(completion: @escaping(Response)-> Void) {
-        self.client.sendRequest(
-            path: URLPath.user.path,
-            method: .GET
-        ) { data, response, error in
+        self.client.sendRequest(path: URLPath.user.path, method: .GET) { 
+            data, response, error in
             
             if let error = error {
                 NSLog("Error occured in UserService().getUser(): \(error)")

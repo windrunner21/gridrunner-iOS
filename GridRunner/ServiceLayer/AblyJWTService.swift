@@ -7,15 +7,18 @@
 
 import Foundation
 
-class AblyJWTService {
-    let client = APIClient(baseURL: .gameServer)
+struct AblyJWTService {
+    let client: ApiClientProtocol
+    
+    init(client: ApiClientProtocol) {
+        self.client = client
+    }
     
     func getJWT(completion: @escaping (Response, String?)->Void) {
-        self.client.sendRequest(
-            path: "/channels/auth",
-            method: .GET,
-            cookies: (name: "gridrun-session", value: UserDefaults.standard.value(forKey: "session") as? String)
-        ) { data, response, error in
+        let cookies = (name: "gridrun-session", value: UserDefaults.standard.value(forKey: "session") as? String)
+        
+        self.client.sendRequestWithCookies(path: "/channels/auth", method: .GET, cookies: cookies) {
+            data, response, error in
             
             if let error = error {
                 NSLog("Error occured in AblyService().getJWT(): \(error)")

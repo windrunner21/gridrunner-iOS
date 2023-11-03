@@ -9,10 +9,11 @@ import UIKit
 
 class MainViewController: UIViewController {
     
+    private let manager: MenuManager = MenuManager()
+    private let ablyManager: AblyManager = AblyManager()
     // When coming from universal link this value will be set to the parameter value from universal link.
     var roomCode: String?
     
-    private let alertAdapter = AlertAdapter()
     private let gameSearchView = GameSearchView(
         frame: CGRect(
             x: UIScreen.main.bounds.width / 2 - UIScreen.main.bounds.width / 3,
@@ -79,6 +80,8 @@ class MainViewController: UIViewController {
     }
     
     @objc func openGameScreen(_ notification: Notification) {
+        // Set notification for successful matchmaking.
+        Notifications.scheduleMatchmakingNotification()
         self.startGame(custom: false, isJoining: false)
     }
     
@@ -95,51 +98,31 @@ class MainViewController: UIViewController {
         self.view.addSubview(gameSearchView)
         self.gameSearchView.slideIn()
         
-        AblyJWTService().getJWT() { response, token in
+        self.ablyManager.retrieveToken { response, token in
             
             switch response {
             case .success:
                 guard let token = token else {
                     DispatchQueue.main.async {
-                        let alert = self.alertAdapter.createNetworkErrorAlert()
+                        let alert = self.manager.alertAdapter.createGeneralErrorAlert()
                         self.present(alert, animated: true)
                     }
                     return
                 }
-                
-                let channelName: String = {
-                    switch gameType {
-                    case .quickplay:
-                        return "quick-play-queue"
-                    case .rankedplay:
-                        return "ranked-play-queue"
-                    case .roomplay:
-                        return "quick-play-queue"
-                    }
-                }()
-                
-                AblyService.shared.update(with: token, and: channelName)
+    
+                AblyService.shared.update(with: token, and: gameType.channelName)
                 AblyService.shared.enterQueue()
-            case .requestError:
-                DispatchQueue.main.async {
-                    self.gameSearchView.slideOut()
-                    let alert = self.alertAdapter.createServiceRequestErrorAlert()
-                    self.present(alert, animated: true)
-                }
             default:
                 DispatchQueue.main.async {
                     self.gameSearchView.slideOut()
-                    let alert = self.alertAdapter.createNetworkErrorAlert()
-                    self.present(alert, animated: true)
+                    let alert = self.manager.alertAdapter.createNetworkErrorAlert(ofType: response)
+                    if let alert = alert { self.present(alert, animated: true) }
                 }
             }
         }
     }
     
     private func startGame(custom: Bool, isJoining: Bool) {
-        // Set notification for successful matchmaking.
-        Notifications.scheduleMatchmakingNotification()
-        
         let loadingTypeViewController = custom ? RoomLoadingViewController() : LoadingViewController()
         
         if let loadingViewController = loadingTypeViewController as? LoadingViewController {
@@ -173,7 +156,8 @@ class MainViewController: UIViewController {
         let loadingOverlayView = LoadingOverlayView()
         self.view.addSubview(loadingOverlayView)
         
-        let alert = self.alertAdapter.createJoinRoomAlert(withCode: roomCode, loadingOverlayView: loadingOverlayView) { errorAlert, response in
+        let alert = self.manager.alertAdapter.createJoinRoomAlert(withCode: roomCode, loadingOverlayView: loadingOverlayView) { errorAlert, response in
+            
             UIView.animate(withDuration: 0.3, animations: {
                 loadingOverlayView.removeFromSuperview()
                 

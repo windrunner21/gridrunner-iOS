@@ -9,10 +9,10 @@ import UIKit
 
 class LaunchViewController: UIViewController {
 
+    private let manager: LaunchManager = LaunchManager()
+    
     // When coming from universal link this value will be set to the parameter value from universal link.
     var roomCode: String?
-    var forceUpgrade: Bool = false
-    let alertAdapter: AlertAdapter = AlertAdapter()
     
     @IBOutlet weak var loadingLabel: UILabel!
     
@@ -25,7 +25,7 @@ class LaunchViewController: UIViewController {
         // Make API call to check for API availability
         if isAPIAvailable() {
             DispatchQueue.main.async {
-                let alert = self.alertAdapter.createForceUpgradeAlert(completion: self.transitionToMainScreen)
+                let alert = self.manager.alertAdapter.createForceUpgradeAlert(completion: self.transitionToMainScreen)
                 self.present(alert, animated: true)
             }
         } else {
@@ -47,13 +47,13 @@ class LaunchViewController: UIViewController {
     }
     
     private func isAPIAvailable() -> Bool {
-        self.forceUpgrade
+        self.manager.forceUpgrade
     }
     
     private func retrieveUserSession(completion: @escaping (Response) -> Void) {
         let session = UserDefaults.standard.value(forKey: "session")
         if let session = session {
-            UserService().getUser() { response in
+            self.manager.retrieveLoggedInUser { response in
                 DispatchQueue.main.async {
                     if response == .success {
                         NSLog("User retrieval completed successfully. Session: \(session)")

@@ -70,6 +70,15 @@
 		CA790B1B2AF3CBDE00691DC9 /* HistoryProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA790B1A2AF3CBDE00691DC9 /* HistoryProtocol.swift */; };
 		CA790B1D2AF3DA8900691DC9 /* GameOver.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA790B1C2AF3DA8900691DC9 /* GameOver.swift */; };
 		CA790B1F2AF3DACB00691DC9 /* GameOverProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA790B1E2AF3DACB00691DC9 /* GameOverProtocol.swift */; };
+		CA790B242AF4D12000691DC9 /* ApiClientProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA790B232AF4D12000691DC9 /* ApiClientProtocol.swift */; };
+		CA790B272AF5003200691DC9 /* ProfileManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA790B262AF5003200691DC9 /* ProfileManager.swift */; };
+		CA790B292AF510F400691DC9 /* AblyManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA790B282AF510F400691DC9 /* AblyManager.swift */; };
+		CA790B2B2AF5125800691DC9 /* LaunchManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA790B2A2AF5125800691DC9 /* LaunchManager.swift */; };
+		CA790B2D2AF51AC500691DC9 /* LoginManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA790B2C2AF51AC500691DC9 /* LoginManager.swift */; };
+		CA790B2F2AF51D8600691DC9 /* RegisterManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA790B2E2AF51D8600691DC9 /* RegisterManager.swift */; };
+		CA790B312AF51EA600691DC9 /* MenuManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA790B302AF51EA600691DC9 /* MenuManager.swift */; };
+		CA790B382AF51F9D00691DC9 /* RoomManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA790B372AF51F9D00691DC9 /* RoomManager.swift */; };
+		CA790B3A2AF5315200691DC9 /* PasswordManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA790B392AF5315200691DC9 /* PasswordManager.swift */; };
 		CA852A312A30A20200961E65 /* AlertAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA852A302A30A20200961E65 /* AlertAdapter.swift */; };
 		CA852A332A30ABB700961E65 /* Response.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA852A322A30ABB700961E65 /* Response.swift */; };
 		CA852A392A30B19100961E65 /* UserRole.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA852A382A30B19100961E65 /* UserRole.swift */; };
@@ -229,6 +238,15 @@
 		CA790B1A2AF3CBDE00691DC9 /* HistoryProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryProtocol.swift; sourceTree = "<group>"; };
 		CA790B1C2AF3DA8900691DC9 /* GameOver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameOver.swift; sourceTree = "<group>"; };
 		CA790B1E2AF3DACB00691DC9 /* GameOverProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameOverProtocol.swift; sourceTree = "<group>"; };
+		CA790B232AF4D12000691DC9 /* ApiClientProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiClientProtocol.swift; sourceTree = "<group>"; };
+		CA790B262AF5003200691DC9 /* ProfileManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileManager.swift; sourceTree = "<group>"; };
+		CA790B282AF510F400691DC9 /* AblyManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AblyManager.swift; sourceTree = "<group>"; };
+		CA790B2A2AF5125800691DC9 /* LaunchManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchManager.swift; sourceTree = "<group>"; };
+		CA790B2C2AF51AC500691DC9 /* LoginManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginManager.swift; sourceTree = "<group>"; };
+		CA790B2E2AF51D8600691DC9 /* RegisterManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterManager.swift; sourceTree = "<group>"; };
+		CA790B302AF51EA600691DC9 /* MenuManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuManager.swift; sourceTree = "<group>"; };
+		CA790B372AF51F9D00691DC9 /* RoomManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoomManager.swift; sourceTree = "<group>"; };
+		CA790B392AF5315200691DC9 /* PasswordManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordManager.swift; sourceTree = "<group>"; };
 		CA852A302A30A20200961E65 /* AlertAdapter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertAdapter.swift; sourceTree = "<group>"; };
 		CA852A322A30ABB700961E65 /* Response.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Response.swift; sourceTree = "<group>"; };
 		CA852A382A30B19100961E65 /* UserRole.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserRole.swift; sourceTree = "<group>"; };
@@ -511,6 +529,61 @@
 				CA1F56392AE52E8300ED5FCB /* GameHints.swift */,
 			);
 			path = InMemoryStorage;
+			sourceTree = "<group>";
+		};
+		CA790B252AF4FDF900691DC9 /* Managers */ = {
+			isa = PBXGroup;
+			children = (
+				CA790B362AF51F9300691DC9 /* Ably */,
+				CA790B352AF51F8C00691DC9 /* Main */,
+				CA790B342AF51F8300691DC9 /* Launch */,
+				CA790B332AF51F7500691DC9 /* Authentication */,
+				CA790B322AF51F6A00691DC9 /* Profile */,
+				CA790B372AF51F9D00691DC9 /* RoomManager.swift */,
+			);
+			path = Managers;
+			sourceTree = "<group>";
+		};
+		CA790B322AF51F6A00691DC9 /* Profile */ = {
+			isa = PBXGroup;
+			children = (
+				CA790B262AF5003200691DC9 /* ProfileManager.swift */,
+			);
+			path = Profile;
+			sourceTree = "<group>";
+		};
+		CA790B332AF51F7500691DC9 /* Authentication */ = {
+			isa = PBXGroup;
+			children = (
+				CA790B2C2AF51AC500691DC9 /* LoginManager.swift */,
+				CA790B2E2AF51D8600691DC9 /* RegisterManager.swift */,
+				CA790B392AF5315200691DC9 /* PasswordManager.swift */,
+			);
+			path = Authentication;
+			sourceTree = "<group>";
+		};
+		CA790B342AF51F8300691DC9 /* Launch */ = {
+			isa = PBXGroup;
+			children = (
+				CA790B2A2AF5125800691DC9 /* LaunchManager.swift */,
+			);
+			path = Launch;
+			sourceTree = "<group>";
+		};
+		CA790B352AF51F8C00691DC9 /* Main */ = {
+			isa = PBXGroup;
+			children = (
+				CA790B302AF51EA600691DC9 /* MenuManager.swift */,
+			);
+			path = Main;
+			sourceTree = "<group>";
+		};
+		CA790B362AF51F9300691DC9 /* Ably */ = {
+			isa = PBXGroup;
+			children = (
+				CA790B282AF510F400691DC9 /* AblyManager.swift */,
+			);
+			path = Ably;
 			sourceTree = "<group>";
 		};
 		CA852A2F2A30A1EA00961E65 /* Structs */ = {
@@ -810,6 +883,7 @@
 				CAF8ECB02A2DC5BD00179EF1 /* RequestInterceptor.swift */,
 				CAF8ECB82A2E205700179EF1 /* Credentials.swift */,
 				CA852A602A40425800961E65 /* AnyResponseParser.swift */,
+				CA790B232AF4D12000691DC9 /* ApiClientProtocol.swift */,
 			);
 			name = Protocols;
 			sourceTree = "<group>";
@@ -901,6 +975,7 @@
 		CAFED4BF2A0249D200FB4B9B /* BusinessLogicLayer */ = {
 			isa = PBXGroup;
 			children = (
+				CA790B252AF4FDF900691DC9 /* Managers */,
 				CA0AAC872A25DF74008367FB /* Utils */,
 				CA4E3F592A07BBE100D36266 /* Models */,
 				CAEC677C2AC18C2C003A3E8A /* Notifications.swift */,
@@ -1100,6 +1175,7 @@
 				CA4E3F692A0CE31200D36266 /* TransitionViewController.swift in Sources */,
 				CA852A5A2A3C4E9400961E65 /* GameSessionDetails.swift in Sources */,
 				CAF8ECBF2A2F741900179EF1 /* URLPath.swift in Sources */,
+				CA790B2D2AF51AC500691DC9 /* LoginManager.swift in Sources */,
 				CAF8ECB92A2E205700179EF1 /* Credentials.swift in Sources */,
 				CAFED8BF2AAEED0400C32741 /* UsernameLabel.swift in Sources */,
 				CA1F56362AE4322A00ED5FCB /* LoadingViewController.swift in Sources */,
@@ -1119,6 +1195,7 @@
 				CAB12C4B2AA527E500BF71E1 /* ProfileItemView.swift in Sources */,
 				CA1F56382AE433AB00ED5FCB /* RoomLoadingViewController.swift in Sources */,
 				CAB729062A64A5E400BB4908 /* Friendly.swift in Sources */,
+				CA790B2B2AF5125800691DC9 /* LaunchManager.swift in Sources */,
 				CA790B1D2AF3DA8900691DC9 /* GameOver.swift in Sources */,
 				CA852A392A30B19100961E65 /* UserRole.swift in Sources */,
 				CA0AAC8E2A26219B008367FB /* MenuItemView.swift in Sources */,
@@ -1132,6 +1209,7 @@
 				CA852A632A4042D900961E65 /* AnyResponseParserExtension.swift in Sources */,
 				CAB8CE082AEB0DB0008F64A7 /* GameConfig.swift in Sources */,
 				CAB728FD2A648EBB00BB4908 /* CreateRoomViewController.swift in Sources */,
+				CA790B272AF5003200691DC9 /* ProfileManager.swift in Sources */,
 				CAF8ECB32A2DD23600179EF1 /* BaseURL.swift in Sources */,
 				CAFED8C82AAF4DAC00C32741 /* PlayerTypeLabel.swift in Sources */,
 				CA71F9C92AA5DE0A007AF4F0 /* TitleLabel.swift in Sources */,
@@ -1148,8 +1226,10 @@
 				CA0AAC362A0E6428008367FB /* MapDimensions.swift in Sources */,
 				CAC833672A5BEE3B00EED95B /* PasswordViewController.swift in Sources */,
 				CAB8CE0A2AEB0DCC008F64A7 /* Configurable.swift in Sources */,
+				CA790B3A2AF5315200691DC9 /* PasswordManager.swift in Sources */,
 				CA0AAC2E2A0E2F0F008367FB /* Tile.swift in Sources */,
 				CAAF16982AAAF3AE000D8984 /* RoomParameterView.swift in Sources */,
+				CA790B2F2AF51D8600691DC9 /* RegisterManager.swift in Sources */,
 				CA852A3B2A331B8300961E65 /* UserService.swift in Sources */,
 				CAFED4912A02496E00FB4B9B /* MainViewController.swift in Sources */,
 				CAC833692A5C008400EED95B /* PasswordService.swift in Sources */,
@@ -1158,6 +1238,7 @@
 				CA852A512A39ABC600961E65 /* GameType.swift in Sources */,
 				CAF8ECB12A2DC5BD00179EF1 /* RequestInterceptor.swift in Sources */,
 				CA790B172AF3C0E900691DC9 /* GridProtocol.swift in Sources */,
+				CA790B242AF4D12000691DC9 /* ApiClientProtocol.swift in Sources */,
 				CA852A542A39ABF900961E65 /* GameTypeExtension.swift in Sources */,
 				CA0AAC3B2A0E7528008367FB /* AnyPowerUp.swift in Sources */,
 				CA0AAC392A0E722C008367FB /* TileType.swift in Sources */,
@@ -1166,6 +1247,7 @@
 				CA852A452A3742C900961E65 /* ProfileViewController.swift in Sources */,
 				CA35E7B72A28D0B60057BAB6 /* ViewExtension.swift in Sources */,
 				CAAF75062A9E459100978B5F /* ProfileView.swift in Sources */,
+				CA790B382AF51F9D00691DC9 /* RoomManager.swift in Sources */,
 				CA0AAC432A166F18008367FB /* GameHistoryExamples.swift in Sources */,
 				CA0AAC612A1D1D1D008367FB /* Player.swift in Sources */,
 				CAAF16922AA9FDA9000D8984 /* LoadingOverlayView.swift in Sources */,
@@ -1173,6 +1255,7 @@
 				CAAF169A2AAB536E000D8984 /* PlayerRole.swift in Sources */,
 				CAF8ECA92A2DBF9400179EF1 /* User.swift in Sources */,
 				CAAF75022A9E1B3600978B5F /* RoundView.swift in Sources */,
+				CA790B292AF510F400691DC9 /* AblyManager.swift in Sources */,
 				CA4E3F602A0891F300D36266 /* RegisterViewController.swift in Sources */,
 				CAF8ECB72A2E1FDE00179EF1 /* RegisterCredentials.swift in Sources */,
 				CA852A582A39C96D00961E65 /* AblyService.swift in Sources */,
@@ -1187,6 +1270,7 @@
 				CA852A6B2A40597A00961E65 /* SpecialTile.swift in Sources */,
 				CA0AAC302A0E484F008367FB /* Coordinate.swift in Sources */,
 				CA1F563A2AE52E8300ED5FCB /* GameHints.swift in Sources */,
+				CA790B312AF51EA600691DC9 /* MenuManager.swift in Sources */,
 				CA0AAC5B2A1B7EDF008367FB /* History.swift in Sources */,
 				CA045EAA2AA22D5300BFF03E /* Dimensions.swift in Sources */,
 				CAEC677D2AC18C2C003A3E8A /* Notifications.swift in Sources */,

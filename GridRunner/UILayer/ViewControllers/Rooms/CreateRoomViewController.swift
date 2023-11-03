@@ -9,8 +9,10 @@ import UIKit
 
 class CreateRoomViewController: UIViewController {
     
+    private let manager: RoomManager = RoomManager()
+    private let ablyManager: AblyManager = AblyManager()
+    
     var mainViewController: MainViewController!
-    private let alertAdapter: AlertAdapter = AlertAdapter()
     private var currentRole: PlayerRole = .unknown
     
     // Programmable UI properties.
@@ -86,12 +88,12 @@ class CreateRoomViewController: UIViewController {
         
     private func sendCreateRoomRequest() {
         self.createRoomButton.disable()
-        AblyJWTService().getJWT() { response, token in
+        self.ablyManager.retrieveToken { response, token in
             switch response {
             case .success:
                 guard let token = token else {
                     DispatchQueue.main.async {
-                        let alert = self.alertAdapter.createNetworkErrorAlert()
+                        let alert = self.manager.alertAdapter.createGeneralErrorAlert()
                         self.present(alert, animated: true)
                     }
                     return
@@ -102,7 +104,7 @@ class CreateRoomViewController: UIViewController {
                     case .success:
                         guard let clientId = clientId else {
                             DispatchQueue.main.async {
-                                let alert = self.alertAdapter.createNetworkErrorAlert()
+                                let alert = self.manager.alertAdapter.createGeneralErrorAlert()
                                 self.present(alert, animated: true)
                             }
                             return
@@ -124,24 +126,24 @@ class CreateRoomViewController: UIViewController {
                             }
                         default:
                             DispatchQueue.main.async {
-                                let alert = self.alertAdapter.createServiceRequestErrorAlert()
+                                let alert = self.manager.alertAdapter.createGeneralErrorAlert()
                                 self.present(alert, animated: true)
                                 self.createRoomButton.enable()
                             }
                             return
                         }
                     
-                        GameService().createRoom(as: self.currentRole.rawValue, withId: clientId) { response in
+                        self.manager.createRoom(as: self.currentRole.rawValue, withId: clientId) { response in
                             switch response {
                             case .success:
                                 guard let roomCode = Friendly.shared.getRoomCode() else {
                                     DispatchQueue.main.async {
-                                        let alert = self.alertAdapter.createDecoderErrorAlert()
+                                        let alert = self.manager.alertAdapter.createGeneralErrorAlert()
                                         self.present(alert, animated: true)
                                     }
                                     return
                                 }
-                      
+                                
                                 GameSessionDetails.shared.setRoomCode(to: roomCode)
                                 DispatchQueue.main.async {
                                     self.createRoomButton.enable()
@@ -149,40 +151,24 @@ class CreateRoomViewController: UIViewController {
                                         NotificationCenter.default.post(name: NSNotification.Name("Success::Matchmaking::Custom"), object: nil)
                                     }
                                 }
-                                
-                            case .networkError:
+                            default:
                                 DispatchQueue.main.async {
-                                    let alert = self.alertAdapter.createNetworkErrorAlert()
-                                    self.present(alert, animated: true)
-                                }
-                            case .requestError:
-                                DispatchQueue.main.async {
-                                    let alert = self.alertAdapter.createServiceRequestErrorAlert()
-                                    self.present(alert, animated: true)
-                                }
-                            case .decoderError:
-                                DispatchQueue.main.async {
-                                    let alert = self.alertAdapter.createDecoderErrorAlert()
-                                    self.present(alert, animated: true)
+                                    let alert = self.manager.alertAdapter.createNetworkErrorAlert(ofType: response)
+                                    if let alert = alert { self.present(alert, animated: true) }
                                 }
                             }
                         }
                     default:
                         DispatchQueue.main.async {
-                            let alert = self.alertAdapter.createNetworkErrorAlert()
+                            let alert = self.manager.alertAdapter.createGeneralErrorAlert()
                             self.present(alert, animated: true)
                         }
                     }
                 }
-            case .requestError:
-                DispatchQueue.main.async {
-                    let alert = self.alertAdapter.createServiceRequestErrorAlert()
-                    self.present(alert, animated: true)
-                }
             default:
                 DispatchQueue.main.async {
-                    let alert = self.alertAdapter.createNetworkErrorAlert()
-                    self.present(alert, animated: true)
+                    let alert = self.manager.alertAdapter.createNetworkErrorAlert(ofType: response)
+                    if let alert = alert { self.present(alert, animated: true) }
                 }
             }
         }

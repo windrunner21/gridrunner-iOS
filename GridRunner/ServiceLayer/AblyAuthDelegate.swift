@@ -4,14 +4,15 @@
 //
 //  Created by Imran Hajiyev on 06.07.23.
 //
-
-import Foundation
 import Ably
 
-class AblyAuthCallbackDelegate {
+struct AblyAuthCallbackDelegate {
+    
+    private let ablyManager: AblyManager = AblyManager()
+    
     func tokenRequest(_ tokenParams: ARTTokenParams?, callback: @escaping (ARTTokenDetails?, Error?) -> Void) {
         // Generate or fetch the necessary token request and pass it to the callback.
-        AblyJWTService().getJWT() { response, token in
+        self.ablyManager.retrieveToken { response, token in
             switch response {
             case .success:
                 guard let token = token else {

@@ -10,7 +10,7 @@ import UIKit
 class LoginViewController: UIViewController, UITextFieldDelegate {
     
     var mainViewController: MainViewController!
-    var alertAdapter: AlertAdapter = AlertAdapter()
+    private let manager: LoginManager = LoginManager()
     
     // Programmable UI properties.
     let cancelView: CancelView = CancelView()
@@ -205,7 +205,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         
         let credentials = LoginCredentials(username: username, password: password)
         
-        AuthService().login(with: credentials) { response in
+        self.manager.loginUser(with: credentials) { response in
             DispatchQueue.main.async {
                 self.signInButton.enable()
                 
@@ -213,15 +213,9 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
                 case .success:
                     self.mainViewController.checkUserAuthentication()
                     self.mainViewController.dismiss(animated: true)
-                case .networkError:
-                    let alert = self.alertAdapter.createNetworkErrorAlert()
-                    self.present(alert, animated: true)
-                case .requestError:
-                    let alert = self.alertAdapter.createServiceRequestErrorAlert()
-                    self.present(alert, animated: true)
-                case .decoderError:
-                    let alert = self.alertAdapter.createDecoderErrorAlert()
-                    self.present(alert, animated: true)
+                default:
+                    let alert = self.manager.alertAdapter.createNetworkErrorAlert(ofType: response)
+                    if let alert = alert { self.present(alert, animated: true) }
                 }
             }
         }

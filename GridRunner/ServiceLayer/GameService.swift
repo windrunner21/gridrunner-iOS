@@ -7,15 +7,18 @@
 
 import Foundation
 
-class GameService {
-    private let client = APIClient(baseURL: .gameServer)
+struct GameService {
+    private let client: ApiClientProtocol
+    
+    init(client: ApiClientProtocol) {
+        self.client = client
+    }
     
     func createRoom(as role: String, withId clientId: String, completion: @escaping (Response) -> Void) {
-        client.sendRequest(
-            path: URLPath.createRoom.path,
-            method: .GET,
-            parameters: [URLQueryItem(name: "as", value: role), URLQueryItem(name: "clientId", value: clientId)]
-        ) { data, response, error in
+        let parameters = [URLQueryItem(name: "as", value: role), URLQueryItem(name: "clientId", value: clientId)]
+        
+        client.sendRequestWithParameters(path: URLPath.createRoom.path, method: .GET, parameters: parameters) { 
+            data, response, error in
             
             if let error = error {
                 NSLog("Error occured in GameService().createRoom(): \(error)")
@@ -39,11 +42,10 @@ class GameService {
     }
     
     func joinRoom(withCode code: String, completion: @escaping (Response) -> Void) {
-        client.sendRequest(
-            path: URLPath.joinRoom.path,
-            method: .GET,
-            parameters: [URLQueryItem(name: "room", value: code)]
-        ) { data, response, error in
+        let parameters = [URLQueryItem(name: "room", value: code)]
+        
+        client.sendRequestWithParameters(path: URLPath.joinRoom.path, method: .GET, parameters: parameters) {
+            data, response, error in
             
             if let error = error {
                 NSLog("Error occured in GameService().joinRoom(): \(error)")

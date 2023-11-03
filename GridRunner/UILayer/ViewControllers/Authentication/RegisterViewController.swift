@@ -10,7 +10,7 @@ import UIKit
 class RegisterViewController: UIViewController, UITextFieldDelegate {
 
     var mainViewController: MainViewController!
-    var alertAdapter: AlertAdapter = AlertAdapter()
+    private let manager: RegisterManager = RegisterManager()
     
     // Programmable UI properties.
     let cancelView: CancelView = CancelView()
@@ -188,7 +188,7 @@ class RegisterViewController: UIViewController, UITextFieldDelegate {
         }
         
         let credentials = RegisterCredentials(username: username,password: password, email: email)
-        AuthService().register(with: credentials) { response in
+        self.manager.registerUser(with: credentials) { response in
             DispatchQueue.main.async {
                 self.signUpButton.enable()
                 
@@ -196,15 +196,9 @@ class RegisterViewController: UIViewController, UITextFieldDelegate {
                 case .success:
                     self.mainViewController.checkUserAuthentication()
                     self.mainViewController.dismiss(animated: true)
-                case .networkError:
-                    let alert = self.alertAdapter.createNetworkErrorAlert()
-                    self.present(alert, animated: true)
-                case .requestError:
-                    let alert = self.alertAdapter.createServiceRequestErrorAlert()
-                    self.present(alert, animated: true)
-                case .decoderError:
-                    let alert = self.alertAdapter.createDecoderErrorAlert()
-                    self.present(alert, animated: true)
+                default:
+                    let alert = self.manager.alertAdapter.createNetworkErrorAlert(ofType: response)
+                    if let alert = alert { self.present(alert, animated: true) }
                 }
             }
         }

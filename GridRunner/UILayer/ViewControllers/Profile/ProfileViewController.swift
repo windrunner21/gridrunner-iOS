@@ -9,8 +9,8 @@ import UIKit
 
 class ProfileViewController: UIViewController {
     
+    private let manager: ProfileManager = ProfileManager()
     var mainViewController: MainViewController!
-    var alertAdapter: AlertAdapter = AlertAdapter()
     
     // Programmable UI properties.
     let grayLayer = CALayer()
@@ -86,7 +86,7 @@ class ProfileViewController: UIViewController {
     }
     
     private func onLogout(caller view: UIView) {
-        AuthService().logout { response in
+        self.manager.logoutFromAccount { response in
             DispatchQueue.main.async {
                 view.alpha = 1
 
@@ -94,22 +94,16 @@ class ProfileViewController: UIViewController {
                 case .success:
                     self.mainViewController.checkUserAuthentication()
                     self.mainViewController.dismiss(animated: true)
-                case .networkError:
-                    let alert = self.alertAdapter.createNetworkErrorAlert()
-                    self.present(alert, animated: true)
-                case .requestError:
-                    let alert = self.alertAdapter.createServiceRequestErrorAlert()
-                    self.present(alert, animated: true)
-                case .decoderError:
-                    let alert = self.alertAdapter.createDecoderErrorAlert()
-                    self.present(alert, animated: true)
+                default:
+                    let alert = self.manager.alertAdapter.createNetworkErrorAlert(ofType: response)
+                    if let alert = alert { self.present(alert, animated: true) }
                 }
             }
         }
     }
     
     private func onDeleteAccount(caller view: UIView) {
-        AuthService().deleteAccount { response in
+        self.manager.deleteAccount { response in
             DispatchQueue.main.async {
                 view.alpha = 1
 
@@ -117,15 +111,9 @@ class ProfileViewController: UIViewController {
                 case .success:
                     self.mainViewController.checkUserAuthentication()
                     self.mainViewController.dismiss(animated: true)
-                case .networkError:
-                    let alert = self.alertAdapter.createNetworkErrorAlert()
-                    self.present(alert, animated: true)
-                case .requestError:
-                    let alert = self.alertAdapter.createServiceRequestErrorAlert()
-                    self.present(alert, animated: true)
-                case .decoderError:
-                    let alert = self.alertAdapter.createDecoderErrorAlert()
-                    self.present(alert, animated: true)
+                default:
+                    let alert = self.manager.alertAdapter.createNetworkErrorAlert(ofType: response)
+                    if let alert = alert { self.present(alert, animated: true) }
                 }
             }
         }

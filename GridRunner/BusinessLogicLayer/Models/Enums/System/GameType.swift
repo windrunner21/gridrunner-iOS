@@ -10,3 +10,16 @@ enum GameType {
     case rankedplay
     case roomplay
 }
+
+extension GameType {
+    var channelName: String {
+        switch self {
+        case .quickplay:
+            return "quick-play-queue"
+        case .rankedplay:
+            return "ranked-play-queue"
+        case .roomplay:
+            return "quick-play-queue"
+        }
+    }
+}
