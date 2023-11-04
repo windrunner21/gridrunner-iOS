@@ -38,8 +38,19 @@ class Game {
         self.map = map
         self.player = player
         self.history = history ?? History()
+                
+        switch self.player?.type {
+        case .runner:
+            self.player?.setHistory(to: self.history.getRunnerHistory())
+            self.player?.updateCurrentTurn(to: self.history.getRunnerHistory().count + 1)
+        case .seeker:
+            self.player?.setHistory(to: self.history.getSeekerHistory())
+            self.player?.updateCurrentTurn(to: self.history.getSeekerHistory().count + 1)
+        default:
+            break
+        }
         
-        NSLog("Game has been instantiated.")
+        NSLog("Game session has been instantiated.")
     }
     
     func updateSeekerHistory() {

@@ -12,53 +12,6 @@
 					<key>EndingColumnNumber</key>
 					<string>0</string>
 					<key>EndingLineNumber</key>
-					<string>68</string>
-					<key>StartingColumnNumber</key>
-					<string>0</string>
-					<key>StartingLineNumber</key>
-					<string>67</string>
-					<key>Timestamp</key>
-					<string>719831542.320371</string>
-				</dict>
-				<key>rebasable-url</key>
-				<dict>
-					<key>base</key>
-					<string>workspace</string>
-					<key>payload</key>
-					<dict>
-						<key>relative-path</key>
-						<string>GridRunner/UILayer/ViewControllers/Game/GameViewController.swift</string>
-					</dict>
-				</dict>
-			</dict>
-			<key>text-context</key>
-			<dict>
-				<key>focused</key>
-				<string>            self.initializeOfflineGame()
-</string>
-				<key>leading</key>
-				<string>            NotificationCenter.default.addObserver(self, selector: #selector(finishGame), name: NSNotification.Name("Success:GameOver"), object: nil)
-        } else {
-</string>
-				<key>trailing</key>
-				<string>        }
-        
-        guard let player = self.game.getPlayer() else { presentErrorAlert(); return }
-</string>
-			</dict>
-			<key>title</key>
-			<string>Need to create map. Get's stuck on previous game's map.</string>
-			<key>type</key>
-			<string>bookmark</string>
-		</dict>
-		<dict>
-			<key>destination</key>
-			<dict>
-				<key>location-parameters</key>
-				<dict>
-					<key>EndingColumnNumber</key>
-					<string>0</string>
-					<key>EndingLineNumber</key>
 					<string>84</string>
 					<key>StartingColumnNumber</key>
 					<string>0</string>

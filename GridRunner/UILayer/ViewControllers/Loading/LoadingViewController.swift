@@ -60,7 +60,8 @@ class LoadingViewController: UIViewController {
     }
     
     @objc private func transitionToGame() {
-        let gameViewController: GameViewController = GameViewController()
+        let manager: GameManager = GameManager()
+        let gameViewController: GameViewController = GameViewController(with: manager)
         let sceneDelegate = UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate
         sceneDelegate?.transitionViewController.transition(to: gameViewController, with: [.transitionCurlUp])
     }

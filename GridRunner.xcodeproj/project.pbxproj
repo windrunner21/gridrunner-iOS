@@ -79,6 +79,8 @@
 		CA790B312AF51EA600691DC9 /* MenuManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA790B302AF51EA600691DC9 /* MenuManager.swift */; };
 		CA790B382AF51F9D00691DC9 /* RoomManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA790B372AF51F9D00691DC9 /* RoomManager.swift */; };
 		CA790B3A2AF5315200691DC9 /* PasswordManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA790B392AF5315200691DC9 /* PasswordManager.swift */; };
+		CA790B3D2AF617A300691DC9 /* GameManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA790B3C2AF617A300691DC9 /* GameManager.swift */; };
+		CA790B3F2AF6237800691DC9 /* GameError.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA790B3E2AF6237800691DC9 /* GameError.swift */; };
 		CA852A312A30A20200961E65 /* AlertAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA852A302A30A20200961E65 /* AlertAdapter.swift */; };
 		CA852A332A30ABB700961E65 /* Response.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA852A322A30ABB700961E65 /* Response.swift */; };
 		CA852A392A30B19100961E65 /* UserRole.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA852A382A30B19100961E65 /* UserRole.swift */; };
@@ -247,6 +249,8 @@
 		CA790B302AF51EA600691DC9 /* MenuManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuManager.swift; sourceTree = "<group>"; };
 		CA790B372AF51F9D00691DC9 /* RoomManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoomManager.swift; sourceTree = "<group>"; };
 		CA790B392AF5315200691DC9 /* PasswordManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordManager.swift; sourceTree = "<group>"; };
+		CA790B3C2AF617A300691DC9 /* GameManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameManager.swift; sourceTree = "<group>"; };
+		CA790B3E2AF6237800691DC9 /* GameError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameError.swift; sourceTree = "<group>"; };
 		CA852A302A30A20200961E65 /* AlertAdapter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertAdapter.swift; sourceTree = "<group>"; };
 		CA852A322A30ABB700961E65 /* Response.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Response.swift; sourceTree = "<group>"; };
 		CA852A382A30B19100961E65 /* UserRole.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserRole.swift; sourceTree = "<group>"; };
@@ -510,6 +514,7 @@
 			children = (
 				CA8CBF992A4F1FFA003CF44B /* AuthenticationError.swift */,
 				CA7417B22A56ECE900A9683A /* AblyAuthenticationError.swift */,
+				CA790B3E2AF6237800691DC9 /* GameError.swift */,
 			);
 			path = Errors;
 			sourceTree = "<group>";
@@ -534,6 +539,7 @@
 		CA790B252AF4FDF900691DC9 /* Managers */ = {
 			isa = PBXGroup;
 			children = (
+				CA790B3B2AF6179C00691DC9 /* Game */,
 				CA790B362AF51F9300691DC9 /* Ably */,
 				CA790B352AF51F8C00691DC9 /* Main */,
 				CA790B342AF51F8300691DC9 /* Launch */,
@@ -584,6 +590,14 @@
 				CA790B282AF510F400691DC9 /* AblyManager.swift */,
 			);
 			path = Ably;
+			sourceTree = "<group>";
+		};
+		CA790B3B2AF6179C00691DC9 /* Game */ = {
+			isa = PBXGroup;
+			children = (
+				CA790B3C2AF617A300691DC9 /* GameManager.swift */,
+			);
+			path = Game;
 			sourceTree = "<group>";
 		};
 		CA852A2F2A30A1EA00961E65 /* Structs */ = {
@@ -1181,6 +1195,7 @@
 				CA1F56362AE4322A00ED5FCB /* LoadingViewController.swift in Sources */,
 				CA852A332A30ABB700961E65 /* Response.swift in Sources */,
 				CA0AAC322A0E637E008367FB /* Game.swift in Sources */,
+				CA790B3D2AF617A300691DC9 /* GameManager.swift in Sources */,
 				CA053D1C2AB878C10019FAD1 /* Bot.swift in Sources */,
 				CAAA1CE92AA1D966007886B9 /* PrimaryButton.swift in Sources */,
 				CA0AAC3D2A121EE2008367FB /* MoveDirection.swift in Sources */,
@@ -1205,6 +1220,7 @@
 				CA4E3F5C2A07BBF100D36266 /* PlayerType.swift in Sources */,
 				CA0AAC5D2A1B7EE6008367FB /* Turn.swift in Sources */,
 				CA4E3F582A07A85900D36266 /* GameViewController.swift in Sources */,
+				CA790B3F2AF6237800691DC9 /* GameError.swift in Sources */,
 				CA8CBF9C2A504276003CF44B /* MoveResponse.swift in Sources */,
 				CA852A632A4042D900961E65 /* AnyResponseParserExtension.swift in Sources */,
 				CAB8CE082AEB0DB0008F64A7 /* GameConfig.swift in Sources */,

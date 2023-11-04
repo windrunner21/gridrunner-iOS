@@ -104,12 +104,12 @@ class OfflineSettingsViewController: UIViewController {
     }
             
     @objc func onStartOfflineMode() {
+        let manager: GameManager = GameManager(offline: true)
         
         //GameConfig.update(<#T##self: GameConfig##GameConfig#>)
         
         self.dismiss(animated: true) {
-            let gameViewController: GameViewController = GameViewController()
-            gameViewController.isOnline = false
+            let gameViewController: GameViewController = GameViewController(with: manager)
             let sceneDelegate = UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate
             sceneDelegate?.transitionViewController.transition(to: gameViewController, with: [.transitionCurlUp])
         }
