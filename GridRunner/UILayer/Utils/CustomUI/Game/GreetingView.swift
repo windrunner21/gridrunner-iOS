@@ -10,18 +10,16 @@ import UIKit
 class GreetingView: UIView {
     var playerType: PlayerType!
     
-    let viewTitle: TitleLabel = TitleLabel()
-    let viewSubtitle: SubtitleLabel = SubtitleLabel()
-    let button: PrimaryButton = PrimaryButton()
+    private let viewTitle: TitleLabel = TitleLabel()
+    private let viewSubtitle: SubtitleLabel = SubtitleLabel()
+    private let button: PrimaryButton = PrimaryButton()
+            
+    convenience init() {
+        self.init(frame:
+                    CGRect(x: 20, y: UIScreen.main.bounds.height / 2 - 100, width: UIScreen.main.bounds.width - 40, height: 200)
+        )
+    }
     
-    let imageView: UIImageView = {
-        let imageView = UIImageView()
-        imageView.translatesAutoresizingMaskIntoConstraints = false
-        imageView.frame.size.width = UIScreen.main.bounds.width / 2
-        imageView.contentMode = .scaleAspectFit
-        return imageView
-    }()
-        
     override init(frame: CGRect) {
         super.init(frame: frame)
         self.commonInit()
@@ -35,20 +33,21 @@ class GreetingView: UIView {
     private func commonInit() {
         self.backgroundColor = UIColor(named: "Background")
         
-        self.setupViewLabels()
-        self.setupImage()
-        self.setupButton()
+        self._setupViewLabels()
+        self._setupButton()
+        self.addElevation()
+        self.layer.cornerRadius = 10
     }
     
-    @objc func onButtonTouchDown() {
+    @objc private func onButtonTouchDown() {
         self.button.onTouchDown()
     }
 
-    @objc func onButtonTouchUpOutside() {
+    @objc private func onButtonTouchUpOutside() {
         self.button.onTouchUpOutside()
     }
 
-    @objc func onButton() {
+    @objc private func onButton() {
         self.removeFromSuperview()
     }
     
@@ -56,7 +55,7 @@ class GreetingView: UIView {
         self.removeFromSuperview()
     }
     
-    private func setupViewLabels() {
+    private func _setupViewLabels() {
         self.viewTitle.setup(in: self)
         self.viewSubtitle.setup(in: self)
         
@@ -71,7 +70,7 @@ class GreetingView: UIView {
         ])
     }
     
-    private func setupButton() {
+    private func _setupButton() {
         self.button.addTarget(self, action: #selector(onButton), for: .touchUpInside)
         self.button.addTarget(self, action: #selector(onButtonTouchUpOutside), for: .touchUpOutside)
         self.button.addTarget(self, action: #selector(onButtonTouchDown), for: .touchDown)
@@ -83,16 +82,7 @@ class GreetingView: UIView {
         NSLayoutConstraint.activate([
             self.button.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 20),
             self.button.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -20),
-            self.button.bottomAnchor.constraint(equalTo: self.safeAreaLayoutGuide.bottomAnchor, constant: -10)
-        ])
-    }
-    
-    private func setupImage() {
-        self.addSubview(imageView)
-        
-        NSLayoutConstraint.activate([
-            self.imageView.centerXAnchor.constraint(equalTo: self.centerXAnchor),
-            self.imageView.centerYAnchor.constraint(equalTo: self.centerYAnchor)
+            self.button.bottomAnchor.constraint(equalTo: self.safeAreaLayoutGuide.bottomAnchor, constant: -20)
         ])
     }
     
@@ -100,11 +90,9 @@ class GreetingView: UIView {
         if playerType == .runner {
             self.viewTitle.text = "You are Runner"
             self.viewSubtitle.text = "your goal is to escape the maze! map usually has several exit points, so head up to them. beware as you are being tailed by the seeker. escape the maze without being caught!"
-            self.imageView.image = UIImage(named: "RedSneakerIcon")
         } else if playerType == .seeker {
             self.viewTitle.text = "You are Seeker"
             self.viewSubtitle.text = "your goal is to find a runner! runner would navigate to one of the exits to escape, so be prepared to chase them around through the maze. find the runner before they escape!"
-            self.imageView.image = UIImage(named: "BlackSneakerIcon")
         }
        
     }

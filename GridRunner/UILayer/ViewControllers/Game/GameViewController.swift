@@ -12,14 +12,7 @@ class GameViewController: UIViewController {
     private var manager: GameManager
     
     // Programmable UI properties.
-    // MARK: redo
-    let greetingView = GreetingView(
-        frame: CGRect(
-            x: 0,
-            y: 0,
-            width: UIScreen.main.bounds.width,
-            height: UIScreen.main.bounds.height)
-    )
+    let greetingView: GreetingView = GreetingView()
     
     let playerProfileView: ProfileView = ProfileView()
     let playerUsernameLabel: UsernameLabel = UsernameLabel()
