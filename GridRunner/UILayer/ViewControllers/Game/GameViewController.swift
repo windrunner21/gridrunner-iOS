@@ -12,26 +12,26 @@ class GameViewController: UIViewController {
     private var manager: GameManager
     
     // Programmable UI properties.
-    let greetingView: GreetingView = GreetingView()
+    private let greetingView: GreetingView = GreetingView()
     
-    let playerProfileView: ProfileView = ProfileView()
-    let playerUsernameLabel: UsernameLabel = UsernameLabel()
-    let playerTypeLabel: PlayerTypeLabel = PlayerTypeLabel()
+    private let playerProfileView: ProfileView = ProfileView()
+    private let playerUsernameLabel: UsernameLabel = UsernameLabel()
+    private let playerTypeLabel: PlayerTypeLabel = PlayerTypeLabel()
     
-    let opponentProfileView: ProfileView = ProfileView()
-    let opponentUsernameLabel: UsernameLabel = UsernameLabel()
-    let opponentTypeLabel: PlayerTypeLabel = PlayerTypeLabel()
+    private let opponentProfileView: ProfileView = ProfileView()
+    private let opponentUsernameLabel: UsernameLabel = UsernameLabel()
+    private let opponentTypeLabel: PlayerTypeLabel = PlayerTypeLabel()
     
-    let turnCounter: CounterView = CounterView()
-    let movesCounter: CounterView = CounterView()
+    private let turnCounter: CounterView = CounterView()
+    private let movesCounter: CounterView = CounterView()
     
-    let gameView: UIView = UIView()
+    private let gameView: UIView = UIView()
     
-    let resignButton: GameButtonView = GameButtonView()
-    let undoButton: GameButtonView = GameButtonView()
-    let finishButton: GameButtonView = GameButtonView()
+    private let resignButton: GameButtonView = GameButtonView()
+    private let undoButton: GameButtonView = GameButtonView()
+    private let finishButton: GameButtonView = GameButtonView()
     
-    let buttonsStackView: UIStackView = {
+    private let buttonsStackView: UIStackView = {
         let stackView = UIStackView()
         stackView.translatesAutoresizingMaskIntoConstraints = false
         stackView.axis = .horizontal
@@ -65,25 +65,23 @@ class GameViewController: UIViewController {
         
         do {
             try self.manager.initializeGame()
-            // MARK:
-            self.initializeOnlineGame()
+            self._visualizeGame()
         } catch {
             self.presentErrorAlert()
         }
-        
-        guard let player = self.manager.game.getPlayer() else { presentErrorAlert(); return }
                 
-        self.setupProfileViews(with: player)
+        self.setupProfileViews()
         self.setupGameView()
         self.setupCounterViews()
         self.setupButtons()
-        
-        self.showGreetingView(with: player.type)
+        self.showGreetingView()
     }
     
-    private func showGreetingView(with playerType: PlayerType) {
+    private func showGreetingView() {
+        guard let player = self.manager.game.getPlayer() else { presentErrorAlert(); return }
+        
         UIView.animate(withDuration: 0.3, animations: {
-            self.greetingView.playerType = playerType
+            self.greetingView.playerType = player.type
             self.greetingView.setupLabels()
             self.view.addSubview(self.greetingView)
         })
@@ -99,7 +97,7 @@ class GameViewController: UIViewController {
         
         if player.type == .runner && MoveResponse.shared.getPlayedBy() == .seeker {
             self.manager.game.updateSeekerHistory()
-            for move in self.manager.game.getHistory().getSeekerHistory()[player.currentTurnNumber - 2].getMoves() {
+            for move in self.manager.game.getHistory().seeker[player.currentTurnNumber - 2].getMoves() {
                 self.accessTile(with: move.to, in: gameView)?.openBySeeker(explicit: true)
             }
         }
@@ -137,8 +135,7 @@ class GameViewController: UIViewController {
         // Construct all moves from total history on map.
         self.manager.updateGameHistory(isGameOver: true)
         self.manager.game.getHistory().outputHistory()
-        self.reconstructRunnerHistory()
-        self.reconstructSeekerHistory()
+        self._reconstructHistory()
         
         if player.type == GameOver.shared.winner {
             guard let tile = self.accessTile(with: player.position, in: gameView) else { return }
@@ -200,8 +197,7 @@ class GameViewController: UIViewController {
                 self.visualizeTurnForOpponent()
             }
             
-            self.updateMovesCounter(with: player.numberOfMoves)
-            self.updateTurnCounter(with: player.currentTurnNumber)
+            self._updateCounters()
             
             self.undoButton.disable()
             self.finishButton.disable()
@@ -312,12 +308,11 @@ class GameViewController: UIViewController {
         return nil
     }
     
-    private func updateMovesCounter(with value: Int) {
-        self.movesCounter.counter = "\(value)"
-    }
-    
-    private func updateTurnCounter(with value: Int) {
-        self.turnCounter.counter = "\(value)"
+    private func _updateCounters() {
+        guard let player = self.manager.game.getPlayer() else { return }
+        
+        self.movesCounter.counter = "\(player.numberOfMoves)"
+        self.turnCounter.counter = "\(player.currentTurnNumber)"
     }
     
     private func enableUndoButton(on condition: Bool? = nil) {
@@ -340,8 +335,7 @@ class GameViewController: UIViewController {
         self.highlightRunnerMoves()
         self.highlightSeekerMove()
         
-        self.updateMovesCounter(with: player.numberOfMoves)
-        self.updateTurnCounter(with: player.currentTurnNumber)
+        self._updateCounters()
         
         // Handle enabling finish and undo buttons.
         self.enableUndoButton(on: player.numberOfMoves < player.maximumNumberOfMoves)
@@ -413,21 +407,15 @@ class GameViewController: UIViewController {
         }
     }
         
-    private func initializeOnlineGame() {
-        // Prepare game grid.
+    private func _visualizeGame() {
         self.createGameGrid(
             rows: self.manager.game.getMap().getDimensions().getNumberOfRows(),
             columns: self.manager.game.getMap().getDimensions().getNumberOfColumns(),
             inside: gameView
         )
         
-        // MARK: update
-        guard let player = self.manager.game.getPlayer() else { return }
-        
-        self.reconstructRunnerHistory()
-        self.reconstructSeekerHistory()
-        self.updateMovesCounter(with: player.numberOfMoves)
-        self.updateTurnCounter(with: player.currentTurnNumber)
+        self._reconstructHistory()
+        self._updateCounters()
         
         // Checks if player is Runner. If Runner highlights possible move coordinates.
         self.highlightRunnerMoves()
@@ -444,7 +432,9 @@ class GameViewController: UIViewController {
         ])
     }
     
-    private func setupProfileViews(with player: AnyPlayer) {
+    private func setupProfileViews() {
+        guard let player = self.manager.game.getPlayer() else { presentErrorAlert(); return }
+        
         self.playerProfileView.textSize = Dimensions.buttonFont
         self.playerProfileView.setup(in: self.view)
         self.playerProfileView.color = player.type == .runner ? UIColor(named: "Red") : UIColor(named: "Gray")
@@ -565,7 +555,12 @@ class GameViewController: UIViewController {
         self.opponentProfileView.setBorderColor(to: .systemGreen)
     }
     
-    private func reconstructSeekerHistory() {
+    private func _reconstructHistory() {
+        self._reconstructRunnerHistory()
+        self._reconstructSeekerHistory()
+    }
+    
+    private func _reconstructSeekerHistory() {
         for turn in self.manager.game.getHistory().seeker {
             for move in turn.getMoves() {
                 self.accessTile(with: move.to, in: gameView)?.openBySeeker(explicit: true)
@@ -573,13 +568,13 @@ class GameViewController: UIViewController {
         }
     }
     
-    // MARK: first arrow doesnt get updated correctly for turn
-    private func reconstructRunnerHistory() {
-        for turn in self.manager.game.getHistory().getRunnerHistory() {
+    // MARK: first arrow doesnt get updated correctly for turn if on the same tile +1 from start
+    private func _reconstructRunnerHistory() {
+        for turn in self.manager.game.getHistory().runner {
             for move in turn.getMoves() {
                 self.accessTile(with: move.to, in: gameView)?.openByRunner(
                     explicit: true,
-                    lastTurn: self.manager.game.getHistory().getRunnerHistory().prefix(while: {$0.id != turn.id}).last,
+                    lastTurn: self.manager.game.getHistory().runner.prefix(while: {$0.id != turn.id}).last,
                     oldTile: self.accessTile(with: move.from, in: gameView),
                     and: move.identifyMoveDirection())
             }

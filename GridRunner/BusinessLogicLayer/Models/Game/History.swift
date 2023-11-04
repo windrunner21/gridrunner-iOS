@@ -18,14 +18,6 @@ class History: HistoryProtocol {
         self.seeker = seekerHistory
     }
     
-    func getRunnerHistory() -> [Turn] {
-        self.runner
-    }
-    
-    func getSeekerHistory() -> [Turn] {
-        self.seeker
-    }
-    
     func setHistory(of player: PlayerType, to history: [Turn]) {
         if player == .runner {
             self.setRunnerHistory(to: history)

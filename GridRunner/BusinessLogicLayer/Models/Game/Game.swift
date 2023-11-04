@@ -41,11 +41,11 @@ class Game {
                 
         switch self.player?.type {
         case .runner:
-            self.player?.setHistory(to: self.history.getRunnerHistory())
-            self.player?.updateCurrentTurn(to: self.history.getRunnerHistory().count + 1)
+            self.player?.setHistory(to: self.history.runner)
+            self.player?.updateCurrentTurn(to: self.history.runner.count + 1)
         case .seeker:
-            self.player?.setHistory(to: self.history.getSeekerHistory())
-            self.player?.updateCurrentTurn(to: self.history.getSeekerHistory().count + 1)
+            self.player?.setHistory(to: self.history.seeker)
+            self.player?.updateCurrentTurn(to: self.history.seeker.count + 1)
         default:
             break
         }
@@ -62,12 +62,12 @@ class Game {
         // Create moves using these coordinates.
         for coordinate in coordinates {
             // If seeker history is empty, use initial move from as map center.
-            if self.getHistory().getSeekerHistory().isEmpty {
+            if self.getHistory().seeker.isEmpty {
                 let move = Move(from: self.getMap().getCenterCoordinates(), to: coordinate)
                 moves.append(move)
             } else {
                 var move: Move
-                if let lastToCoordinate = self.getHistory().getSeekerHistory().last?.getMoves().last?.to {
+                if let lastToCoordinate = self.getHistory().seeker.last?.getMoves().last?.to {
                     move = Move(from: lastToCoordinate, to: coordinate)
                 } else {
                     // Set from coordinate as map center if previous move was empty by the Seeker.
