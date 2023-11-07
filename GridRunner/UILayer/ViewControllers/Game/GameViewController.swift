@@ -98,7 +98,7 @@ class GameViewController: UIViewController {
         if player.type == .runner && MoveResponse.shared.getPlayedBy() == .seeker {
             self.manager.game.updateSeekerHistory()
             for move in self.manager.game.getHistory().seeker[player.currentTurnNumber - 2].getMoves() {
-                self.accessTile(with: move.to, in: gameView)?.openBySeeker(explicit: true)
+                self.accessTile(at: move.to)?.openBySeeker(explicit: true)
             }
         }
         
@@ -115,10 +115,10 @@ class GameViewController: UIViewController {
             // Construct move using current and future (not opened) move. Ordinary logic: old and current moves.
             serverTurn.reverse()
             
-            self.accessTile(with: firstMove.to, in: gameView)?.openByRunner(
+            self.accessTile(at: firstMove.to)?.openByRunner(
                 explicit: true,
                 lastTurn: serverTurn,
-                oldTile: self.accessTile(with: secondMove.from, in: gameView),
+                oldTile: self.accessTile(at: secondMove.from),
                 and: secondMoveDirection
             )
         }
@@ -127,81 +127,64 @@ class GameViewController: UIViewController {
     }
     
     @objc private func finishGame() {
+        self.manager.finishGame()
+        self._reconstructHistoryVisually()
+        self._decorateWinPosition()
+        self.presentGameOverAlert()
+    }
+    
+    private func onResign() {
+        let alert = self.manager.alertAdapter.createResignAlert(alertActionHandler: { [weak self] in
+            self?.manager.abortGame()
+            self?.transitionToMainScreen()
+        })
+        
+        self.present(alert, animated: true)
+    }
+    
+    private func onUndo() {
         guard let player = self.manager.game.getPlayer() else {
             presentErrorAlert()
             return
         }
         
-        // Construct all moves from total history on map.
-        self.manager.updateGameHistory(isGameOver: true)
-        self.manager.game.getHistory().outputHistory()
-        self._reconstructHistory()
-        
-        if player.type == GameOver.shared.winner {
-            guard let tile = self.accessTile(with: player.position, in: gameView) else { return }
-            player.win(on: tile)
+        guard let lastMove = player.history.last?.getMoves().last else {
+            print("Could not get last move from Player. Returning...")
+            presentErrorAlert()
+            return
         }
         
-        self.presentGameOverAlert()
+        let lastTile = self.accessTile(at: lastMove.to)
+        let previousTile = self.accessTile(at: lastMove.from)
+        
+        lastTile?.closeBy(player)
+        
+        player.undo(lastMove)
+        
+        if let runner = player as? Runner {
+            runner.undo(previousTile: previousTile)
+        }
+        
+        self.updateGameHUD(of: player)
     }
     
-    @objc private func onResign() {
-        if resignButton.isEnabled {
-            let alert = self.manager.alertAdapter.createResignAlert(alertActionHandler: { [weak self] in
-                self?.transitionToMainScreen()
-            })
-            
-            self.present(alert, animated: true)
+    private func onFinish() {
+        guard let player = self.manager.game.getPlayer() else {
+            presentErrorAlert()
+            return
         }
-    }
-    
-    @objc func onUndo() {
-        if undoButton.isEnabled {
-            guard let player = self.manager.game.getPlayer() else {
-                presentErrorAlert()
-                return
-            }
-            
-            guard let lastMove = player.history.last?.getMoves().last else {
-                print("Could not get last move from Player. Returning...")
-                presentErrorAlert()
-                return
-            }
-            
-            let lastTile = self.accessTile(with: lastMove.to, in: gameView)
-            let previousTile = self.accessTile(with: lastMove.from, in: gameView)
-            
-            lastTile?.closeBy(player)
-            
-            player.undo(lastMove)
-            
-            if let runner = player as? Runner {
-                runner.undo(previousTile: previousTile)
-            }
-            
-            self.updateGameHUD(of: player)
+        
+        player.finish()
+        player.publishTurn()
+        
+        if let _ = player as? Runner {
+            self.visualizeTurnForOpponent()
         }
-    }
-    
-    @objc func onFinish() {
-        if finishButton.isEnabled {
-            guard let player = self.manager.game.getPlayer() else {
-                presentErrorAlert()
-                return
-            }
-            
-            player.finish()
-            player.publishTurn()
-            
-            if let _ = player as? Runner {
-                self.visualizeTurnForOpponent()
-            }
-            
-            self._updateCounters()
-            
-            self.undoButton.disable()
-            self.finishButton.disable()
-        }
+        
+        self._updateCounters()
+        
+        self.undoButton.disable()
+        self.finishButton.disable()
     }
     
     private func createGameGrid(rows: Int, columns: Int, inside rootView: UIView, spacing: CGFloat = 5) {
@@ -280,7 +263,7 @@ class GameViewController: UIViewController {
     private func exitTileTapped(_ tile: Tile, by player: AnyPlayer) {}
     
     private func basicTileTapped(_ tile: Tile, by player: AnyPlayer) {
-        let previousTile = self.accessTile(with: player.position, in: gameView)
+        let previousTile = self.accessTile(at: player.position)
         
         player.move(from: previousTile, to: tile)
         self.manager.game.getHistory().setHistory(of: player.type, to: player.history)
@@ -288,7 +271,7 @@ class GameViewController: UIViewController {
         self.updateGameHUD(of: player)
     }
     
-    private func accessTile(with coordinate: Coordinate, in view: UIView) -> Tile? {
+    private func accessTile(at coordinate: Coordinate) -> Tile? {
         let min = -1
         let max = self.manager.game.getMap().getDimensions().dimensions()
         
@@ -297,7 +280,7 @@ class GameViewController: UIViewController {
         let row = coordinate.y
         let column = coordinate.x
         
-        if let view = view.subviews.first as? UIStackView {
+        if let view = gameView.subviews.first as? UIStackView {
             if row > min, row < max.rows, let row = view.arrangedSubviews[row] as? UIStackView {
                 if column > min, column < max.columns, let tile = row.arrangedSubviews[column] as? Tile {
                     return tile
@@ -352,6 +335,7 @@ class GameViewController: UIViewController {
     
     private func presentErrorAlert() {
         let alert = self.manager.alertAdapter.createGameErrorAlert(alertActionHandler: { [weak self] in
+            self?.manager.abortGame()
             self?.transitionToMainScreen()
         })
         
@@ -359,7 +343,6 @@ class GameViewController: UIViewController {
     }
     
     private func transitionToMainScreen() {
-        if self.manager.isOnlineGame { AblyService.shared.leaveGame() }
         let mainViewController: MainViewController = MainViewController()
         let sceneDelegate = UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate
         sceneDelegate?.transitionViewController.transition(to: mainViewController, with: [.transitionCurlDown])
@@ -372,7 +355,7 @@ class GameViewController: UIViewController {
         let noLongerPossibleMoveCoordinates = runner.getNoLongerPossibleMoveCoordinates()
         
         for coordinate in noLongerPossibleMoveCoordinates {
-            let tile = self.accessTile(with: coordinate, in: self.gameView)
+            let tile = self.accessTile(at: coordinate)
             tile?.removeHighlight()
         }
         
@@ -380,7 +363,7 @@ class GameViewController: UIViewController {
         let possibleMoveCoordinates = runner.getPossibleMoveCoordinates()
         
         for coordinate in possibleMoveCoordinates {
-            let tile = self.accessTile(with: coordinate, in: self.gameView)
+            let tile = self.accessTile(at: coordinate)
             tile?.decorateRunnerHighlight()
         }
     }
@@ -390,19 +373,19 @@ class GameViewController: UIViewController {
         
         // Access previous to last element from Seeker history.
         if let previousToLastToCoordinate = seeker.history.dropLast(1).last?.getMoves().last?.to {
-            let tile = self.accessTile(with: previousToLastToCoordinate, in: self.gameView)
+            let tile = self.accessTile(at: previousToLastToCoordinate)
             tile?.decorateSeekerHighlight()
         }
         
         // Access last element from Seeker history.
         if let lastFromCoordinate = seeker.history.last?.getMoves().last?.from {
-            let tile = self.accessTile(with: lastFromCoordinate, in: self.gameView)
+            let tile = self.accessTile(at: lastFromCoordinate)
             tile?.removeHighlight()
         }
         
         // Access last element from Seeker history.
         if let lastToCoordinate = seeker.history.last?.getMoves().last?.to {
-            let tile = self.accessTile(with: lastToCoordinate, in: self.gameView)
+            let tile = self.accessTile(at: lastToCoordinate)
             tile?.decorateSeekerHighlight()
         }
     }
@@ -414,7 +397,7 @@ class GameViewController: UIViewController {
             inside: gameView
         )
         
-        self._reconstructHistory()
+        self._reconstructHistoryVisually()
         self._updateCounters()
         
         // Checks if player is Runner. If Runner highlights possible move coordinates.
@@ -515,21 +498,17 @@ class GameViewController: UIViewController {
         self.undoButton.image = UIImage(systemName: "arrow.counterclockwise")
         self.finishButton.image = UIImage(systemName: "checkmark")
         
-        self.buttonsStackView.addArrangedSubview(resignButton)
-        self.buttonsStackView.addArrangedSubview(undoButton)
-        self.buttonsStackView.addArrangedSubview(finishButton)
-        
-        let resignGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(onResign))
-        let undoGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(onUndo))
-        let finishGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(onFinish))
-        
-        self.resignButton.addGestureRecognizer(resignGestureRecognizer)
-        self.undoButton.addGestureRecognizer(undoGestureRecognizer)
-        self.finishButton.addGestureRecognizer(finishGestureRecognizer)
+        self.resignButton.setAction(action: onResign)
+        self.undoButton.setAction(action: onUndo)
+        self.finishButton.setAction(action: onFinish)
         
         self.resignButton.enable()
         self.undoButton.disable()
         self.finishButton.disable()
+        
+        self.buttonsStackView.addArrangedSubview(resignButton)
+        self.buttonsStackView.addArrangedSubview(undoButton)
+        self.buttonsStackView.addArrangedSubview(finishButton)
     }
     
     private func visualizeTurn(for player: AnyPlayer, initial: Bool) {
@@ -555,7 +534,7 @@ class GameViewController: UIViewController {
         self.opponentProfileView.setBorderColor(to: .systemGreen)
     }
     
-    private func _reconstructHistory() {
+    private func _reconstructHistoryVisually() {
         self._reconstructRunnerHistory()
         self._reconstructSeekerHistory()
     }
@@ -563,7 +542,7 @@ class GameViewController: UIViewController {
     private func _reconstructSeekerHistory() {
         for turn in self.manager.game.getHistory().seeker {
             for move in turn.getMoves() {
-                self.accessTile(with: move.to, in: gameView)?.openBySeeker(explicit: true)
+                self.accessTile(at: move.to)?.openBySeeker(explicit: true)
             }
         }
     }
@@ -572,12 +551,19 @@ class GameViewController: UIViewController {
     private func _reconstructRunnerHistory() {
         for turn in self.manager.game.getHistory().runner {
             for move in turn.getMoves() {
-                self.accessTile(with: move.to, in: gameView)?.openByRunner(
+                self.accessTile(at: move.to)?.openByRunner(
                     explicit: true,
                     lastTurn: self.manager.game.getHistory().runner.prefix(while: {$0.id != turn.id}).last,
-                    oldTile: self.accessTile(with: move.from, in: gameView),
+                    oldTile: self.accessTile(at: move.from),
                     and: move.identifyMoveDirection())
             }
+        }
+    }
+    
+    private func _decorateWinPosition() {
+        if let player = self.manager.game.getPlayer(), player.type == GameOver.shared.winner,
+            let tile = self.accessTile(at: player.position) {
+            player.win(on: tile)
         }
     }
 }

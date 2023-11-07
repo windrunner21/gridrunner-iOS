@@ -30,6 +30,20 @@ struct GameManager {
         }
     }
     
+    func finishGame() {
+        // Construct all moves from total history on map.
+        self.updateGameHistory(isGameOver: true)
+        // Output overall history for testing purposes
+        self.game.getHistory().outputHistory()
+        if self.isOnlineGame { AblyService.shared.leaveGame() }
+    }
+    
+    func abortGame() {
+        // Output overall history for testing purposes
+        self.game.getHistory().outputHistory()
+        if self.isOnlineGame { AblyService.shared.leaveGame() }
+    }
+    
     func updateGameHistory(isGameOver over: Bool) {
         let onlineOverHistory = GameOver.shared.history
         

@@ -85,9 +85,15 @@ class GameButtonView: UIView {
     func disable() {
         self.gameButton.isEnabled = false
     }
+    
+    func setAction(action: @escaping()->Void) {
+        self.gameButton.tapAction = action
+    }
 }
 
 class GameButton: UIView {
+    var tapAction: (()->Void)?
+    
     var isEnabled: Bool = false {
         didSet {
             self.backgroundColor = isEnabled ? UIColor(named: "Red") : .systemGray
@@ -137,5 +143,12 @@ class GameButton: UIView {
         self.backgroundColor = UIColor(named: "Red")
         self.layer.cornerRadius = 40 / 2
         self.addButtonElevation()
+        
+        let gestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(onTapAction))
+        self.addGestureRecognizer(gestureRecognizer)
+    }
+    
+    @objc private func onTapAction() {
+        if self.isEnabled { self.tapAction?() }
     }
 }
