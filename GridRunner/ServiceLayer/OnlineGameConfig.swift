@@ -1,5 +1,5 @@
 //
-//  GameConfig.swift
+//  OnlineGameConfig.swift
 //  GridRunner
 //
 //  Created by Imran Hajiyev on 19.06.23.

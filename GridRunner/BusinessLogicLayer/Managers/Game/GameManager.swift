@@ -11,15 +11,18 @@ struct GameManager {
     var isPlayerTurn: Bool
     let alertAdapter: AlertAdapter
     
-    // Config related properties
-    let onlineGrid = GameConfig.shared.grid
-    let onlineHistory = GameConfig.shared.history
+    let difficulty: Difficulty?
     
-    init(offline: Bool? = nil) {
+    // Config related properties
+    let configGrid = GameConfig.shared.grid
+    let configHistory = GameConfig.shared.history
+    
+    init(offline: Bool? = nil, difficulty: Difficulty? = nil) {
         self.game = Game()
         self.isOnlineGame = offline ?? true
         self.isPlayerTurn = false
         self.alertAdapter = AlertAdapter()
+        self.difficulty = difficulty
     }
     
     func initializeGame() throws {
@@ -87,10 +90,10 @@ struct GameManager {
     }
     
     func updateGameHistory(isGameOver over: Bool) {
-        let onlineOverHistory = GameOver.shared.history
+        let overHistory = GameOver.shared.history
         
-        let runnerHistory = over ? onlineOverHistory.runner : onlineHistory.runner
-        let seekerHistory = over ? onlineOverHistory.seeker : onlineHistory.seeker
+        let runnerHistory = over ? overHistory.runner : configHistory.runner
+        let seekerHistory = over ? overHistory.seeker : configHistory.seeker
         self.game.getHistory().setRunnerHistory(to: runnerHistory)
         self.game.getHistory().setSeekerHistory(to: seekerHistory)
     }
@@ -105,13 +108,13 @@ struct GameManager {
     
     private func _initializeOnlineGame() throws {
         guard let clientId = AblyService.shared.getClientId() else { throw GameError.missingClientId }
-        guard let startTile = onlineGrid.tiles.first(where: { $0.type == .start }) else { throw GameError.missingStartTile }
+        guard let startTile = configGrid.tiles.first(where: { $0.type == .start }) else { throw GameError.missingStartTile }
         
-        let mapDimensions = MapDimensions(onlineGrid.height, by: onlineGrid.width)
+        let mapDimensions = MapDimensions(configGrid.height, by: configGrid.width)
         
         let map = Map(with: mapDimensions)
         let player = self._initializePlayer(from: clientId, at: startTile)
-        let history = History(with: onlineHistory.runner, and: onlineHistory.seeker)
+        let history = History(with: configHistory.runner, and: configHistory.seeker)
         
         guard let player = player else { throw GameError.noPlayer }
         
@@ -125,7 +128,7 @@ struct GameManager {
     }
     
     private func _initializeOfflineGame() {
-        
+        print("Offline Game Initialized")
     }
     
     private func _initializePlayer(from id: String, at tile: Tile) -> AnyPlayer? {

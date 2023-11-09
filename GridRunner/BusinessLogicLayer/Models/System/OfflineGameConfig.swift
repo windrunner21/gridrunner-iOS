@@ -17,4 +17,16 @@ struct OfflineGameConfig: Configurable {
     var turn: String
     var history: HistoryProtocol
     var type: String
+    
+    init(role: PlayerRole, map: MapType) {
+        self.grid = Grid()
+        self.runner = ""
+        self.seeker = ""
+        self.opponent = ""
+        self.runnerMovesLeft = 2
+        self.seekerMovesLeft = 1
+        self.turn = "runner"
+        self.history = History()
+        self.type = "config"
+    }
 }
