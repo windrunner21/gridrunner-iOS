@@ -9,4 +9,5 @@ enum GameError: Error {
     case missingStartTile
     case missingClientId
     case noPlayer
+    case noLastMove
 }

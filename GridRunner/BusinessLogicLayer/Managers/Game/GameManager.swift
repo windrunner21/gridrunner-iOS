@@ -44,6 +44,48 @@ struct GameManager {
         if self.isOnlineGame { AblyService.shared.leaveGame() }
     }
     
+    func ondoMove() throws -> (AnyPlayer, Move)  {
+        guard let player = self.game.getPlayer() else { throw GameError.noPlayer }
+        guard let lastMove = player.history.last?.getMoves().last else { throw GameError.noLastMove}
+        player.undo(lastMove)
+        return(player, lastMove)
+    }
+    
+    func finishMove() throws {
+        guard let player = self.game.getPlayer() else { throw GameError.noPlayer }
+        player.finish()
+        player.publishTurn()
+    }
+    
+    func updateGameToMoveResponse(runnerLogic: (Move)->Void, seekerLogic: (Move, Move, Turn, MoveDirection)->Void) throws {
+        guard let player = self.game.getPlayer() else { throw GameError.noPlayer }
+                
+        if player.type == .runner && MoveResponse.shared.getPlayedBy() == .seeker {
+            self.game.updateSeekerHistory()
+            for move in self.game.getHistory().seeker[player.currentTurnNumber - 2].getMoves() {
+                runnerLogic(move)
+            }
+        }
+        
+        if player.type == .seeker && MoveResponse.shared.getPlayedBy() == .server {
+            self.game.updateRunnerHistory()
+            
+            guard let serverTurn = MoveResponse.shared.getRunnerTurn() else { return }
+            guard let firstMove = serverTurn.getMoves().first else { return }
+            guard let secondMove = serverTurn.getMoves().last else { return }
+            
+            let secondMoveDirection = secondMove.identifyMoveDirection()
+            
+            // Need to reverse turn because to construct the move from server turn it uses reverse logic.
+            // Construct move using current and future (not opened) move. Ordinary logic: old and current moves.
+            serverTurn.reverse()
+            
+            seekerLogic(firstMove, secondMove, serverTurn, secondMoveDirection)
+        }
+        
+        self.game.getHistory().outputHistory()
+    }
+    
     func updateGameHistory(isGameOver over: Bool) {
         let onlineOverHistory = GameOver.shared.history
         

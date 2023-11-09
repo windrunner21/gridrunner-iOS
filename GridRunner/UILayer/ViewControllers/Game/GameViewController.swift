@@ -88,42 +88,23 @@ class GameViewController: UIViewController {
     }
     
     @objc private func updateGame() {
-        guard let player = self.manager.game.getPlayer() else {
-            presentErrorAlert()
-            return
-        }
-        
-        self.visualizeTurn(for: player, initial: false)
-        
-        if player.type == .runner && MoveResponse.shared.getPlayedBy() == .seeker {
-            self.manager.game.updateSeekerHistory()
-            for move in self.manager.game.getHistory().seeker[player.currentTurnNumber - 2].getMoves() {
-                self.accessTile(at: move.to)?.openBySeeker(explicit: true)
-            }
-        }
-        
-        if player.type == .seeker && MoveResponse.shared.getPlayedBy() == .server {
-            self.manager.game.updateRunnerHistory()
-            
-            guard let serverTurn = MoveResponse.shared.getRunnerTurn() else { return }
-            guard let firstMove = serverTurn.getMoves().first else { return }
-            guard let secondMove = serverTurn.getMoves().last else { return }
-            
-            let secondMoveDirection = secondMove.identifyMoveDirection()
-            
-            // Need to reverse turn because to construct the move from server turn it uses reverse logic.
-            // Construct move using current and future (not opened) move. Ordinary logic: old and current moves.
-            serverTurn.reverse()
-            
-            self.accessTile(at: firstMove.to)?.openByRunner(
-                explicit: true,
-                lastTurn: serverTurn,
-                oldTile: self.accessTile(at: secondMove.from),
-                and: secondMoveDirection
+        do {
+            try self.manager.updateGameToMoveResponse(
+                runnerLogic: { move in self.accessTile(at: move.to)?.openBySeeker(explicit: true) },
+                seekerLogic: { firstMove, secondMove, serverTurn, secondMoveDirection in
+                    self.accessTile(at: firstMove.to)?.openByRunner(
+                        explicit: true,
+                        lastTurn: serverTurn,
+                        oldTile: self.accessTile(at: secondMove.from),
+                        and: secondMoveDirection
+                    )
+                }
             )
+        } catch {
+            self.presentErrorAlert()
         }
         
-        self.manager.game.getHistory().outputHistory()
+        self.visualizeTurn(initial: false)
     }
     
     @objc private func finishGame() {
@@ -143,48 +124,28 @@ class GameViewController: UIViewController {
     }
     
     private func onUndo() {
-        guard let player = self.manager.game.getPlayer() else {
-            presentErrorAlert()
-            return
+        do {
+            let (player, lastMove) = try self.manager.ondoMove()
+            let lastTile = self.accessTile(at: lastMove.to)
+            let previousTile = self.accessTile(at: lastMove.from)
+            lastTile?.closeBy(player)
+            (player as? Runner)?.undo(previousTile: previousTile)
+            self.updateGameHUD(of: player)
+        } catch {
+            self .presentErrorAlert()
         }
-        
-        guard let lastMove = player.history.last?.getMoves().last else {
-            print("Could not get last move from Player. Returning...")
-            presentErrorAlert()
-            return
-        }
-        
-        let lastTile = self.accessTile(at: lastMove.to)
-        let previousTile = self.accessTile(at: lastMove.from)
-        
-        lastTile?.closeBy(player)
-        
-        player.undo(lastMove)
-        
-        if let runner = player as? Runner {
-            runner.undo(previousTile: previousTile)
-        }
-        
-        self.updateGameHUD(of: player)
     }
     
     private func onFinish() {
-        guard let player = self.manager.game.getPlayer() else {
-            presentErrorAlert()
-            return
+        do {
+            try self.manager.finishMove()
+            self.visualizeTurnForOpponent() // MARK: may need to remove in the future
+            self._updateCounters()
+            self.undoButton.disable()
+            self.finishButton.disable()
+        } catch {
+            self.presentErrorAlert()
         }
-        
-        player.finish()
-        player.publishTurn()
-        
-        if let _ = player as? Runner {
-            self.visualizeTurnForOpponent()
-        }
-        
-        self._updateCounters()
-        
-        self.undoButton.disable()
-        self.finishButton.disable()
     }
     
     private func createGameGrid(rows: Int, columns: Int, inside rootView: UIView, spacing: CGFloat = 5) {
@@ -452,7 +413,7 @@ class GameViewController: UIViewController {
             self.opponentTypeLabel.leadingAnchor.constraint(equalTo: self.view.centerXAnchor, constant: 10),
         ])
         
-        self.visualizeTurn(for: player, initial: true)
+        self.visualizeTurn(initial: true)
     }
     
     private func setupProfileViewLabels(with player: AnyPlayer) {
@@ -511,7 +472,8 @@ class GameViewController: UIViewController {
         self.buttonsStackView.addArrangedSubview(finishButton)
     }
     
-    private func visualizeTurn(for player: AnyPlayer, initial: Bool) {
+    private func visualizeTurn(initial: Bool) {
+        guard let player = self.manager.game.getPlayer() else { presentErrorAlert(); return }
         let compareAgainstType: PlayerType = initial ? GameConfig.shared.getCurrentTurn() : MoveResponse.shared.getNextTurn()
         
         if player.type == compareAgainstType {

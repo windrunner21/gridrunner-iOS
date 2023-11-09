@@ -5,7 +5,6 @@
 //  Created by Imran Hajiyev on 12.05.23.
 //
 
-
 class Runner: Player, AnyPlayer {
     var type: PlayerType = .runner
     var highlightedCoordinates: Set<Coordinate> = Set()
