@@ -44,7 +44,7 @@ struct Notifications {
         let center = UNUserNotificationCenter.current()
         center.add(request) { (error) in
             if error != nil {
-                NSLog("Error happened adding matchmaking notification request.")
+                Log.error("Error happened adding matchmaking notification request.")
             }
         }
     }

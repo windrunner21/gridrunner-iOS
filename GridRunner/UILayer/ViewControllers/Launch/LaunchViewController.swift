@@ -56,17 +56,17 @@ class LaunchViewController: UIViewController {
             self.manager.retrieveLoggedInUser { response in
                 DispatchQueue.main.async {
                     if response == .success {
-                        NSLog("User retrieval completed successfully. Session: \(session)")
+                        Log.success("User retrieval completed successfully. Session: \(session).")
                         completion(.success)
                     } else {
-                        NSLog("Cannot get User.")
+                        Log.error("Cannot get User.")
                         completion(.requestError)
                     }
                 }
             }
         } else {
             DispatchQueue.main.async {
-                NSLog("No session found.")
+                Log.data("No session found.")
                 completion(.requestError)
             }
         }

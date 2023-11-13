@@ -47,11 +47,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let center = UNUserNotificationCenter.current()
         center.requestAuthorization(options: [.alert, .badge, .sound]) { [weak self] granted, error in
             if let error = error {
-                NSLog("Error happened registering application to notification center. Error: \(error)")
+                Log.error("Error happened registering application to notification center. Error: \(error)")
             }
             
             guard granted else { return }
-            NSLog("Provisional authorization granted.")
+            Log.success("Provisional authorization granted.")
             self?.getNotifications(from: center)
         }
     }
@@ -73,17 +73,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 if !reminderNotificationExists {
                     center.add(reminderNotificationRequest) { (error) in
                         if error != nil {
-                            NSLog("Error happened adding reminder notification request.")
+                            Log.error("Error happened adding reminder notification request.")
                         }
                     }
                 } else {
-                    print("Reminder notification already exists")
+                    Log.data("Reminder notification already exists")
                     // Either remove and update or ignore the new request.
                     // Currently removing and updating.
                     center.removePendingNotificationRequests(withIdentifiers: [reminderNotificationRequest.identifier])
                     center.add(reminderNotificationRequest) { (error) in
                         if error != nil {
-                            NSLog("Error happened updating reminder notification request.")
+                            Log.error("Error happened updating reminder notification request.")
                         }
                     }
                 }

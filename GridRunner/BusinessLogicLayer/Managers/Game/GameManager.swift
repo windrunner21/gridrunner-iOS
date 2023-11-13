@@ -11,18 +11,15 @@ struct GameManager {
     var isPlayerTurn: Bool
     let alertAdapter: AlertAdapter
     
-    let difficulty: Difficulty?
-    
     // Config related properties
     let configGrid = GameConfig.shared.grid
     let configHistory = GameConfig.shared.history
     
-    init(offline: Bool? = nil, difficulty: Difficulty? = nil) {
+    init(offline: Bool? = nil) {
         self.game = Game()
         self.isOnlineGame = offline ?? true
         self.isPlayerTurn = false
         self.alertAdapter = AlertAdapter()
-        self.difficulty = difficulty
     }
     
     func initializeGame() throws {

@@ -22,13 +22,13 @@ struct PasswordService {
             data, response, error in
             
             if let error = error {
-                NSLog("Error occured in PasswordService().resetPassword(): \(error)")
+                Log.error("Error occured in PasswordService().resetPassword(): \(error)")
                 completion(.networkError)
             } else if let response = response as? HTTPURLResponse, response.statusCode == 200, let data = data {
                 print(String(data: data, encoding: .utf8)!)
                 completion(.success)
             } else {
-                NSLog("Error occured in PasswordService().resetPassword(): Incorrect request.")
+                Log.error("Error occured in PasswordService().resetPassword(): Incorrect request.")
                 completion(.requestError)
             }
         }

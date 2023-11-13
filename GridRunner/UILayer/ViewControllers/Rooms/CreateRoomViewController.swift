@@ -116,14 +116,13 @@ class CreateRoomViewController: UIViewController {
                         case .seeker:
                             GameSessionDetails.shared.setSeeker(to: clientId)
                         case .random:
-                            let randomInt = Int.random(in: 0...100)
-                            if randomInt > 50 {
+                            RandomGenerator.random(a: {
                                 GameSessionDetails.shared.setRunner(to: clientId)
                                 self.currentRole = .runner
-                            } else {
+                            }, b: {
                                 GameSessionDetails.shared.setSeeker(to: clientId)
                                 self.currentRole = .seeker
-                            }
+                            })
                         default:
                             DispatchQueue.main.async {
                                 let alert = self.manager.alertAdapter.createGeneralErrorAlert()

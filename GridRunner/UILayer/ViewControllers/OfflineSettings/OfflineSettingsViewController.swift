@@ -104,8 +104,8 @@ class OfflineSettingsViewController: UIViewController {
     }
             
     @objc func onStartOfflineMode() {
-        let manager: GameManager = GameManager(offline: true, difficulty: currentDifficulty)
-        let offlineConfiguration = OfflineGameConfig(role: currentRole, map: currentMap)
+        let manager: GameManager = GameManager(offline: true)
+        let offlineConfiguration = OfflineGameConfig(role: currentRole, map: currentMap, difficulty: currentDifficulty)
         GameConfig.shared.update(with: offlineConfiguration)
         
         self.dismiss(animated: true) {

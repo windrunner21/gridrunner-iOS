@@ -100,7 +100,7 @@
 		CA852A612A40425800961E65 /* AnyResponseParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA852A602A40425800961E65 /* AnyResponseParser.swift */; };
 		CA852A632A4042D900961E65 /* AnyResponseParserExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA852A622A4042D900961E65 /* AnyResponseParserExtension.swift */; };
 		CA852A672A40487900961E65 /* OnlineHistory.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA852A662A40487800961E65 /* OnlineHistory.swift */; };
-		CA852A692A40489000961E65 /* GridModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA852A682A40488F00961E65 /* GridModel.swift */; };
+		CA852A692A40489000961E65 /* OnlineGrid.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA852A682A40488F00961E65 /* OnlineGrid.swift */; };
 		CA852A6B2A40597A00961E65 /* SpecialTile.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA852A6A2A40597A00961E65 /* SpecialTile.swift */; };
 		CA89AC652A52FBC300265465 /* MoveType.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA89AC642A52FBC300265465 /* MoveType.swift */; };
 		CA8CBF9A2A4F1FFA003CF44B /* AuthenticationError.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA8CBF992A4F1FFA003CF44B /* AuthenticationError.swift */; };
@@ -143,6 +143,8 @@
 		CAF8ECBD2A2F6CFC00179EF1 /* ActivityIndicatorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAF8ECBC2A2F6CFC00179EF1 /* ActivityIndicatorExtension.swift */; };
 		CAF8ECBF2A2F741900179EF1 /* URLPath.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAF8ECBE2A2F741900179EF1 /* URLPath.swift */; };
 		CAF8ECC32A2F78A600179EF1 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAF8ECC22A2F78A600179EF1 /* LoginViewController.swift */; };
+		CAFA9A2E2B023C4D0031C199 /* RandomGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAFA9A2D2B023C4D0031C199 /* RandomGenerator.swift */; };
+		CAFA9A302B0252590031C199 /* Logging.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAFA9A2F2B0252590031C199 /* Logging.swift */; };
 		CAFED48D2A02496E00FB4B9B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAFED48C2A02496E00FB4B9B /* AppDelegate.swift */; };
 		CAFED48F2A02496E00FB4B9B /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAFED48E2A02496E00FB4B9B /* SceneDelegate.swift */; };
 		CAFED4912A02496E00FB4B9B /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAFED4902A02496E00FB4B9B /* MainViewController.swift */; };
@@ -269,7 +271,7 @@
 		CA852A602A40425800961E65 /* AnyResponseParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnyResponseParser.swift; sourceTree = "<group>"; };
 		CA852A622A4042D900961E65 /* AnyResponseParserExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnyResponseParserExtension.swift; sourceTree = "<group>"; };
 		CA852A662A40487800961E65 /* OnlineHistory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnlineHistory.swift; sourceTree = "<group>"; };
-		CA852A682A40488F00961E65 /* GridModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GridModel.swift; sourceTree = "<group>"; };
+		CA852A682A40488F00961E65 /* OnlineGrid.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnlineGrid.swift; sourceTree = "<group>"; };
 		CA852A6A2A40597A00961E65 /* SpecialTile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpecialTile.swift; sourceTree = "<group>"; };
 		CA89AC642A52FBC300265465 /* MoveType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoveType.swift; sourceTree = "<group>"; };
 		CA8CBF992A4F1FFA003CF44B /* AuthenticationError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationError.swift; sourceTree = "<group>"; };
@@ -312,6 +314,8 @@
 		CAF8ECBC2A2F6CFC00179EF1 /* ActivityIndicatorExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityIndicatorExtension.swift; sourceTree = "<group>"; };
 		CAF8ECBE2A2F741900179EF1 /* URLPath.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLPath.swift; sourceTree = "<group>"; };
 		CAF8ECC22A2F78A600179EF1 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		CAFA9A2D2B023C4D0031C199 /* RandomGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RandomGenerator.swift; sourceTree = "<group>"; };
+		CAFA9A2F2B0252590031C199 /* Logging.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Logging.swift; sourceTree = "<group>"; };
 		CAFED4892A02496E00FB4B9B /* GridRunner.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GridRunner.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CAFED48C2A02496E00FB4B9B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		CAFED48E2A02496E00FB4B9B /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -399,8 +403,10 @@
 		CA0AAC872A25DF74008367FB /* Utils */ = {
 			isa = PBXGroup;
 			children = (
+				CAFA9A2D2B023C4D0031C199 /* RandomGenerator.swift */,
 				CA0AAC882A25DF8C008367FB /* ProfileIcon.swift */,
 				CA852A522A39ABEA00961E65 /* Extensions */,
+				CAFA9A2F2B0252590031C199 /* Logging.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -434,7 +440,7 @@
 			isa = PBXGroup;
 			children = (
 				CA852A5E2A4029A900961E65 /* OnlineGameConfig.swift */,
-				CA852A682A40488F00961E65 /* GridModel.swift */,
+				CA852A682A40488F00961E65 /* OnlineGrid.swift */,
 				CA852A6A2A40597A00961E65 /* SpecialTile.swift */,
 				CA852A662A40487800961E65 /* OnlineHistory.swift */,
 			);
@@ -1234,7 +1240,7 @@
 				CAFED8C12AAF032500C32741 /* GameButtonView.swift in Sources */,
 				CA053D1E2AB878DF0019FAD1 /* GameDifficulty.swift in Sources */,
 				CA0AAC892A25DF8C008367FB /* ProfileIcon.swift in Sources */,
-				CA852A692A40489000961E65 /* GridModel.swift in Sources */,
+				CA852A692A40489000961E65 /* OnlineGrid.swift in Sources */,
 				CA852A612A40425800961E65 /* AnyResponseParser.swift in Sources */,
 				CA852A672A40487900961E65 /* OnlineHistory.swift in Sources */,
 				CA0AAC3F2A13A2A0008367FB /* ArrowDirection.swift in Sources */,
@@ -1264,11 +1270,13 @@
 				CA35E7B72A28D0B60057BAB6 /* ViewExtension.swift in Sources */,
 				CAAF75062A9E459100978B5F /* ProfileView.swift in Sources */,
 				CA790B382AF51F9D00691DC9 /* RoomManager.swift in Sources */,
+				CAFA9A2E2B023C4D0031C199 /* RandomGenerator.swift in Sources */,
 				CA0AAC432A166F18008367FB /* GameHistoryExamples.swift in Sources */,
 				CA0AAC612A1D1D1D008367FB /* Player.swift in Sources */,
 				CAAF16922AA9FDA9000D8984 /* LoadingOverlayView.swift in Sources */,
 				CAB12C472AA4C3C800BF71E1 /* RankView.swift in Sources */,
 				CAAF169A2AAB536E000D8984 /* PlayerRole.swift in Sources */,
+				CAFA9A302B0252590031C199 /* Logging.swift in Sources */,
 				CAF8ECA92A2DBF9400179EF1 /* User.swift in Sources */,
 				CAAF75022A9E1B3600978B5F /* RoundView.swift in Sources */,
 				CA790B292AF510F400691DC9 /* AblyManager.swift in Sources */,

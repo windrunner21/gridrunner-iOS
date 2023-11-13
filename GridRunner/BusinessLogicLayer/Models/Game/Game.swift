@@ -50,7 +50,7 @@ class Game {
             break
         }
         
-        NSLog("Game session has been instantiated.")
+        Log.data("Game session has been instantiated.")
     }
     
     func updateSeekerHistory() {

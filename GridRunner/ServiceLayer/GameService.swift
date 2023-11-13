@@ -21,7 +21,7 @@ struct GameService {
             data, response, error in
             
             if let error = error {
-                NSLog("Error occured in GameService().createRoom(): \(error)")
+                Log.error("Error occured in GameService().createRoom(): \(error)")
                 completion(.networkError)
             } else if let response = response as? HTTPURLResponse, response.statusCode == 200, let data = data {
                 print(String(data: data, encoding: .utf8)!)
@@ -31,11 +31,11 @@ struct GameService {
                     Friendly.shared.setRoomCode(friendly.getRoomCode())
                     completion(.success)
                 } else {
-                    NSLog("Error occured in GameService().createRoom(): Cannot decode JSON to Friendly class.")
+                    Log.error("Error occured in GameService().createRoom(): Cannot decode JSON to Friendly class.")
                     completion(.decoderError)
                 }
             } else {
-                NSLog("Error occured in GameService().createRoom(): Incorrect request.")
+                Log.error("Error occured in GameService().createRoom(): Incorrect request.")
                 completion(.requestError)
             }
         }
@@ -48,7 +48,7 @@ struct GameService {
             data, response, error in
             
             if let error = error {
-                NSLog("Error occured in GameService().joinRoom(): \(error)")
+                Log.error("Error occured in GameService().joinRoom(): \(error)")
                 completion(.networkError)
             } else if let response = response as? HTTPURLResponse, response.statusCode == 200, let data = data {
                 print(String(data: data, encoding: .utf8)!)
@@ -58,11 +58,11 @@ struct GameService {
                     Friendly.shared.setHost(friendly.getHost())
                     completion(.success)
                 } else {
-                    NSLog("Error occured in GameService().joinRoom(): Cannot decode JSON to Friendly class.")
+                    Log.error("Error occured in GameService().joinRoom(): Cannot decode JSON to Friendly class.")
                     completion(.decoderError)
                 }
             } else {
-                NSLog("Error occured in GameService().joinRoom(): Incorrect request.")
+                Log.error("Error occured in GameService().joinRoom(): Incorrect request.")
                 completion(.requestError)
             }
         }

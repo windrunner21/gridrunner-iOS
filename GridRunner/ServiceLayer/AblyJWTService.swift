@@ -21,13 +21,13 @@ struct AblyJWTService {
             data, response, error in
             
             if let error = error {
-                NSLog("Error occured in AblyService().getJWT(): \(error)")
+                Log.error("Error occured in AblyService().getJWT(): \(error)")
                 completion(.networkError, nil)
             } else if let response = response as? HTTPURLResponse, response.statusCode == 200, let data = data {
                 let token = String(decoding: data, as: UTF8.self)
                 completion(.success, token.replacingOccurrences(of: "\"", with: ""))
             } else {
-                NSLog("Error occured in AblyService().getJWT(): Sent request was incorrect.")
+                Log.error("Error occured in AblyService().getJWT(): Sent request was incorrect.")
                 completion(.requestError, nil)
             }
         }

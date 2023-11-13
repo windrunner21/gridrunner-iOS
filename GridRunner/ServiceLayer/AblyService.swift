@@ -59,7 +59,7 @@ class AblyService {
     // Public methods for rest of the project to interact with: enter, leave queues.
     func enterQueue() {
         self.client.connection.once(.connected) { stateChange in
-            NSLog("Connected to Ably.")
+            Log.data("Connected to Ably.")
             self._enter()
         }
     }
@@ -75,7 +75,7 @@ class AblyService {
         if client.connection.state == .connected {
             self._enterGame(isJoining: joining)
         } else {
-            NSLog("Could not enter game")
+            Log.error("Could not enter game")
         }
     }
     
@@ -90,7 +90,7 @@ class AblyService {
   
     // QUEUES
     private func _enter() {
-        NSLog("Entering channel \"\(self.queueChannel.name)\" queue.")
+        Log.data("Entering channel \"\(self.queueChannel.name)\" queue.")
         
         self.queueChannel.subscribe("game") { [weak self] message in
             if let data = message.data as? [String: Any] {
@@ -112,7 +112,7 @@ class AblyService {
     }
     
     private func _leave() {
-        NSLog("Leaving channel \"\(self.queueChannel.name)\" queue.")
+        Log.data("Leaving channel \"\(self.queueChannel.name)\" queue.")
         self.queueChannel.unsubscribe()
         self.queueChannel.presence.leave(nil)
         self.queueChannel.detach()
@@ -126,7 +126,7 @@ class AblyService {
         "room:\(GameSessionDetails.shared.roomCode):\(clientId)"
         self.gameChannel = self.client.channels.get(channelName)
         
-        NSLog("Entering channel \"\(channelName)\".")
+        Log.data("Entering channel \"\(channelName)\".")
         
         var didReceiveConfigFile: Bool = false
         
@@ -173,13 +173,13 @@ class AblyService {
     }
     
     private func _leaveGame() {
-        NSLog("Resigning from the game.")
+        Log.data("Resigning from the game.")
         
         self.gameChannel.publish(GameSessionDetails.shared.roomCode, data: ["resign": true]) { error in
             if let error = error {
                 print("Unable to publish message. Status code: \(error.statusCode). Error: \(error.message)")
             } else {
-                NSLog("Leaving channel \"\(self.gameChannel.name)\".")
+                Log.data("Leaving channel \"\(self.gameChannel.name)\".")
                 self.gameChannel.unsubscribe()
                 self.gameChannel.presence.leave(nil)
                 self.gameChannel.detach()

@@ -10,4 +10,5 @@ enum GameError: Error {
     case missingClientId
     case noPlayer
     case noLastMove
+    case unknownMapType
 }

@@ -20,7 +20,7 @@ struct UserService {
             data, response, error in
             
             if let error = error {
-                NSLog("Error occured in UserService().getUser(): \(error)")
+                Log.error("Error occured in UserService().getUser(): \(error)")
                 completion(.networkError)
             } else if let response = response as? HTTPURLResponse, response.statusCode == 200, let data = data {
                 let user = User.decode(data: data, type: User.self)
@@ -29,12 +29,12 @@ struct UserService {
                     User.shared.update(with: user)
                     completion(.success)
                 } else {
-                    NSLog("Error occured in UserService().getUser(): Cannot decode JSON to User class.")
+                    Log.error("Error occured in UserService().getUser(): Cannot decode JSON to User class.")
                     completion(.decoderError)
                 }
                 
             } else {
-                NSLog("Error occured in UserService().getUser(): Sent request was incorrect.")
+                Log.error("Error occured in UserService().getUser(): Sent request was incorrect.")
                 completion(.requestError)
             }
         }

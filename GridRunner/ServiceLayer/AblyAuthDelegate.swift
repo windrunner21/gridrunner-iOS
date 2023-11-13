@@ -16,14 +16,14 @@ struct AblyAuthCallbackDelegate {
             switch response {
             case .success:
                 guard let token = token else {
-                    NSLog("Token returned as nil in AblyAuthCallbackDelegate.")
+                    Log.data("Token returned as nil in AblyAuthCallbackDelegate.")
                     return
                 }
                 
                 let tokenDetails = ARTTokenDetails(token: token)
                 callback(tokenDetails, nil)
             default:
-                NSLog("Could not get token from AblyJWTService in AblyAuthCallbackDelegate.")
+                Log.error("Could not get token from AblyJWTService in AblyAuthCallbackDelegate.")
                 callback(nil, AblyAuthenticationError.noToken)
             }
         }
