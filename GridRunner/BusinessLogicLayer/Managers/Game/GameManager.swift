@@ -17,7 +17,7 @@ struct GameManager {
     
     init(offline: Bool? = nil) {
         self.game = Game()
-        self.isOnlineGame = offline ?? true
+        self.isOnlineGame = !(offline ?? false)
         self.isPlayerTurn = false
         self.alertAdapter = AlertAdapter()
     }
@@ -26,7 +26,7 @@ struct GameManager {
         if isOnlineGame {
             try self._initializeOnlineGame()
         } else {
-            self._initializeOfflineGame()
+            try self._initializeOfflineGame()
         }
     }
     
@@ -105,6 +105,14 @@ struct GameManager {
     
     private func _initializeOnlineGame() throws {
         guard let clientId = AblyService.shared.getClientId() else { throw GameError.missingClientId }
+        try self._initializeGame(with: clientId)
+    }
+    
+    private func _initializeOfflineGame() throws {
+        try self._initializeGame()
+    }
+    
+    private func _initializeGame(with clientId: String? = nil) throws {
         guard let startTile = configGrid.tiles.first(where: { $0.type == .start }) else { throw GameError.missingStartTile }
         
         let mapDimensions = MapDimensions(configGrid.height, by: configGrid.width)
@@ -124,11 +132,7 @@ struct GameManager {
         self.updateGameHistory(isGameOver: false)
     }
     
-    private func _initializeOfflineGame() {
-        print("Offline Game Initialized")
-    }
-    
-    private func _initializePlayer(from id: String, at tile: Tile) -> AnyPlayer? {
+    private func _initializePlayer(from id: String? = nil, at tile: Tile) -> AnyPlayer? {
         if GameConfig.shared.runner == id || GameConfig.shared.runner == "you" {
             return Runner(at: tile.position)
         } else if GameConfig.shared.seeker == id || GameConfig.shared.seeker == "you" {

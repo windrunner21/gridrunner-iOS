@@ -99,7 +99,6 @@ class MainViewController: UIViewController {
         self.gameSearchView.slideIn()
         
         self.ablyManager.retrieveToken { response, token in
-            
             switch response {
             case .success:
                 guard let token = token else {

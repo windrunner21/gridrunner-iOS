@@ -39,7 +39,7 @@ struct Grid: GridProtocol {
     
     private mutating func _setBasic() {
         self.tiles.append(contentsOf: [
-            self._generateTile(at: 5, and: 5, as: .start),
+            self._generateTile(at: 6, and: 6, as: .start),
             self._generateTile(at: 0, and: 0, as: .exit),
             self._generateTile(at: 12, and: 0, as: .exit),
             self._generateTile(at: 0, and: 12, as: .exit),
@@ -49,7 +49,7 @@ struct Grid: GridProtocol {
     
     private mutating func _setBordered() {
         self.tiles.append(contentsOf: [
-            self._generateTile(at: 5, and: 5, as: .start),
+            self._generateTile(at: 6, and: 6, as: .start),
             self._generateTile(at: 0, and: 0, as: .exit),
             self._generateTile(at: 12, and: 12, as: .exit),
             self._generateTile(at: 0, and: 1, as: .closed),
@@ -57,30 +57,76 @@ struct Grid: GridProtocol {
             self._generateTile(at: 2, and: 1, as: .closed),
             self._generateTile(at: 3, and: 1, as: .closed),
             self._generateTile(at: 4, and: 1, as: .closed),
-            self._generateTile(at: 7, and: 6, as: .closed),
-            self._generateTile(at: 7, and: 6, as: .closed),
-            self._generateTile(at: 9, and: 6, as: .closed),
-            self._generateTile(at: 10, and: 6, as: .closed),
-            self._generateTile(at: 7, and: 7, as: .closed),
-            self._generateTile(at: 7, and: 8, as: .closed),
-            self._generateTile(at: 7, and: 10, as: .closed)
+            self._generateTile(at: 9, and: 8, as: .closed),
+            self._generateTile(at: 11, and: 8, as: .closed),
+            self._generateTile(at: 12, and: 8, as: .closed),
+            self._generateTile(at: 9, and: 9, as: .closed),
+            self._generateTile(at: 9, and: 10, as: .closed),
+            self._generateTile(at: 9, and: 12, as: .closed)
         ])
     }
     
     private mutating func _setShaped() {
         self.tiles.append(contentsOf: [
-            self._generateTile(at: 5, and: 5, as: .start),
+            self._generateTile(at: 6, and: 6, as: .start),
             self._generateTile(at: 12, and: 0, as: .exit),
             self._generateTile(at: 0, and: 12, as: .exit),
+            
+            self._generateTile(at: 0, and: 0, as: .outer),
+            self._generateTile(at: 0, and: 1, as: .outer),
             self._generateTile(at: 0, and: 2, as: .outer),
             self._generateTile(at: 0, and: 3, as: .outer),
             self._generateTile(at: 0, and: 4, as: .outer),
             self._generateTile(at: 0, and: 5, as: .outer),
+            self._generateTile(at: 0, and: 6, as: .outer),
+            
+            self._generateTile(at: 1, and: 1, as: .outer),
+            self._generateTile(at: 1, and: 2, as: .outer),
+            self._generateTile(at: 1, and: 3, as: .outer),
+            self._generateTile(at: 1, and: 4, as: .outer),
+            self._generateTile(at: 1, and: 5, as: .outer),
+            self._generateTile(at: 1, and: 6, as: .outer),
+            
             self._generateTile(at: 1, and: 0, as: .outer),
             self._generateTile(at: 2, and: 0, as: .outer),
             self._generateTile(at: 3, and: 0, as: .outer),
             self._generateTile(at: 4, and: 0, as: .outer),
-            self._generateTile(at: 5, and: 0, as: .outer)
+            self._generateTile(at: 5, and: 0, as: .outer),
+            self._generateTile(at: 6, and: 0, as: .outer),
+            
+            self._generateTile(at: 2, and: 1, as: .outer),
+            self._generateTile(at: 3, and: 1, as: .outer),
+            self._generateTile(at: 4, and: 1, as: .outer),
+            self._generateTile(at: 5, and: 1, as: .outer),
+            self._generateTile(at: 6, and: 1, as: .outer),
+            
+            self._generateTile(at: 12, and: 12, as: .outer),
+            self._generateTile(at: 12, and: 11, as: .outer),
+            self._generateTile(at: 12, and: 10, as: .outer),
+            self._generateTile(at: 12, and: 9, as: .outer),
+            self._generateTile(at: 12, and: 8, as: .outer),
+            self._generateTile(at: 12, and: 7, as: .outer),
+            self._generateTile(at: 12, and: 6, as: .outer),
+            
+            self._generateTile(at: 11, and: 10, as: .outer),
+            self._generateTile(at: 11, and: 9, as: .outer),
+            self._generateTile(at: 11, and: 8, as: .outer),
+            self._generateTile(at: 11, and: 7, as: .outer),
+            self._generateTile(at: 11, and: 6, as: .outer),
+            
+            self._generateTile(at: 11, and: 12, as: .outer),
+            self._generateTile(at: 10, and: 12, as: .outer),
+            self._generateTile(at: 9, and: 12, as: .outer),
+            self._generateTile(at: 8, and: 12, as: .outer),
+            self._generateTile(at: 7, and: 12, as: .outer),
+            self._generateTile(at: 6, and: 12, as: .outer),
+            
+            self._generateTile(at: 11, and: 11, as: .outer),
+            self._generateTile(at: 10, and: 11, as: .outer),
+            self._generateTile(at: 9, and: 11, as: .outer),
+            self._generateTile(at: 8, and: 11, as: .outer),
+            self._generateTile(at: 7, and: 11, as: .outer),
+            self._generateTile(at: 6, and: 11, as: .outer),
         ])
     }
     
