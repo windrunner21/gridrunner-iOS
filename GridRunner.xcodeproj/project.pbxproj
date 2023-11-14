@@ -420,13 +420,6 @@
 			path = Views;
 			sourceTree = "<group>";
 		};
-		CA1F56312AE42C0100ED5FCB /* Loading */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Loading;
-			sourceTree = "<group>";
-		};
 		CA1F56342AE4321700ED5FCB /* Loading */ = {
 			isa = PBXGroup;
 			children = (
@@ -799,7 +792,6 @@
 		CAAF75002A9E1B0800978B5F /* CustomUI */ = {
 			isa = PBXGroup;
 			children = (
-				CA1F56312AE42C0100ED5FCB /* Loading */,
 				CAFED8C42AAF4C7400C32741 /* Room */,
 				CAAF16962AAAF215000D8984 /* Profile */,
 				CAAF16952AAAF204000D8984 /* Menu */,

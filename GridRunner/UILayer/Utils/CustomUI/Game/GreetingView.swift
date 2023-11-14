@@ -8,16 +8,18 @@
 import UIKit
 
 class GreetingView: UIView {
+    
     var playerType: PlayerType!
+    
+    private let overlayView = UIView()
+    private let contentView = UIView()
     
     private let viewTitle: TitleLabel = TitleLabel()
     private let viewSubtitle: SubtitleLabel = SubtitleLabel()
     private let button: PrimaryButton = PrimaryButton()
             
     convenience init() {
-        self.init(frame:
-                    CGRect(x: 20, y: UIScreen.main.bounds.height / 2 - 100, width: UIScreen.main.bounds.width - 40, height: 200)
-        )
+        self.init(frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height))
     }
     
     override init(frame: CGRect) {
@@ -31,12 +33,15 @@ class GreetingView: UIView {
     }
     
     private func commonInit() {
-        self.backgroundColor = UIColor(named: "Background")
+        // Add overlay to disable user interaction and clearly seperate design wise.
+        self.overlayView.backgroundColor = UIColor(named: "PureBlack")?.withAlphaComponent(0.5)
+        self.overlayView.frame = UIScreen.main.bounds
+        self.overlayView.autoresizingMask = [.flexibleHeight, .flexibleWidth]
+        self.addSubview(overlayView)
         
+        self._setupContentView()
         self._setupViewLabels()
         self._setupButton()
-        self.addElevation()
-        self.layer.cornerRadius = 10
     }
     
     @objc private func onButtonTouchDown() {
@@ -55,18 +60,34 @@ class GreetingView: UIView {
         self.removeFromSuperview()
     }
     
-    private func _setupViewLabels() {
-        self.viewTitle.setup(in: self)
-        self.viewSubtitle.setup(in: self)
+    private func _setupContentView() {
+        self.contentView.translatesAutoresizingMaskIntoConstraints = false
+        self.contentView.backgroundColor = UIColor(named: "Background")
+        self.contentView.addElevation()
+        self.contentView.layer.cornerRadius = 10
+        
+        self.overlayView.addSubview(contentView)
         
         NSLayoutConstraint.activate([
-            self.viewTitle.topAnchor.constraint(equalTo: self.safeAreaLayoutGuide.topAnchor, constant: Dimensions.verticalSpacing20),
-            self.viewTitle.leadingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.leadingAnchor, constant: 20),
-            self.viewTitle.trailingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.trailingAnchor, constant: -20),
+            self.contentView.centerXAnchor.constraint(equalTo: self.overlayView.centerXAnchor),
+            self.contentView.centerYAnchor.constraint(equalTo: self.overlayView.centerYAnchor),
+            self.contentView.heightAnchor.constraint(equalToConstant: 200),
+            self.contentView.widthAnchor.constraint(equalToConstant: UIScreen.main.bounds.width - 40)
+        ])
+    }
+    
+    private func _setupViewLabels() {
+        self.viewTitle.setup(in: self.contentView)
+        self.viewSubtitle.setup(in: self.contentView)
+        
+        NSLayoutConstraint.activate([
+            self.viewTitle.topAnchor.constraint(equalTo: self.contentView.topAnchor, constant: Dimensions.verticalSpacing20),
+            self.viewTitle.leadingAnchor.constraint(equalTo: self.contentView.leadingAnchor, constant: 20),
+            self.viewTitle.trailingAnchor.constraint(equalTo: self.contentView.trailingAnchor, constant: -20),
             
             self.viewSubtitle.topAnchor.constraint(equalTo: self.viewTitle.bottomAnchor),
-            self.viewSubtitle.leadingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.leadingAnchor, constant: 20),
-            self.viewSubtitle.trailingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.trailingAnchor, constant: -20),
+            self.viewSubtitle.leadingAnchor.constraint(equalTo: self.contentView.leadingAnchor, constant: 20),
+            self.viewSubtitle.trailingAnchor.constraint(equalTo: self.contentView.trailingAnchor, constant: -20),
         ])
     }
     
@@ -75,14 +96,14 @@ class GreetingView: UIView {
         self.button.addTarget(self, action: #selector(onButtonTouchUpOutside), for: .touchUpOutside)
         self.button.addTarget(self, action: #selector(onButtonTouchDown), for: .touchDown)
         
-        self.button.width = UIScreen.main.bounds.width - 40
+        self.button.width = UIScreen.main.bounds.width - 80
         self.button.height = self.button.width / 8
         self.button.setup(in: self, withTitle: "Let's Go!")
                 
         NSLayoutConstraint.activate([
-            self.button.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 20),
-            self.button.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -20),
-            self.button.bottomAnchor.constraint(equalTo: self.safeAreaLayoutGuide.bottomAnchor, constant: -20)
+            self.button.leadingAnchor.constraint(equalTo: self.contentView.leadingAnchor, constant: 20),
+            self.button.trailingAnchor.constraint(equalTo: self.contentView.trailingAnchor, constant: -20),
+            self.button.bottomAnchor.constraint(equalTo: self.contentView.bottomAnchor, constant: -20)
         ])
     }
     
