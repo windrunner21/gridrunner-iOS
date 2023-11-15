@@ -54,7 +54,8 @@ struct GameManager {
     func finishMove() throws {
         guard let player = self.game.getPlayer() else { throw GameError.noPlayer }
         player.finish()
-        player.publishTurn()
+        if self.isOnlineGame { player.publishTurn() }
+        // AI comes in here for now
     }
     
     func updateGameToMoveResponse(runnerLogic: (Move)->Void, seekerLogic: (Move, Move, Turn, MoveDirection)->Void) throws {
