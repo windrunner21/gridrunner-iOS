@@ -12,12 +12,8 @@ class Game {
     private var player: AnyPlayer?
     private var history: History
     
-    convenience init() {
-        self.init(map: Map())
-    }
-    
-    init(map: Map, player: AnyPlayer? = nil, history: History? = nil) {
-        self.map = map
+    init(map: Map? = nil, player: AnyPlayer? = nil, history: History? = nil) {
+        self.map = map ?? Map()
         self.player = player
         self.history = history ?? History()
     }

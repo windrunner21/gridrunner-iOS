@@ -145,6 +145,8 @@
 		CAF8ECC32A2F78A600179EF1 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAF8ECC22A2F78A600179EF1 /* LoginViewController.swift */; };
 		CAFA9A2E2B023C4D0031C199 /* RandomGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAFA9A2D2B023C4D0031C199 /* RandomGenerator.swift */; };
 		CAFA9A302B0252590031C199 /* Logging.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAFA9A2F2B0252590031C199 /* Logging.swift */; };
+		CAFA9A332B04AFC00031C199 /* GameAlgo.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAFA9A322B04AFC00031C199 /* GameAlgo.swift */; };
+		CAFA9A352B04ECFB0031C199 /* GameNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAFA9A342B04ECFB0031C199 /* GameNode.swift */; };
 		CAFED48D2A02496E00FB4B9B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAFED48C2A02496E00FB4B9B /* AppDelegate.swift */; };
 		CAFED48F2A02496E00FB4B9B /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAFED48E2A02496E00FB4B9B /* SceneDelegate.swift */; };
 		CAFED4912A02496E00FB4B9B /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAFED4902A02496E00FB4B9B /* MainViewController.swift */; };
@@ -316,6 +318,8 @@
 		CAF8ECC22A2F78A600179EF1 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		CAFA9A2D2B023C4D0031C199 /* RandomGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RandomGenerator.swift; sourceTree = "<group>"; };
 		CAFA9A2F2B0252590031C199 /* Logging.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Logging.swift; sourceTree = "<group>"; };
+		CAFA9A322B04AFC00031C199 /* GameAlgo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameAlgo.swift; sourceTree = "<group>"; };
+		CAFA9A342B04ECFB0031C199 /* GameNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameNode.swift; sourceTree = "<group>"; };
 		CAFED4892A02496E00FB4B9B /* GridRunner.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GridRunner.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CAFED48C2A02496E00FB4B9B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		CAFED48E2A02496E00FB4B9B /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -900,6 +904,15 @@
 			name = Protocols;
 			sourceTree = "<group>";
 		};
+		CAFA9A312B04AFB00031C199 /* Algorithms */ = {
+			isa = PBXGroup;
+			children = (
+				CAFA9A322B04AFC00031C199 /* GameAlgo.swift */,
+				CAFA9A342B04ECFB0031C199 /* GameNode.swift */,
+			);
+			path = Algorithms;
+			sourceTree = "<group>";
+		};
 		CAFED4802A02496E00FB4B9B = {
 			isa = PBXGroup;
 			children = (
@@ -987,6 +1000,7 @@
 		CAFED4BF2A0249D200FB4B9B /* BusinessLogicLayer */ = {
 			isa = PBXGroup;
 			children = (
+				CAFA9A312B04AFB00031C199 /* Algorithms */,
 				CA790B252AF4FDF900691DC9 /* Managers */,
 				CA0AAC872A25DF74008367FB /* Utils */,
 				CA4E3F592A07BBE100D36266 /* Models */,
@@ -1219,6 +1233,7 @@
 				CA0AAC5D2A1B7EE6008367FB /* Turn.swift in Sources */,
 				CA4E3F582A07A85900D36266 /* GameViewController.swift in Sources */,
 				CA790B3F2AF6237800691DC9 /* GameError.swift in Sources */,
+				CAFA9A352B04ECFB0031C199 /* GameNode.swift in Sources */,
 				CA8CBF9C2A504276003CF44B /* MoveResponse.swift in Sources */,
 				CA852A632A4042D900961E65 /* AnyResponseParserExtension.swift in Sources */,
 				CAB8CE082AEB0DB0008F64A7 /* GameConfig.swift in Sources */,
@@ -1233,6 +1248,7 @@
 				CA053D1E2AB878DF0019FAD1 /* GameDifficulty.swift in Sources */,
 				CA0AAC892A25DF8C008367FB /* ProfileIcon.swift in Sources */,
 				CA852A692A40489000961E65 /* OnlineGrid.swift in Sources */,
+				CAFA9A332B04AFC00031C199 /* GameAlgo.swift in Sources */,
 				CA852A612A40425800961E65 /* AnyResponseParser.swift in Sources */,
 				CA852A672A40487900961E65 /* OnlineHistory.swift in Sources */,
 				CA0AAC3F2A13A2A0008367FB /* ArrowDirection.swift in Sources */,

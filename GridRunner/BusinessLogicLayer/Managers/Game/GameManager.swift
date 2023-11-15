@@ -36,12 +36,14 @@ struct GameManager {
         // Output overall history for testing purposes
         self.game.getHistory().outputHistory()
         if self.isOnlineGame { AblyService.shared.leaveGame() }
+        Log.data("Game finished.")
     }
     
     func abortGame() {
         // Output overall history for testing purposes
         self.game.getHistory().outputHistory()
         if self.isOnlineGame { AblyService.shared.leaveGame() }
+        Log.data("Game aborted.")
     }
     
     func ondoMove() throws -> (AnyPlayer, Move)  {
