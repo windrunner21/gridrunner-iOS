@@ -146,7 +146,8 @@
 		CAFA9A2E2B023C4D0031C199 /* RandomGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAFA9A2D2B023C4D0031C199 /* RandomGenerator.swift */; };
 		CAFA9A302B0252590031C199 /* Logging.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAFA9A2F2B0252590031C199 /* Logging.swift */; };
 		CAFA9A332B04AFC00031C199 /* GameAlgo.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAFA9A322B04AFC00031C199 /* GameAlgo.swift */; };
-		CAFA9A352B04ECFB0031C199 /* GameNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAFA9A342B04ECFB0031C199 /* GameNode.swift */; };
+		CAFA9A352B04ECFB0031C199 /* GraphNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAFA9A342B04ECFB0031C199 /* GraphNode.swift */; };
+		CAFA9A372B063F1F0031C199 /* Graph.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAFA9A362B063F1F0031C199 /* Graph.swift */; };
 		CAFED48D2A02496E00FB4B9B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAFED48C2A02496E00FB4B9B /* AppDelegate.swift */; };
 		CAFED48F2A02496E00FB4B9B /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAFED48E2A02496E00FB4B9B /* SceneDelegate.swift */; };
 		CAFED4912A02496E00FB4B9B /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAFED4902A02496E00FB4B9B /* MainViewController.swift */; };
@@ -319,7 +320,8 @@
 		CAFA9A2D2B023C4D0031C199 /* RandomGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RandomGenerator.swift; sourceTree = "<group>"; };
 		CAFA9A2F2B0252590031C199 /* Logging.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Logging.swift; sourceTree = "<group>"; };
 		CAFA9A322B04AFC00031C199 /* GameAlgo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameAlgo.swift; sourceTree = "<group>"; };
-		CAFA9A342B04ECFB0031C199 /* GameNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameNode.swift; sourceTree = "<group>"; };
+		CAFA9A342B04ECFB0031C199 /* GraphNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphNode.swift; sourceTree = "<group>"; };
+		CAFA9A362B063F1F0031C199 /* Graph.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Graph.swift; sourceTree = "<group>"; };
 		CAFED4892A02496E00FB4B9B /* GridRunner.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GridRunner.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CAFED48C2A02496E00FB4B9B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		CAFED48E2A02496E00FB4B9B /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -908,7 +910,8 @@
 			isa = PBXGroup;
 			children = (
 				CAFA9A322B04AFC00031C199 /* GameAlgo.swift */,
-				CAFA9A342B04ECFB0031C199 /* GameNode.swift */,
+				CAFA9A342B04ECFB0031C199 /* GraphNode.swift */,
+				CAFA9A362B063F1F0031C199 /* Graph.swift */,
 			);
 			path = Algorithms;
 			sourceTree = "<group>";
@@ -1233,7 +1236,7 @@
 				CA0AAC5D2A1B7EE6008367FB /* Turn.swift in Sources */,
 				CA4E3F582A07A85900D36266 /* GameViewController.swift in Sources */,
 				CA790B3F2AF6237800691DC9 /* GameError.swift in Sources */,
-				CAFA9A352B04ECFB0031C199 /* GameNode.swift in Sources */,
+				CAFA9A352B04ECFB0031C199 /* GraphNode.swift in Sources */,
 				CA8CBF9C2A504276003CF44B /* MoveResponse.swift in Sources */,
 				CA852A632A4042D900961E65 /* AnyResponseParserExtension.swift in Sources */,
 				CAB8CE082AEB0DB0008F64A7 /* GameConfig.swift in Sources */,
@@ -1284,6 +1287,7 @@
 				CAAF16922AA9FDA9000D8984 /* LoadingOverlayView.swift in Sources */,
 				CAB12C472AA4C3C800BF71E1 /* RankView.swift in Sources */,
 				CAAF169A2AAB536E000D8984 /* PlayerRole.swift in Sources */,
+				CAFA9A372B063F1F0031C199 /* Graph.swift in Sources */,
 				CAFA9A302B0252590031C199 /* Logging.swift in Sources */,
 				CAF8ECA92A2DBF9400179EF1 /* User.swift in Sources */,
 				CAAF75022A9E1B3600978B5F /* RoundView.swift in Sources */,

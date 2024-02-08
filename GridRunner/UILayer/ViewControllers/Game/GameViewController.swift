@@ -10,6 +10,7 @@ import UIKit
 class GameViewController: UIViewController {
          
     private var manager: GameManager
+    private let alertAdapter: AlertAdapter
     
     // Programmable UI properties.
     private let greetingView: GreetingView = GreetingView()
@@ -43,6 +44,7 @@ class GameViewController: UIViewController {
     
     init(with manager: GameManager) {
         self.manager = manager
+        self.alertAdapter = AlertAdapter()
         super.init(nibName: nil, bundle: nil) // Call the designated initializer of UIViewController
     }
     
@@ -115,7 +117,7 @@ class GameViewController: UIViewController {
     }
     
     private func onResign() {
-        let alert = self.manager.alertAdapter.createResignAlert(alertActionHandler: { [weak self] in
+        let alert = self.alertAdapter.createResignAlert(alertActionHandler: { [weak self] in
             self?.manager.abortGame()
             self?.transitionToMainScreen()
         })
@@ -287,7 +289,7 @@ class GameViewController: UIViewController {
     }
     
     private func presentGameOverAlert() {
-        let alert = self.manager.alertAdapter.createGameOverAlert(winner: GameOver.shared.winner, reason: GameOver.shared.reason, alertActionHandler: { [weak self] in
+        let alert = self.alertAdapter.createGameOverAlert(winner: GameOver.shared.winner, reason: GameOver.shared.reason, alertActionHandler: { [weak self] in
             self?.transitionToMainScreen()
         })
         
@@ -295,7 +297,7 @@ class GameViewController: UIViewController {
     }
     
     private func presentErrorAlert() {
-        let alert = self.manager.alertAdapter.createGameErrorAlert(alertActionHandler: { [weak self] in
+        let alert = self.alertAdapter.createGameErrorAlert(alertActionHandler: { [weak self] in
             self?.manager.abortGame()
             self?.transitionToMainScreen()
         })

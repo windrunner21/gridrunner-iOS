@@ -21,12 +21,11 @@ struct Bot {
         // use grid run game algo
         switch player {
         case .runner:
-            gameAlgorithms.runnerAlgorithm()
-            return Move(from: Coordinate(x: 0, y: 0), to: Coordinate(x: 4, y: 4))
+            return gameAlgorithms.runnerAlgorithm()
         case .seeker:
-            gameAlgorithms.seekerAlgorithm()
-            return Move(from: Coordinate(x: 0, y: 0), to: Coordinate(x: 3, y: 3))
+            return gameAlgorithms.seekerAlgorithm()
         default:
             return nil
-        }    }
+        }
+    }
 }

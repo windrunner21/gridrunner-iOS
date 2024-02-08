@@ -9,7 +9,6 @@ struct GameManager {
     let game: Game
     let isOnlineGame: Bool
     var isPlayerTurn: Bool
-    let alertAdapter: AlertAdapter
     
     // Config related properties
     let configGrid = GameConfig.shared.grid
@@ -19,7 +18,6 @@ struct GameManager {
         self.game = Game()
         self.isOnlineGame = !(offline ?? false)
         self.isPlayerTurn = false
-        self.alertAdapter = AlertAdapter()
     }
     
     func initializeGame() throws {

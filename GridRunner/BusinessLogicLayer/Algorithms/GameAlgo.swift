@@ -8,6 +8,7 @@
 import Foundation
 
 struct GameAlgo {
+    
     /*
      use minimax?
      chess or tic tac toe cannot finish the game right away
@@ -17,25 +18,26 @@ struct GameAlgo {
      for other way around need to change the logic?
     */
     
+    // Alpha-Beta Pruning and Depth-Limited Search. for pruning graph algorithm
+    
     func generateGameTree() {
         // first build tree using root game node
     }
     
-    func runnerAlgorithm() {
+    func runnerAlgorithm(difficulty: Difficulty) -> Move {
         /*
          runner starts the game
          runner finishes the game?
         */
-        // make random move if first
-        // make move towards nearest exit and if seeker is not in vicinity
-        // construct game tree
+        return Move(from: Coordinate(x: 5, y: 5), to: Coordinate(x: 5, y: 6))
     }
     
-    func seekerAlgorithm() {
+    func seekerAlgorithm() -> Move {
         /*
          runner starts the game
          seeker finishes the game?
         */
+        return Move(from: Coordinate(x: 5, y: 5), to: Coordinate(x: 7, y: 9))
     }
     
     private func minimax(game: Game, depth: Int, isMaximizing: Bool, currentPlayer: PlayerType) -> Int {
